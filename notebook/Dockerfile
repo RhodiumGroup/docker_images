@@ -25,8 +25,10 @@ RUN conda install --yes -c conda-forge \
     python-blosc \
     scipy \
     scikit-image \
+    scikit-learn \
     xarray \
     zict \
+    cartopy \
     && conda clean -tipsy
 
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager @jupyterlab/hub-extension
@@ -50,10 +52,7 @@ RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 USER root
 COPY prepare.sh /usr/bin/prepare.sh
 RUN chmod +x /usr/bin/prepare.sh
-RUN mkdir /home/$NB_USER/examples && chown -R $NB_USER /home/$NB_USER/examples
-RUN mkdir /pre-home && mkdir /pre-home/examples && chown -R $NB_USER /pre-home
 COPY worker-template.yaml /pre-home
-COPY examples/ /pre-home/examples/
 ENV DASKERNETES_WORKER_TEMPLATE_PATH /home/$NB_USER/worker-template.yaml
 ENV DASKERNETES_DIAGNOSTICS_LINK {JUPYTERHUB_SERVICE_PREFIX}proxy/{port}/status
 ENV DASKERNETES_WORKER_NAME dask-{JUPYTERHUB_USER}-{uuid}

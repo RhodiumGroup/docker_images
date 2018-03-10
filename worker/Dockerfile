@@ -21,6 +21,9 @@ RUN conda install --yes -c conda-forge \
     scipy \
     xarray \
     zict \
+    matplotlib \
+    cartopy \
+    scikit-learn \
     && conda clean -tipsy
 
 RUN apt-get update \

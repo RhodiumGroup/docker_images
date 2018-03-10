@@ -11,7 +11,8 @@ spec:
       - 6GB
       - --death-timeout
       - '60'
-    image: daskdev/pangeo-worker:2018-03-01
+    image: jgerardsimcock/worker
+    tag: 2018-03-09
     name: dask-worker
     securityContext:
       capabilities:
@@ -19,7 +20,7 @@ spec:
       privileged: true
     env:
       - name: GCSFUSE_BUCKET
-        value: pangeo-data
+        value: jhub-rhg
     resources:
       limits:
         cpu: "1.75"
