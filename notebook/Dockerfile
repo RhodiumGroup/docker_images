@@ -10,7 +10,6 @@ USER $NB_USER
 RUN conda install --yes -c conda-forge \
     cytoolz \
     dask=0.17.0 \
-    distributed=1.21.0 \
     fastparquet \
     ipywidgets \
     jupyterlab \
@@ -26,6 +25,7 @@ RUN conda install --yes -c conda-forge \
     scipy \
     scikit-image \
     scikit-learn \
+    tornado=4.5 \
     xarray \
     zict \
     cartopy \
@@ -36,17 +36,17 @@ RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager @jupyterlab
 RUN pip install fusepy click jedi kubernetes --upgrade --no-cache-dir
 
 RUN pip install daskernetes==0.1.3 \
+                distributed==1.21.3 \
+                git+https://github.com/dask/dask-kubernetes@5ba08f714ef38e585e9f2038b6be530c578b96dd \
                 git+https://github.com/zarr-developers/zarr \
                 git+https://github.com/pydata/xarray \
-                gcsfs==0.0.5 \
-                --no-cache-dir
+                git+https://github.com/ioam/holoviews \
+                git+https://github.com/dask/gcsfs \
+                git+https://github.com/jupyterhub/nbserverproxy \
+                --no-cache-dir \
+                --upgrade
 
-RUN pip install distributed==1.21.1 \
-                dask==0.17.1 \
-                --no-dependencies \ 
-                --no-cache-dir
 
-RUN pip install git+https://github.com/jupyterhub/nbserverproxy --no-cache-dir
 RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
 USER root

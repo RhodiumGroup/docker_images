@@ -1,5 +1,5 @@
 # Start cluster on Google cloud
-gcloud container clusters create jhub-rhg --num-nodes=2 --machine-type=n1-standard-2 --zone=us-west1-a  --cluster-version=1.9.3-gke.0
+gcloud container clusters create jhub-rhg --num-nodes=3 --machine-type=n1-standard-2 --zone=us-west1-a  --cluster-version=1.9.3-gke.0
 
 #gcloud container clusters get-credentials pangeo --zone us-central1-b --project pangeo-181919
 
