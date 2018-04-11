@@ -20,13 +20,14 @@ if [ "$EXTRA_PIP_PACKAGES" ]; then
 fi
 
 if [ "$GCSFUSE_TOKEN" ]; then
-    printf "$GCSFUSE_TOKEN" > /opt/gcsfuse_token.json
+    echo "$GCSFUSE_TOKEN" > /opt/gcsfuse_token.json
     export GOOGLE_APPLICATION_CREDENTIALS="/opt/gcsfuse_token.json"
 fi
 
 if [ "$GCSFUSE_BUCKET" ]; then
     echo "Mounting $GCSFUSE_BUCKET to /gcs"
-    /opt/conda/bin/gcsfuse $GCSFUSE_BUCKET /gcs --background --project-id=rhg-hub --token="/opt/gcsfuse_token.json"
+    /usr/bin/gcsfuse --key-file /opt/gcsfuse_token.json $GCSFUSE_BUCKET /gcs
+
 fi
 # Run extra commands
 $@
