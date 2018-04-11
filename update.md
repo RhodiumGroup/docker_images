@@ -9,12 +9,11 @@ general use for other deployments.
 Update Docker Images
 --------------------
 
-Modify the Dockerfiles in `gce/notebook` and `gce/worker` to suit your needs,
-possibly including new versions of libraries.  Consider also adding new
-examples to the `gce/notebook/examples` directory.
+Modify the Dockerfiles in `/notebook` and `/worker` to suit your needs,
+possibly including new versions of libraries.
 
 We recommend that you first modify the worker docker image because you will
-need to include its new tag in the `gce/notebook/worker-template.yaml` file.
+need to include its new tag in the `/notebook/worker-template.yaml` file.
 
 ### Build worker image
 
@@ -22,9 +21,9 @@ Navigate to the worker directory and build the docker image.  We currently use
 the date like `YYYY-MM-DD` as a tag.
 
 ```bash
-cd gce/worker
+cd /worker
 # edit Dockerfile
-docker build -t daskdev/pangeo-worker:TAG .
+docker build -t rhodium/worker:TAG .
 ```
 
 You will probably have to do this a few times.
@@ -32,12 +31,12 @@ You will probably have to do this a few times.
 
 ### Build Notebook image
 
-Navigate to the `gce/notebook` directory and modify the Dockerfile, notebooks,
+Navigate to the `/notebook` directory and modify the Dockerfile, notebooks,
 and `worker-template.yaml` file as necessary.  In particular you should update
 the `image:` tag to match the tag of the worker that you have just built.
 
 ```bash
-docker build -t daskdev/pangeo-notebook:TAG .
+docker build -t rhodium/notebook:TAG .
 ```
 
 ### Push to dockerhub
@@ -45,18 +44,18 @@ docker build -t daskdev/pangeo-notebook:TAG .
 You can push both images to docker hub:
 
 ```bash
-docker push daskdev/pangeo-worker:TAG
-docker push daskdev/pangeo-notebook:TAG
+docker push rhodium/worker:TAG
+docker push rhodium/notebook:TAG
 ```
 
 
 Update JupyterHub config file
 -----------------------------
 
-The JupyterHub deployment is defined in the `gce/jupyter-config.yaml` file.
+The JupyterHub deployment is defined in the `/value.yaml` file.
 You might want to take this opportunity to add new administrators, define
 memory and CPU resources limits for the Jupyter servers, etc..
-You will also need to update the tag of the `daskdev/pangeo-notebook`
+You will also need to update the tag of the `rhodium/notebook`
 docker image to the TAG that you created above (likely the date `YYYY-MM-DD`).
 
 You will also notice that two entries have been marked `SECRET`.
@@ -77,7 +76,7 @@ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > inst
 bash install-helm.bash --version v2.6.2
 ```
 
-### Connect Kubectl to Pangeo Kubernetes deployment
+### Connect Kubectl to rhodium Kubernetes deployment
 
 And you will need kubectl (see web for instructions) and a connection to the
 Pangeo deployment.  You can find the connection information by navigating to
