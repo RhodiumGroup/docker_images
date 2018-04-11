@@ -19,9 +19,14 @@ if [ "$EXTRA_PIP_PACKAGES" ]; then
     /opt/conda/bin/pip install $EXTRA_PIP_PACKAGES
 fi
 
+if [ "$GCSFUSE_TOKEN" ]; then
+    printf "$GCSFUSE_TOKEN" > gcsfuse_token.json
+    export GOOGLE_APPLICATION_CREDENTIALS="$(pwd)/gcsfuse_token.json"
+fi
+
 if [ "$GCSFUSE_BUCKET" ]; then
     echo "Mounting $GCSFUSE_BUCKET to /gcs"
-    /opt/conda/bin/gcsfuse $GCSFUSE_BUCKET /gcs --background
+    /opt/conda/bin/gcsfuse $GCSFUSE_BUCKET /gcs --background --project-id=rhg-hub
 fi
 # Run extra commands
 $@
