@@ -36,7 +36,7 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && apt-get install gcsfuse \
   && alias googlefuse=/usr/bin/gcsfuse
 
-RUN pip install pyasn1 click urllib3 --upgrade
+RUN pip install google-cloud google-cloud-storage pyasn1 click urllib3 --upgrade
 
 RUN pip install git+https://github.com/zarr-developers/zarr \
                 git+https://github.com/pydata/xarray \
