@@ -43,6 +43,7 @@ RUN pip install git+https://github.com/zarr-developers/zarr \
                 git+https://github.com/dask/gcsfs@2fbdc27e838a531ada080886ae778cb370ae48b8\
                 fusepy \
                 wget \
+                google-cloud-storage \
                 --no-cache-dir \
                 --upgrade
 
