@@ -34,6 +34,9 @@ RUN conda install --yes -c ioam -c bokeh/channel/dev \
     zict \
     && conda clean -tipsy
 
+# fix https://github.com/ContinuumIO/anaconda-issues/issues/542
+RUN conda install --yes -c conda-forge setuptools
+
 RUN pip install wget google-cloud google-cloud-storage fusepy click jedi kubernetes --upgrade --no-cache-dir
 
 RUN pip install daskernetes==0.1.3 \

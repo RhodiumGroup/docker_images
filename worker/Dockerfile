@@ -36,6 +36,10 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && apt-get install gcsfuse \
   && alias googlefuse=/usr/bin/gcsfuse
 
+# fix https://github.com/ContinuumIO/anaconda-issues/issues/542
+RUN conda install --yes -c conda-forge setuptools
+
+RUN pip install --upgrade pip
 RUN pip install google-cloud google-cloud-storage pyasn1 click urllib3 --upgrade
 
 RUN pip install git+https://github.com/zarr-developers/zarr \
