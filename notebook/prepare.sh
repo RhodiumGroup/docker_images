@@ -22,9 +22,23 @@ if [ "$EXTRA_PIP_PACKAGES" ]; then
     /opt/conda/bin/pip install $EXTRA_PIP_PACKAGES
 fi
 
-if [ "$GCSFUSE_BUCKET" ]; then
-    echo "Mounting $GCSFUSE_BUCKET to /gcs"
-    /opt/conda/bin/gcsfuse $GCSFUSE_BUCKET /gcs --background
+SA_FILE=service-account-credentials.json
+if [ ! -f $SA_FILE ]; then
+    echo "no credentials file present"
+else
+    echo "credentials file present...checking to see if bucket mounted"
 fi
+
+GCSFUSE_BUCKET=rhg-data
+if [ ! -d /gcs/climate ]; then
+    echo "Mounting $GCSFUSE_BUCKET to /gcs"
+    /usr/bin/gcsfuse --key-file=$SA_FILE $GCSFUSE_BUCKET /gcs
+fi
+
+if [ -f worker-template.yml ]; then
+    echo "appending service-account-credentials to worker-template"
+    python add_service_creds.py
+fi
+
 # Run extra commands
 $@
