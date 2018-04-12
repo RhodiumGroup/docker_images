@@ -11,6 +11,9 @@ spec:
       - 6GB
       - --death-timeout
       - '60'
+    env:
+      - name: GCSFUSE_BUCKET
+        value: rhg-data
     image: rhodium/worker:2018-04-04
     name: dask-worker
     securityContext:
