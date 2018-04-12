@@ -7,7 +7,7 @@ RUN chmod +x /usr/local/bin/dumb-init
 RUN conda install --yes -c conda-forge \
     cytoolz \
     dask=0.17.2 \
-    distributed=1.21.5 \
+    distributed=1.21.6 \
     fastparquet \
     git \
     lz4 \

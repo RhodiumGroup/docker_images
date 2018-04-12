@@ -12,7 +12,7 @@ RUN conda install --yes -c ioam -c bokeh/channel/dev \
     cytoolz \
     datashader \
     dask=0.17.2 \
-    distributed=1.21.5 \
+    distributed=1.21.6 \
     fastparquet \
     ipywidgets \
     jupyterlab \
