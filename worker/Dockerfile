@@ -29,6 +29,13 @@ RUN apt-get update \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
+RUN export GCSFUSE_REPO=gcsfuse-xenial \
+  && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \
+  && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
+  && apt-get update \
+  && apt-get install gcsfuse \
+  && alias googlefuse=/usr/bin/gcsfuse
+
 RUN pip install pyasn1 click urllib3 --upgrade
 
 RUN pip install git+https://github.com/zarr-developers/zarr \
