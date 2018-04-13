@@ -7,13 +7,15 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 USER $NB_USER
 
-RUN conda install --yes -c ioam -c bokeh/channel/dev \
+RUN conda install --yes -c conda-forge \
     bokeh=0.12.14 \
     cytoolz \
     datashader \
     dask=0.17.2 \
-    distributed=1.21.6 \
+    zarr \
+    distributed=1.21.5 \
     fastparquet \
+    git \
     ipywidgets \
     jupyterlab \
     holoviews \
@@ -34,34 +36,37 @@ RUN conda install --yes -c ioam -c bokeh/channel/dev \
     zict \
     && conda clean -tipsy
 
-# fix https://github.com/ContinuumIO/anaconda-issues/issues/542
-RUN conda install --yes -c conda-forge setuptools
+RUN apt-get update \
+  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
-RUN pip install wget google-cloud google-cloud-storage fusepy click jedi kubernetes --upgrade --no-cache-dir
-
-RUN pip install daskernetes==0.1.3 \
-                git+https://github.com/dask/dask-kubernetes@5ba08f714ef38e585e9f2038b6be530c578b96dd \
-                git+https://github.com/zarr-developers/zarr \
-                git+https://github.com/pydata/xarray \
-                git+https://github.com/ioam/holoviews@3f015c0a531f54518abbfecffaac72a7b3554ed3\
-                git+https://github.com/dask/gcsfs@2fbdc27e838a531ada080886ae778cb370ae48b8\
-                git+https://github.com/jupyterhub/nbserverproxy \
-                --no-cache-dir \
-                --upgrade
-
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager \
-                                 @jupyterlab/hub-extension \
-                                 @pyviz/jupyterlab_holoviews
-
-RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
-
-USER root
 RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \
   && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
   && apt-get update \
   && apt-get install gcsfuse \
   && alias googlefuse=/usr/bin/gcsfuse
+
+# fix https://github.com/ContinuumIO/anaconda-issues/issues/542
+RUN conda install --yes -c conda-forge setuptools
+
+RUN pip install --upgrade pip
+RUN pip install wget google-cloud google-cloud-storage fusepy click jedi kubernetes --no-cache-dir
+RUN pip install google-cloud google-cloud-storage pyasn1 click urllib3
+
+RUN pip install daskernetes==0.1.3 \
+                git+https://github.com/dask/dask-kubernetes@5ba08f714ef38e585e9f2038b6be530c578b96dd \
+                git+https://github.com/ioam/holoviews@3f015c0a531f54518abbfecffaac72a7b3554ed3\
+                git+https://github.com/dask/gcsfs@2fbdc27e838a531ada080886ae778cb370ae48b8\
+                git+https://github.com/jupyterhub/nbserverproxy \
+                --no-cache-dir 
+
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager \
+                                 @jupyterlab/hub-extension \
+                                 @pyviz/jupyterlab_holoviews
+
+RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
 USER root
 COPY prepare.sh /usr/bin/prepare.sh
