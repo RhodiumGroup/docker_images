@@ -7,6 +7,7 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 USER $NB_USER
 
+RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     bokeh=0.12.14 \
     cytoolz \
