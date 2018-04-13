@@ -26,7 +26,7 @@ RUN conda install --yes -c conda-forge \
     nomkl \
     numba \
     numcodecs \
-    numpy \
+    numpy==1.14.2 \
     pandas \
     python-blosc \
     scipy \
