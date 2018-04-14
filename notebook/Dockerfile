@@ -1,5 +1,6 @@
 FROM jupyter/base-notebook
 
+
 USER root
 RUN apt-get update \
   && apt-get install -yq --no-install-recommends libfuse-dev nano fuse vim git \
@@ -64,6 +65,9 @@ ENV DASKERNETES_DIAGNOSTICS_LINK {JUPYTERHUB_SERVICE_PREFIX}proxy/{port}/status
 ENV DASKERNETES_WORKER_TEMPLATE_PATH /home/$NB_USER/worker-template.yaml
 ENV DASKERNETES_WORKER_NAME dask-{JUPYTERHUB_USER}-{uuid}
 ENV DASK_DIAGNOSTICS_LINK {JUPYTERHUB_SERVICE_PREFIX}proxy/{port}/status
+ENV DASK_KUBERNETES_WORKER_TEMPLATE_PATH /home/$NB_USER/worker-template.yaml
+ENV DASK_KUBERNETES_WORKER_NAME dask-{JUPYTERHUB_USER}-{uuid}
+
 
 USER root
 RUN export GCSFUSE_REPO=gcsfuse-xenial \
