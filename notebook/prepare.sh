@@ -22,7 +22,7 @@ if [ "$EXTRA_PIP_PACKAGES" ]; then
     /opt/conda/bin/pip install $EXTRA_PIP_PACKAGES
 fi
 
-SA_FILE=service-account-credentials.json
+SA_FILE=~/service-account-credentials.json
 if [ ! -f $SA_FILE ]; then
     echo "no credentials file present"
 else
@@ -35,7 +35,7 @@ if [ ! -d /gcs/climate ]; then
     /usr/bin/gcsfuse --key-file=$SA_FILE $GCSFUSE_BUCKET /gcs
 fi
 
-if [ -f worker-template.yml ]; then
+if [ -f ~/worker-template.yml ]; then
     echo "appending service-account-credentials to worker-template"
     python add_service_creds.py
 fi
