@@ -4,6 +4,7 @@ FROM continuumio/miniconda3:4.4.10
 RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64
 RUN chmod +x /usr/local/bin/dumb-init
 
+RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     bokeh=0.12.14 \
     cytoolz \
@@ -21,9 +22,9 @@ RUN conda install --yes -c conda-forge \
     nb_conda_kernels \
     netcdf4 \
     nomkl \
-    numba \
+    numba=0.37.0 \
     numcodecs \
-    numpy \
+    numpy=1.14.2 \
     pandas \
     python-blosc \
     scipy \
