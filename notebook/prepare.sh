@@ -22,22 +22,21 @@ if [ "$EXTRA_PIP_PACKAGES" ]; then
     /opt/conda/bin/pip install $EXTRA_PIP_PACKAGES
 fi
 
-SA_FILE=~/service-account-credentials.json
+SA_FILE=/home/jovyan/service-account-credentials.json
 if [ ! -f $SA_FILE ]; then
     echo "no credentials file present"
 else
-    echo "credentials file present...checking to see if bucket mounted"
-fi
 
-GCSFUSE_BUCKET=rhg-data
-if [ ! -d /gcs/climate ]; then
-    echo "Mounting $GCSFUSE_BUCKET to /gcs"
-    /usr/bin/gcsfuse --key-file=$SA_FILE $GCSFUSE_BUCKET /gcs
-fi
+    GCSFUSE_BUCKET=rhg-data
+    if ! grep -q "/gcs" /proc/mounts; then
+        echo "Mounting $GCSFUSE_BUCKET to /gcs"
+        /usr/bin/gcsfuse --key-file=$SA_FILE $GCSFUSE_BUCKET /gcs
+    fi
 
-if [ -f ~/worker-template.yml ]; then
-    echo "appending service-account-credentials to worker-template"
-    python add_service_creds.py
+    if [ -f /home/jovyan/worker-template.yml ]; then
+        echo "appending service-account-credentials to worker-template"
+        python /home/jovyan/add_service_creds.py
+    fi
 fi
 
 # Run extra commands
