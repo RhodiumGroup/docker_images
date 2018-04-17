@@ -34,10 +34,12 @@ RUN conda install --yes -c conda-forge \
     zict \
     && conda clean -tipsy
 
+USER root
 RUN apt-get update \
-  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse \
+  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse gnupg2 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
+
 
 RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \

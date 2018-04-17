@@ -1,17 +1,19 @@
+#We build our single-user notebook from the base jupyter notebook image
 FROM jupyter/base-notebook
 
-
+#install some system level packages 
 USER root
 RUN apt-get update \
-  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse vim git \
+  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse vim git keychain \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 USER $NB_USER
 
-RUN conda update --yes conda
+#Do additional conda installs 
 RUN conda install --yes -c conda-forge \
     bokeh=0.12.14 \
     cytoolz \
+    cartopy \
     datashader \
     dask=0.17.2 \
     zarr \
@@ -25,6 +27,7 @@ RUN conda install --yes -c conda-forge \
     matplotlib \
     nb_conda_kernels \
     netcdf4 \
+    nodejs \
     nomkl \
     numba \
     numcodecs \
@@ -39,6 +42,7 @@ RUN conda install --yes -c conda-forge \
     zict \
     && conda clean -tipsy
 
+
 RUN pip install wget google-cloud google-cloud-storage fusepy click jedi kubernetes --no-cache-dir
 
 RUN pip install daskernetes==0.1.3 \
@@ -48,7 +52,7 @@ RUN pip install daskernetes==0.1.3 \
                 git+https://github.com/jupyterhub/nbserverproxy \
                 --no-cache-dir
 
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.34 \
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager \
                                  @jupyterlab/hub-extension \
                                  @pyviz/jupyterlab_holoviews
 
@@ -69,8 +73,6 @@ ENV DASK_DIAGNOSTICS_LINK {JUPYTERHUB_SERVICE_PREFIX}proxy/{port}/status
 ENV DASK_KUBERNETES_WORKER_TEMPLATE_PATH /home/$NB_USER/worker-template.yaml
 ENV DASK_KUBERNETES_WORKER_NAME dask-{JUPYTERHUB_USER}-{uuid}
 
-
-USER root
 RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \
   && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
