@@ -21,13 +21,11 @@ RUN conda install --yes -c conda-forge \
     distributed=1.21.5 \
     fastparquet \
     ipywidgets \
-    jupyterlab \
     holoviews \
     lz4 \
     matplotlib \
     nb_conda_kernels \
     netcdf4 \
-    nodejs \
     nomkl \
     numba \
     numcodecs \
@@ -43,7 +41,7 @@ RUN conda install --yes -c conda-forge \
     && conda clean -tipsy
 
 
-RUN pip install wget google-cloud google-cloud-storage fusepy click jedi kubernetes --no-cache-dir
+RUN pip install wget jupyterlab==0.31rc2 google-cloud google-cloud-storage fusepy click jedi kubernetes --no-cache-dir
 
 RUN pip install daskernetes==0.1.3 \
                 git+https://github.com/dask/dask-kubernetes@5ba08f714ef38e585e9f2038b6be530c578b96dd \
@@ -52,7 +50,7 @@ RUN pip install daskernetes==0.1.3 \
                 git+https://github.com/jupyterhub/nbserverproxy \
                 --no-cache-dir
 
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager \
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.33.0\
                                  @jupyterlab/hub-extension \
                                  @pyviz/jupyterlab_holoviews
 
