@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+env: 
+  - TAG=2018-4-17.1
+before_install:
+  - docker build -t rhodium/worker:$TAG .
+  - docker build -t rhodium/notebook:$TAG .
+script:
+  - docker images rhodium/notebook:$TAG
+  - docker images rhodium/worker:$TAG
+
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push rhodium/worker:$TAG;
+    docker push rhodium/notebook:$TAG;
+    fi
+
+
+
