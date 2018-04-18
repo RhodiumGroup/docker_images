@@ -4,7 +4,9 @@ services:
 env: 
   - TAG=2018-4-17.1
 before_install:
-  - docker build -t rhodium/worker:$TAG worker/Dockerfile
+  - cd worker
+  - docker build -t rhodium/worker:$TAG .
+  - cd ../notebook
   - docker build -t rhodium/notebook:$TAG notebook/Dockerfile
 script:
   - docker images rhodium/notebook:$TAG
