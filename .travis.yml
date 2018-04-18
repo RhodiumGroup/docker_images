@@ -7,7 +7,7 @@ before_install:
   - cd worker
   - docker build -t rhodium/worker:$TAG .
   - cd ../notebook
-  - docker build -t rhodium/notebook:$TAG notebook/Dockerfile
+  - docker build -t rhodium/notebook:$TAG .
 script:
   - docker images rhodium/notebook:$TAG
   - docker images rhodium/worker:$TAG
