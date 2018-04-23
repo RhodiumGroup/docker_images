@@ -4,7 +4,7 @@ FROM jupyter/base-notebook
 #install some system level packages 
 USER root
 RUN apt-get update \
-  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse vim git keychain \
+  && apt-get install -yq --no-install-recommends python3-pip libfuse-dev nano fuse vim git keychain \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 USER $NB_USER
