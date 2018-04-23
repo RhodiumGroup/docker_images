@@ -9,6 +9,13 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 USER $NB_USER
 
+ARG JUPYTERHUB_VERSION=0.8.*
+
+ADD requirements.txt /tmp/requirements.txt
+RUN pip3 install --no-cache-dir \
+         jupyterhub==${JUPYTERHUB_VERSION} \
+         -r /tmp/requirements.txt
+
 #Do additional conda installs 
 RUN conda install --yes -c conda-forge \
     bokeh=0.12.14 \
