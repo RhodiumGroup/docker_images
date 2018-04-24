@@ -5,17 +5,11 @@ FROM jupyter/base-notebook
 USER root
 RUN apt-get update \
   && apt-get install -yq --no-install-recommends python3-pip libfuse-dev nano fuse vim git keychain \
+  python3-setuptools \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 USER $NB_USER
 
-ARG JUPYTERHUB_VERSION=0.8.*
-
-ADD requirements.txt /tmp/requirements.txt
-RUN pip3 install --no-cache-dir \
-         setuptools \
-         jupyterhub==${JUPYTERHUB_VERSION} \
-         -r /tmp/requirements.txt
 
 #Do additional conda installs 
 RUN conda install --yes -c conda-forge \
@@ -48,6 +42,12 @@ RUN conda install --yes -c conda-forge \
     zict \
     && conda clean -tipsy
 
+ARG JUPYTERHUB_VERSION=0.8.*
+
+ADD requirements.txt /tmp/requirements.txt
+RUN pip3 install --no-cache-dir \
+         jupyterhub==${JUPYTERHUB_VERSION} \
+         -r /tmp/requirements.txt
 
 RUN pip install wget jupyterlab==0.31rc2 google-cloud google-cloud-storage fusepy click jedi kubernetes --no-cache-dir
 
