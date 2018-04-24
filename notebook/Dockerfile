@@ -4,7 +4,15 @@ FROM jupyter/base-notebook
 #install some system level packages 
 USER root
 RUN apt-get update \
-  && apt-get install -yq --no-install-recommends python3-pip libfuse-dev nano fuse vim git keychain \
+  && apt-get install -yq --no-install-recommends \
+  python3-pip \
+  libfuse-dev \
+  nano \
+  fuse \
+  vim \
+  git \
+  keychain \
+  rsync \
   python3 \
   python3-dev \
   python3-setuptools \
@@ -63,8 +71,7 @@ RUN pip install daskernetes==0.1.3 \
                 git+https://github.com/jupyterhub/nbserverproxy \
                 --no-cache-dir
 
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.33.0\
-                                 @jupyterlab/hub-extension \
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.33.0
 
 RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
