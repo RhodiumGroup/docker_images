@@ -22,6 +22,10 @@ if [ "$EXTRA_PIP_PACKAGES" ]; then
     /opt/conda/bin/pip install $EXTRA_PIP_PACKAGES
 fi
 
+if [ -f /home/jovyan/conda_environment.yml ]; then
+    echo conda create env -f conda_environment.yml
+fi
+
 SA_FILE=/home/jovyan/service-account-credentials.json
 if [ ! -f $SA_FILE ]; then
     echo "no credentials file present"

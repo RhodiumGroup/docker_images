@@ -26,6 +26,7 @@ USER $NB_USER
 #Do additional conda installs 
 RUN conda install --yes -c conda-forge \
     bokeh=0.12.14 \
+    basemap \
     cytoolz \
     cartopy \
     datashader \
