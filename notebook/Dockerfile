@@ -82,7 +82,7 @@ RUN conda install --quiet --yes \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
-RUN pip install wget jupyterlab==0.31rc2 google-cloud google-cloud-storage fusepy click jedi kubernetes --no-cache-dir
+RUN pip install wget jupyterlab==0.31rc2 py_noaa dffread xlrd google-cloud google-cloud-storage fusepy click jedi kubernetes --no-cache-dir
 
 RUN pip install daskernetes==0.1.3 \
                 git+https://github.com/dask/dask-kubernetes@5ba08f714ef38e585e9f2038b6be530c578b96dd \
@@ -102,6 +102,10 @@ RUN mkdir /pre-home && chown -R $NB_USER /pre-home
 COPY worker-template.yaml /pre-home
 COPY add_service_creds.py /pre-home
 
+#install rclone
+RUN curl https://rclone.org/install.sh | sudo bash
+
+#setup Dask Kubernetes
 ENV DASK_TICK_MAXIMUM_DELAY=5s
 ENV DASKERNETES_DIAGNOSTICS_LINK {JUPYTERHUB_SERVICE_PREFIX}proxy/{port}/status
 ENV DASKERNETES_WORKER_TEMPLATE_PATH /home/$NB_USER/worker-template.yaml
