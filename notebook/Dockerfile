@@ -102,8 +102,6 @@ RUN mkdir /pre-home && chown -R $NB_USER /pre-home
 COPY worker-template.yaml /pre-home
 COPY add_service_creds.py /pre-home
 
-#install rclone
-RUN curl https://rclone.org/install.sh | sudo bash
 
 #setup Dask Kubernetes
 ENV DASK_TICK_MAXIMUM_DELAY=5s
