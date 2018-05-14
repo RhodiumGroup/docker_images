@@ -52,7 +52,7 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
 RUN conda install --yes -c conda-forge setuptools
 
 RUN pip install --upgrade pip
-RUN pip install wget google-cloud google-cloud-storage fusepy click jedi kubernetes pyasn1 click urllib3 --no-cache-dir
+RUN pip install wget google-cloud google-cloud-storage gsutil fusepy click jedi kubernetes pyasn1 click urllib3 --no-cache-dir
 
 RUN pip install daskernetes==0.1.3 \
                 git+https://github.com/dask/dask-kubernetes@5ba08f714ef38e585e9f2038b6be530c578b96dd \
