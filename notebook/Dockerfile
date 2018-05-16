@@ -31,6 +31,7 @@ RUN conda install --yes -c conda-forge \
     cartopy \
     datashader \
     dask=0.17.2 \
+    esmpy \
     zarr \
     dask-ml \
     distributed=1.21.5 \
@@ -82,7 +83,7 @@ RUN conda install --quiet --yes \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
-RUN pip install wget jupyterlab==0.31rc2 py_noaa dbfread xlrd mapbox google-cloud google-cloud-storage gsutil fusepy click jedi kubernetes --no-cache-dir
+RUN pip install wget jupyterlab==0.31rc2 py_noaa dbfread xlrd mapbox google-cloud google-cloud-storage xesmf gsutil fusepy click jedi kubernetes --no-cache-dir
 
 RUN pip install daskernetes==0.1.3 \
                 git+https://github.com/dask/dask-kubernetes@5ba08f714ef38e585e9f2038b6be530c578b96dd \
