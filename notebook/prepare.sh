@@ -22,10 +22,9 @@ if [ "$EXTRA_PIP_PACKAGES" ]; then
     /opt/conda/bin/pip install $EXTRA_PIP_PACKAGES
 fi
 
-CONDA_FILE=/home/jovyan/conda_environment.yml
-if [ -f $CONDA_FILE ]; then
+if [ -e "/home/jovyan/conda_environment.yml" ]; then
     echo "installing conda env"
-    echo conda env create -f $CONDA_FILE
+    /opt/conda/bin/conda env create -f /home/jovyan/conda_environment.yml
 fi
 
 SA_FILE=/home/jovyan/service-account-credentials.json
