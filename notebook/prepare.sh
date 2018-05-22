@@ -38,7 +38,7 @@ else
         /usr/bin/gcsfuse --key-file=$SA_FILE $GCSFUSE_BUCKET /gcs
     fi
 
-    if [ -f /home/jovyan/worker-template.yaml ]; then
+    if [ -f /home/jovyan/worker-template.yml ]; then
         echo "appending service-account-credentials to worker-template"
         python /home/jovyan/add_service_creds.py
     fi
