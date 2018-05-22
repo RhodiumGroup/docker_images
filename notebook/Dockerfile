@@ -70,7 +70,6 @@ RUN conda install --quiet --yes \
     'r-forecast=8.2*' \
     'r-rsqlite=2.0*' \
     'r-reshape2=1.4*' \
-    'r-nycflights13=0.2*' \
     'r-caret=6.0*' \
     'r-rcurl=1.95*' \
     'r-crayon=1.3*' \

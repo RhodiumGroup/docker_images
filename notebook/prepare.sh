@@ -25,7 +25,7 @@ fi
 CONDA_FILE=/home/jovyan/conda_environment.yml
 if [ -f $CONDA_FILE ]; then
     echo "installing conda env"
-    echo conda create env -f $CONDA_FILE
+    echo conda env create -f $CONDA_FILE
 fi
 
 SA_FILE=/home/jovyan/service-account-credentials.json
