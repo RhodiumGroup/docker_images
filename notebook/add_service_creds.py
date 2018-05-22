@@ -3,7 +3,7 @@ import json, yaml
 
 def add_service_creds():
 
-    with open('/home/jovyan/worker-template.yaml', 'r') as f:
+    with open('/home/jovyan/worker-template.yml', 'r') as f:
         WORKER_TEMPLATE = yaml.safe_load(f)
 
     for env in WORKER_TEMPLATE['spec']['containers'][0]['env']:
@@ -18,7 +18,7 @@ def add_service_creds():
     WORKER_TEMPLATE['spec']['containers'][0]['env'].append(
         {'name': 'GCSFUSE_TOKEN', 'value': TOKEN_STRING})
 
-    with open('/home/jovyan/worker-template.yaml', 'w') as f:
+    with open('/home/jovyan/worker-template.yml', 'w') as f:
         f.write(yaml.dump(WORKER_TEMPLATE))
 
     print('worker-template.yml updated')

@@ -100,7 +100,7 @@ USER root
 COPY prepare.sh /usr/bin/prepare.sh
 RUN chmod +x /usr/bin/prepare.sh
 RUN mkdir /pre-home && chown -R $NB_USER /pre-home
-COPY worker-template.yaml /pre-home
+COPY worker-template.yml /pre-home
 COPY add_service_creds.py /pre-home
 
 
