@@ -83,7 +83,7 @@ RUN conda install --quiet --yes \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
-RUN pip install wget jupyterlab==0.31rc2 py_noaa dbfread xlrd mapbox google-cloud==0.32.0 google-cloud-storage xesmf gsutil fusepy click jedi kubernetes --no-cache-dir
+RUN pip install wget jupyterlab==0.31rc2 py_noaa dbfread xlrd mapbox google-cloud==0.32.0 google-cloud-storage xesmf gsutil fusepy click jedi kubernetes impactlab-tools --no-cache-dir
 
 RUN pip install daskernetes==0.1.3 \
                 git+https://github.com/dask/dask-kubernetes@5ba08f714ef38e585e9f2038b6be530c578b96dd \

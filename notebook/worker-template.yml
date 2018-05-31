@@ -14,7 +14,7 @@ spec:
     env:
       - name: GCSFUSE_BUCKET
         value: rhg-data
-    image: rhodium/worker:2018-05-22
+    image: rhodium/worker:2018-05-31
     name: dask-worker
     securityContext:
       capabilities:
@@ -22,8 +22,8 @@ spec:
       privileged: true
     resources:
       limits:
-        cpu: "1.75"
-        memory: 6G
+        cpu: "3.5"
+        memory: 12G
       requests:
-        cpu: "1.75"
-        memory: 6G
+        cpu: "3.5"
+        memory: 12G
