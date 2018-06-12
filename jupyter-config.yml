@@ -2,7 +2,7 @@ jupyterhub:
   singleuser:
     image:
       name: rhodium/notebook
-      tag: 2018-06-12.03
+      tag: 2018-06-12.04
     storage:
       capacity: 10Gi
     dynamic:
