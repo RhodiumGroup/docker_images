@@ -14,14 +14,15 @@ RUN apt-get update \
   vim \
   git \
   keychain \
+  gnupg \
+  gnupg-utils \
+  gnupg2 \
   rsync \
   libcurl4-openssl-dev \
   libssl-dev \
-  build-essential \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
-USER $NB_USER
+  build-essential
 
+USER $NB_USER
 
 #Do additional conda installs 
 RUN conda update --yes conda
@@ -57,8 +58,7 @@ RUN conda install --yes -c conda-forge \
     tornado \
     xarray=0.10.7 \
     zict \
-    rasterio \
-    && conda clean -tipsy
+    rasterio
 
 RUN conda install --yes --channel conda-forge/label/dev geopandas
 
@@ -84,7 +84,6 @@ RUN conda install --quiet --yes \
     'r-sparklyr=0.7*' \
     'r-htmlwidgets=1.0*' \
     'r-hexbin=1.27*' && \
-    conda clean -tipsy && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
@@ -124,6 +123,10 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && apt-get update \
   && apt-get install gcsfuse \
   && alias googlefuse=/usr/bin/gcsfuse
+
+# clean up
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN conda clean -tipsy
 
 RUN mkdir /gcs && chown -R $NB_USER /gcs
 RUN mkdir /opt/app
