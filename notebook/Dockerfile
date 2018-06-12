@@ -14,16 +14,17 @@ RUN apt-get update \
   vim \
   git \
   keychain \
+  gnupg \
+  gnupg2 \
   rsync \
   libcurl4-openssl-dev \
   libssl-dev \
-  build-essential \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+  build-essential
+
 USER $NB_USER
 
-
 #Do additional conda installs 
+RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     bokeh=0.12.14 \
     basemap \
@@ -31,6 +32,7 @@ RUN conda install --yes -c conda-forge \
     cartopy \
     datashader \
     dask=0.17.2 \
+    gdal=2.2.4 \
     esmpy \
     zarr \
     dask-ml \
@@ -44,18 +46,20 @@ RUN conda install --yes -c conda-forge \
     nb_conda_kernels \
     netcdf4 \
     nomkl \
-    numba \
+    numba=0.37.0 \
     numcodecs \
-    numpy \
+    numpy=1.14.2 \
     pandas \
     python-blosc \
     scipy \
     scikit-image \
     scikit-learn \
     tornado \
-    xarray \
+    xarray=0.10.7 \
     zict \
-    && conda clean -tipsy
+    rasterio
+
+RUN conda install --yes --channel conda-forge/label/dev geopandas
 
 #install R packages
 RUN conda install --quiet --yes \
@@ -79,7 +83,6 @@ RUN conda install --quiet --yes \
     'r-sparklyr=0.7*' \
     'r-htmlwidgets=1.0*' \
     'r-hexbin=1.27*' && \
-    conda clean -tipsy && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
@@ -119,6 +122,10 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && apt-get update \
   && apt-get install gcsfuse \
   && alias googlefuse=/usr/bin/gcsfuse
+
+# clean up
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN conda clean -tipsy
 
 RUN mkdir /gcs && chown -R $NB_USER /gcs
 RUN mkdir /opt/app
