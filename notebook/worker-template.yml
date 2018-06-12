@@ -14,7 +14,7 @@ spec:
     env:
       - name: GCSFUSE_BUCKET
         value: rhg-data
-    image: rhodium/worker:2018-06-12.02
+    image: rhodium/worker:2018-06-12.03
     name: dask-worker
     securityContext:
       capabilities:
