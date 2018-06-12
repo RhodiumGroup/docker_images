@@ -40,7 +40,7 @@ RUN conda install --yes --channel conda-forge/label/dev geopandas
 
 USER root
 RUN apt-get update \
-  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse gnupg gnupg-utils gnupg2
+  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse gnupg gnupg2
 
 
 RUN export GCSFUSE_REPO=gcsfuse-xenial \

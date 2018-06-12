@@ -15,7 +15,6 @@ RUN apt-get update \
   git \
   keychain \
   gnupg \
-  gnupg-utils \
   gnupg2 \
   rsync \
   libcurl4-openssl-dev \
