@@ -10,6 +10,7 @@ RUN conda install --yes -c conda-forge \
     cytoolz \
     datashader \
     dask=0.17.2 \
+    gdal=2.2.4 \
     esmpy \
     zarr \
     distributed=1.21.5 \
@@ -31,9 +32,12 @@ RUN conda install --yes -c conda-forge \
     scipy \
     scikit-image \
     tornado \
-    xarray \
+    xarray=0.10.7 \
     zict \
+    rasterio \
     && conda clean -tipsy
+
+RUN conda install --yes --channel conda-forge/label/dev geopandas
 
 USER root
 RUN apt-get update \

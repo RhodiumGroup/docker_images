@@ -24,6 +24,7 @@ USER $NB_USER
 
 
 #Do additional conda installs 
+RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     bokeh=0.12.14 \
     basemap \
@@ -31,6 +32,7 @@ RUN conda install --yes -c conda-forge \
     cartopy \
     datashader \
     dask=0.17.2 \
+    gdal=2.2.4 \
     esmpy \
     zarr \
     dask-ml \
@@ -44,18 +46,21 @@ RUN conda install --yes -c conda-forge \
     nb_conda_kernels \
     netcdf4 \
     nomkl \
-    numba \
+    numba=0.37.0 \
     numcodecs \
-    numpy \
+    numpy=1.14.2 \
     pandas \
     python-blosc \
     scipy \
     scikit-image \
     scikit-learn \
     tornado \
-    xarray \
+    xarray=0.10.7 \
     zict \
+    rasterio \
     && conda clean -tipsy
+
+RUN conda install --yes --channel conda-forge/label/dev geopandas
 
 #install R packages
 RUN conda install --quiet --yes \
