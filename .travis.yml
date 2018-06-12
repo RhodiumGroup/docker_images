@@ -2,7 +2,7 @@ sudo: required
 services:
   - docker
 env: 
-  - TAG=2018-06-12.01
+  - TAG=2018-06-12.02
 before_install:
   - cd worker
   - docker build -t rhodium/worker:$TAG .
