@@ -40,7 +40,7 @@ RUN conda install --yes -c conda-forge \
     fastparquet \
     ipywidgets \
     holoviews \
-    lz4 \
+    lz4=1.1.0 \
     matplotlib \
     nbserverproxy \
     nb_conda_kernels \
@@ -50,7 +50,7 @@ RUN conda install --yes -c conda-forge \
     numcodecs \
     numpy=1.14.2 \
     pandas \
-    python-blosc \
+    python-blosc=1.4.4 \
     scipy \
     scikit-image \
     scikit-learn \

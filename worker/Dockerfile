@@ -19,7 +19,7 @@ RUN conda install --yes -c conda-forge \
     ipywidgets \
     jupyterlab \
     holoviews \
-    lz4 \
+    lz4=1.1.0 \
     matplotlib \
     nb_conda_kernels \
     netcdf4 \
@@ -28,7 +28,7 @@ RUN conda install --yes -c conda-forge \
     numcodecs \
     numpy=1.14.2 \
     pandas \
-    python-blosc \
+    python-blosc=1.4.4 \
     scipy \
     scikit-image \
     tornado \
