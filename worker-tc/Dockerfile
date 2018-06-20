@@ -65,9 +65,7 @@ RUN pip install daskernetes==0.1.3 \
 
 RUN git clone git://github.com/bolliger32/clawpack.git \
     && cd clawpack \
-    && python setup.py git-dev \
-    && # optionally, for installation of Python components \
-    && pip install -e 
+    && pip install -e .
 
 # clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
