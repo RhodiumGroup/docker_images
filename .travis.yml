@@ -4,9 +4,9 @@ services:
 env: 
   - TAG=2018-06-20.01
 before_install:
-  - cd ../notebook
+  - cd notebook
   - docker build -t rhodium/notebook:$TAG .
-  - cd worker
+  - cd ../worker
   - docker build -t rhodium/worker:$TAG .
   - cd ../worker-tc
   - docker build -t rhodium/worker-tc:$TAG .
