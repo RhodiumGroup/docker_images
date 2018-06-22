@@ -63,9 +63,14 @@ RUN pip install daskernetes==0.1.3 \
                 git+https://github.com/jupyterhub/nbserverproxy \
                 --no-cache-dir
 
-RUN git clone git://github.com/bolliger32/clawpack.git \
+RUN apt-get install -y gfortran
+
+RUN git clone --recurse-submodules -j4 https://github.com/bolliger32/clawpack.git \
     && cd clawpack \
     && pip install -e .
+
+ENV CLAW=/clawpack-v5.4.1
+ENV FC=gfortran
 
 # clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*

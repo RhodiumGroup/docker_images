@@ -3,7 +3,8 @@ services:
   - docker
 env: 
   - TAG=2018-06-20.02
-before_install:
+install:
+  - travis_wait 30 mvn install
   - cd notebook
   - docker build -t rhodium/notebook:$TAG .
   - cd ../worker
