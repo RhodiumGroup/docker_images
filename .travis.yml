@@ -1,21 +1,26 @@
 sudo: required
 services:
   - docker
+
 env: 
   - TAG=2018-07-03.01
+
 before_install:
   - cd worker
   - docker build -t rhodium/worker:$TAG .
   - cd ../notebook
   - docker build -t rhodium/notebook:$TAG .
+
 script:
   - docker images rhodium/notebook:$TAG
   - docker images rhodium/worker:$TAG
 
-#add push
-after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push rhodium/worker:$TAG;
-    docker push rhodium/notebook:$TAG;
-    fi
+deploy:
+  provider: script
+  script:
+    - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+    - docker push rhodium/worker:$TAG
+    - docker push rhodium/notebook:$TAG
+
+  on:
+    branch: master
