@@ -15,12 +15,9 @@ script:
   - docker images rhodium/notebook:$TAG
   - docker images rhodium/worker:$TAG
 
-deploy:
-  provider: script
-  script:
-    - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-    - docker push rhodium/worker:$TAG
-    - docker push rhodium/notebook:$TAG
-
-  on:
-    branch: master
+after_success:
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+      docker push rhodium/worker:$TAG;
+      docker push rhodium/notebook:$TAG;
+    fi
