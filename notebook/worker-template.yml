@@ -5,7 +5,7 @@ spec:
   - args:
       - dask-worker
       - --nthreads
-      - '2'
+      - '4'
       - --no-bokeh
       - --memory-limit
       - 6GB
@@ -22,8 +22,8 @@ spec:
       privileged: true
     resources:
       limits:
-        cpu: "3.5"
-        memory: 12G
+        cpu: "1.75"
+        memory: 6G
       requests:
-        cpu: "3.5"
-        memory: 12G
+        cpu: "1.75"
+        memory: 6G
