@@ -3,7 +3,7 @@ services:
   - docker
 
 env: 
-  - TAG=2018-07-05.01
+  - TAG=2018-07-06.01
 
 before_install:
   - cd worker
