@@ -1,3 +1,5 @@
+![build status](https://travis-ci.org/RhodiumGroup/docker_images.svg?branch=master) ![notebook pulls](https://img.shields.io/docker/pulls/rhodium/notebook.svg?label=notebook%20pulls) ![worker pulls](https://img.shields.io/docker/pulls/rhodium/worker.svg?label=worker%20pulls)
+
 Dockerfiles and set-up for creating a jupyterhub deployment on gce with k8s
 
 
