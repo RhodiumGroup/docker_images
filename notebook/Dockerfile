@@ -86,7 +86,7 @@ RUN conda install --quiet --yes \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
-RUN pip install wget jupyterlab==0.31rc2 py_noaa dbfread xlrd mapbox google-cloud==0.32.0 google-cloud-storage xesmf gsutil fusepy click jedi kubernetes impactlab-tools --no-cache-dir
+RUN pip install wget jupyterlab==0.32.1 py_noaa dbfread xlrd mapbox google-cloud==0.32.0 google-cloud-storage xesmf gsutil fusepy click jedi kubernetes impactlab-tools --no-cache-dir
 
 RUN pip install daskernetes==0.1.3 \
                 git+https://github.com/dask/dask-kubernetes@5ba08f714ef38e585e9f2038b6be530c578b96dd \
@@ -94,8 +94,10 @@ RUN pip install daskernetes==0.1.3 \
                 git+https://github.com/dask/gcsfs@2fbdc27e838a531ada080886ae778cb370ae48b8\
                 --no-cache-dir
 
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.33.0 \
-                                  @jupyterlab/hub-extension@0.8.1
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.35 \
+                                  @jupyterlab/hub-extension@0.9.2 \
+                                  jupyterlab_bokeh@0.5.0 \
+                                  @pyviz/jupyterlab_pyviz@0.5.2
 
 RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
@@ -110,10 +112,10 @@ COPY add_service_creds.py /pre-home
 #setup Dask Kubernetes
 ENV DASK_TICK_MAXIMUM_DELAY=5s
 ENV DASKERNETES_DIAGNOSTICS_LINK {JUPYTERHUB_SERVICE_PREFIX}proxy/{port}/status
-ENV DASKERNETES_WORKER_TEMPLATE_PATH /home/$NB_USER/worker-template.yaml
+ENV DASKERNETES_WORKER_TEMPLATE_PATH /home/$NB_USER/worker-template.yml
 ENV DASKERNETES_WORKER_NAME dask-{JUPYTERHUB_USER}-{uuid}
 ENV DASK_DIAGNOSTICS_LINK {JUPYTERHUB_SERVICE_PREFIX}proxy/{port}/status
-ENV DASK_KUBERNETES_WORKER_TEMPLATE_PATH /home/$NB_USER/worker-template.yaml
+ENV DASK_KUBERNETES_WORKER_TEMPLATE_PATH /home/$NB_USER/worker-template.yml
 ENV DASK_KUBERNETES_WORKER_NAME dask-{JUPYTERHUB_USER}-{uuid}
 
 RUN export GCSFUSE_REPO=gcsfuse-xenial \

@@ -1,8 +1,10 @@
 sudo: required
 services:
   - docker
-env: 
-  - TAG=2018-06-22.01
+
+env:
+  - TAG=2018-07-06.01
+
 install:
   - cd notebook
   - docker build -t rhodium/notebook:$TAG .
@@ -10,16 +12,19 @@ install:
   - docker build -t rhodium/worker:$TAG .
   - cd ../worker-tc
   - docker build -t rhodium/worker-tc:$TAG .
+
 script:
   - docker images rhodium/notebook:$TAG
   - docker images rhodium/worker:$TAG
   - docker images rhodium/worker:$TAG
 
-#add push
-after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push rhodium/worker:$TAG;
-    docker push rhodium/worker-tc:$TAG;
-    docker push rhodium/notebook:$TAG;
-    fi
+before_deploy:
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+deploy:
+  provider: script
+  script: 
+    - docker push "rhodium/notebook:$TAG"
+    - docker push "rhodium/worker:$TAG"
+    - docker push "rhodium/worker:$TAG"
+  on:
+    branch: master
