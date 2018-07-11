@@ -26,5 +26,6 @@ deploy:
     - docker push "rhodium/notebook:$TAG"
     - docker push "rhodium/worker:$TAG"
     - docker push "rhodium/worker:$TAG"
+  skip_cleanup: true
   on:
     branch: master
