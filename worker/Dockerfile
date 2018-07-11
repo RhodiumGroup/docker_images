@@ -40,7 +40,7 @@ RUN conda install --yes --channel conda-forge/label/dev geopandas
 
 USER root
 RUN apt-get update \
-  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse gnupg gnupg2
+  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse gnupg gnupg2 zip
 
 
 RUN export GCSFUSE_REPO=gcsfuse-xenial \
@@ -54,7 +54,7 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
 RUN conda install --yes -c conda-forge setuptools
 
 RUN pip install --upgrade pip
-RUN pip install wget google-cloud==0.32.0 google-cloud-storage gsutil statsmodels fusepy click jedi kubernetes pyasn1 click urllib3 xesmf --no-cache-dir
+RUN pip install wget google-cloud==0.32.0 google-cloud-storage gsutil statsmodels==0.9.0 fusepy click jedi kubernetes pyasn1 click urllib3 xesmf --no-cache-dir
 
 RUN pip install daskernetes==0.1.3 \
                 git+https://github.com/dask/dask-kubernetes@5ba08f714ef38e585e9f2038b6be530c578b96dd \
