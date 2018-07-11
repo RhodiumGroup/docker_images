@@ -2,8 +2,8 @@ sudo: required
 services:
   - docker
 
-env:
-  - TAG=2018-07-06.01
+env: 
+  - TAG=2018-07-10
 
 install:
   - cd notebook
