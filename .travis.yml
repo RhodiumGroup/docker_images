@@ -3,7 +3,7 @@ services:
   - docker
 
 env: 
-  - TAG=2018-07-10
+  - TAG=2018-07-11.01
 
 install:
   - cd notebook
