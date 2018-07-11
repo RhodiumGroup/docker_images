@@ -7,25 +7,20 @@ env:
 
 install:
   - cd notebook
-  - docker build -t rhodium/notebook:$TAG .
+  - docker build --pull --cache-from rhodium/notebook -t rhodium/notebook:$TAG .
   - cd ../worker
-  - docker build -t rhodium/worker:$TAG .
+  - docker build --pull --cache-from rhodium/worker -t rhodium/worker:$TAG .
   - cd ../worker-tc
-  - docker build -t rhodium/worker-tc:$TAG .
+  - docker build --pull --cache-from rhodium/worker-tc -t rhodium/worker-tc:$TAG .
 
 script:
   - docker images rhodium/notebook:$TAG
   - docker images rhodium/worker:$TAG
-  - docker images rhodium/worker:$TAG
+  - docker images rhodium/worker-tc:$TAG
 
-before_deploy:
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 deploy:
   provider: script
-  script: 
-    - docker push "rhodium/notebook:$TAG"
-    - docker push "rhodium/worker:$TAG"
-    - docker push "rhodium/worker:$TAG"
+  script: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push "rhodium/notebook:$TAG" && docker push "rhodium/worker:$TAG" && docker push "rhodium/worker-tc:$TAG"
   skip_cleanup: true
   on:
     branch: master
