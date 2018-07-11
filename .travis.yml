@@ -2,25 +2,24 @@ sudo: required
 services:
   - docker
 
-env: 
-  - TAG=2018-07-11.01
+env:
+  global:
+    - TAG=2018-07-11.01
+  matrix:
+    - IMAGE_NAME=notebook
+    - IMAGE_NAME=worker
+    - IMAGE_NAME=worker-tc
 
 install:
-  - cd notebook
-  - docker build --pull --cache-from rhodium/notebook -t rhodium/notebook:$TAG .
-  - cd ../worker
-  - docker build --pull --cache-from rhodium/worker -t rhodium/worker:$TAG .
-  - cd ../worker-tc
-  - docker build --pull --cache-from rhodium/worker-tc -t rhodium/worker-tc:$TAG .
+  - cd $IMAGE_NAME
+  - docker build --pull --cache-from rhodium/$IMAGE_NAME -t rhodium/$IMAGE_NAME:$TAG .
 
 script:
-  - docker images rhodium/notebook:$TAG
-  - docker images rhodium/worker:$TAG
-  - docker images rhodium/worker-tc:$TAG
+  - docker images rhodium/$IMAGE_NAME:$TAG
 
 deploy:
   provider: script
-  script: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push "rhodium/notebook:$TAG" && docker push "rhodium/worker:$TAG" && docker push "rhodium/worker-tc:$TAG"
+  script: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push "rhodium/$IMAGE_NAME:$TAG"
   skip_cleanup: true
   on:
     branch: master
