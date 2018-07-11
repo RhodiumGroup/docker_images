@@ -54,7 +54,7 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
 RUN conda install --yes -c conda-forge setuptools
 
 RUN pip install --upgrade pip
-RUN pip install wget google-cloud==0.32.0 google-cloud-storage gsutil statsmodels fusepy click jedi kubernetes pyasn1 click urllib3 xesmf --no-cache-dir
+RUN pip install wget google-cloud==0.32.0 google-cloud-storage gsutil fusepy click jedi kubernetes pyasn1 click urllib3 xesmf --no-cache-dir
 
 RUN pip install daskernetes==0.1.3 \
                 git+https://github.com/dask/dask-kubernetes@5ba08f714ef38e585e9f2038b6be530c578b96dd \
@@ -62,6 +62,15 @@ RUN pip install daskernetes==0.1.3 \
                 git+https://github.com/dask/gcsfs@2fbdc27e838a531ada080886ae778cb370ae48b8\
                 git+https://github.com/jupyterhub/nbserverproxy \
                 --no-cache-dir
+
+RUN apt-get install -y gfortran
+
+RUN git clone --recurse-submodules -j4 https://github.com/bolliger32/clawpack.git \
+    && cd clawpack \
+    && pip install -e .
+
+ENV CLAW=/clawpack-v5.4.1
+ENV FC=gfortran
 
 # clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
