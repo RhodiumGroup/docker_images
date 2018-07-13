@@ -36,5 +36,5 @@ after_deploy:
     - helm repo index .
     - git commit -am 'add new helm chart tag=$TAG'
     - git push 
-    on:
-      branch: master
+  on:
+    branch: master
