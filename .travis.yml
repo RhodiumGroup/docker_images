@@ -24,12 +24,10 @@ deploy:
   on:
     branch: master
 after_deploy:
-  on:
-    branch: master 
-  install: 
+  
+  script: 
     - curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
-    - pip install --default-timeout=100 git+https://github.com/RhodiumGroup/helm-chart.git
-  sript: 
+    - pip install git+https://github.com/RhodiumGroup/helm-chart.git
     - cd helm-chart
     - python update_helm_tag.py -$TAG
     - helm package rhg-hub/
@@ -38,3 +36,5 @@ after_deploy:
     - helm repo index .
     - git commit -am 'add new helm chart tag=$TAG'
     - git push 
+    on:
+      branch: master
