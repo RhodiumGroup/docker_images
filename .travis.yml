@@ -24,7 +24,7 @@ deploy:
   on:
     branch: master
 after_deploy:
-  
+  provider: script
   script: 
     - curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
     - pip install git+https://github.com/RhodiumGroup/helm-chart.git
