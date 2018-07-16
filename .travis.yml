@@ -24,17 +24,24 @@ deploy:
   on:
     branch: master
 after_deploy:
-  provider: script
-  script: 
+    #install helm
     - curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
-    - pip install git+https://github.com/RhodiumGroup/helm-chart.git
+
+    # set-up deploy key
+    - openssl aes-256-cbc -K $encrypted_c0b671082c84_key -iv $encrypted_c0b671082c84_iv -in github_deploy_key.enc -out github_deploy_key -d
+    #clone our helm repo
+    - git clone git@github.com:RhodiumGroup/docker_images.git
+    #update the tag for the helm chart
     - cd helm-chart
     - python update_helm_tag.py -$TAG
+    #create the helm chart with the new tag
     - helm package rhg-hub/
+    #add information to gh-pages repo
     - git checkout gh-pages
     - git add rhg-hub*.tgz
     - helm repo index .
     - git commit -am 'add new helm chart tag=$TAG'
+    #push to gh-pages
     - git push 
   on:
     branch: master
