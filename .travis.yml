@@ -28,9 +28,9 @@ after_deploy:
     - curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
 
     # set-up deploy key
-    - openssl aes-256-cbc -K $encrypted_c0b671082c84_key -iv $encrypted_c0b671082c84_iv -in github_deploy_key.enc -out github_deploy_key -d
+    - openssl aes-256-cbc -K $encrypted_19fb998dc11c_key -iv $encrypted_19fb998dc11c_iv -in github_deploy_key.enc -out github_deploy_key -d
     #clone our helm repo
-    - git clone git@github.com:RhodiumGroup/docker_images.git
+    - git clone git@github.com:RhodiumGroup/helm-chart.git
     #update the tag for the helm chart
     - cd helm-chart
     - python update_helm_tag.py -$TAG
