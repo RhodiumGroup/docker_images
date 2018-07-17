@@ -4,7 +4,7 @@ services:
 
 env:
   global:
-    - TAG=2018-07-17.01
+    - TAG=2018-07-12.01
   matrix:
     - IMAGE_NAME=notebook
     - IMAGE_NAME=worker
@@ -12,7 +12,7 @@ env:
 
 install:
   - cd $IMAGE_NAME
-  - docker build -t rhodium/$IMAGE_NAME:$TAG .
+  - docker build --pull --cache-from rhodium/$IMAGE_NAME -t rhodium/$IMAGE_NAME:$TAG .
 
 script:
   - docker images rhodium/$IMAGE_NAME:$TAG
