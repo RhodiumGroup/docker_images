@@ -12,7 +12,7 @@ env:
 
 install:
   - cd $IMAGE_NAME
-  - docker build --pull --cache-from rhodium/$IMAGE_NAME -t rhodium/$IMAGE_NAME:$TAG .
+  - docker build rhodium/$IMAGE_NAME -t rhodium/$IMAGE_NAME:$TAG .
 
 script:
   - docker images rhodium/$IMAGE_NAME:$TAG
