@@ -5,15 +5,17 @@ RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/
 RUN chmod +x /usr/local/bin/dumb-init
 
 RUN conda update --yes conda
-RUN conda install --yes -c conda-forge \
-    bokeh=0.12.14 \
+RUN conda install --yes 
+    -c defaults \
+    -c conda-forge \
+    bokeh=0.12.16 \
     cytoolz \
     datashader \
-    dask=0.17.2 \
+    dask=0.18.0 \
     gdal=2.2.4 \
     esmpy \
     zarr \
-    distributed=1.21.5 \
+    distributed=1.22.0 \
     fastparquet \
     git \
     ipywidgets \
@@ -54,14 +56,21 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
 RUN conda install --yes -c conda-forge setuptools
 
 RUN pip install --upgrade pip
-RUN pip install wget google-cloud==0.32.0 google-cloud-storage gsutil statsmodels==0.9.0 fusepy click jedi kubernetes pyasn1 click urllib3 xesmf --no-cache-dir
-
-RUN pip install daskernetes==0.1.3 \
-                git+https://github.com/dask/dask-kubernetes@5ba08f714ef38e585e9f2038b6be530c578b96dd \
-                git+https://github.com/ioam/holoviews@3f015c0a531f54518abbfecffaac72a7b3554ed3\
-                git+https://github.com/dask/gcsfs@2fbdc27e838a531ada080886ae778cb370ae48b8\
-                git+https://github.com/jupyterhub/nbserverproxy \
+RUN pip install wget \
+                dask-kubernetes==0.4.0 \
+                google-cloud==0.32.0 \
+                google-cloud-storage \
+                gsutil \
+                statsmodels==0.9.0 \
+                fusepy \
+                click \
+                jedi \
+                pyasn1 \
+                click \
+                urllib3 \
+                xesmf \
                 --no-cache-dir
+
 
 # clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*

@@ -26,20 +26,31 @@ USER $NB_USER
 
 #Do additional conda installs 
 RUN conda update --yes conda
-RUN conda install --yes -c conda-forge \
-    bokeh=0.12.14 \
+RUN conda install --yes \
+    -c defaults \
+    -c pyviz/label/dev \
+    -c bokeh/channel/dev \
+    -c intake \
+    -c conda-forge \
+    bokeh=0.12.16 \
     basemap \
     cytoolz \
     cartopy \
     datashader \
-    dask=0.17.2 \
+    dask=0.18.0 \
     gdal=2.2.4 \
     esmpy \
     zarr \
     dask-ml \
-    distributed=1.21.5 \
+    distributed=1.22.0 \
     fastparquet \
+    graphviz \
+    python-graphviz \ 
     ipywidgets \
+    jupyter \
+    jupyterlab=0.32.1 \
+    jupyterlab_launcher=0.10.5 \
+    jupyter_client \
     ipdb \
     holoviews \
     lz4=1.1.0 \
@@ -92,7 +103,7 @@ RUN pip install \
   bumpversion==0.5.3 \
   click \
   coverage==4.5.1 \
-  dbfread \
+  dask-kubernetes==0.4.0 \
   flake8==3.5.0 \
   fusepy \
   google-cloud==0.32.0 \
@@ -101,7 +112,7 @@ RUN pip install \
   impactlab-tools \
   jedi \
   jupyterlab==0.32.1 \
-  kubernetes \
+  kubernetes==6.0.0 \
   mapbox \
   pytest==3.6.3 \
   pytest-cov==2.5.1 \
@@ -117,11 +128,6 @@ RUN pip install \
   xlrd \
   --no-cache-dir
 
-RUN pip install daskernetes==0.1.3 \
-                git+https://github.com/dask/dask-kubernetes@5ba08f714ef38e585e9f2038b6be530c578b96dd \
-                git+https://github.com/ioam/holoviews@3f015c0a531f54518abbfecffaac72a7b3554ed3\
-                git+https://github.com/dask/gcsfs@2fbdc27e838a531ada080886ae778cb370ae48b8\
-                --no-cache-dir
 
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.35 \
                                   @jupyterlab/hub-extension@0.9.2 \
@@ -139,13 +145,9 @@ COPY add_service_creds.py /pre-home
 
 
 #setup Dask Kubernetes
-ENV DASK_TICK_MAXIMUM_DELAY=5s
-ENV DASKERNETES_DIAGNOSTICS_LINK {JUPYTERHUB_SERVICE_PREFIX}proxy/{port}/status
-ENV DASKERNETES_WORKER_TEMPLATE_PATH /home/$NB_USER/worker-template.yml
-ENV DASKERNETES_WORKER_NAME dask-{JUPYTERHUB_USER}-{uuid}
-ENV DASK_DIAGNOSTICS_LINK {JUPYTERHUB_SERVICE_PREFIX}proxy/{port}/status
-ENV DASK_KUBERNETES_WORKER_TEMPLATE_PATH /home/$NB_USER/worker-template.yml
-ENV DASK_KUBERNETES_WORKER_NAME dask-{JUPYTERHUB_USER}-{uuid}
+ENV DASK_CONFIG=/home/$NB_USER/config.yml
+COPY config.yml /pre-home
+COPY worker-template.yml /pre-home
 
 RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \
