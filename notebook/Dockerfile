@@ -48,6 +48,7 @@ RUN conda install --yes \
     python-graphviz \ 
     ipywidgets \
     jupyter \
+    jupyterhub==0.8.1
     jupyterlab=0.32.1 \
     jupyterlab_launcher=0.10.5 \
     jupyter_client \

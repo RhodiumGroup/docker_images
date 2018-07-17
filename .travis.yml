@@ -4,7 +4,7 @@ services:
 
 env:
   global:
-    - TAG=2018-07-12.01
+    - TAG=2018-07-17.02
   matrix:
     - IMAGE_NAME=notebook
     - IMAGE_NAME=worker
@@ -24,8 +24,7 @@ deploy:
   on:
     branch: master
 after_deploy:
-  install:
-    #install helm
+  script:
     - curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
     # set-up deploy key
     - openssl aes-256-cbc -K $encrypted_19fb998dc11c_key -iv $encrypted_19fb998dc11c_iv -in github_deploy_key.enc -out github_deploy_key -d
