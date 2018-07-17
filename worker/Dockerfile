@@ -5,7 +5,7 @@ RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/
 RUN chmod +x /usr/local/bin/dumb-init
 
 RUN conda update --yes conda
-RUN conda install --yes 
+RUN conda install --yes \
     -c defaults \
     -c conda-forge \
     bokeh=0.12.16 \
