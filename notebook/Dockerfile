@@ -133,7 +133,7 @@ RUN pip install \
 
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.35 \
                                   @jupyterlab/hub-extension@0.9.2 \
-                                  @jupyterlab_bokeh@0.5.0 \
+                                  jupyterlab_bokeh@0.5.0 \
                                   @pyviz/jupyterlab_pyviz@0.5.2
 
 RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
