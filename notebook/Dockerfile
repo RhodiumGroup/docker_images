@@ -32,6 +32,7 @@ RUN conda install --yes \
     -c bokeh/channel/dev \
     -c intake \
     -c conda-forge \
+    beautifulsoup4  \
     bokeh=0.12.16 \
     basemap \
     cytoolz \

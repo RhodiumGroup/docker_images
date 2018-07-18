@@ -8,6 +8,7 @@ RUN conda update --yes conda
 RUN conda install --yes \
     -c defaults \
     -c conda-forge \
+    beautifulsoup4 \
     bokeh=0.12.16 \
     cytoolz \
     datashader \
