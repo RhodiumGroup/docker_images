@@ -48,6 +48,7 @@ RUN conda install --yes \
     graphviz \
     python-graphviz \ 
     ipywidgets \
+    ipykernel \
     jupyter \
     #jupyterhub==0.8.1 \
     jupyterlab=0.32.1 \
@@ -66,6 +67,7 @@ RUN conda install --yes \
     numpy=1.14.2 \
     pandas \
     python-blosc=1.4.4 \
+    seaborn \
     scipy \
     scikit-image \
     scikit-learn \
