@@ -30,7 +30,6 @@ RUN conda install --yes \
     -c defaults \
     -c pyviz/label/dev \
     -c bokeh/channel/dev \
-    -c intake \
     -c conda-forge \
     beautifulsoup4  \
     bokeh=0.12.16 \
@@ -50,7 +49,6 @@ RUN conda install --yes \
     ipywidgets \
     ipykernel \
     jupyter \
-    #jupyterhub==0.8.1 \
     jupyterlab=0.32.1 \
     jupyterlab_launcher=0.10.5 \
     jupyter_client \

@@ -44,5 +44,13 @@ else
     fi
 fi
 
+JLAB_DIR=/opt/conda/shares/jupyter/lab/staging/
+if [[ -d  $JLAB_DIR ]]; then
+    echo "deleting $JLAB_DIR"; 
+     rm -rf $JLAB_DIR; 
+fi
+
+
+
 # Run extra commands
 $@
