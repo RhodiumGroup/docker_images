@@ -28,7 +28,7 @@ USER $NB_USER
 RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     beautifulsoup4 \
-    bokeh=0.12.14 \
+    bokeh=0.12.15 \
     basemap \
     cytoolz \
     cartopy \
