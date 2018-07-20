@@ -4,7 +4,7 @@ services:
 
 env:
   global:
-    - TAG=2018-07-19.01
+    - TAG=2018-07-20.01
   matrix:
     - IMAGE_NAME=notebook
     - IMAGE_NAME=worker

@@ -1,4 +1,4 @@
-#We build our single-user notebook from the base jupyter notebook image
+##We build our single-user notebook from the base jupyter notebook image
 FROM jupyter/base-notebook
 
 #install some system level packages 
@@ -26,32 +26,21 @@ USER $NB_USER
 
 #Do additional conda installs 
 RUN conda update --yes conda
-RUN conda install --yes \
-    -c defaults \
-    -c pyviz/label/dev \
-    -c bokeh/channel/dev \
-    -c conda-forge \
-    beautifulsoup4  \
-    bokeh=0.12.16 \
+RUN conda install --yes -c conda-forge \
+    beautifulsoup4 \
+    bokeh=0.12.14 \
     basemap \
     cytoolz \
     cartopy \
     datashader \
-    dask=0.18.0 \
+    dask=0.17.2 \
     gdal=2.2.4 \
     esmpy \
     zarr \
     dask-ml \
-    distributed=1.22.0 \
+    distributed=1.21.5 \
     fastparquet \
-    graphviz \
-    python-graphviz \ 
     ipywidgets \
-    ipykernel \
-    jupyter \
-    jupyterlab=0.32.1 \
-    jupyterlab_launcher=0.10.5 \
-    jupyter_client \
     ipdb \
     holoviews \
     lz4=1.1.0 \
@@ -65,7 +54,7 @@ RUN conda install --yes \
     numpy=1.14.2 \
     pandas \
     python-blosc=1.4.4 \
-    seaborn \
+    seaborn
     scipy \
     scikit-image \
     scikit-learn \
