@@ -54,7 +54,7 @@ RUN conda install --yes -c conda-forge \
     numpy=1.14.2 \
     pandas \
     python-blosc=1.4.4 \
-    seaborn
+    seaborn \
     scipy \
     scikit-image \
     scikit-learn \
