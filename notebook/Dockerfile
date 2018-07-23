@@ -28,20 +28,24 @@ USER $NB_USER
 RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     beautifulsoup4 \
-    bokeh=0.12.15 \
+    bokeh=0.12.16 \
     basemap \
     cytoolz \
     cartopy \
     datashader \
-    dask=0.17.2 \
+    dask=0.18.0 \
     gdal=2.2.4 \
     esmpy \
     zarr \
     dask-ml \
-    distributed=1.21.5 \
+    distributed=1.22.0 \
     fastparquet \
     ipywidgets \
     ipdb \
+    jupyter \
+    jupyterlab=0.32.1 \
+    jupyterlab_launcher=0.10.5 \
+    jupyter_client \
     holoviews \
     lz4=1.1.0 \
     matplotlib \
@@ -58,7 +62,7 @@ RUN conda install --yes -c conda-forge \
     scipy \
     scikit-image \
     scikit-learn \
-    tornado \
+    tornado=5.0.2 \
     xarray=0.10.7 \
     zict \
     rasterio
@@ -102,8 +106,8 @@ RUN pip install \
   gsutil \
   impactlab-tools \
   jedi \
-  jupyterlab==0.32.1 \
   kubernetes==6.0.0 \
+  nbserverproxy==0.8.1 
   mapbox \
   pytest==3.6.3 \
   pytest-cov==2.5.1 \
@@ -122,10 +126,9 @@ RUN pip install \
 
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.35 \
                                   @jupyterlab/hub-extension@0.9.2 \
-                                  jupyterlab_bokeh@0.5.0 \
                                   @pyviz/jupyterlab_pyviz@0.5.2
 
-RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
+RUN jupyter serverextension enable --py nbserverproxy jupyterlab --sys-prefix
 
 USER root
 COPY prepare.sh /usr/bin/prepare.sh
