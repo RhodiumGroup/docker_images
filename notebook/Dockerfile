@@ -107,7 +107,7 @@ RUN pip install \
   impactlab-tools \
   jedi \
   kubernetes==6.0.0 \
-  nbserverproxy==0.8.1 
+  nbserverproxy==0.8.1 \
   mapbox \
   pytest==3.6.3 \
   pytest-cov==2.5.1 \
