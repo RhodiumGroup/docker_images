@@ -7,14 +7,14 @@ RUN chmod +x /usr/local/bin/dumb-init
 RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     beautifulsoup4 \
-    bokeh=0.12.14 \
+    bokeh=0.12.16 \
     cytoolz \
     datashader \
-    dask=0.17.2 \
+    dask=0.18.0 \
     gdal=2.2.4 \
     esmpy \
     zarr \
-    distributed=1.21.5 \
+    distributed=1.22.0 \
     fastparquet \
     git \
     ipywidgets \
@@ -33,7 +33,7 @@ RUN conda install --yes -c conda-forge \
     python-blosc=1.4.4 \
     scipy \
     scikit-image \
-    tornado \
+    tornado=5.0.2\
     xarray=0.10.7 \
     zict \
     rasterio
@@ -65,7 +65,6 @@ RUN pip install wget \
                 fusepy \
                 click \
                 jedi \
-                kubernetes \
                 pyasn1 \
                 click \
                 urllib3 \
@@ -87,7 +86,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN conda clean -tipsy
 
 ENV OMP_NUM_THREADS=1
-ENV DASK_TICK_MAXIMUM_DELAY=5s
+ENV DASK_DISTRIBUTED__ADMIN__TICK__LIMIT=5s
 
 USER root
 COPY prepare.sh /usr/bin/prepare.sh
