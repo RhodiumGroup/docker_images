@@ -27,15 +27,15 @@ if [ -e "/home/jovyan/conda_environment.yml" ]; then
     /opt/conda/bin/conda env create -f /home/jovyan/conda_environment.yml;
 fi
 
-SA_FILE=/home/jovyan/service-account-credentials.json
-if [ ! -f $SA_FILE ]; then
+STORAGE_DIR=/home/jovyan/storage_credentials/
+if [ ! -d $STORAGE_DIR ]; then
     echo "no credentials file present";
 else
-
-    GCSFUSE_BUCKET=rhg-data
+    SA_FILE=$(ls $SA_FILE)
+    GCSFUSE_BUCKET=$(basename $VAR .json)
     if ! grep -q "/gcs" /proc/mounts; then
         echo "Mounting $GCSFUSE_BUCKET to /gcs";
-        /usr/bin/gcsfuse --key-file=$SA_FILE $GCSFUSE_BUCKET /gcs;
+        /usr/bin/gcsfuse --key-file=$STORAGE_DIR$SA_FILE $GCSFUSE_BUCKET /gcs;
     fi
 
     if [ -f "/home/jovyan/worker-template.yml" ]; then

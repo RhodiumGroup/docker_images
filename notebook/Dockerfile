@@ -38,6 +38,7 @@ RUN conda install --yes -c conda-forge \
     dask-ml \
     distributed=1.21.5 \
     fastparquet \
+    ipdb \
     ipywidgets \
     holoviews \
     lz4 \
@@ -51,9 +52,11 @@ RUN conda install --yes -c conda-forge \
     numpy=1.14.2 \
     pandas \
     python-blosc \
+    seaborn \
     scipy \
     scikit-image \
     scikit-learn \
+    statsmodels==0.9.0 \
     tornado \
     xarray=0.10.7 \
     zict \
@@ -106,6 +109,7 @@ RUN chmod +x /usr/bin/prepare.sh
 RUN mkdir /pre-home && chown -R $NB_USER /pre-home
 COPY worker-template.yml /pre-home
 COPY add_service_creds.py /pre-home
+
 
 
 #setup Dask Kubernetes
