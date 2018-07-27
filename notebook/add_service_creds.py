@@ -11,7 +11,7 @@ def add_service_creds():
             print('token already appended')
             return
 
-    with open('/home/jovyan/storage/*.json', 'r') as f:
+    with open('/home/jovyan/service-account-credentials.json', 'r') as f:
         print('loading service account creds')
         TOKEN_STRING = json.dumps(json.load(f))
 
