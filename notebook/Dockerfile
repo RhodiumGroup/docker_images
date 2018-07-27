@@ -19,13 +19,15 @@ RUN apt-get update \
   rsync \
   libcurl4-openssl-dev \
   libssl-dev \
-  build-essential
+  build-essential \ 
+  zip
 
 USER $NB_USER
 
 #Do additional conda installs 
 RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
+    beautifulsoup4 \
     bokeh=0.12.14 \
     basemap \
     cytoolz \
@@ -39,6 +41,7 @@ RUN conda install --yes -c conda-forge \
     distributed=1.21.5 \
     fastparquet \
     ipywidgets \
+    ipdb \
     holoviews \
     lz4 \
     matplotlib \
@@ -54,6 +57,8 @@ RUN conda install --yes -c conda-forge \
     scipy \
     scikit-image \
     scikit-learn \
+    seaborn \
+    statsmodels==0.9.0 \
     tornado \
     xarray=0.10.7 \
     zict \
@@ -97,6 +102,7 @@ RUN pip install daskernetes==0.1.3 \
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.33.0 \
                                   @jupyterlab/hub-extension@0.8.1 \
                                   jupyterlab_bokeh@0.4.1
+                                  @pyviz/jupyterlab_pyviz@0.5.2
 
 RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
@@ -123,6 +129,10 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && apt-get update \
   && apt-get install gcsfuse \
   && alias googlefuse=/usr/bin/gcsfuse
+
+USER root
+RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+RUN chmod +x cloud_sql_proxy
 
 # clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*

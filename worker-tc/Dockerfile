@@ -42,8 +42,11 @@ RUN conda install --yes --channel conda-forge/label/dev geopandas
 
 USER root
 RUN apt-get update \
-  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse gnupg gnupg2
+  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse gnupg gnupg2 zip
 
+USER root
+RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+RUN chmod +x cloud_sql_proxy
 
 RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \
@@ -65,13 +68,18 @@ RUN pip install daskernetes==0.1.3 \
                 git+https://github.com/jupyterhub/nbserverproxy \
                 --no-cache-dir
 
+RUN apt-get install -y gfortran
+
+RUN git clone --recurse-submodules -j4 https://github.com/bolliger32/clawpack.git \
+    && cd clawpack \
+    && pip install -e .
+
+ENV CLAW=/clawpack-v5.4.1
+ENV FC=gfortran
+
 # clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN conda clean -tipsy
-
-USER root
-RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
-RUN chmod +x cloud_sql_proxy
 
 ENV OMP_NUM_THREADS=1
 ENV DASK_TICK_MAXIMUM_DELAY=5s
