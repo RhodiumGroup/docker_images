@@ -33,7 +33,6 @@ RUN conda install --yes -c conda-forge \
     python-blosc=1.4.4 \
     scipy \
     scikit-image \
-    seaborn \
     statsmodels=0.9.0 \
     tornado \
     xarray=0.10.7 \
