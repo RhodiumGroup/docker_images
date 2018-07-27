@@ -1,4 +1,4 @@
-#We build our single-user notebook from the base jupyter notebook image
+##We build our single-user notebook from the base jupyter notebook image
 FROM jupyter/base-notebook
 
 #install some system level packages 
@@ -19,13 +19,15 @@ RUN apt-get update \
   rsync \
   libcurl4-openssl-dev \
   libssl-dev \
-  build-essential
+  build-essential \
+  zip
 
 USER $NB_USER
 
 #Do additional conda installs 
 RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
+    beautifulsoup4 \
     bokeh=0.12.14 \
     basemap \
     cytoolz \
@@ -38,8 +40,8 @@ RUN conda install --yes -c conda-forge \
     dask-ml \
     distributed=1.21.5 \
     fastparquet \
-    ipdb \
     ipywidgets \
+    ipdb \
     holoviews \
     lz4 \
     matplotlib \
@@ -52,10 +54,10 @@ RUN conda install --yes -c conda-forge \
     numpy=1.14.2 \
     pandas \
     python-blosc \
-    seaborn \
     scipy \
     scikit-image \
     scikit-learn \
+    seaborn \
     statsmodels==0.9.0 \
     tornado \
     xarray=0.10.7 \
@@ -89,7 +91,33 @@ RUN conda install --quiet --yes \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
-RUN pip install wget jupyterlab==0.31rc2 py_noaa dbfread xlrd mapbox google-cloud==0.32.0 google-cloud-storage xesmf gsutil fusepy click jedi kubernetes impactlab-tools --no-cache-dir
+RUN pip install \
+  bumpversion==0.5.3 \
+  click \
+  coverage==4.5.1 \
+  dask-kubernetes==0.4.0 \
+  flake8==3.5.0 \
+  fusepy \
+  google-cloud==0.32.0 \
+  google-cloud-storage \
+  gsutil \
+  impactlab-tools \
+  jedi \
+  jupyterlab==0.31rc2 \
+  mapbox \
+  pytest==3.6.3 \
+  pytest-cov==2.5.1 \
+  pytest-runner==4.2 \
+  PyYAML==3.13 \
+  py_noaa \
+  Sphinx==1.7.5 \
+  statsmodels==0.9.0 \
+  tox==3.1.1 \
+  wget \
+  wheel==0.31.1 \
+  xesmf \
+  xlrd \
+  --no-cache-dir
 
 RUN pip install daskernetes==0.1.3 \
                 git+https://github.com/dask/dask-kubernetes@5ba08f714ef38e585e9f2038b6be530c578b96dd \
@@ -97,9 +125,12 @@ RUN pip install daskernetes==0.1.3 \
                 git+https://github.com/dask/gcsfs@2fbdc27e838a531ada080886ae778cb370ae48b8\
                 --no-cache-dir
 
+
+
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.33.0 \
                                   @jupyterlab/hub-extension@0.8.1 \
                                   jupyterlab_bokeh@0.4.1
+                                  @pyviz/jupyterlab_pyviz@0.5.2
 
 RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
@@ -109,7 +140,6 @@ RUN chmod +x /usr/bin/prepare.sh
 RUN mkdir /pre-home && chown -R $NB_USER /pre-home
 COPY worker-template.yml /pre-home
 COPY add_service_creds.py /pre-home
-
 
 
 #setup Dask Kubernetes
@@ -128,6 +158,7 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && apt-get install gcsfuse \
   && alias googlefuse=/usr/bin/gcsfuse
 
+USER root
 RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
 RUN chmod +x cloud_sql_proxy
 

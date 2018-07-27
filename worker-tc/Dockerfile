@@ -7,14 +7,14 @@ RUN chmod +x /usr/local/bin/dumb-init
 RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     beautifulsoup4 \
-    bokeh=0.12.16 \
+    bokeh=0.12.14 \
     cytoolz \
     datashader \
-    dask=0.18.0 \
+    dask=0.17.2 \
     gdal=2.2.4 \
     esmpy \
     zarr \
-    distributed=1.22.0 \
+    distributed=1.21.5 \
     fastparquet \
     git \
     ipywidgets \
@@ -33,7 +33,9 @@ RUN conda install --yes -c conda-forge \
     python-blosc=1.4.4 \
     scipy \
     scikit-image \
-    tornado=5.0.2\
+    seaborn \
+    statsmodels=0.9.0 \
+    tornado \
     xarray=0.10.7 \
     zict \
     rasterio
@@ -42,7 +44,7 @@ RUN conda install --yes --channel conda-forge/label/dev geopandas
 
 USER root
 RUN apt-get update \
-  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse gnupg gnupg2
+  && apt-get install -yq --no-install-recommends libfuse-dev nano fuse gnupg gnupg2 zip
 
 
 RUN export GCSFUSE_REPO=gcsfuse-xenial \
@@ -54,17 +56,16 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
 
 # fix https://github.com/ContinuumIO/anaconda-issues/issues/542
 RUN conda install --yes -c conda-forge setuptools
-
+ 
 #RUN pip install --upgrade pip
 RUN pip install wget \
-                dask-kubernetes==0.4.0 \
                 google-cloud==0.32.0 \
                 google-cloud-storage \
                 gsutil \
-                statsmodels==0.9.0 \
                 fusepy \
                 click \
                 jedi \
+                kubernetes \
                 pyasn1 \
                 click \
                 urllib3 \
@@ -86,7 +87,11 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN conda clean -tipsy
 
 ENV OMP_NUM_THREADS=1
-ENV DASK_DISTRIBUTED__ADMIN__TICK__LIMIT=5s
+ENV DASK_TICK_MAXIMUM_DELAY=5s
+
+USER root
+RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+RUN chmod +x cloud_sql_proxy
 
 USER root
 COPY prepare.sh /usr/bin/prepare.sh
