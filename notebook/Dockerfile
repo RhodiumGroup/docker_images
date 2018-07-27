@@ -1,4 +1,4 @@
-#We build our single-user notebook from the base jupyter notebook image
+##We build our single-user notebook from the base jupyter notebook image
 FROM jupyter/base-notebook
 
 #install some system level packages 
@@ -91,13 +91,40 @@ RUN conda install --quiet --yes \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
-RUN pip install wget jupyterlab==0.31rc2 py_noaa dbfread xlrd mapbox google-cloud==0.32.0 google-cloud-storage xesmf gsutil fusepy click jedi kubernetes impactlab-tools --no-cache-dir
+RUN pip install \
+  bumpversion==0.5.3 \
+  click \
+  coverage==4.5.1 \
+  flake8==3.5.0 \
+  fusepy \
+  google-cloud==0.32.0 \
+  google-cloud-storage \
+  gsutil \
+  impactlab-tools \
+  jedi \
+  jupyterlab==0.31rc2 \
+  mapbox \
+  pytest==3.6.3 \
+  pytest-cov==2.5.1 \
+  pytest-runner==4.2 \
+  PyYAML==3.13 \
+  py_noaa \
+  Sphinx==1.7.5 \
+  statsmodels==0.9.0 \
+  tox==3.1.1 \
+  wget \
+  wheel==0.31.1 \
+  xesmf \
+  xlrd \
+  --no-cache-dir
 
 RUN pip install daskernetes==0.1.3 \
                 git+https://github.com/dask/dask-kubernetes@5ba08f714ef38e585e9f2038b6be530c578b96dd \
                 git+https://github.com/ioam/holoviews@3f015c0a531f54518abbfecffaac72a7b3554ed3\
                 git+https://github.com/dask/gcsfs@2fbdc27e838a531ada080886ae778cb370ae48b8\
                 --no-cache-dir
+
+
 
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.33.0 \
                                   @jupyterlab/hub-extension@0.8.1 \
