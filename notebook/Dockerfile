@@ -95,7 +95,6 @@ RUN pip install \
   bumpversion==0.5.3 \
   click \
   coverage==4.5.1 \
-  dask-kubernetes==0.4.0 \
   flake8==3.5.0 \
   fusepy \
   google-cloud==0.32.0 \
