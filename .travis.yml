@@ -3,21 +3,25 @@ services:
   - docker
 
 env: 
-  - TAG=2018-07-26.01
+  global:
+    - TAG=2018-07-26.01
+  matrix:
+    - IMAGE_NAME=notebook
+    - IMAGE_NAME=worker
+    - IMAGE_NAME=worker-tc
 
-before_install:
-  - cd worker
-  - docker build -t rhodium/worker:$TAG .
-  - cd ../notebook
-  - docker build -t rhodium/notebook:$TAG .
+
+install:
+  - cd $IMAGE_NAME
+  - docker build --pull --cache-from rhodium/$IMAGE_NAME -t rhodium/$IMAGE_NAME:$TAG .
 
 script:
-  - docker images rhodium/notebook:$TAG
-  - docker images rhodium/worker:$TAG
+  - docker images rhodium/$IMAGE_NAME:$TAG
 
-after_success:
-  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
-      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-      docker push rhodium/worker:$TAG;
-      docker push rhodium/notebook:$TAG;
-    fi
+deploy:
+  provider: script
+  script: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push "rhodium/$IMAGE_NAME:$TAG"
+  skip_cleanup: true
+  on:
+    branch: master
+
