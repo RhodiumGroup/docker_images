@@ -40,6 +40,7 @@ RUN conda install --yes -c conda-forge \
     dask-ml \
     distributed=1.22.0 \
     fastparquet \
+    ipdb \
     ipywidgets \
     ipdb \
     jupyter \
@@ -62,7 +63,8 @@ RUN conda install --yes -c conda-forge \
     scipy \
     scikit-image \
     scikit-learn \
-    tornado=5.0.2 \
+    statsmodels==0.9.0 \
+    tornado \
     xarray=0.10.7 \
     zict \
     rasterio
@@ -138,6 +140,7 @@ COPY worker-template.yml /pre-home
 COPY add_service_creds.py /pre-home
 
 
+
 #setup Dask Kubernetes
 ENV DASK_CONFIG=/home/$NB_USER/config.yml
 COPY config.yml /pre-home
@@ -149,6 +152,9 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && apt-get update \
   && apt-get install gcsfuse \
   && alias googlefuse=/usr/bin/gcsfuse
+
+RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+RUN chmod +x cloud_sql_proxy
 
 # clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*

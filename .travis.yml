@@ -2,13 +2,14 @@ sudo: required
 services:
   - docker
 
-env:
+env: 
   global:
-    - TAG=2018-07-23.01
+    - TAG=2018-07-26.01
   matrix:
     - IMAGE_NAME=notebook
     - IMAGE_NAME=worker
     - IMAGE_NAME=worker-tc
+
 
 install:
   - cd $IMAGE_NAME
@@ -23,25 +24,4 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
-# after_deploy:
-#   script:
-#     - curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
-#     # set-up deploy key
-#     - openssl aes-256-cbc -K $encrypted_19fb998dc11c_key -iv $encrypted_19fb998dc11c_iv -in github_deploy_key.enc -out github_deploy_key -d
-#     - chmod 600 github_deploy_key
-#     #clone our helm repo
-#     - git clone git@github.com:RhodiumGroup/helm-chart.git
-#     #update the tag for the helm chart
-#     - cd helm-chart
-#     - python update_helm_tag.py -$TAG
-#     #create the helm chart with the new tag
-#     - helm package rhg-hub/
-#     #add information to gh-pages repo
-#     - git checkout gh-pages
-#     - git add rhg-hub*.tgz
-#     - helm repo index .
-#     - git commit -am 'add new helm chart tag=$TAG'
-#     #push to gh-pages
-#     - git push 
-#   on:
-#     branch: master
+
