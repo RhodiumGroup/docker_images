@@ -13,6 +13,7 @@ install:
   - docker tag rhodium/$IMAGE_NAME:$TAG rhodium/$IMAGE_NAME:latest
 script:
   - docker images rhodium/$IMAGE_NAME:$TAG
+  - docker images rhodium/$IMAGE_NAME:latest
 deploy:
   provider: script
   script: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push "rhodium/$IMAGE_NAME:$TAG" && docker push "rhodium/$IMAGE_NAME:latest"
