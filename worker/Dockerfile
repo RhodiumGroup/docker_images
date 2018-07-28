@@ -44,7 +44,6 @@ USER root
 RUN apt-get update \
   && apt-get install -yq --no-install-recommends libfuse-dev nano fuse gnupg gnupg2 zip
 
-
 RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \
   && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
