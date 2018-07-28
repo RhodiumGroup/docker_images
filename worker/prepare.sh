@@ -20,7 +20,7 @@ if [[ "$EXTRA_PIP_PACKAGES" ]]; then
 fi
 
 if [[ "$GCSFUSE_TOKENS" ]]; then
-    echo "$GCSFUSE_TOKEN" > /opt/gcsfuse_token_strings.json
+    echo "$GCSFUSE_TOKENS" > /opt/gcsfuse_token_strings.json
     python /usr/bin/add_service_creds.py
 
     for f in /opt/gcsfuse_tokens/*.json;
