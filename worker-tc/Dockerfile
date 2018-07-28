@@ -44,10 +44,6 @@ USER root
 RUN apt-get update \
   && apt-get install -yq --no-install-recommends libfuse-dev nano fuse gnupg gnupg2 zip
 
-USER root
-RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
-RUN chmod +x cloud_sql_proxy
-
 RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \
   && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
@@ -80,6 +76,9 @@ RUN pip install wget \
                 xesmf \
                 --no-cache-dir
 
+USER root
+RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+RUN chmod +x cloud_sql_proxy
 
 RUN apt-get install -y gfortran
 

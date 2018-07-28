@@ -128,7 +128,7 @@ RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.33.0 \
                                   jupyterlab_bokeh@0.4.1 
                                   
                               
-RUN jupyter serverextension enable --py nbserverproxy jupyterlab --sys-prefix
+RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
 USER root
 COPY prepare.sh /usr/bin/prepare.sh

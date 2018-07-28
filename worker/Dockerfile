@@ -20,7 +20,7 @@ RUN conda install --yes -c conda-forge \
     ipywidgets \
     jupyterlab \
     holoviews \
-    lz4=1.1.0 \
+    lz4 \
     matplotlib \
     nb_conda_kernels \
     netcdf4 \
@@ -79,10 +79,6 @@ RUN pip install daskernetes==0.1.3 \
 # clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN conda clean -tipsy
-
-USER root
-RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
-RUN chmod +x cloud_sql_proxy
 
 ENV OMP_NUM_THREADS=1
 ENV DASK_TICK_MAXIMUM_DELAY=5s
