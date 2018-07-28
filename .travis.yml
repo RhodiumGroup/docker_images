@@ -3,7 +3,7 @@ services:
   - docker
 env:
   global:
-    - TAG=2018-07-28.03
+    - TAG=2018-07-28.04
   matrix:
     - IMAGE_NAME=notebook
     - IMAGE_NAME=worker
