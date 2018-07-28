@@ -10,7 +10,7 @@ env:
 install:
   - cd $IMAGE_NAME
   - docker build --pull --cache-from rhodium/$IMAGE_NAME -t rhodium/$IMAGE_NAME:$TAG .
-  - docket tag rhodium/$IMAGE_NAME:$TAG rhodium/$IMAGE_NAME:latest
+  - docker tag rhodium/$IMAGE_NAME:$TAG rhodium/$IMAGE_NAME:latest
 script:
   - docker images rhodium/$IMAGE_NAME:$TAG
 deploy:
