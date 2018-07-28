@@ -7,15 +7,15 @@ env:
   matrix:
     - IMAGE_NAME=notebook
     - IMAGE_NAME=worker
-    - IMAGE_NAME=worker-tc
 install:
   - cd $IMAGE_NAME
   - docker build --pull --cache-from rhodium/$IMAGE_NAME -t rhodium/$IMAGE_NAME:$TAG .
+  - docket tag rhodium/$IMAGE_NAME:$TAG rhodium/$IMAGE_NAME:latest
 script:
   - docker images rhodium/$IMAGE_NAME:$TAG
 deploy:
   provider: script
-  script: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push "rhodium/$IMAGE_NAME:$TAG"
+  script: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push "rhodium/$IMAGE_NAME:$TAG" && docker push "rhodium/$IMAGE_NAME:latest"
   skip_cleanup: true
   on:
     branch: master
