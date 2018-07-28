@@ -11,7 +11,7 @@ fi
 
 if [[ "$EXTRA_CONDA_PACKAGES" ]]; then
     echo "EXTRA_CONDA_PACKAGES environment variable found.  Installing."
-    /opt/conda/bin/conda install $EXTRA_CONDA_PACKAGES
+    /opt/conda/bin/conda install --yes $EXTRA_CONDA_PACKAGES
 fi
 
 if [[ "$EXTRA_PIP_PACKAGES" ]]; then
@@ -19,15 +19,20 @@ if [[ "$EXTRA_PIP_PACKAGES" ]]; then
     /opt/conda/bin/pip install $EXTRA_PIP_PACKAGES
 fi
 
-if [[ "$GCSFUSE_TOKEN" ]]; then
-    echo "$GCSFUSE_TOKEN" > /opt/gcsfuse_token.json
-    export GOOGLE_APPLICATION_CREDENTIALS="/opt/gcsfuse_token.json"
-fi
+if [[ "$GCSFUSE_TOKENS" ]]; then
+    echo "$GCSFUSE_TOKENS" > /opt/gcsfuse_token_strings.json
+    python /usr/bin/add_service_creds.py
 
-if [[ "$GCSFUSE_BUCKET" ]]; then
-    echo "Mounting $GCSFUSE_BUCKET to /gcs"
-    /usr/bin/gcsfuse --key-file /opt/gcsfuse_token.json $GCSFUSE_BUCKET /gcs
+    for f in /opt/gcsfuse_tokens/*.json;
+    do
+        bucket=$(basename ${f/.json/});
+        if ! grep -q "/gcs/${bucket}"/proc/mounts; then
+            echo "Mounting $bucket to /gcs/$bucket";
+            mkdir -p /gcs/$bucket;
+            /usr/bin/gcsfuse --key-file=$f$bucket /gcs/$bucket;
+        fi;
+    done
+    fi
 
-fi
 # Run extra commands
 $@

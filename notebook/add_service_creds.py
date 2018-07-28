@@ -1,4 +1,4 @@
-import json, yaml
+import json, yaml, os, glob
 
 
 def add_service_creds():
@@ -11,12 +11,16 @@ def add_service_creds():
             print('token already appended')
             return
 
-    with open('/home/jovyan/service-account-credentials.json', 'r') as f:
-        print('loading service account creds')
-        TOKEN_STRING = json.dumps(json.load(f))
+    creds = {}
+
+    for f in glob.glob('/home/jovyan/service-account-credentials/*.json'):
+        bucket = os.path.splitext(os.path.basename(f))[0]
+
+        with open(f, 'r') as f:
+            creds[bucket] = json.load(f)
 
     WORKER_TEMPLATE['spec']['containers'][0]['env'].append(
-        {'name': 'GCSFUSE_TOKEN', 'value': TOKEN_STRING})
+        {'name': 'GCSFUSE_TOKENS', 'value': json.dumps(creds)})
 
     with open('/home/jovyan/worker-template.yml', 'w') as f:
         f.write(yaml.dump(WORKER_TEMPLATE))
