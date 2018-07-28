@@ -19,7 +19,7 @@ RUN apt-get update \
   rsync \
   libcurl4-openssl-dev \
   libssl-dev \
-  build-essential \
+  build-essential \ 
   zip
 
 USER $NB_USER
@@ -33,19 +33,15 @@ RUN conda install --yes -c conda-forge \
     cytoolz \
     cartopy \
     datashader \
-    dask=0.18.0 \
+    dask=0.17.2 \
     gdal=2.2.4 \
     esmpy \
     zarr \
     dask-ml \
-    distributed=1.22.0 \
+    distributed=1.21.5 \
     fastparquet \
     ipywidgets \
     ipdb \
-    jupyter \
-    jupyterlab=0.32.1 \
-    jupyterlab_launcher=0.10.5 \
-    jupyter_client \
     holoviews \
     lz4 \
     matplotlib \

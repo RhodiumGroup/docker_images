@@ -2,8 +2,7 @@ jupyterhub:
   singleuser:
     image:
       name: rhodium/notebook
-      tag: 2018-07-26.01
-
+      tag: 2018-07-28.01
     storage:
       capacity: 10Gi
     dynamic:
@@ -43,6 +42,8 @@ jupyterhub:
                                     "bolliger32", 
                                     "jaysayre",
                                     "}  
+
+
     
   cull:
     enabled: true

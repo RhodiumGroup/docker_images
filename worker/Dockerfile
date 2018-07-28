@@ -7,14 +7,14 @@ RUN chmod +x /usr/local/bin/dumb-init
 RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     beautifulsoup4 \
-    bokeh=0.12.16 \
+    bokeh=0.12.14 \
     cytoolz \
     datashader \
-    dask=0.18.0 \
+    dask=0.17.2 \
     gdal=2.2.4 \
     esmpy \
     zarr \
-    distributed=1.22.0 \
+    distributed=1.21.5 \
     fastparquet \
     git \
     ipywidgets \
@@ -22,7 +22,6 @@ RUN conda install --yes -c conda-forge \
     holoviews \
     lz4=1.1.0 \
     matplotlib \
-    nbserverproxy \
     nb_conda_kernels \
     netcdf4 \
     nomkl \
@@ -30,7 +29,7 @@ RUN conda install --yes -c conda-forge \
     numcodecs \
     numpy=1.14.2 \
     pandas \
-    python-blosc=1.4.4 \
+    python-blosc \
     scipy \
     scikit-image \
     statsmodels=0.9.0 \
@@ -64,6 +63,7 @@ RUN pip install wget \
                 fusepy \
                 click \
                 jedi \
+                kubernetes \
                 pyasn1 \
                 click \
                 urllib3 \
@@ -81,8 +81,12 @@ RUN pip install daskernetes==0.1.3 \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN conda clean -tipsy
 
+USER root
+RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+RUN chmod +x cloud_sql_proxy
+
 ENV OMP_NUM_THREADS=1
-ENV DASK_DISTRIBUTED__ADMIN__TICK__LIMIT=5s
+ENV DASK_TICK_MAXIMUM_DELAY=5s
 
 USER root
 RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy

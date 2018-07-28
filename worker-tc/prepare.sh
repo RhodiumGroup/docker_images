@@ -19,7 +19,6 @@ if [[ "$EXTRA_PIP_PACKAGES" ]]; then
     /opt/conda/bin/pip install $EXTRA_PIP_PACKAGES
 fi
 
-
 if [[ "$GCSFUSE_TOKEN" ]]; then
     echo "$GCSFUSE_TOKEN" > /opt/gcsfuse_token.json
     export GOOGLE_APPLICATION_CREDENTIALS="/opt/gcsfuse_token.json"

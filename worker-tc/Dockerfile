@@ -20,9 +20,8 @@ RUN conda install --yes -c conda-forge \
     ipywidgets \
     jupyterlab \
     holoviews \
-    lz4=1.1.0 \
+    lz4 \
     matplotlib \
-    nbserverproxy \
     nb_conda_kernels \
     netcdf4 \
     nomkl \
@@ -30,7 +29,7 @@ RUN conda install --yes -c conda-forge \
     numcodecs \
     numpy=1.14.2 \
     pandas \
-    python-blosc=1.4.4 \
+    python-blosc \
     scipy \
     scikit-image \
     statsmodels=0.9.0 \
@@ -45,6 +44,9 @@ USER root
 RUN apt-get update \
   && apt-get install -yq --no-install-recommends libfuse-dev nano fuse gnupg gnupg2 zip
 
+USER root
+RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+RUN chmod +x cloud_sql_proxy
 
 RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \
@@ -55,6 +57,13 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
 
 # fix https://github.com/ContinuumIO/anaconda-issues/issues/542
 RUN conda install --yes -c conda-forge setuptools
+
+RUN pip install daskernetes==0.1.3 \
+                git+https://github.com/dask/dask-kubernetes@5ba08f714ef38e585e9f2038b6be530c578b96dd \
+                git+https://github.com/ioam/holoviews@3f015c0a531f54518abbfecffaac72a7b3554ed3\
+                git+https://github.com/dask/gcsfs@2fbdc27e838a531ada080886ae778cb370ae48b8\
+                git+https://github.com/jupyterhub/nbserverproxy \
+                --no-cache-dir
  
 #RUN pip install --upgrade pip
 RUN pip install wget \
@@ -87,10 +96,6 @@ RUN conda clean -tipsy
 
 ENV OMP_NUM_THREADS=1
 ENV DASK_TICK_MAXIMUM_DELAY=5s
-
-USER root
-RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
-RUN chmod +x cloud_sql_proxy
 
 USER root
 COPY prepare.sh /usr/bin/prepare.sh
