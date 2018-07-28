@@ -32,22 +32,15 @@ if [[ -e "/home/jovyan/conda_environment.yml" ]]; then
     /opt/conda/bin/conda env create -f /home/jovyan/conda_environment.yml;
 fi
 
-SA_FILE=/home/jovyan/service-account-credentials.json
-if [[ ! -f $SA_FILE ]]; then
-    echo "no credentials file present";
-else
-
-    GCSFUSE_BUCKET=rhg-data
-    if ! grep -q "/gcs" /proc/mounts; then
-        echo "Mounting $GCSFUSE_BUCKET to /gcs";
-        /usr/bin/gcsfuse --key-file=$SA_FILE $GCSFUSE_BUCKET /gcs;
-    fi
-
-    if [[ -f "/home/jovyan/worker-template.yml" ]]; then
-        echo "appending service-account-credentials to worker-template";
-        python /home/jovyan/add_service_creds.py;
-    fi
-fi
+for f in /home/jovyan/service-account-credentials/*.json;
+do
+    bucket=$(basename ${f/.json/});
+    if ! grep -q "/gcs/${bucket}"/proc/mounts; then
+        echo "Mounting $bucket to /gcs/$bucket";
+        mkdir -p /gcs/$bucket;
+        /usr/bin/gcsfuse --key-file=$f$bucket /gcs/$bucket;
+    fi;
+done
 
 # Run extra commands
 $@
