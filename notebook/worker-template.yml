@@ -5,7 +5,7 @@ spec:
   - args:
       - dask-worker
       - --nthreads
-      - '4'
+      - '2'
       - --no-bokeh
       - --memory-limit
       - 6GB
@@ -14,7 +14,7 @@ spec:
     env:
       - name: GCSFUSE_BUCKET
         value: rhg-data
-    image: rhodium/worker:2018-07-28.02
+    image: rhodium/worker:2018-07-28.03
     name: dask-worker
     securityContext:
       capabilities:

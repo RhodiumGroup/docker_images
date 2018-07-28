@@ -1,5 +1,5 @@
 ##We build our single-user notebook from the base jupyter notebook image
-FROM jupyter/base-notebook
+FROM jupyter/base-notebook:5811dcb711ba
 
 #install some system level packages 
 USER root
@@ -9,6 +9,7 @@ RUN apt-get update \
   fonts-dejavu \
   tzdata \
   gfortran \
+  graphviz \
   nano \
   fuse \
   vim \
@@ -28,18 +29,18 @@ USER $NB_USER
 RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     beautifulsoup4 \
-    bokeh=0.12.14 \
+    bokeh=0.12.16 \
+    bqplot \
     basemap \
     cytoolz \
     cartopy \
     datashader \
-    dask=0.17.2 \
     gdal=2.2.4 \
     esmpy \
-    zarr \
     dask-ml \
-    distributed=1.21.5 \
     fastparquet \
+    fusepy \ 
+    geoviews \
     ipywidgets \
     ipdb \
     holoviews \
@@ -54,6 +55,7 @@ RUN conda install --yes -c conda-forge \
     numpy=1.14.2 \
     pandas \
     python-blosc \
+    python-graphviz \
     scipy \
     scikit-image \
     scikit-learn \
@@ -62,7 +64,9 @@ RUN conda install --yes -c conda-forge \
     tornado \
     xarray=0.10.7 \
     zict \
-    rasterio
+    rasterio \
+    zarr 
+
 
 RUN conda install --yes --channel conda-forge/label/dev geopandas
 
@@ -95,6 +99,7 @@ RUN pip install \
   bumpversion==0.5.3 \
   click \
   coverage==4.5.1 \
+  dask-kubernetes \
   flake8==3.5.0 \
   fusepy \
   google-cloud==0.32.0 \
@@ -102,7 +107,6 @@ RUN pip install \
   gsutil \
   impactlab-tools \
   jedi \
-  jupyterlab==0.31rc2 \
   mapbox \
   pytest==3.6.3 \
   pytest-cov==2.5.1 \
@@ -117,19 +121,10 @@ RUN pip install \
   xlrd \
   --no-cache-dir
 
-RUN pip install daskernetes==0.1.3 \
-                git+https://github.com/dask/dask-kubernetes@5ba08f714ef38e585e9f2038b6be530c578b96dd \
-                git+https://github.com/ioam/holoviews@3f015c0a531f54518abbfecffaac72a7b3554ed3\
-                git+https://github.com/dask/gcsfs@2fbdc27e838a531ada080886ae778cb370ae48b8\
-                --no-cache-dir
-
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.33.0 \
-                                  @jupyterlab/hub-extension@0.8.1 \
-                                  jupyterlab_bokeh@0.4.1 
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager \
+                                 @pyviz/jupyterlab_pyviz
                                   
                               
-RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
-
 USER root
 COPY prepare.sh /usr/bin/prepare.sh
 RUN chmod +x /usr/bin/prepare.sh
@@ -137,15 +132,9 @@ RUN mkdir /pre-home && chown -R $NB_USER /pre-home
 COPY worker-template.yml /pre-home
 COPY add_service_creds.py /pre-home
 
+COPY config.yaml /pre-home
+COPY worker-template.yaml /pre-home
 
-#setup Dask Kubernetes
-ENV DASK_TICK_MAXIMUM_DELAY=5s
-ENV DASKERNETES_DIAGNOSTICS_LINK {JUPYTERHUB_SERVICE_PREFIX}proxy/{port}/status
-ENV DASKERNETES_WORKER_TEMPLATE_PATH /home/$NB_USER/worker-template.yml
-ENV DASKERNETES_WORKER_NAME dask-{JUPYTERHUB_USER}-{uuid}
-ENV DASK_DIAGNOSTICS_LINK {JUPYTERHUB_SERVICE_PREFIX}proxy/{port}/status
-ENV DASK_KUBERNETES_WORKER_TEMPLATE_PATH /home/$NB_USER/worker-template.yml
-ENV DASK_KUBERNETES_WORKER_NAME dask-{JUPYTERHUB_USER}-{uuid}
 
 RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \

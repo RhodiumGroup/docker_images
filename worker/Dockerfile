@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3:4.4.10
+FROM continuumio/miniconda3:4.5.4
 
 # Dumb init
 RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64
@@ -7,18 +7,16 @@ RUN chmod +x /usr/local/bin/dumb-init
 RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     beautifulsoup4 \
-    bokeh=0.12.14 \
+    bokeh=0.12.16 \
+    cloudpickle \
     cytoolz \
     datashader \
-    dask=0.17.2 \
     gdal=2.2.4 \
     esmpy \
     zarr \
-    distributed=1.21.5 \
     fastparquet \
     git \
     ipywidgets \
-    jupyterlab \
     holoviews \
     lz4 \
     matplotlib \
@@ -58,23 +56,17 @@ RUN conda install --yes -c conda-forge setuptools
 RUN pip install wget \
                 google-cloud==0.32.0 \
                 google-cloud-storage \
+                dask-kubernetes \
                 gsutil \
                 fusepy \
                 click \
                 jedi \
-                kubernetes \
                 pyasn1 \
                 click \
                 urllib3 \
                 xesmf \
                 --no-cache-dir
 
-RUN pip install daskernetes==0.1.3 \
-                git+https://github.com/dask/dask-kubernetes@5ba08f714ef38e585e9f2038b6be530c578b96dd \
-                git+https://github.com/ioam/holoviews@3f015c0a531f54518abbfecffaac72a7b3554ed3\
-                git+https://github.com/dask/gcsfs@2fbdc27e838a531ada080886ae778cb370ae48b8\
-                git+https://github.com/jupyterhub/nbserverproxy \
-                --no-cache-dir
 
 # clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
