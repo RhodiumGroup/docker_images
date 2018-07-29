@@ -20,19 +20,22 @@ if [[ "$EXTRA_PIP_PACKAGES" ]]; then
 fi
 
 if [[ "$GCSFUSE_TOKENS" ]]; then
-    echo "$GCSFUSE_TOKENS" > /opt/gcsfuse_token_strings.json
-    python /usr/bin/add_service_creds.py
+    echo "$GCSFUSE_TOKENS" > /opt/gcsfuse_token_strings.json;
+
+    mkdir -p /opt/gcsfuse_tokens/;
+
+    python /usr/bin/add_service_creds.py;
 
     for f in /opt/gcsfuse_tokens/*.json;
     do
         bucket=$(basename ${f/.json/});
-        if ! grep -q "/gcs/${bucket}"/proc/mounts; then
+        if ! grep -q "/gcs/${bucket}" /proc/mounts; then
             echo "Mounting $bucket to /gcs/$bucket";
-            mkdir -p /gcs/$bucket;
-            /usr/bin/gcsfuse --key-file=$f$bucket /gcs/$bucket;
+            mkdir -p "/gcs/${bucket}";
+            /usr/bin/gcsfuse --key-file="$f" "${bucket}" "/gcs/${bucket}";
         fi;
     done
-    fi
+fi
 
 # Run extra commands
 $@

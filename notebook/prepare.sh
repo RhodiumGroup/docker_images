@@ -35,10 +35,10 @@ fi
 for f in /home/jovyan/service-account-credentials/*.json;
 do
     bucket=$(basename ${f/.json/});
-    if ! grep -q "/gcs/${bucket}"/proc/mounts; then
-        echo "Mounting $bucket to /gcs/$bucket";
-        mkdir -p /gcs/$bucket;
-        /usr/bin/gcsfuse --key-file=$f$bucket /gcs/$bucket;
+    if ! grep -q "/gcs/${bucket}" /proc/mounts; then
+        echo "Mounting $bucket to /gcs/${bucket}";
+        mkdir -p "/gcs/$bucket";
+        /usr/bin/gcsfuse --key-file="$f" "$bucket" "/gcs/${bucket}";
     fi;
 done
 
