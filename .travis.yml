@@ -9,7 +9,7 @@ env:
     - IMAGE_NAME=worker
 install:
   - cd $IMAGE_NAME
-  - docker build --pull --cache-from rhodium/$IMAGE_NAME -t rhodium/$IMAGE_NAME:$TAG .
+  - docker build --pull --cache-from rhodium/$IMAGE_NAME:latest -t rhodium/$IMAGE_NAME:$TAG .
   - docker tag rhodium/$IMAGE_NAME:$TAG rhodium/$IMAGE_NAME:latest
 script:
   - docker images rhodium/$IMAGE_NAME:$TAG
