@@ -6,11 +6,9 @@ def create_service_cred_files():
     with open("/opt/gcsfuse_token_strings.json", 'r') as f:
         creds = json.load(f)
 
-    os.makedirs('/opt/gcsfuse_tokens/')
-
     for k, v in creds.items():
         with open('/opt/gcsfuse_tokens/{}.json'.format(k), 'w+') as f:
-            f.write(v)
+            f.write(json.dumps(v))
 
 
 if __name__ == '__main__':
