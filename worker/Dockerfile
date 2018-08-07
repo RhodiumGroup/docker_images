@@ -76,8 +76,8 @@ ENV OMP_NUM_THREADS=1
 ENV DASK_TICK_MAXIMUM_DELAY=5s
 
 USER root
-RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
-RUN chmod +x cloud_sql_proxy
+RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/bin/cloud_sql_proxy
+RUN chmod +x /usr/bin/cloud_sql_proxy
 
 USER root
 COPY prepare.sh /usr/bin/prepare.sh

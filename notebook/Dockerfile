@@ -144,8 +144,8 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && alias googlefuse=/usr/bin/gcsfuse
 
 USER root
-RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
-RUN chmod +x cloud_sql_proxy
+RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/bin/cloud_sql_proxy
+RUN chmod +x /usr/bin/cloud_sql_proxy
 
 # clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
