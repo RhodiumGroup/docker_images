@@ -1,5 +1,5 @@
 ##We build our single-user notebook from the base jupyter notebook image
-FROM jupyter/base-notebook:5811dcb711ba
+FROM jupyter/base-notebook
 
 #install some system level packages 
 USER root
