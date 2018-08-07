@@ -9,8 +9,8 @@ env:
     - IMAGE_NAME=worker
 install:
   - cd $IMAGE_NAME
-  - docker pull rhodium/$IMAGE_NAME:dev
-  - docker build --pull --cache-from rhodium/$IMAGE_NAME:dev -t rhodium/$IMAGE_NAME:$TAG .
+  - docker pull rhodium/$IMAGE_NAME:latest
+  - docker build --pull --cache-from rhodium/$IMAGE_NAME:latest -t rhodium/$IMAGE_NAME:$TAG .
 script:
   - docker images rhodium/$IMAGE_NAME:$TAG
 deploy:
