@@ -11,13 +11,17 @@ install:
   - cd $IMAGE_NAME
   - docker pull rhodium/$IMAGE_NAME:latest
   - docker build --pull --cache-from rhodium/$IMAGE_NAME:latest -t rhodium/$IMAGE_NAME:$TAG .
-  - docker tag rhodium/$IMAGE_NAME:$TAG rhodium/$IMAGE_NAME:latest
 script:
   - docker images rhodium/$IMAGE_NAME:$TAG
-  - docker images rhodium/$IMAGE_NAME:latest
 deploy:
-  provider: script
-  script: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push "rhodium/$IMAGE_NAME:$TAG" && docker push "rhodium/$IMAGE_NAME:latest"
-  skip_cleanup: true
-  on:
-    branch: master
+  - provider: script
+    script: docker tag rhodium/$IMAGE_NAME:$TAG rhodium/$IMAGE_NAME:dev && docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push "rhodium/$IMAGE_NAME:$TAG" && docker push "rhodium/$IMAGE_NAME:dev"
+    skip_cleanup: true
+    on:
+      branch: dev
+  - provider: script
+    script: docker tag rhodium/$IMAGE_NAME:$TAG rhodium/$IMAGE_NAME:dev && rhodium/$IMAGE_NAME:latest && docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push "rhodium/$IMAGE_NAME:$TAG" && docker push "rhodium/$IMAGE_NAME:dev" && docker push "rhodium/$IMAGE_NAME:latest"
+    skip_cleanup: true
+    on:
+      branch: master
+
