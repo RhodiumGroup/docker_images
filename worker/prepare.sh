@@ -37,5 +37,14 @@ if [[ "$GCSFUSE_TOKENS" ]]; then
     done
 fi
 
+if [[ "$SQL_TOKEN" ]]; then
+    if [[ "$SQL_INSTANCE" ]]; then
+        echo "Starting SQL proxy connection to $SQL_INSTANCE";
+        echo "$SQL_TOKEN" > /opt/sql_token_string.json;
+        /usr/bin/cloud_sql_proxy -instances=$SQL_INSTANCE -credential_file=/opt/sql_token_string.json &
+    fi;
+fi
+
+
 # Run extra commands
 $@
