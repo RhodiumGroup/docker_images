@@ -51,7 +51,7 @@ RUN conda install --yes -c conda-forge \
     zarr=2.2.0 \
     zict=0.1.3
 
-RUN conda install --yes --channel conda-forge/label/dev geopandas=geopandas=1.0.0.dev
+RUN conda install --yes --channel conda-forge/label/dev geopandas
 
 USER root
 RUN apt-get update \
