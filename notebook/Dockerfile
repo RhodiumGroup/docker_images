@@ -48,7 +48,7 @@ RUN conda install --yes -c conda-forge \
     fastparquet=0.1.5 \
     fusepy=2.0.4 \
     gdal=2.2.4 \
-    geoviews=1.5.0 \
+    geoviews \
     holoviews=1.10.2 \
     ipdb=0.11 \
     ipywidgets=7.2.1 \
