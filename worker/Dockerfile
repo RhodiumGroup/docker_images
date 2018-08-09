@@ -7,7 +7,7 @@ RUN chmod +x /usr/local/bin/dumb-init
 RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     beautifulsoup4=4.6.1 \
-    bokeh=0.12.14 \ # 0.13.0
+    bokeh=0.12.14 \ 
     click=6.7 \
     cloudpickle=0.5.3 \
     cytoolz=0.9.0.1 \
