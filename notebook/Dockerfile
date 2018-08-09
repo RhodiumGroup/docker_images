@@ -67,7 +67,7 @@ RUN conda install --yes -c conda-forge \
     numpy=1.14.2 \
     pandas=0.23.2 \
     python-blosc=1.4.4 \
-    rasterio=0.36.0
+    rasterio=0.36.0 \
     scikit-image=0.14.0 \
     scikit-learn=0.19.1 \
     scipy=1.1.0 \

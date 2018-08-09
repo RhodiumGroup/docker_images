@@ -23,7 +23,7 @@ RUN conda install --yes -c conda-forge \
     fusepy=2.0.4 \ 
     gdal=2.2.4 \
     git \
-    geoviews=1.5.0 \
+    geoviews\
     holoviews=1.10.2 \
     ipdb=0.11 \
     ipywidgets=7.2.1 \
