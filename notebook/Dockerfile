@@ -36,7 +36,7 @@ RUN conda install --yes -c conda-forge \
     bqplot \
     cartopy=0.16.0 \
     click=6.7 \
-    cytoolz=0.9.0.1 \ \
+    cytoolz=0.9.0.1 \
     dask-core=0.17.2 \
     dask-glm=0.1.0 \
     dask-ml=0.6.0 \
