@@ -3,7 +3,7 @@
 ##We build our single-user notebook from the base jupyter notebook image
 FROM jupyter/base-notebook
 
-#install some system level packages 
+#install some system level packages
 USER root
 RUN apt-get update \
   && apt-get install -yq --no-install-recommends \
@@ -22,13 +22,13 @@ RUN apt-get update \
   rsync \
   libcurl4-openssl-dev \
   libssl-dev \
-  build-essential \ 
+  build-essential \
   zip
 
 USER $NB_USER
 
-#Do additional conda installs 
-RUN conda update --yes conda=4.5.9
+#Do additional conda installs
+RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     basemap=1.1.0 \
     beautifulsoup4=4.6.1 \
@@ -46,7 +46,7 @@ RUN conda install --yes -c conda-forge \
     distributed=1.21.5 \
     esmpy=7.1.0r \
     fastparquet=0.1.5 \
-    fusepy=2.0.4 \ 
+    fusepy=2.0.4 \
     gdal=2.2.4 \
     geoviews=1.5.0 \
     holoviews=1.10.2 \
@@ -75,7 +75,7 @@ RUN conda install --yes -c conda-forge \
     statsmodels==0.9.0 \
     tornado=5.0.2 \
     xarray=0.10.7 \
-    zarr=2.2.0 \ 
+    zarr=2.2.0 \
     zict=0.1.3
 
 
@@ -137,7 +137,7 @@ RUN jupyter labextension install \
   @jupyterlab/hub-extension@0.8.1 \
   jupyterlab_bokeh@0.4.1 \
   @pyviz/jupyterlab_pyviz
-                                  
+
 RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
 USER root

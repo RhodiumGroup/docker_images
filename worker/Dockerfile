@@ -20,7 +20,7 @@ RUN conda install --yes -c conda-forge \
     distributed=1.21.5 \
     esmpy=7.1.0r \
     fastparquet=0.1.5 \
-    fusepy=2.0.4 \ 
+    fusepy=2.0.4 \
     gdal=2.2.4 \
     git \
     geoviews=1.5.0 \
