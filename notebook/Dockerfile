@@ -145,6 +145,7 @@ RUN chmod +x /usr/bin/prepare.sh
 RUN mkdir /pre-home && chown -R $NB_USER /pre-home
 COPY worker-template.yml /pre-home
 COPY add_service_creds.py /pre-home
+COPY run_sql_proxy.py /pre-home
 
 COPY config.yml /pre-home
 COPY worker-template.yml /pre-home
