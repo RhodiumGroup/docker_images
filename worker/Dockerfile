@@ -7,7 +7,7 @@ RUN chmod +x /usr/local/bin/dumb-init
 RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     beautifulsoup4=4.6.1 \
-    bokeh=0.12.14 \ 
+    bokeh=0.12.14 \
     click=6.7 \
     cloudpickle=0.5.3 \
     cytoolz=0.9.0.1 \
@@ -20,10 +20,10 @@ RUN conda install --yes -c conda-forge \
     distributed=1.21.5 \
     esmpy=7.1.0r \
     fastparquet=0.1.5 \
-    fusepy=2.0.4 \ 
+    fusepy=2.0.4 \
     gdal=2.2.4 \
     git \
-    geoviews\
+    geoviews \
     holoviews=1.10.2 \
     ipdb=0.11 \
     ipywidgets=7.2.1 \
@@ -51,7 +51,7 @@ RUN conda install --yes -c conda-forge \
     zarr=2.2.0 \
     zict=0.1.3
 
-RUN conda install --yes --channel conda-forge/label/dev geopandas=geopandas=1.0.0.dev
+RUN conda install --yes --channel conda-forge/label/dev geopandas
 
 USER root
 RUN apt-get update \

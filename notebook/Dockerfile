@@ -3,7 +3,7 @@
 ##We build our single-user notebook from the base jupyter notebook image
 FROM jupyter/base-notebook
 
-#install some system level packages 
+#install some system level packages
 USER root
 RUN apt-get update \
   && apt-get install -yq --no-install-recommends \
@@ -22,21 +22,21 @@ RUN apt-get update \
   rsync \
   libcurl4-openssl-dev \
   libssl-dev \
-  build-essential \ 
+  build-essential \
   zip
 
 USER $NB_USER
 
-#Do additional conda installs 
-RUN conda update --yes conda=4.5.9
+#Do additional conda installs
+RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     basemap=1.1.0 \
     beautifulsoup4=4.6.1 \
-    bokeh=0.12.14 \ 
+    bokeh=0.12.14 \
     bqplot \
     cartopy=0.16.0 \
     click=6.7 \
-    cytoolz=0.9.0.1 \ \
+    cytoolz=0.9.0.1 \
     dask-core=0.17.2 \
     dask-glm=0.1.0 \
     dask-ml=0.6.0 \
@@ -46,9 +46,9 @@ RUN conda install --yes -c conda-forge \
     distributed=1.21.5 \
     esmpy=7.1.0r \
     fastparquet=0.1.5 \
-    fusepy=2.0.4 \ 
+    fusepy=2.0.4 \
     gdal=2.2.4 \
-    geoviews=1.5.0 \
+    geoviews \
     holoviews=1.10.2 \
     ipdb=0.11 \
     ipywidgets=7.2.1 \
@@ -75,7 +75,7 @@ RUN conda install --yes -c conda-forge \
     statsmodels==0.9.0 \
     tornado=5.0.2 \
     xarray=0.10.7 \
-    zarr=2.2.0 \ 
+    zarr=2.2.0 \
     zict=0.1.3
 
 
@@ -116,7 +116,7 @@ RUN pip install \
   google-cloud==0.32.0 \
   gsutil==4.33 \
   impactlab-tools \
-  jupyterlab==0.31rc2 \
+  jupyterlab==0.32.1 \
   kubernetes==6.0.0 \
   mapbox==0.16.2 \
   py-noaa==0.2.2 \
@@ -133,11 +133,11 @@ RUN pip install \
   --no-cache-dir
 
 RUN jupyter labextension install \
-  @jupyter-widgets/jupyterlab-manager@0.33.0 \
-  @jupyterlab/hub-extension@0.8.1 \
-  jupyterlab_bokeh@0.4.1 \
-  @pyviz/jupyterlab_pyviz
-                                  
+  @jupyter-widgets/jupyterlab-manager@0.35 \
+  @jupyterlab/hub-extension@0.9.2 \
+  jupyterlab_bokeh@0.5.0 \
+  @pyviz/jupyterlab_holoviews@0.5.2
+
 RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
 USER root
@@ -146,6 +146,7 @@ RUN chmod +x /usr/bin/prepare.sh
 RUN mkdir /pre-home && chown -R $NB_USER /pre-home
 COPY worker-template.yml /pre-home
 COPY add_service_creds.py /pre-home
+COPY run_sql_proxy.py /pre-home
 
 COPY config.yml /pre-home
 COPY worker-template.yml /pre-home
