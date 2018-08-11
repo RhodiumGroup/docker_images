@@ -116,7 +116,7 @@ RUN pip install \
   google-cloud==0.32.0 \
   gsutil==4.33 \
   impactlab-tools \
-  jupyterlab==0.31rc2 \
+  jupyterlab==0.32.1 \
   kubernetes==6.0.0 \
   mapbox==0.16.2 \
   py-noaa==0.2.2 \
@@ -133,9 +133,10 @@ RUN pip install \
   --no-cache-dir
 
 RUN jupyter labextension install \
-  @jupyter-widgets/jupyterlab-manager@0.33.0 \
-  @jupyterlab/hub-extension@0.8.1 \
-  jupyterlab_bokeh@0.4.1
+  @jupyter-widgets/jupyterlab-manager@0.35 \
+  @jupyterlab/hub-extension@0.9.2 \
+  jupyterlab_bokeh@0.5.0 \
+  @pyviz/jupyterlab_holoviews@0.5.2
 
 RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
