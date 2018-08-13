@@ -36,6 +36,7 @@ RUN conda install --yes -c conda-forge \
     bqplot \
     cartopy=0.16.0 \
     click=6.7 \
+    cloudpickle=0.5.3 \
     cytoolz=0.9.0.1 \
     dask-core=0.17.2 \
     dask-glm=0.1.0 \
@@ -48,6 +49,7 @@ RUN conda install --yes -c conda-forge \
     fastparquet=0.1.5 \
     fusepy=2.0.4 \
     gdal=2.2.4 \
+    git \
     geoviews \
     holoviews=1.10.2 \
     ipdb=0.11 \
@@ -72,8 +74,10 @@ RUN conda install --yes -c conda-forge \
     scikit-learn=0.19.1 \
     scipy=1.1.0 \
     seaborn=0.9.0 \
-    statsmodels==0.9.0 \
+    setuptools=39.2.0 \
+    statsmodels=0.9.0 \
     tornado=5.0.2 \
+    urllib3=1.23 \
     xarray=0.10.7 \
     zarr=2.2.0 \
     zict=0.1.3

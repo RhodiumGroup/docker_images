@@ -6,8 +6,11 @@ RUN chmod +x /usr/local/bin/dumb-init
 
 RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
+    basemap=1.1.0 \
     beautifulsoup4=4.6.1 \
     bokeh=0.12.14 \
+    bqplot \
+    cartopy=0.16.0 \
     click=6.7 \
     cloudpickle=0.5.3 \
     cytoolz=0.9.0.1 \
@@ -28,10 +31,12 @@ RUN conda install --yes -c conda-forge \
     ipdb=0.11 \
     ipywidgets=7.2.1 \
     jedi=0.12.0 \
+    jupyter=1.0.0 \
     lz4-c=1.8.1.2 \
     lz4=1.1.0 \
     matplotlib=2.2.2 \
     nb_conda_kernels=2.1.1 \
+    nbserverproxy=0.8.3 \
     netcdf-fortran=4.4.4 \
     netcdf4=1.4.0 \
     nomkl=2.0 \
@@ -42,7 +47,9 @@ RUN conda install --yes -c conda-forge \
     python-blosc=1.4.4 \
     rasterio=0.36.0 \
     scikit-image=0.14.0 \
+    scikit-learn=0.19.1 \
     scipy=1.1.0 \
+    seaborn=0.9.0 \
     setuptools=39.2.0 \
     statsmodels=0.9.0 \
     tornado=5.0.2 \
