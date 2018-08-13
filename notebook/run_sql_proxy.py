@@ -94,7 +94,7 @@ class add_sql_proxy_to_worker_spec(object):
         print('proxy added to worker-template.yml')
 
 
-    def maybe_start_sql_proxy(sql_instance, sql_token_file):
+    def maybe_start_sql_proxy(self, sql_instance, sql_token_file):
         if (sql_instance is None) or (sql_token_file is None):
             return
         
