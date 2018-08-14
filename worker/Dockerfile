@@ -14,13 +14,13 @@ RUN conda install --yes -c conda-forge \
     click=6.7 \
     cloudpickle=0.5.3 \
     cytoolz=0.9.0.1 \
-    dask-core=0.17.2 \
+    dask-core=0.18.2 \
     dask-glm=0.1.0 \
-    dask-ml=0.6.0 \
+    dask-ml=0.7.0 \
     dask-searchcv=0.2.0 \
-    dask=0.17.2 \
+    dask=0.18.2 \
     datashader=0.6.6 \
-    distributed=1.21.5 \
+    distributed=1.22.1 \
     esmpy=7.1.0r \
     fastparquet=0.1.5 \
     fusepy=2.0.4 \
@@ -55,7 +55,7 @@ RUN conda install --yes -c conda-forge \
     statsmodels=0.9.0 \
     tornado=5.0.2 \
     urllib3=1.23 \
-    xarray=0.10.7 \
+    xarray=0.10.8 \
     zarr=2.2.0 \
     zict=0.1.3
 
