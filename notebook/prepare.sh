@@ -42,5 +42,10 @@ do
     fi;
 done
 
+if [ -f "/home/jovyan/worker-template.yml" ]; then
+    echo "appending service-account-credentials to worker-template";
+    python /home/jovyan/add_service_creds.py;
+fi
+
 # Run extra commands
 $@
