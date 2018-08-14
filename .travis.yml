@@ -20,7 +20,7 @@ deploy:
     on:
       branch: dev
   - provider: script
-    script: docker tag rhodium/$IMAGE_NAME:$TAG rhodium/$IMAGE_NAME:dev && docker tag rhodium/$IMAGE_NAME:$TAG rhodium/$IMAGE_NAME:$TRAVIS_COMMIT && git tag rhodium/$IMAGE_NAME:$TAG rhodium/$IMAGE_NAME:latest && docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push "rhodium/$IMAGE_NAME:$TAG" && docker push "rhodium/$IMAGE_NAME:dev" && docker push "rhodium/$IMAGE_NAME:latest" && docker push "rhodium/$IMAGE_NAME:$TRAVIS_COMMIT"
+    script: docker tag rhodium/$IMAGE_NAME:$TAG rhodium/$IMAGE_NAME:dev && docker tag rhodium/$IMAGE_NAME:$TAG rhodium/$IMAGE_NAME:$TRAVIS_COMMIT && docker tag rhodium/$IMAGE_NAME:$TAG rhodium/$IMAGE_NAME:latest && docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push "rhodium/$IMAGE_NAME:$TAG" && docker push "rhodium/$IMAGE_NAME:dev" && docker push "rhodium/$IMAGE_NAME:latest" && docker push "rhodium/$IMAGE_NAME:$TRAVIS_COMMIT"
     skip_cleanup: true
     on:
       branch: master
