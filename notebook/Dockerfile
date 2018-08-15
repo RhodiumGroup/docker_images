@@ -114,8 +114,7 @@ RUN conda install --quiet --yes \
 RUN pip install \
   bumpversion==0.5.3 \
   coverage==4.5.1 \
-  daskernetes==0.1.3 \
-  dask-kubernetes==0.2.0 \
+  dask-kubernetes==0.4.0 \
   flake8==3.5.0 \
   google-cloud-storage==1.10.0 \
   google-cloud==0.32.0 \

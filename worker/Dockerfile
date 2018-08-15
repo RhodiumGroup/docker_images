@@ -74,8 +74,7 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
 
 #RUN pip install --upgrade pip
 RUN pip install \
-    daskernetes==0.1.3 \
-    dask-kubernetes==0.2.0 \
+    dask-kubernetes==0.4.0 \
     google-cloud-storage==1.10.0 \
     google-cloud==0.32.0 \
     gsutil==4.33 \
