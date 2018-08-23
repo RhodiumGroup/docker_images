@@ -24,7 +24,7 @@ RUN conda install --yes -c conda-forge \
     esmpy=7.1.0r \
     fastparquet=0.1.5 \
     fusepy=2.0.4 \
-    gcsfs=0.1.1 \
+    gcsfs=0.1.2 \
     gdal=2.2.4 \
     git \
     geoviews \
@@ -54,6 +54,7 @@ RUN conda install --yes -c conda-forge \
     setuptools=39.2.0 \
     statsmodels=0.9.0 \
     tornado=5.0.2 \
+    tqdm=4.24.0 \
     urllib3=1.23 \
     xarray=0.10.8 \
     zarr=2.2.0 \
