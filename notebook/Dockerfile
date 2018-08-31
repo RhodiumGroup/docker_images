@@ -7,22 +7,22 @@ FROM jupyter/base-notebook
 USER root
 RUN apt-get update \
   && apt-get install -yq --no-install-recommends \
-  libfuse-dev \
+  build-essential \
   fonts-dejavu \
-  tzdata \
-  gfortran \
-  graphviz \
-  nano \
   fuse \
-  vim \
+  gfortran \
   git \
-  keychain \
   gnupg \
   gnupg2 \
-  rsync \
+  graphviz \
+  keychain \
   libcurl4-openssl-dev \
+  libfuse-dev \
   libssl-dev \
-  build-essential \
+  nano \
+  rsync \
+  tzdata \
+  vim \
   zip
 
 USER $NB_USER
@@ -32,7 +32,7 @@ RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     basemap=1.1.0 \
     beautifulsoup4=4.6.1 \
-    bokeh=0.12.14 \
+    bokeh=0.12.15 \
     bqplot \
     cartopy=0.16.0 \
     click=6.7 \
@@ -46,13 +46,16 @@ RUN conda install --yes -c conda-forge \
     datashader=0.6.6 \
     distributed=1.22.1 \
     esmpy=7.1.0r \
-    fastparquet=0.1.5 \
+    fastparquet=0.1.6 \
+    fiona=1.7.12 \
     fusepy=2.0.4 \
     gcsfs=0.1.2 \
     gdal=2.2.4 \
-    git \
-    geoviews \
-    holoviews=1.10.2 \
+    geoalchemy2=0.5.0 \
+    geoviews=1.5.1 \
+    git=2.18.0 \
+    gitpython=2.1.11 \
+    holoviews=1.10.7 \
     ipdb=0.11 \
     ipywidgets=7.2.1 \
     jedi=0.12.0 \
@@ -62,14 +65,16 @@ RUN conda install --yes -c conda-forge \
     matplotlib=2.2.2 \
     nb_conda_kernels=2.1.1 \
     nbserverproxy=0.8.3 \
+    ncurses=6.1 \
     netcdf-fortran=4.4.4 \
-    netcdf4=1.4.0 \
+    netcdf4=1.3.1 \
     nomkl=2.0 \
     numba=0.37.0 \
     numcodecs=0.5.5 \
     numpy=1.14.2 \
     pandas=0.23.2 \
     python-blosc=1.4.4 \
+    python-snappy=0.5.3 \
     rasterio=0.36.0 \
     scikit-image=0.14.0 \
     scikit-learn=0.19.1 \
@@ -83,7 +88,6 @@ RUN conda install --yes -c conda-forge \
     xarray=0.10.8 \
     zarr=2.2.0 \
     zict=0.1.3
-
 
 RUN conda install --yes --channel conda-forge/label/dev geopandas
 
