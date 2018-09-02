@@ -114,7 +114,7 @@ docker run -p 8888:8888 -p 8786:8786 -p 8787:8787 $NOTEBOOK_TAG start.sh jupyter
 dask-scheduler --port 8786 --bokeh-port 8787
 
 # in a new terminal window on your laptop, make sure you set your tag environment variables, then start a worker container using whatever worker image you want, and get it to connect to the scheduler
-docker run -p 8666:8666 -p 8785:8785 --net="host" $WORKER_TAG /opt/conda/bin/dask-worker localhost:8786 --worker-port 8666 --nanny-port 8785
+docker run -p 8666:8666 -p 8785:8785 --net="host" $WORKER_TAG dask-worker localhost:8786 --worker-port 8666 --nanny-port 8785
 
 # you should see the worker report that it is registered to the scheduler, and on the scheduler terminal on jupyterlab it should report the registered worker
 
