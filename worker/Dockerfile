@@ -15,7 +15,7 @@ RUN apt-get update \
   zip
 
 RUN conda update --yes conda
-RUN conda install --yes -c conda-forge \
+RUN conda create -n worker --yes -c conda-forge \
     basemap=1.1.0 \
     beautifulsoup4=4.6.1 \
     bokeh=0.12.15 \
@@ -75,7 +75,7 @@ RUN conda install --yes -c conda-forge \
     zarr=2.2.0 \
     zict=0.1.3
 
-RUN conda install --yes --channel conda-forge/label/dev geopandas
+RUN conda install -n worker --yes --channel conda-forge/label/dev geopandas
 
 RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \
@@ -84,8 +84,7 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && apt-get install gcsfuse \
   && alias googlefuse=/usr/bin/gcsfuse
 
-#RUN pip install --upgrade pip
-RUN pip install \
+RUN /opt/conda/envs/worker/bin/pip install \
     dask-kubernetes==0.4.0 \
     google-cloud-storage==1.10.0 \
     google-cloud==0.32.0 \
