@@ -16,6 +16,7 @@ RUN apt-get update \
 
 RUN conda update --yes conda
 RUN conda create -n worker --yes -c conda-forge \
+    python=3.6 \
     basemap=1.1.0 \
     beautifulsoup4=4.6.1 \
     bokeh=0.12.15 \
