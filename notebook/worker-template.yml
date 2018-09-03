@@ -8,7 +8,7 @@ spec:
       - '1'
       - --no-bokeh
       - --memory-limit
-      - 6GB
+      - 11.5GB
       - --death-timeout
       - '60'
     env:
@@ -23,7 +23,7 @@ spec:
     resources:
       limits:
         cpu: "1.75"
-        memory: 6G
+        memory: 11.5G
       requests:
         cpu: "1.75"
-        memory: 6G
+        memory: 11.5G

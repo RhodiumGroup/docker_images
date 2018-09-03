@@ -113,4 +113,8 @@ RUN chmod +x /usr/bin/prepare.sh
 RUN mkdir /opt/app
 RUN mkdir /gcs
 
+RUN pip install \
+  rhg_compute_tools \
+  --no-cache-dir
+
 ENTRYPOINT ["/usr/local/bin/dumb-init", "/usr/bin/prepare.sh"]
