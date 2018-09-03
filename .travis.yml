@@ -15,6 +15,7 @@ before-install:
       sed -i .bak 's/image: rhodium\/worker:.*/image: rhodium\/worker:'"$TRAVIS_TAG"'/' notebook/worker-template.yml; \
     fi
   - rm notebook/worker-template.yml.bak
+  - cat notebook/worker-template.yml | grep image:
 
 install:
   - cd $IMAGE_NAME
