@@ -47,4 +47,4 @@ fi
 
 
 # Run extra commands
-$@
+source activate worker && $@

@@ -8,13 +8,13 @@ spec:
       - '1'
       - --no-bokeh
       - --memory-limit
-      - 6GB
+      - 11.5GB
       - --death-timeout
       - '60'
     env:
       - name: GCSFUSE_BUCKET
         value: rhg-data
-    image: rhodium/worker:2018-08-13.01
+    image: rhodium/worker:d15fbe5fa4c4f78740cd3ab566007adf2f801947
     name: dask-worker
     securityContext:
       capabilities:
@@ -23,7 +23,7 @@ spec:
     resources:
       limits:
         cpu: "1.75"
-        memory: 6G
+        memory: 11.5G
       requests:
         cpu: "1.75"
-        memory: 6G
+        memory: 11.5G
