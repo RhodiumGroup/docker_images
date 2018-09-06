@@ -33,9 +33,9 @@ if [[ -e "/home/jovyan/conda_environment.yml" ]]; then
 fi
 
 # mirror directory used on workers
-mkdir -p /opt/gcsfuse_tokens/
+sudo mkdir -p /opt/gcsfuse_tokens/
 mkdir -p /home/jovyan/service-account-credentials/
-cp /home/jovyan/service-account-credentials/*.json /opt/gcsfuse_tokens/
+sudo cp /home/jovyan/service-account-credentials/*.json /opt/gcsfuse_tokens/
 
 for f in /home/jovyan/service-account-credentials/*.json;
 do
