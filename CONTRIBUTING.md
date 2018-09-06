@@ -144,17 +144,16 @@ successful on the `dev` and `master` branches.
 Each worker and notebook image are tagged with one or more of several
 tags:
 
+* A version number (e.g. `0.2.1`) is assigned to each major
+  release (tag). This is only pushed to docker once and is permanently
+  stable. Use release tags on production deployments. To create a
+  release, [draft a new release](https://github.com/RhodiumGroup/docker_images/releases/new)
+  on github.
+
 * A commit hash (e.g. `fbb4a04f3829f12c81812573c54d8e52aba324ce`) is
   assigned to every `dev` or `master` build. These are completely
   stable and will not be updated ever. Use these tags to ensure you
   always get this specific image.
-
-* A version number (e.g. `2018-01-01.01`) is assigned to each major
-  release and all builds with this version number will be assigned
-  this tag. Note that it is possible to update these tags, so
-  multiple pushes to `dev` or `master` with the same version number
-  will result in the images being overwritten. We should really
-  fix this... see #41.
 
 * Every build on the `dev` branch will be assigned the `dev` tag. Use
   the `dev` tag to get the latest development release.
