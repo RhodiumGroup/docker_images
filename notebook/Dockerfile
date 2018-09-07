@@ -157,7 +157,7 @@ COPY worker-template.yml /pre-home
 COPY add_service_creds.py /pre-home
 COPY run_sql_proxy.py /pre-home
 
-COPY config.yml /pre-home
+COPY config.yaml /pre-home
 COPY worker-template.yml /pre-home
 
 
