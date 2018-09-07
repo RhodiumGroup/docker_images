@@ -36,7 +36,8 @@ def get_sql_service_account_token(sql_token_file):
 
     try:
         with open(sql_token_file, 'r') as f:
-            return f.read()
+            return json.load(f)
+
     except (OSError, IOError):
         return
 
@@ -109,7 +110,7 @@ class add_sql_proxy_to_worker_spec(object):
 
         p.wait()
 
-        
+
     def return_worker_spec_to_original_state(self, *args):
         if self.original_worker_template is None:
             return
