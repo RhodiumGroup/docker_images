@@ -7,5 +7,5 @@ distributed:
       limit: 5s
 
 kubernetes:
-  worker-template-path: "/home/{NB_USER}/worker-template.yaml"
+  worker-template-path: "/home/{NB_USER}/worker-template.yml"
   name: "dask-{JUPYTERHUB_USER}-{uuid}"

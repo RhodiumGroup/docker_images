@@ -10,7 +10,7 @@ To use, create a file at /home/jovyan/setup.cfg with the following contents:
     SQL_INSTANCE = {project}:{region}:{instance}=tcp:{port}
     SQL_TOKEN_FILE = /path/to/credentials-file.json
 
-modifying the `SQL_INSTANCE` and `SQL_TOKEN_FILE` values to match your server's
+modifying the `SQL_INSTANCE` and `SQL_TOKEN` values to match your server's
 configuration.
 
 Then, run `python run_sql_proxy.py`. This will start an SQL proxy and will also
@@ -36,7 +36,8 @@ def get_sql_service_account_token(sql_token_file):
 
     try:
         with open(sql_token_file, 'r') as f:
-            return f.read()
+            return json.load(f)
+
     except (OSError, IOError):
         return
 
@@ -75,13 +76,13 @@ class add_sql_proxy_to_worker_spec(object):
         for env in worker_template_modified['spec']['containers'][0]['env']:
             if 'SQL_INSTANCE' in env['name']:
                 continue
-            elif 'SQL_TOKEN_FILE' in env['name']:
+            elif 'SQL_TOKEN' in env['name']:
                 continue
             else:
                 env_vars.append(env)
 
         env_vars.append(
-            {'name': 'SQL_TOKEN', 'value': sql_token})
+            {'name': 'SQL_TOKEN', 'value': json.dumps(sql_token)})
 
         env_vars.append(
             {'name': 'SQL_INSTANCE', 'value': sql_instance})
@@ -109,7 +110,7 @@ class add_sql_proxy_to_worker_spec(object):
 
         p.wait()
 
-        
+
     def return_worker_spec_to_original_state(self, *args):
         if self.original_worker_template is None:
             return
