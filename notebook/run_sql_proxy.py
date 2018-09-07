@@ -82,7 +82,7 @@ class add_sql_proxy_to_worker_spec(object):
                 env_vars.append(env)
 
         env_vars.append(
-            {'name': 'SQL_TOKEN', 'value': sql_token})
+            {'name': 'SQL_TOKEN', 'value': json.dumps(sql_token)})
 
         env_vars.append(
             {'name': 'SQL_INSTANCE', 'value': sql_instance})
