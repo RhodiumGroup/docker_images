@@ -11,12 +11,12 @@ fi
 
 if [[ "$EXTRA_CONDA_PACKAGES" ]]; then
     echo "EXTRA_CONDA_PACKAGES environment variable found.  Installing."
-    /opt/conda/bin/conda install --yes $EXTRA_CONDA_PACKAGES
+    /opt/conda/envs/worker/bin/conda install --yes $EXTRA_CONDA_PACKAGES
 fi
 
 if [[ "$EXTRA_PIP_PACKAGES" ]]; then
     echo "EXTRA_PIP_PACKAGES environment variable found.  Installing".
-    /opt/conda/bin/pip install $EXTRA_PIP_PACKAGES
+    /opt/conda/envs/worker/bin/pip install $EXTRA_PIP_PACKAGES
 fi
 
 if [[ "$GCSFUSE_TOKENS" ]]; then

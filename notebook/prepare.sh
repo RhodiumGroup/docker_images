@@ -32,6 +32,11 @@ if [[ -e "/home/jovyan/conda_environment.yml" ]]; then
     /opt/conda/bin/conda env create -f /home/jovyan/conda_environment.yml;
 fi
 
+# mirror directory used on workers
+sudo mkdir -p /opt/gcsfuse_tokens/
+mkdir -p /home/jovyan/service-account-credentials/
+sudo cp /home/jovyan/service-account-credentials/*.json /opt/gcsfuse_tokens/
+
 for f in /home/jovyan/service-account-credentials/*.json;
 do
     bucket=$(basename ${f/.json/});
