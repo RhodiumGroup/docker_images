@@ -10,7 +10,7 @@ To use, create a file at /home/jovyan/setup.cfg with the following contents:
     SQL_INSTANCE = {project}:{region}:{instance}=tcp:{port}
     SQL_TOKEN_FILE = /path/to/credentials-file.json
 
-modifying the `SQL_INSTANCE` and `SQL_TOKEN_FILE` values to match your server's
+modifying the `SQL_INSTANCE` and `SQL_TOKEN` values to match your server's
 configuration.
 
 Then, run `python run_sql_proxy.py`. This will start an SQL proxy and will also
@@ -76,7 +76,7 @@ class add_sql_proxy_to_worker_spec(object):
         for env in worker_template_modified['spec']['containers'][0]['env']:
             if 'SQL_INSTANCE' in env['name']:
                 continue
-            elif 'SQL_TOKEN_FILE' in env['name']:
+            elif 'SQL_TOKEN' in env['name']:
                 continue
             else:
                 env_vars.append(env)
