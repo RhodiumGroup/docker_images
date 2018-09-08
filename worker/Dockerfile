@@ -60,6 +60,7 @@ RUN conda create -n worker --yes -c conda-forge \
     numcodecs=0.5.5 \
     numpy=1.14.2 \
     pandas=0.23.2 \
+    pip=18.0 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
     rasterio=0.36.0 \
