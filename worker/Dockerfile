@@ -63,6 +63,7 @@ RUN conda create -n worker --yes -c conda-forge \
     pip=18.0 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
+    pyyaml=3.13 \
     rasterio=0.36.0 \
     scikit-image=0.14.0 \
     scikit-learn=0.19.1 \
