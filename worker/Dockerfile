@@ -7,11 +7,23 @@ RUN chmod +x /usr/local/bin/dumb-init
 USER root
 RUN apt-get update \
   && apt-get install -yq --no-install-recommends \
+  build-essential \
   fuse \
+  gfortran \
+  git \
   gnupg \
   gnupg2 \
+  keychain \
+  libcurl4-openssl-dev \
   libfuse-dev \
+  libssl-dev \
+  locate \
+  lsb-release \
   nano \
+  rsync \
+  tzdata \
+  unzip \
+  vim \
   zip
 
 RUN conda update --yes conda
@@ -80,6 +92,11 @@ RUN conda create -n worker --yes -c conda-forge \
 
 RUN conda install -n worker --yes --channel conda-forge/label/dev geopandas
 
+RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
+    echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+    apt-get update -y && apt-get install google-cloud-sdk -y
+
 RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \
   && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
@@ -89,9 +106,7 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
 
 RUN /opt/conda/envs/worker/bin/pip install \
     dask-kubernetes==0.4.0 \
-    google-cloud-storage==1.10.0 \
-    google-cloud==0.32.0 \
-    gsutil==4.33 \
+    google-cloud-storage==1.12.0 \
     pyasn1-modules==0.2.2 \
     pyasn1==0.4.3 \
     wget==3.2 \
