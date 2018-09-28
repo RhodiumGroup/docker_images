@@ -1,5 +1,3 @@
-# Note that this image is attempting to update from the build here: https://travis-ci.org/RhodiumGroup/docker_images/builds/400944547#L2345
-
 ##We build our single-user notebook from the base jupyter notebook image
 FROM jupyter/base-notebook
 
@@ -19,9 +17,12 @@ RUN apt-get update \
   libcurl4-openssl-dev \
   libfuse-dev \
   libssl-dev \
+  locate \
+  lsb-release \
   nano \
   rsync \
   tzdata \
+  unzip \
   vim \
   zip
 
@@ -121,9 +122,7 @@ RUN pip install \
   coverage==4.5.1 \
   dask-kubernetes==0.4.0 \
   flake8==3.5.0 \
-  google-cloud-storage==1.10.0 \
-  google-cloud==0.32.0 \
-  gsutil==4.33 \
+  google-cloud-storage==1.12.0 \
   impactlab-tools \
   jupyterlab==0.32.1 \
   kubernetes==6.0.0 \
@@ -160,6 +159,10 @@ COPY run_sql_proxy.py /pre-home
 COPY config.yaml /pre-home
 COPY worker-template.yml /pre-home
 
+RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
+    echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+    apt-get update -y && apt-get install google-cloud-sdk -y
 
 RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \
