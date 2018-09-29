@@ -72,6 +72,7 @@ RUN conda create -n worker --yes -c conda-forge \
     numcodecs=0.5.5 \
     numpy=1.14.2 \
     pandas=0.23.2 \
+    pip=10.0.1 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
     rasterio=0.36.0 \
@@ -129,8 +130,10 @@ RUN chmod +x /usr/bin/prepare.sh
 RUN mkdir /opt/app
 RUN mkdir /gcs
 
-RUN pip install \
-  rhg_compute_tools \
+RUN /opt/conda/envs/worker/bin/pip install \
+  rhg_compute_tools==0.1.0 \
+  impactlab-tools==0.3.1 \
+  climate-toolbox==0.1.4 \
   --no-cache-dir
 
 ENTRYPOINT ["/usr/local/bin/dumb-init", "/usr/bin/prepare.sh"]

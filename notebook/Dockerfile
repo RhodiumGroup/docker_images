@@ -76,6 +76,7 @@ RUN conda install --yes -c conda-forge \
     pandas=0.23.2 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
+    pip=10.0.1 \
     rasterio=0.36.0 \
     scikit-image=0.14.0 \
     scikit-learn=0.19.1 \
@@ -188,7 +189,9 @@ RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CO
 USER $NB_USER
 
 RUN pip install \
-  rhg_compute_tools \
+  rhg_compute_tools==0.1.0 \
+  impactlab-tools==0.3.1 \
+  climate-toolbox==0.1.4 \
   --no-cache-dir
 
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
