@@ -45,6 +45,9 @@ if [[ "$SQL_TOKEN" ]]; then
     fi;
 fi
 
+if [[ "$GCLOUD_DEFAULT_TOKEN_FILE" ]]; then
+    gcloud auth activate-service-account --key-file $GCLOUD_DEFAULT_TOKEN_FILE;
+fi
 
 # Run extra commands
 source activate worker && $@

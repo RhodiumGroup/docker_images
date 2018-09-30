@@ -1,5 +1,3 @@
-# Note that this image is attempting to update from the build here: https://travis-ci.org/RhodiumGroup/docker_images/builds/400944547#L2345
-
 ##We build our single-user notebook from the base jupyter notebook image
 FROM jupyter/base-notebook
 
@@ -19,9 +17,12 @@ RUN apt-get update \
   libcurl4-openssl-dev \
   libfuse-dev \
   libssl-dev \
+  locate \
+  lsb-release \
   nano \
   rsync \
   tzdata \
+  unzip \
   vim \
   zip
 
@@ -75,6 +76,8 @@ RUN conda install --yes -c conda-forge \
     pandas=0.23.2 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
+    pip=9.0.3 \
+    PyYAML=3.12 \
     rasterio=0.36.0 \
     scikit-image=0.14.0 \
     scikit-learn=0.19.1 \
@@ -121,9 +124,7 @@ RUN pip install \
   coverage==4.5.1 \
   dask-kubernetes==0.4.0 \
   flake8==3.5.0 \
-  google-cloud-storage==1.10.0 \
-  google-cloud==0.32.0 \
-  gsutil==4.33 \
+  google-cloud-storage==1.12.0 \
   impactlab-tools \
   jupyterlab==0.32.1 \
   kubernetes==6.0.0 \
@@ -132,7 +133,6 @@ RUN pip install \
   pytest-cov==2.5.1 \
   pytest-runner==4.2 \
   pytest==3.6.2 \
-  PyYAML==3.12 \
   Sphinx==1.7.5 \
   tox==3.1.1 \
   wget==3.2 \
@@ -160,6 +160,10 @@ COPY run_sql_proxy.py /pre-home
 COPY config.yaml /pre-home
 COPY worker-template.yml /pre-home
 
+RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
+    echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+    apt-get update -y && apt-get install google-cloud-sdk -y
 
 RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \
@@ -185,7 +189,9 @@ RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CO
 USER $NB_USER
 
 RUN pip install \
-  rhg_compute_tools \
+  rhg_compute_tools==0.1.0 \
+  impactlab-tools==0.3.1 \
+  climate-toolbox==0.1.4 \
   --no-cache-dir
 
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
