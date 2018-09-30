@@ -76,7 +76,8 @@ RUN conda install --yes -c conda-forge \
     pandas=0.23.2 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
-    pip=10.0.1 \
+    pip=9.0.3 \
+    PyYAML=3.12 \
     rasterio=0.36.0 \
     scikit-image=0.14.0 \
     scikit-learn=0.19.1 \
@@ -132,7 +133,6 @@ RUN pip install \
   pytest-cov==2.5.1 \
   pytest-runner==4.2 \
   pytest==3.6.2 \
-  PyYAML==3.12 \
   Sphinx==1.7.5 \
   tox==3.1.1 \
   wget==3.2 \
