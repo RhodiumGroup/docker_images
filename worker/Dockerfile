@@ -137,4 +137,6 @@ RUN /opt/conda/envs/worker/bin/pip install \
   climate-toolbox==0.1.4 \
   --no-cache-dir
 
+RUN conda config --add channels conda-forge
+
 ENTRYPOINT ["/usr/local/bin/dumb-init", "/usr/bin/prepare.sh"]

@@ -194,5 +194,7 @@ RUN pip install \
   climate-toolbox==0.1.4 \
   --no-cache-dir
 
+RUN conda config --add channels conda-forge
+
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
 CMD ["start.sh jupyter lab"]
