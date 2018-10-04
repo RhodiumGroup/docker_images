@@ -51,6 +51,7 @@ RUN conda create -n worker --yes -c conda-forge \
     gcsfs=0.1.2 \
     gdal=2.2.4 \
     geoalchemy2=0.5.0 \
+    geopy=1.17.0 \
     geoviews=1.5.1 \
     git=2.18.0 \
     gitpython=2.1.11 \
