@@ -11,7 +11,7 @@ fi
 
 if [[ "$EXTRA_CONDA_PACKAGES" ]]; then
     echo "EXTRA_CONDA_PACKAGES environment variable found.  Installing."
-    conda install -n worker --yes $EXTRA_CONDA_PACKAGES
+    /opt/conda/bin/conda install -n worker --yes $EXTRA_CONDA_PACKAGES
 fi
 
 if [[ "$EXTRA_PIP_PACKAGES" ]]; then
