@@ -1,4 +1,4 @@
-FROM climateimpactlab/miniconda3-gfortran-netcdf:latest
+FROM climateimpactlab/miniconda3-gfortran-netcdf:v1.0.1
 
 # build conda
 
@@ -7,7 +7,6 @@ USER $NB_USER
 RUN conda config --add channels conda-forge
 RUN conda update --yes conda
 RUN conda create -n worker --yes -c conda-forge \
-    python=3.6 \
     basemap=1.1.0 \
     beautifulsoup4=4.6.1 \
     bokeh=0.12.15 \
@@ -47,13 +46,16 @@ RUN conda create -n worker --yes -c conda-forge \
     netcdf-fortran=4.4.4 \
     netcdf4=1.3.1 \
     nomkl=2.0 \
+    nose=1.3.7 \
     numba=0.37.0 \
     numcodecs=0.5.5 \
     numpy=1.14.2 \
     pandas=0.23.2 \
     pip=9.0.3 \
+    pyshp=1.2.12 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
+    python=3.6 \
     PyYAML=3.12 \
     rasterio=0.36.0 \
     scikit-image=0.14.0 \

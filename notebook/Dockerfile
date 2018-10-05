@@ -1,4 +1,4 @@
-FROM climateimpactlab/gfortran-netcdf-notebook:latest
+FROM climateimpactlab/gfortran-netcdf-notebook:v1.0.1
 
 # build conda
 
@@ -47,13 +47,15 @@ RUN conda install --yes -c conda-forge \
     netcdf-fortran=4.4.4 \
     netcdf4=1.3.1 \
     nomkl=2.0 \
+    nose=1.3.7 \
     numba=0.37.0 \
     numcodecs=0.5.5 \
     numpy=1.14.2 \
     pandas=0.23.2 \
+    pip=9.0.3 \
+    pyshp=1.2.12 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
-    pip=9.0.3 \
     PyYAML=3.12 \
     rasterio=0.36.0 \
     scikit-image=0.14.0 \
