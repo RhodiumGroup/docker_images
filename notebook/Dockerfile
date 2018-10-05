@@ -1,4 +1,4 @@
-FROM climateimpactlab/gfortran-netcdf-notebook:v1.0.1
+FROM climateimpactlab/gfortran-netcdf-notebook:latest
 
 # build conda
 

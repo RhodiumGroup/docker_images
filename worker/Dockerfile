@@ -1,4 +1,4 @@
-FROM climateimpactlab/miniconda3-gfortran-netcdf:v1.0.1
+FROM climateimpactlab/miniconda3-gfortran-netcdf:latest
 
 # build conda
 
