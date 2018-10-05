@@ -176,5 +176,7 @@ RUN pip install \
 # update pip
 RUN pip install --upgrade pip
 
+WORKDIR $HOME
+
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
 CMD ["start.sh jupyter lab"]
