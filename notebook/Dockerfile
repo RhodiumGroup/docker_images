@@ -1,34 +1,10 @@
-##We build our single-user notebook from the base jupyter notebook image
-FROM jupyter/base-notebook
+FROM climateimpactlab/gfortran-netcdf-notebook:v1.0.3
 
-#install some system level packages
-USER root
-RUN apt-get update \
-  && apt-get install -yq --no-install-recommends \
-  build-essential \
-  fonts-dejavu \
-  fuse \
-  gfortran \
-  git \
-  gnupg \
-  gnupg2 \
-  graphviz \
-  keychain \
-  libcurl4-openssl-dev \
-  libfuse-dev \
-  libssl-dev \
-  locate \
-  lsb-release \
-  nano \
-  rsync \
-  tzdata \
-  unzip \
-  vim \
-  zip
+# build conda
 
 USER $NB_USER
 
-#Do additional conda installs
+RUN conda config --add channels conda-forge
 RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     basemap=1.1.0 \
@@ -71,13 +47,15 @@ RUN conda install --yes -c conda-forge \
     netcdf-fortran=4.4.4 \
     netcdf4=1.3.1 \
     nomkl=2.0 \
+    nose=1.3.7 \
     numba=0.37.0 \
     numcodecs=0.5.5 \
     numpy=1.14.2 \
     pandas=0.23.2 \
+    pip=9.0.3 \
+    pyshp=1.2.12 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
-    pip=9.0.3 \
     PyYAML=3.12 \
     rasterio=0.36.0 \
     scikit-image=0.14.0 \
@@ -195,7 +173,10 @@ RUN pip install \
   climate-toolbox==0.1.4 \
   --no-cache-dir
 
-RUN conda config --add channels conda-forge
+# update pip
+RUN pip install --upgrade pip
+
+WORKDIR $HOME
 
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
 CMD ["start.sh jupyter lab"]
