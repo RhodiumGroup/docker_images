@@ -114,7 +114,7 @@ RUN mkdir /opt/app
 RUN mkdir /gcs
 
 RUN /opt/conda/envs/worker/bin/pip install \
-  rhg_compute_tools==0.1.0 \
+  rhg_compute_tools==0.1.2 \
   impactlab-tools==0.3.1 \
   climate-toolbox==0.1.4 \
   --no-cache-dir

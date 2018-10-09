@@ -168,7 +168,7 @@ RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CO
 USER $NB_USER
 
 RUN pip install \
-  rhg_compute_tools==0.1.0 \
+  rhg_compute_tools==0.1.2 \
   impactlab-tools==0.3.1 \
   climate-toolbox==0.1.4 \
   --no-cache-dir
