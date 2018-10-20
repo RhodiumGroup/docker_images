@@ -56,6 +56,7 @@ RUN conda install --yes -c conda-forge \
     pyshp=1.2.12 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
+    pyviz_comms=0.6.0 \
     PyYAML=3.12 \
     rasterio=0.36.0 \
     scikit-image=0.14.0 \
@@ -124,7 +125,7 @@ RUN jupyter labextension install \
   @jupyter-widgets/jupyterlab-manager@0.35 \
   @jupyterlab/hub-extension@0.9.2 \
   jupyterlab_bokeh@0.5.0 \
-  @pyviz/jupyterlab_holoviews@0.5.2 \
+  @pyviz/jupyterlab_pyviz \
   dask-labextension
 
 RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
