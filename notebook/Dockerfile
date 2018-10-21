@@ -9,7 +9,7 @@ RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     basemap=1.1.0 \
     beautifulsoup4=4.6.1 \
-    bokeh=0.12.15 \
+    bokeh=0.13.0 \
     bqplot \
     cartopy=0.16.0 \
     click=6.7 \
