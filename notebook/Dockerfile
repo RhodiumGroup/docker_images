@@ -15,13 +15,13 @@ RUN conda install --yes -c conda-forge \
     click=6.7 \
     cloudpickle=0.5.3 \
     cytoolz=0.9.0.1 \
-    dask-core=0.18.2 \
+    dask-core=0.19.4 \
     dask-glm=0.1.0 \
-    dask-ml=0.7.0 \
+    dask-ml=0.11.0 \
     dask-searchcv=0.2.0 \
     dask=0.18.2 \
-    datashader=0.6.6 \
-    distributed=1.22.1 \
+    datashader=0.6.8 \
+    distributed=1.23.3 \
     esmpy=7.1.0r \
     fastparquet=0.1.6 \
     fiona=1.7.12 \
@@ -35,7 +35,7 @@ RUN conda install --yes -c conda-forge \
     gitpython=2.1.11 \
     holoviews=1.10.7 \
     ipdb=0.11 \
-    ipywidgets=7.2.1 \
+    ipywidgets=7.4.2 \
     jedi=0.12.0 \
     jupyter=1.0.0 \
     jupyterhub=0.9.4 \
@@ -104,7 +104,7 @@ RUN conda install --quiet --yes \
 RUN pip install \
   bumpversion==0.5.3 \
   coverage==4.5.1 \
-  dask-kubernetes==0.4.0 \
+  dask-kubernetes==0.5.0 \
   flake8==3.5.0 \
   google-cloud-storage==1.12.0 \
   impactlab-tools \
@@ -124,9 +124,9 @@ RUN pip install \
   --no-cache-dir
 
 RUN jupyter labextension install \
-  @jupyter-widgets/jupyterlab-manager@0.35 \
-  @jupyterlab/hub-extension@0.9.2 \
-  jupyterlab_bokeh@0.5.0 \
+  @jupyter-widgets/jupyterlab-manager@0.38 \
+  @jupyterlab/hub-extension@0.12.0 \
+  jupyterlab_bokeh@0.6.3 \
   @pyviz/jupyterlab_pyviz \
   dask-labextension
 
@@ -172,7 +172,7 @@ RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CO
 USER $NB_USER
 
 RUN pip install \
-  rhg_compute_tools==0.1.0 \
+  rhg_compute_tools==0.1.5 \
   impactlab-tools==0.3.1 \
   climate-toolbox==0.1.4 \
   --no-cache-dir
