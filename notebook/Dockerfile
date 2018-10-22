@@ -24,7 +24,7 @@ RUN conda install --yes -c conda-forge \
     distributed=1.23.3 \
     esmpy=7.1.0r \
     fastparquet=0.1.6 \
-    fiona=1.7.12 \
+    fiona=1.7.13 \
     fusepy=2.0.4 \
     gcsfs=0.1.2 \
     gdal=2.2.4 \
@@ -107,8 +107,6 @@ RUN pip install \
   dask-kubernetes==0.5.0 \
   flake8==3.5.0 \
   google-cloud-storage==1.12.0 \
-  impactlab-tools \
-  jupyterlab==0.32.1 \
   kubernetes==6.0.0 \
   mapbox==0.16.2 \
   py-noaa==0.2.2 \
