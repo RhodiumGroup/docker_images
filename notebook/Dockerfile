@@ -19,7 +19,7 @@ RUN conda install --yes -c conda-forge \
     dask-glm=0.1.0 \
     dask-ml=0.11.0 \
     dask-searchcv=0.2.0 \
-    dask=0.18.2 \
+    dask=0.19.4 \
     datashader=0.6.8 \
     distributed=1.23.3 \
     esmpy=7.1.0r \
