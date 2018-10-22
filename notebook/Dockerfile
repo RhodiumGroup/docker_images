@@ -53,7 +53,7 @@ RUN conda install --yes -c conda-forge \
     numba=0.37.0 \
     numcodecs=0.5.5 \
     numpy=1.14.2 \
-    pandas=0.23.2 \
+    pandas=0.23.4 \
     pip=9.0.3 \
     pyshp=1.2.12 \
     python-blosc=1.4.4 \
@@ -61,8 +61,8 @@ RUN conda install --yes -c conda-forge \
     pyviz_comms=0.6.0 \
     PyYAML=3.12 \
     rasterio=0.36.0 \
-    scikit-image=0.14.0 \
-    scikit-learn=0.19.1 \
+    scikit-image=0.14.1 \
+    scikit-learn=0.20.0 \
     scipy=1.1.0 \
     seaborn=0.9.0 \
     setuptools=39.2.0 \
@@ -70,7 +70,7 @@ RUN conda install --yes -c conda-forge \
     tornado=5.0.2 \
     tqdm=4.24.0 \
     urllib3=1.23 \
-    xarray=0.10.8 \
+    xarray=0.10.9 \
     zarr=2.2.0 \
     zict=0.1.3
 
