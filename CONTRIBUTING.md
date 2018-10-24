@@ -106,7 +106,7 @@ Note that this does not use a kubernetes cluster, just a single worker.
 ```bash
 
 # start jupyterlab in the notebook server
-docker run -p 8888:8888 -p 8786:8786 -p 8787:8787 $NOTEBOOK_TAG start.sh jupyter lab --port=8888
+docker run -p 8888:8888 -p 8786:8786 -p 8787:8787 $NOTEBOOK_TAG start.sh jupyter lab --port 8888 --no-browser --allow-root
 
 # go to https://localhost:8888 to view the page. you'll need to enter the token from the docker log in order to log in
 
