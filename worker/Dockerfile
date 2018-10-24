@@ -9,22 +9,22 @@ RUN conda update --yes conda
 RUN conda create -n worker --yes -c conda-forge \
     basemap=1.1.0 \
     beautifulsoup4=4.6.1 \
-    bokeh=0.12.15 \
+    bokeh=0.13.0 \
     bqplot \
     cartopy=0.16.0 \
     click=6.7 \
     cloudpickle=0.5.3 \
     cytoolz=0.9.0.1 \
-    dask-core=0.18.2 \
+    dask-core=0.19.4 \
     dask-glm=0.1.0 \
-    dask-ml=0.7.0 \
+    dask-ml=0.11.0 \
     dask-searchcv=0.2.0 \
-    dask=0.18.2 \
-    datashader=0.6.6 \
-    distributed=1.22.1 \
+    dask=0.19.4 \
+    datashader=0.6.8 \
+    distributed=1.23.3 \
     esmpy=7.1.0r \
     fastparquet=0.1.6 \
-    fiona=1.7.12 \
+    fiona=1.7.13 \
     fusepy=2.0.4 \
     gcsfs=0.1.2 \
     gdal=2.2.4 \
@@ -35,7 +35,7 @@ RUN conda create -n worker --yes -c conda-forge \
     gitpython=2.1.11 \
     holoviews=1.10.7 \
     ipdb=0.11 \
-    ipywidgets=7.2.1 \
+    ipywidgets=7.4.2 \
     jedi=0.12.0 \
     jupyter=1.0.0 \
     lz4-c=1.8.1.2 \
@@ -51,16 +51,17 @@ RUN conda create -n worker --yes -c conda-forge \
     numba=0.37.0 \
     numcodecs=0.5.5 \
     numpy=1.14.2 \
-    pandas=0.23.2 \
+    pandas=0.23.4 \
     pip=9.0.3 \
     pyshp=1.2.12 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
+    pyviz_comms=0.6.0 \
     python=3.6 \
     PyYAML=3.12 \
     rasterio=0.36.0 \
-    scikit-image=0.14.0 \
-    scikit-learn=0.19.1 \
+    scikit-image=0.14.1 \
+    scikit-learn=0.20.0 \
     scipy=1.1.0 \
     seaborn=0.9.0 \
     setuptools=39.2.0 \
@@ -68,7 +69,7 @@ RUN conda create -n worker --yes -c conda-forge \
     tornado=5.0.2 \
     tqdm=4.24.0 \
     urllib3=1.23 \
-    xarray=0.10.8 \
+    xarray=0.10.9 \
     zarr=2.2.0 \
     zict=0.1.3
 
@@ -87,7 +88,7 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && alias googlefuse=/usr/bin/gcsfuse
 
 RUN /opt/conda/envs/worker/bin/pip install \
-    dask-kubernetes==0.4.0 \
+    dask-kubernetes==0.5.0 \
     google-cloud-storage==1.12.0 \
     pyasn1-modules==0.2.2 \
     pyasn1==0.4.3 \
