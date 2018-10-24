@@ -104,7 +104,7 @@ RUN conda install --quiet --yes \
 RUN pip install \
   bumpversion==0.5.3 \
   coverage==4.5.1 \
-  dask-kubernetes==0.5.0 \
+  git+git://github.com/dask/dask-kubernetes.git@295f06428119bc8e674a2e6a59cd97000fae69e8 \
   flake8==3.5.0 \
   google-cloud-storage==1.12.0 \
   kubernetes==6.0.0 \

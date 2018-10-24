@@ -88,7 +88,7 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && alias googlefuse=/usr/bin/gcsfuse
 
 RUN /opt/conda/envs/worker/bin/pip install \
-    dask-kubernetes==0.5.0 \
+    git+git://github.com/dask/dask-kubernetes.git@295f06428119bc8e674a2e6a59cd97000fae69e8 \
     google-cloud-storage==1.12.0 \
     pyasn1-modules==0.2.2 \
     pyasn1==0.4.3 \
