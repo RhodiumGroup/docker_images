@@ -1,19 +1,15 @@
 [![build status](https://travis-ci.org/RhodiumGroup/docker_images.svg?branch=master)](https://travis-ci.org/RhodiumGroup/docker_images) [![notebook pulls](https://img.shields.io/docker/pulls/rhodium/notebook.svg?label=notebook%20pulls)](https://hub.docker.com/r/rhodium/notebook/) [![notebook image metadata](https://images.microbadger.com/badges/image/rhodium/notebook.svg)](https://microbadger.com/images/rhodium/notebook "notebook image metadata") [![worker pulls](https://img.shields.io/docker/pulls/rhodium/worker.svg?label=worker%20pulls)](https://hub.docker.com/r/rhodium/worker/) [![worker image metadata](https://images.microbadger.com/badges/image/rhodium/worker.svg)](https://microbadger.com/images/rhodium/worker "worker image metadata")
 
-Dockerfiles and set-up for creating a jupyterhub deployment on gce with k8s
+Dockerfiles for compute deployments compute.rhg.com, compute-test.rhg.com, and compute.impactlab.org
 
+## Issues
 
-To update this file
+Need a new package? Find a bug? Have a feature request? [File an issue](https://github.com/RhodiumGroup/docker_images/issues/new) and we'll try to help out.
 
-1. Clone it to your local machine
-2. Create a new branch
-3. Make edits to the dockerfiles in the `worker` and `notebook` directories.  
-4. Commit your changes
-5. Tag your image with `python bump.py`
-6. Push to github and make a pull request to master
-7. If your build passes on Travis, we'll merge it and it will deploy to dockerhub 
+## Contributing
 
-Any questions please email jsimcock@rhg.com
+This package is tested extensively before deployment, so don't be shy about creating a branch and trying your hand at modifying the [notebook](https://github.com/RhodiumGroup/docker_images/tree/master/notebook/) and [worker](https://github.com/RhodiumGroup/docker_images/tree/master/worker/) images.
 
+## Contact
 
-
+Any questions please email mdelgado@rhg.com
