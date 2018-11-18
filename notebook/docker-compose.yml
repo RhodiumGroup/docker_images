@@ -2,7 +2,7 @@ version:  '3.4'
 services:
   test-notebook:
     build: ./
-    image: rhodium/notebook:test
+    image: $NOTEBOOK_TAG
     ports:
-      - "8888:8888"
+      - "8786:8786"
     container_name:   test_notebook
