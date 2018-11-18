@@ -35,14 +35,15 @@ RUN conda install --yes -c conda-forge \
     gitpython=2.1.11 \
     holoviews=1.10.7 \
     ipdb=0.11 \
+    ipympl=0.2.1 \
     ipywidgets=7.4.2 \
     jedi=0.12.0 \
     jupyter=1.0.0 \
     jupyterhub=0.9.4 \
-    jupyterlab=0.35.2 \
+    jupyterlab=0.35.4 \
     lz4-c=1.8.1.2 \
     lz4=1.1.0 \
-    matplotlib=2.2.2 \
+    matplotlib=3.0.2 \
     nb_conda_kernels=2.1.1 \
     nbserverproxy=0.8.3 \
     ncurses=6.1 \
@@ -50,11 +51,11 @@ RUN conda install --yes -c conda-forge \
     netcdf4=1.3.1 \
     nomkl=2.0 \
     nose=1.3.7 \
-    numba=0.37.0 \
+    numba=0.40.0 \
     numcodecs=0.5.5 \
-    numpy=1.14.2 \
+    numpy=1.15.4 \
     pandas=0.23.4 \
-    pip=9.0.3 \
+    pip=18.1 \
     pyshp=1.2.12 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
@@ -119,14 +120,18 @@ RUN pip install \
   wheel==0.31.1 \
   xesmf==0.1.1 \
   xlrd==1.1.0 \
+  rhg_compute_tools==0.1.5 \
+  impactlab-tools==0.3.1 \
+  climate-toolbox==0.1.4 \
   --no-cache-dir
 
 RUN jupyter labextension install \
-  @jupyter-widgets/jupyterlab-manager@0.38 \
+  @jupyter-widgets/jupyterlab-manager@0.38.1 \
   @jupyterlab/hub-extension@0.12.0 \
   jupyterlab_bokeh@0.6.3 \
-  @pyviz/jupyterlab_pyviz \
-  dask-labextension
+  @pyviz/jupyterlab_pyviz@0.6.3 \
+  dask-labextension@0.2.0 \
+  jupyter-matplotlib@0.3.0
 
 RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
@@ -168,15 +173,6 @@ RUN mkdir /opt/app
 RUN echo "$NB_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/notebook
 RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CONDA_DIR/bin\"#" /etc/sudoers
 USER $NB_USER
-
-RUN pip install \
-  rhg_compute_tools==0.1.5 \
-  impactlab-tools==0.3.1 \
-  climate-toolbox==0.1.4 \
-  --no-cache-dir
-
-# update pip
-RUN pip install --upgrade pip
 
 WORKDIR $HOME
 

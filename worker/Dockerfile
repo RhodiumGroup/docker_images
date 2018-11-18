@@ -40,7 +40,7 @@ RUN conda create -n worker --yes -c conda-forge \
     jupyter=1.0.0 \
     lz4-c=1.8.1.2 \
     lz4=1.1.0 \
-    matplotlib=2.2.2 \
+    matplotlib=3.0.2 \
     nb_conda_kernels=2.1.1 \
     nbserverproxy=0.8.3 \
     ncurses=6.1 \
@@ -48,11 +48,11 @@ RUN conda create -n worker --yes -c conda-forge \
     netcdf4=1.3.1 \
     nomkl=2.0 \
     nose=1.3.7 \
-    numba=0.37.0 \
+    numba=0.40.0 \
     numcodecs=0.5.5 \
-    numpy=1.14.2 \
+    numpy=1.15.4 \
     pandas=0.23.4 \
-    pip=9.0.3 \
+    pip=18.1 \
     pyshp=1.2.12 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
@@ -94,6 +94,9 @@ RUN /opt/conda/envs/worker/bin/pip install \
     pyasn1==0.4.3 \
     wget==3.2 \
     xesmf==0.1.1 \
+    rhg_compute_tools==0.1.0 \
+    impactlab-tools==0.3.1 \
+    climate-toolbox==0.1.4 \
     --no-cache-dir
 
 # clean up
@@ -113,14 +116,5 @@ COPY add_service_creds.py /usr/bin/add_service_creds.py
 RUN chmod +x /usr/bin/prepare.sh
 RUN mkdir /opt/app
 RUN mkdir /gcs
-
-RUN /opt/conda/envs/worker/bin/pip install \
-  rhg_compute_tools==0.1.0 \
-  impactlab-tools==0.3.1 \
-  climate-toolbox==0.1.4 \
-  --no-cache-dir
-
-# update pip
-RUN /opt/conda/envs/worker/bin/pip install --upgrade pip
 
 ENTRYPOINT ["/usr/local/bin/dumb-init", "/usr/bin/prepare.sh"]
