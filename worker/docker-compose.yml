@@ -1,8 +1,0 @@
-version:  '3.4'
-services:
-  test-notebook:
-    build: ./
-    image: rhodium/worker:test
-    ports:
-      - "8889:8889"
-    container_name:   test_worker
