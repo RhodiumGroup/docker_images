@@ -120,9 +120,6 @@ RUN pip install \
   wheel==0.31.1 \
   xesmf==0.1.1 \
   xlrd==1.1.0 \
-  rhg_compute_tools==0.1.5 \
-  impactlab-tools==0.3.1 \
-  climate-toolbox==0.1.4 \
   --no-cache-dir
 
 RUN jupyter labextension install \
@@ -175,6 +172,15 @@ RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CO
 USER $NB_USER
 
 WORKDIR $HOME
+
+# pip install the RHG packages that we update frequently
+# (keeping down here so that rest of image will stay
+# cached when updating these versions)
+RUN pip install \
+  rhg_compute_tools==0.1.5 \
+  impactlab-tools==0.3.1 \
+  climate-toolbox==0.1.4 \
+  --no-cache-dir
 
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
 CMD ["start.sh jupyter lab"]

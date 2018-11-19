@@ -94,9 +94,6 @@ RUN /opt/conda/envs/worker/bin/pip install \
     pyasn1==0.4.3 \
     wget==3.2 \
     xesmf==0.1.1 \
-    rhg_compute_tools==0.1.0 \
-    impactlab-tools==0.3.1 \
-    climate-toolbox==0.1.4 \
     --no-cache-dir
 
 # clean up
@@ -116,5 +113,14 @@ COPY add_service_creds.py /usr/bin/add_service_creds.py
 RUN chmod +x /usr/bin/prepare.sh
 RUN mkdir /opt/app
 RUN mkdir /gcs
+
+# pip install the RHG packages that we update frequently
+# (keeping down here so that rest of image will stay
+# cached when updating these versions)
+RUN pip install \
+  rhg_compute_tools==0.1.5 \
+  impactlab-tools==0.3.1 \
+  climate-toolbox==0.1.4 \
+  --no-cache-dir
 
 ENTRYPOINT ["/usr/local/bin/dumb-init", "/usr/bin/prepare.sh"]
