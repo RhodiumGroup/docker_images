@@ -1,0 +1,8 @@
+version:  '3.4'
+services:
+  test-notebook:
+    build: ./
+    image: $NOTEBOOK_TAG
+    ports:
+      - "8786:8786"
+    container_name:   test_notebook
