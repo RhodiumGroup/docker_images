@@ -177,7 +177,7 @@ WORKDIR $HOME
 # (keeping down here so that rest of image will stay
 # cached when updating these versions)
 RUN pip install \
-  rhg_compute_tools==0.1.5 \
+  rhg_compute_tools==0.1.6 \
   impactlab-tools==0.3.1 \
   climate-toolbox==0.1.4 \
   --no-cache-dir
