@@ -39,7 +39,7 @@ RUN conda install --yes -c conda-forge \
     ipywidgets=7.4.2 \
     jedi=0.12.0 \
     jupyter=1.0.0 \
-    jupyterhub=0.9.4 \
+    jupyterhub=0.9.6 \
     jupyterlab=0.35.4 \
     lz4-c=1.8.1.2 \
     lz4=1.1.0 \
@@ -123,7 +123,7 @@ RUN pip install \
   --no-cache-dir
 
 RUN jupyter labextension install \
-  @jupyter-widgets/jupyterlab-manager@0.38.1 \
+  @jupyter-widgets/jupyterlab-manager@0.39.0 \
   @jupyterlab/hub-extension@0.12.0 \
   jupyterlab_bokeh@0.6.3 \
   @pyviz/jupyterlab_pyviz@0.6.3 \
