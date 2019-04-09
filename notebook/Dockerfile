@@ -122,7 +122,7 @@ RUN pip install \
   --no-cache-dir
 
 RUN jupyter labextension install \
-  @jupyter-widgets/jupyterlab-manager@0.39.0 \
+  @jupyter-widgets/jupyterlab-manager@0.38.1 \
   @jupyterlab/hub-extension@0.12.0 \
   jupyterlab_bokeh@0.6.3 \
   @pyviz/jupyterlab_pyviz@0.6.3 \
