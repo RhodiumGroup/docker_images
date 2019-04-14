@@ -19,7 +19,7 @@ RUN conda create -n worker --yes -c conda-forge \
     dask-glm=0.1.0 \
     dask-ml=0.12.0 \
     dask-searchcv=0.2.0 \
-    dask=1.1.5 \
+    dask=1.2.0 \
     datashader=0.7.0 \
     distributed=1.27.0 \
     esmpy=7.1.0r \
