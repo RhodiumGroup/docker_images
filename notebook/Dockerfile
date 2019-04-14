@@ -7,21 +7,21 @@ USER $NB_USER
 RUN conda config --add channels conda-forge
 RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
-    basemap=1.1.0 \
-    beautifulsoup4=4.6.1 \
-    bokeh=0.13.0 \
+    basemap=1.2.0 \
+    beautifulsoup4=4.7.1 \
+    bokeh=1.0.4 \
     bqplot \
     cartopy=0.16.0 \
     click=6.7 \
     cloudpickle=0.5.3 \
     cytoolz=0.9.0.1 \
-    dask-core=0.19.4 \
+    dask-core=1.2.0 \
     dask-glm=0.1.0 \
-    dask-ml=0.11.0 \
+    dask-ml=0.12.0 \
     dask-searchcv=0.2.0 \
-    dask=0.19.4 \
-    datashader=0.6.8 \
-    distributed=1.23.3 \
+    dask=1.1.5 \
+    datashader=0.7.0 \
+    distributed=1.27.0 \
     esmpy=7.1.0r \
     fastparquet=0.1.6 \
     fiona=1.7.13 \
@@ -30,10 +30,10 @@ RUN conda install --yes -c conda-forge \
     gdal=2.2.4 \
     geoalchemy2=0.5.0 \
     geopy=1.17.0 \
-    geoviews=1.5.1 \
+    geoviews=1.6.2 \
     git=2.18.0 \
     gitpython=2.1.11 \
-    holoviews=1.10.7 \
+    holoviews=1.12.1 \
     ipdb=0.11 \
     ipympl=0.2.1 \
     ipywidgets=7.4.2 \
@@ -43,37 +43,37 @@ RUN conda install --yes -c conda-forge \
     jupyterlab=0.35.4 \
     lz4-c=1.8.1.2 \
     lz4=1.1.0 \
-    matplotlib=3.0.2 \
+    matplotlib=3.0.3 \
     nb_conda_kernels=2.1.1 \
-    nbserverproxy=0.8.3 \
+    nbserverproxy=0.8.8 \
     ncurses=6.1 \
     netcdf-fortran=4.4.4 \
     netcdf4=1.3.1 \
     nomkl=2.0 \
     nose=1.3.7 \
-    numba=0.40.0 \
-    numcodecs=0.5.5 \
-    numpy=1.15.4 \
-    pandas=0.23.4 \
+    numba=0.43.1 \
+    numcodecs=0.6.3 \
+    numpy=1.16.2 \
+    pandas=0.24.2 \
     pip=18.1 \
     pyshp=1.2.12 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
-    pyviz_comms=0.6.0 \
+    pyviz_comms=0.7.2 \
     PyYAML=3.12 \
     rasterio=0.36.0 \
     scikit-image=0.14.1 \
     scikit-learn=0.20.0 \
-    scipy=1.1.0 \
+    scipy=1.2.0 \
     seaborn=0.9.0 \
     setuptools=39.2.0 \
     statsmodels=0.9.0 \
-    tornado=5.0.2 \
+    tornado=6.0.2 \
     tqdm=4.24.0 \
     urllib3=1.23 \
-    xarray=0.10.9 \
-    zarr=2.2.0 \
-    zict=0.1.3
+    xarray=0.12.1 \
+    zarr=2.3.1 \
+    zict=0.1.4
 
 RUN conda install --yes --channel conda-forge/label/dev geopandas
 
@@ -177,9 +177,10 @@ WORKDIR $HOME
 # (keeping down here so that rest of image will stay
 # cached when updating these versions)
 RUN pip install \
-  rhg_compute_tools==0.1.5 \
+  rhg_compute_tools==0.1.6 \
   impactlab-tools==0.3.1 \
   climate-toolbox==0.1.4 \
+  parameterize_jobs==0.1.0 \
   --no-cache-dir
 
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
