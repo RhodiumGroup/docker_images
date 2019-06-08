@@ -9,7 +9,7 @@ RUN conda update --yes conda
 RUN conda create -n worker --yes -c conda-forge \
     beautifulsoup4=4.7.1 \
     bokeh=1.0.4 \
-    bqplot=11.5 \
+    bqplot=0.11.5 \
     cartopy=0.16.0 \
     cftime=1.0.3.4 \
     click=6.7 \
@@ -38,7 +38,7 @@ RUN conda create -n worker --yes -c conda-forge \
     ipywidgets=7.4.2 \
     jedi=0.13.3 \
     jupyter=1.0.0 \
-    lz4-c=1.9.1 \
+    lz4-c=1.8.3 \
     lz4=2.1.6 \
     matplotlib=3.1.0 \
     nb_conda_kernels=2.2.2 \
@@ -66,7 +66,6 @@ RUN conda create -n worker --yes -c conda-forge \
     setuptools=39.2.0 \
     statsmodels=0.9.0 \
     tornado=6.0.2 \
-    tqdm=4.321.1 \
     urllib3=1.25.3 \
     xarray=0.12.1 \
     zarr=2.3.2 \

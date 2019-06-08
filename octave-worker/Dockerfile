@@ -17,7 +17,7 @@ RUN conda create -n octave --yes -c conda-forge \
     fastparquet=0.3.1 \
     fusepy=2.0.4 \
     gcsfs=0.2.2 \
-    lz4-c=1.9.1 \
+    lz4-c=1.8.3 \
     lz4=2.1.6 \
     matplotlib=3.1.0 \
     nb_conda_kernels=2.2.2 \
