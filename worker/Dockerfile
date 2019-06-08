@@ -8,7 +8,7 @@ RUN conda config --add channels conda-forge
 RUN conda update --yes conda
 RUN conda create -n worker --yes -c conda-forge \
     beautifulsoup4=4.7.1 \
-    bokeh=1.0.4 \
+    bokeh=1.2.0 \
     bqplot=0.11.5 \
     cartopy=0.16.0 \
     cftime=1.0.3.4 \
@@ -55,7 +55,7 @@ RUN conda create -n worker --yes -c conda-forge \
     pyshp=2.1.0 \
     python-blosc=1.8.1 \
     python-snappy=0.5.4 \
-    python=3.7 \
+    python=3.6 \
     pyviz_comms=0.7.2 \
     PyYAML=5.1.1 \
     rasterio=1.0.24 \
