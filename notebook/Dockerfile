@@ -129,16 +129,21 @@ RUN conda create -n r -c conda-forge \
     'r-htmlwidgets=1.0*' \
     'r-hexbin=1.27*'
 
-RUN jupyter kernelspec install --name R \
-    /opt/conda/envs/r/share/jupyter/kernels/ir
-# set the r kernel python to the r environment python
-RUN sed -i 's/python/\/opt\/conda\/envs\/r\/bin\/python/' \
-    /usr/local/share/jupyter/kernels/ir/kernel.json
-
 # install Octave kernel
 RUN apt-get update && apt-get install -y octave
 RUN conda create -n octave texinfo python=3.6 pip
 RUN /opt/conda/envs/octave/bin/pip install octave_kernel
+
+# enable use of R and Octave kernels in jupyterlab
+
+USER root
+
+RUN jupyter kernelspec install --name R \
+/opt/conda/envs/r/share/jupyter/kernels/ir
+# set the r kernel python to the r environment python
+RUN sed -i 's/python/\/opt\/conda\/envs\/r\/bin\/python/' \
+/usr/local/share/jupyter/kernels/ir/kernel.json
+
 RUN jupyter kernelspec install --name octave \
     /opt/conda/envs/octave/share/jupyter/kernels/octave
 # set the octave kernel python to the r environment python
@@ -148,7 +153,6 @@ RUN sed -i 's/python/\/opt\/conda\/envs\/octave\/bin\/python/' \
 RUN fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
-USER root
 COPY prepare.sh /usr/bin/prepare.sh
 RUN chmod +x /usr/bin/prepare.sh
 RUN mkdir /pre-home && chown -R $NB_USER /pre-home
