@@ -106,6 +106,8 @@ jupyter-matplotlib@0.3.0
 
 RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
+USER root
+
 # install R kernel
 RUN conda create -n r -c conda-forge \
     'rpy2=2.8*' \
@@ -135,8 +137,6 @@ RUN conda create -n octave texinfo python=3.6 pip
 RUN /opt/conda/envs/octave/bin/pip install octave_kernel
 
 # enable use of R and Octave kernels in jupyterlab
-
-USER root
 
 RUN jupyter kernelspec install --name R \
 /opt/conda/envs/r/share/jupyter/kernels/ir
