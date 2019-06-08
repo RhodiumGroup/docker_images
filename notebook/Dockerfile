@@ -77,13 +77,13 @@ RUN conda install --yes -c conda-forge \
 RUN conda install --yes --channel conda-forge/label/dev geopandas
 
 #install R packages
-RUN conda install --quiet --yes \
+RUN conda create -n r -c conda-forge \
     'rpy2=2.8*' \
     'r-base=3.4.1' \
     'r-irkernel=0.8*' \
     'r-plyr=1.8*' \
     'r-devtools=1.13*' \
-    'r-tidyverse=1.1*' \
+    'r-tidyverse=1.2*' \
     'r-shiny=1.0*' \
     'r-rmarkdown=1.8*' \
     'r-forecast=8.2*' \
