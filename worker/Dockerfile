@@ -27,10 +27,10 @@ RUN conda create -n worker --yes -c conda-forge \
     fiona=1.8.6 \
     fusepy=3.0.1 \
     gcsfs=0.2.2 \
-    gdal=3.0.0 \
+    gdal=2.4.1 \
     geopy=1.17.0 \
     geoviews=1.6.2 \
-    git=2.18.0 \
+    git=2.22.0 \
     gitpython=2.1.11 \
     holoviews=1.12.3 \
     ipdb=0.11 \
