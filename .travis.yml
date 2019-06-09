@@ -14,7 +14,7 @@ script:
   - "rm notebook/worker-template.yml.bak"
   - "cat notebook/worker-template.yml | grep image:"
   - "docker pull rhodium/$IMAGE_NAME:dev"
-  - "docker build --pull --cache-from rhodium/$IMAGE_NAME:dev -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT ."
+  - "docker build --pull --cache-from rhodium/$IMAGE_NAME:dev -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT $IMAGE_NAME"
   - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:dev
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   - docker push "rhodium/$IMAGE_NAME:$TRAVIS_COMMIT"
