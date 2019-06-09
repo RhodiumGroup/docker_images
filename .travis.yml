@@ -40,7 +40,9 @@ jobs:
         include:
           - env:
             - IMAGE_NAME=notebook
+          - env:
             - IMAGE_NAME=worker
+          - env:
             - IMAGE_NAME=octave-worker
       script:
         - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
@@ -59,7 +61,9 @@ jobs:
         include:
           - env:
             - IMAGE_NAME=notebook
+          - env:
             - IMAGE_NAME=worker
+          - env:
             - IMAGE_NAME=octave-worker
       script:
         - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
