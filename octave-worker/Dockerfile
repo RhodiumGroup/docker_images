@@ -29,7 +29,7 @@ RUN conda create -n octave --yes -c conda-forge \
     pandas=0.24.2 \
     pip=18.1 \
     python=3.6 \
-    tornado=6.0.2 \
+    tornado=5.1.1 \
     texinfo=6.6 \
     urllib3=1.25.3 \
     xarray=0.12.1 \

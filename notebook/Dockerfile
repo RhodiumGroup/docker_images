@@ -67,7 +67,7 @@ RUN conda install --yes -c conda-forge \
     seaborn=0.9.0 \
     setuptools=39.2.0 \
     statsmodels=0.9.0 \
-    tornado=6.0.2 \
+    tornado=5.1.1 \
     tqdm=4.32.1 \
     urllib3=1.25.3 \
     xarray=0.12.1 \
