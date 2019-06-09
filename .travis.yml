@@ -3,15 +3,14 @@ sudo: required
 services:
   - docker
 
-env:
-  matrix:
-    - IMAGE_NAME=notebook
-    - IMAGE_NAME=worker
-    - IMAGE_NAME=octave-worker
-
 jobs:
   include:
     - stage: build-primary
+      env:
+        matrix:
+          - IMAGE_NAME=notebook
+          - IMAGE_NAME=worker
+          - IMAGE_NAME=octave-worker
       install:
         - "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then sed -i.bak 's/image: rhodium\\/worker.*/image: rhodium\\/worker:'\"$TRAVIS_COMMIT\"'/' notebook/worker-template.yml; else sed -i.bak 's/image: rhodium\\/worker:.*/image: rhodium\\/worker:'\"$TRAVIS_TAG\"'/' notebook/worker-template.yml; fi"
         - "rm notebook/worker-template.yml.bak"
@@ -35,7 +34,8 @@ jobs:
         branch: dev
 
     - stage: build-stage2
-      env: TEST_SUITE=none
+      env:
+        - IMAGE_NAME=notebook
       script:
         - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
         - docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT --build-arg TRAVIS_COMMIT=$TRAVIS_COMMIT -f notebook/Dockerfile.stage2
@@ -47,6 +47,11 @@ jobs:
         branch: dev
 
     - stage: deploy-master
+      env:
+        matrix:
+          - IMAGE_NAME=notebook
+          - IMAGE_NAME=worker
+          - IMAGE_NAME=octave-worker
       script:
         - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:dev
         - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:latest
@@ -59,6 +64,11 @@ jobs:
         branch: master
 
     - stage: deploy-tag
+      env:
+        matrix:
+          - IMAGE_NAME=notebook
+          - IMAGE_NAME=worker
+          - IMAGE_NAME=octave-worker
       script:
         - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:$TRAVIS_TAG
         - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
