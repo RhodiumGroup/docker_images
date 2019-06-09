@@ -3,10 +3,10 @@
 travis_wait() {
   local timeout=$1
   if [[ $timeout =~ ^[0-9]+$ ]]; then
-    <%# looks like an integer, so we assume it's a timeout %>
+    # looks like an integer, so we assume it's a timeout
     shift
   else
-    <%# default value %>
+    # default value
     timeout=20
   fi
   local cmd="$@"
@@ -32,13 +32,13 @@ travis_wait() {
 }
 
 travis_jigger() {
-  <%# helper method for travis_wait() %>
+  # helper method for travis_wait()
   local cmd_pid=$1
   shift
-  local timeout=$1 <%# in minutes %>
+  local timeout=$1  # in minutes
   shift
   local count=0
-  <%# clear the line %>
+  # clear the line
   echo -e "\n"
   while [ $count -lt $timeout ]; do
     count=$(($count + 1))
