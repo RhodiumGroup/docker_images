@@ -36,14 +36,38 @@ jobs:
         branch: dev
 
     - stage: deploy-master
-      matrix:
-        include:
-          - env:
-            - IMAGE_NAME=notebook
-          - env:
-            - IMAGE_NAME=worker
-          - env:
-            - IMAGE_NAME=octave-worker
+      - env:
+        - IMAGE_NAME=notebook
+      script:
+        - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
+        - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:dev
+        - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:latest
+        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+        - docker push "rhodium/$IMAGE_NAME:$TRAVIS_COMMIT"
+        - docker push "rhodium/$IMAGE_NAME:dev"
+        - docker push "rhodium/$IMAGE_NAME:latest"
+      skip_cleanup: true
+      on:
+        branch: master
+
+    - stage: deploy-master
+      - env:
+        - IMAGE_NAME=worker
+      script:
+        - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
+        - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:dev
+        - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:latest
+        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+        - docker push "rhodium/$IMAGE_NAME:$TRAVIS_COMMIT"
+        - docker push "rhodium/$IMAGE_NAME:dev"
+        - docker push "rhodium/$IMAGE_NAME:latest"
+      skip_cleanup: true
+      on:
+        branch: master
+
+    - stage: deploy-master
+      - env:
+        - IMAGE_NAME=octave-worker
       script:
         - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
         - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:dev
@@ -57,14 +81,32 @@ jobs:
         branch: master
 
     - stage: deploy-tag
-      matrix:
-        include:
-          - env:
-            - IMAGE_NAME=notebook
-          - env:
-            - IMAGE_NAME=worker
-          - env:
-            - IMAGE_NAME=octave-worker
+      - env:
+        - IMAGE_NAME=notebook
+      script:
+        - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
+        - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:$TRAVIS_TAG
+        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+        - docker push "rhodium/$IMAGE_NAME:$TRAVIS_TAG"
+      skip_cleanup: true
+      on:
+        tags: true
+
+    - stage: deploy-tag
+      - env:
+        - IMAGE_NAME=worker
+      script:
+        - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
+        - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:$TRAVIS_TAG
+        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+        - docker push "rhodium/$IMAGE_NAME:$TRAVIS_TAG"
+      skip_cleanup: true
+      on:
+        tags: true
+
+    - stage: deploy-tag
+      - env:
+        - IMAGE_NAME=octave-worker
       script:
         - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
         - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:$TRAVIS_TAG
