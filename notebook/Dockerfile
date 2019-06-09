@@ -150,8 +150,8 @@ RUN jupyter kernelspec install --name octave \
 RUN sed -i 's/python/\/opt\/conda\/envs\/octave\/bin\/python/' \
     /usr/local/share/jupyter/kernels/octave/kernel.json
 
-RUN travis_wait 40 fix-permissions $CONDA_DIR
-RUN travis_wait 20 fix-permissions /home/$NB_USER
+COPY travis-utils.sh /usr/bin/travis-utils.sh
+RUN /bin/bash -c "source /usr/bin/travis-utils.sh; travis_wait 40 fix-permissions $CONDA_DIR && travis_wait 20 fix-permissions /home/$NB_USER"
 
 COPY prepare.sh /usr/bin/prepare.sh
 RUN chmod +x /usr/bin/prepare.sh
