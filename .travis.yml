@@ -44,6 +44,10 @@ jobs:
         branch: dev
 
     - stage: deploy-master
+      env:
+        - IMAGE_NAME=notebook
+        - IMAGE_NAME=worker
+        - IMAGE_NAME=octave-worker
       script:
         - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:dev
         - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:latest
@@ -56,6 +60,10 @@ jobs:
         branch: master
 
     - stage: deploy-tag
+      env:
+        - IMAGE_NAME=notebook
+        - IMAGE_NAME=worker
+        - IMAGE_NAME=octave-worker
       script:
         - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:$TRAVIS_TAG
         - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
