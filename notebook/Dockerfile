@@ -77,81 +77,36 @@ RUN conda install --yes -c conda-forge \
 RUN conda install --yes --channel conda-forge/label/dev geopandas
 
 RUN pip install \
-bumpversion==0.5.3 \
-coverage==4.5.1 \
-dask-kubernetes==0.8.0 \
-flake8==3.5.0 \
-google-cloud-storage==1.16.1 \
-kubernetes==9.0.0 \
-mapbox==0.16.2 \
-py-noaa==0.2.2 \
-pytest-cov==2.5.1 \
-pytest-runner==4.2 \
-pytest==3.6.2 \
-Sphinx==1.7.5 \
-tox==3.1.1 \
-wget==3.2 \
-wheel==0.31.1 \
-xesmf==0.1.1 \
-xlrd==1.1.0 \
---no-cache-dir
+    bumpversion==0.5.3 \
+    coverage==4.5.1 \
+    dask-kubernetes==0.8.0 \
+    flake8==3.5.0 \
+    google-cloud-storage==1.16.1 \
+    kubernetes==9.0.0 \
+    mapbox==0.16.2 \
+    py-noaa==0.2.2 \
+    pytest-cov==2.5.1 \
+    pytest-runner==4.2 \
+    pytest==3.6.2 \
+    Sphinx==1.7.5 \
+    tox==3.1.1 \
+    wget==3.2 \
+    wheel==0.31.1 \
+    xesmf==0.1.1 \
+    xlrd==1.1.0 \
+    --no-cache-dir
 
 RUN jupyter labextension install \
-@jupyter-widgets/jupyterlab-manager@0.38.1 \
-@jupyterlab/hub-extension@0.12.0 \
-jupyterlab_bokeh@0.6.3 \
-@pyviz/jupyterlab_pyviz@0.7.1 \
-dask-labextension@0.3.0 \
-jupyter-matplotlib@0.3.0
+    @jupyter-widgets/jupyterlab-manager@0.38.1 \
+    @jupyterlab/hub-extension@0.12.0 \
+    jupyterlab_bokeh@0.6.3 \
+    @pyviz/jupyterlab_pyviz@0.7.1 \
+    dask-labextension@0.3.0 \
+    jupyter-matplotlib@0.3.0
 
 RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
 USER root
-
-# install R kernel
-RUN conda create -n r -c conda-forge \
-    'rpy2=2.8*' \
-    'r-base=3.4.1' \
-    'r-irkernel=0.8*' \
-    'r-plyr=1.8*' \
-    'r-devtools=1.13*' \
-    'r-tidyverse=1.2*' \
-    'r-shiny=1.0*' \
-    'r-rmarkdown=1.8*' \
-    'r-forecast=8.2*' \
-    'r-rsqlite=2.0*' \
-    'r-reshape2=1.4*' \
-    'r-nycflights13=0.2*' \
-    'r-caret=6.0*' \
-    'r-rcurl=1.95*' \
-    'r-crayon=1.3*' \
-    'r-randomforest=4.6*' \
-    'r-htmltools=0.3*' \
-    'r-sparklyr=0.7*' \
-    'r-htmlwidgets=1.0*' \
-    'r-hexbin=1.27*'
-
-# install Octave kernel
-RUN apt-get update && apt-get install -y octave
-RUN conda create -n octave texinfo python=3.6 pip
-RUN /opt/conda/envs/octave/bin/pip install octave_kernel
-
-# # enable use of R and Octave kernels in jupyterlab
-#
-# RUN jupyter kernelspec install --name R \
-# /opt/conda/envs/r/share/jupyter/kernels/ir
-# # set the r kernel python to the r environment python
-# RUN sed -i 's/R/\/opt\/conda\/envs\/r\/bin\/R/' \
-#     /usr/local/share/jupyter/kernels/r/kernel.json
-#
-# RUN jupyter kernelspec install --name octave \
-#     /opt/conda/envs/octave/share/jupyter/kernels/octave
-# # set the octave kernel python to the r environment python
-# RUN sed -i 's/python/\/opt\/conda\/envs\/octave\/bin\/python/' \
-#     /usr/local/share/jupyter/kernels/octave/kernel.json
-
-COPY travis-utils.sh /usr/bin/travis-utils.sh
-RUN /bin/bash -c "source /usr/bin/travis-utils.sh; travis_wait 40 fix-permissions $CONDA_DIR && travis_wait 20 fix-permissions /home/$NB_USER"
 
 COPY prepare.sh /usr/bin/prepare.sh
 RUN chmod +x /usr/bin/prepare.sh
