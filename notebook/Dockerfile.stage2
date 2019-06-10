@@ -1,6 +1,8 @@
 ARG TRAVIS_COMMIT=$TRAVIS_COMMIT
 FROM rhodium/notebook:$TRAVIS_COMMIT
 
+USER root
+
 # install R kernel
 RUN conda create -n r -c conda-forge \
     'rpy2=2.8*' \
@@ -46,7 +48,7 @@ RUN /opt/conda/envs/octave/bin/pip install octave_kernel
 COPY travis-utils.sh /usr/bin/travis-utils.sh
 RUN /bin/bash -c "source /usr/bin/travis-utils.sh; travis_wait 40 fix-permissions $CONDA_DIR && travis_wait 20 fix-permissions /home/$NB_USER"
 
-USER root
+USER $NB_USER
 
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
 CMD ["start.sh jupyter lab"]
