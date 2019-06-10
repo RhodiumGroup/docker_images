@@ -57,10 +57,8 @@ jobs:
         - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
         - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
         - docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT --build-arg TRAVIS_COMMIT=$TRAVIS_COMMIT -f $IMAGE_NAME/Dockerfile.stage2 $IMAGE_NAME
-        - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:dev
         - docker push rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
       skip_cleanup: true
-      if: branch == dev
 
     - stage: deploy-dev
       env:
@@ -72,7 +70,7 @@ jobs:
         - docker push "rhodium/$IMAGE_NAME:$TRAVIS_COMMIT"
         - docker push "rhodium/$IMAGE_NAME:dev"
       skip_cleanup: true
-      on: branch = dev
+      if: branch = dev
 
     - stage: deploy-dev
       env:
@@ -84,7 +82,7 @@ jobs:
         - docker push "rhodium/$IMAGE_NAME:$TRAVIS_COMMIT"
         - docker push "rhodium/$IMAGE_NAME:dev"
       skip_cleanup: true
-      on: branch = dev
+      if: branch = dev
 
     - stage: deploy-dev
       env:
@@ -96,7 +94,7 @@ jobs:
         - docker push "rhodium/$IMAGE_NAME:$TRAVIS_COMMIT"
         - docker push "rhodium/$IMAGE_NAME:dev"
       skip_cleanup: true
-      on: branch = dev
+      if: branch = dev
 
     - stage: deploy-master
       env:
