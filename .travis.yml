@@ -59,11 +59,49 @@ jobs:
         - docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT --build-arg TRAVIS_COMMIT=$TRAVIS_COMMIT -f $IMAGE_NAME/Dockerfile.stage2 $IMAGE_NAME
         - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:dev
         - docker push rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
-        - docker push rhodium/$IMAGE_NAME:dev
       skip_cleanup: true
       if:
         branch = dev
 
+    - stage: deploy-dev
+      env:
+        - IMAGE_NAME=notebook
+      script:
+        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+        - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
+        - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:dev
+        - docker push "rhodium/$IMAGE_NAME:$TRAVIS_COMMIT"
+        - docker push "rhodium/$IMAGE_NAME:dev"
+      skip_cleanup: true
+      on:
+        branch: dev
+
+    - stage: deploy-dev
+      env:
+        - IMAGE_NAME=worker
+      script:
+        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+        - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
+        - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:dev
+        - docker push "rhodium/$IMAGE_NAME:$TRAVIS_COMMIT"
+        - docker push "rhodium/$IMAGE_NAME:dev"
+      skip_cleanup: true
+      on:
+        branch: dev
+
+    - stage: deploy-dev
+      env:
+        - IMAGE_NAME=octave-worker
+      script:
+        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+        - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
+        - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:dev
+        - docker push "rhodium/$IMAGE_NAME:$TRAVIS_COMMIT"
+        - docker push "rhodium/$IMAGE_NAME:dev"
+      skip_cleanup: true
+      on:
+        branch: dev
+
     - stage: deploy-master
       env:
         - IMAGE_NAME=notebook
@@ -76,8 +114,8 @@ jobs:
         - docker push "rhodium/$IMAGE_NAME:dev"
         - docker push "rhodium/$IMAGE_NAME:latest"
       skip_cleanup: true
-      if:
-        branch = master
+      on:
+        branch: master
 
     - stage: deploy-master
       env:
@@ -91,8 +129,8 @@ jobs:
         - docker push "rhodium/$IMAGE_NAME:dev"
         - docker push "rhodium/$IMAGE_NAME:latest"
       skip_cleanup: true
-      if:
-        branch = master
+      on:
+        branch: master
 
     - stage: deploy-master
       env:
@@ -106,8 +144,8 @@ jobs:
         - docker push "rhodium/$IMAGE_NAME:dev"
         - docker push "rhodium/$IMAGE_NAME:latest"
       skip_cleanup: true
-      if:
-        branch = master
+      on:
+        branch: master
 
     - stage: deploy-tag
       env:
@@ -119,7 +157,7 @@ jobs:
         - docker push "rhodium/$IMAGE_NAME:$TRAVIS_TAG"
       skip_cleanup: true
       on:
-        tag IS present
+        tags: true
 
     - stage: deploy-tag
       env:
@@ -131,7 +169,7 @@ jobs:
         - docker push "rhodium/$IMAGE_NAME:$TRAVIS_TAG"
       skip_cleanup: true
       on:
-        tag IS present
+        tags: true
 
     - stage: deploy-tag
       env:
@@ -143,4 +181,4 @@ jobs:
         - docker push "rhodium/$IMAGE_NAME:$TRAVIS_TAG"
       skip_cleanup: true
       on:
-        tag IS present
+        tags: true
