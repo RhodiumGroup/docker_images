@@ -21,7 +21,7 @@ RUN conda create -n worker --yes -c conda-forge \
     dask=0.19.4 \
     datashader=0.6.8 \
     distributed=1.23.3 \
-    esmpy=7.1.0r \
+    esmpy=7.1.0 \
     fastparquet=0.1.6 \
     fiona=1.7.13 \
     fusepy=2.0.4 \
@@ -69,6 +69,7 @@ RUN conda create -n worker --yes -c conda-forge \
     tqdm=4.24.0 \
     urllib3=1.23 \
     xarray=0.10.9 \
+    xesmf==0.1.1 \
     zarr=2.2.0 \
     zict=0.1.3
 
@@ -92,7 +93,6 @@ RUN /opt/conda/envs/worker/bin/pip install \
     pyasn1-modules==0.2.2 \
     pyasn1==0.4.3 \
     wget==3.2 \
-    xesmf==0.1.1 \
     --no-cache-dir
 
 # clean up

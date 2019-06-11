@@ -54,7 +54,6 @@ RUN /opt/conda/envs/octave/bin/pip install \
     pyasn1-modules==0.2.2 \
     pyasn1==0.4.3 \
     wget==3.2 \
-    xesmf==0.1.1 \
     metakernel==0.24.2 \
     octave_kernel==0.31.0 \
     --no-cache-dir
