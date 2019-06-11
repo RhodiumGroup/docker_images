@@ -9,27 +9,27 @@ RUN apt-get update && apt-get install -y octave
 RUN conda config --add channels conda-forge
 RUN conda update --yes conda
 RUN conda create -n octave --yes -c conda-forge \
-    dask-core=1.2.0 \
-    dask=1.2.0 \
-    cftime=1.0.3.4 \
+    dask-core=0.19.4 \
+    dask=0.19.4 \
     cloudpickle=0.5.3 \
-    distributed=1.28.1 \
-    fastparquet=0.3.1 \
+    distributed=1.23.3 \
+    fastparquet=0.1.6 \
     fusepy=2.0.4 \
     gcsfs=0.1.2 \
     lz4-c=1.8.1.2 \
     lz4=1.1.0 \
     matplotlib=3.0.2 \
-    nb_conda_kernels=2.2.2 \
+    nb_conda_kernels=2.1.1 \
     netcdf-fortran=4.4.4 \
     netcdf4=1.3.1 \
+    nomkl=2.0 \
     numba=0.40.0 \
     numcodecs=0.5.5 \
     numpy=1.15.4 \
     pandas=0.23.4 \
     pip=18.1 \
     python=3.6 \
-    tornado=5.1.1 \
+    tornado=5.0.2 \
     texinfo=6.6 \
     urllib3=1.23 \
     xarray=0.10.9 \
@@ -49,10 +49,12 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && alias googlefuse=/usr/bin/gcsfuse
 
 RUN /opt/conda/envs/octave/bin/pip install \
-    dask-kubernetes==0.8.0 \
-    google-cloud-storage==1.16.1 \
-    kubernetes==9.0.0 \
+    git+git://github.com/dask/dask-kubernetes.git@295f06428119bc8e674a2e6a59cd97000fae69e8 \
+    google-cloud-storage==1.12.0 \
+    pyasn1-modules==0.2.2 \
+    pyasn1==0.4.3 \
     wget==3.2 \
+    xesmf==0.1.1 \
     metakernel==0.24.2 \
     octave_kernel==0.31.0 \
     --no-cache-dir
