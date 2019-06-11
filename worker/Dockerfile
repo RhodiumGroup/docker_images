@@ -49,7 +49,6 @@ RUN conda create -n worker --yes -c conda-forge \
     nose=1.3.7 \
     numba=0.40.0 \
     numcodecs=0.5.5 \
-    numpy=1.15.4 \
     pandas=0.23.4 \
     pip=18.1 \
     pyshp=1.2.12 \
@@ -61,7 +60,6 @@ RUN conda create -n worker --yes -c conda-forge \
     rasterio=0.36.0 \
     scikit-image=0.14.1 \
     scikit-learn=0.20.0 \
-    scipy=1.3.0 \
     seaborn=0.9.0 \
     setuptools=39.2.0 \
     statsmodels=0.9.0 \
