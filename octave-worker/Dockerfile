@@ -72,8 +72,8 @@ RUN chmod +x /usr/bin/cloud_sql_proxy
 USER root
 COPY prepare.sh /usr/bin/prepare.sh
 RUN chmod +x /usr/bin/prepare.sh
-COPY add_service_creds.sh /usr/bin/add_service_creds.sh
-RUN chmod +x /usr/bin/add_service_creds.sh
+COPY add_service_creds.py /usr/bin/add_service_creds.py
+RUN chmod +x /usr/bin/add_service_creds.py
 RUN mkdir /opt/app
 RUN mkdir /gcs
 
