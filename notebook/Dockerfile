@@ -55,6 +55,7 @@ RUN conda install --yes -c conda-forge \
     numpy=1.15.4 \
     pandas=0.23.4 \
     pip=18.1 \
+    "poppler<0.62" \
     pyshp=1.2.12 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
@@ -152,7 +153,7 @@ WORKDIR $HOME
 # (keeping down here so that rest of image will stay
 # cached when updating these versions)
 RUN pip install \
-  git+git://github.com/RhodiumGroup/rhg_compute_tools.git@999d4d24f2136ea809cae2d62fa11a5a0c3d7a9c \
+  git+git://github.com/RhodiumGroup/rhg_compute_tools.git@f49c253653b2a11786c7ad67b95e00513eecc0e4 \
   impactlab-tools==0.3.1 \
   climate-toolbox==0.1.4 \
   parameterize_jobs==0.1.0 \
