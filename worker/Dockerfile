@@ -26,7 +26,7 @@ RUN conda create -n worker --yes -c conda-forge \
     fiona=1.7.13 \
     fusepy=2.0.4 \
     gcsfs=0.1.2 \
-    gdal=2.2.4 \
+    gdal=3.0.0 \
     geoalchemy2=0.5.0 \
     geopy=1.17.0 \
     geoviews=1.5.1 \
@@ -52,7 +52,6 @@ RUN conda create -n worker --yes -c conda-forge \
     numpy=1.15.4 \
     pandas=0.23.4 \
     pip=18.1 \
-    "poppler<0.62" \
     pyshp=1.2.12 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
