@@ -30,7 +30,7 @@ RUN conda install --yes -c conda-forge \
     geoalchemy2=0.5.0 \
     geopy=1.17.0 \
     geoviews=1.5.1 \
-    git=2.18.0 \
+    git=2.22.0 \
     gitpython=2.1.11 \
     holoviews=1.10.7 \
     ipdb=0.11 \

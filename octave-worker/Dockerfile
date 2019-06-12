@@ -28,7 +28,6 @@ RUN conda create -n octave --yes -c conda-forge \
     numpy=1.15.4 \
     pandas=0.23.4 \
     pip=18.1 \
-    "poppler<0.62" \
     python=3.6 \
     tornado=5.0.2 \
     texinfo=6.6 \
