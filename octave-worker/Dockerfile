@@ -20,11 +20,11 @@ RUN conda create -n octave --yes -c conda-forge \
     lz4=1.1.0 \
     matplotlib=3.0.2 \
     nb_conda_kernels=2.1.1 \
-    netcdf-fortran=4.4.4 \
-    netcdf4=1.3.1 \
+    netcdf-fortran=4.4.5 \
+    netcdf4=1.5.1.2 \
     nomkl=2.0 \
     numba=0.40.0 \
-    numcodecs=0.5.5 \
+    numcodecs=0.6.3 \
     numpy=1.15.4 \
     pandas=0.23.4 \
     pip=18.1 \
@@ -32,9 +32,9 @@ RUN conda create -n octave --yes -c conda-forge \
     tornado=5.0.2 \
     texinfo=6.6 \
     urllib3=1.23 \
-    xarray=0.10.9 \
-    zarr=2.2.0 \
-    zict=0.1.3
+    xarray=0.12.1 \
+    zarr=2.3.2 \
+    zict=0.1.4
 
 RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
     echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \

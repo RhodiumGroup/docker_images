@@ -8,7 +8,7 @@ RUN conda config --add channels conda-forge
 RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     beautifulsoup4=4.6.1 \
-    bokeh=0.13.0 \
+    bokeh=1.2.0 \
     bqplot \
     cartopy=0.16.0 \
     click=6.7 \
@@ -23,16 +23,16 @@ RUN conda install --yes -c conda-forge \
     distributed=1.23.3 \
     esmpy=7.1.0 \
     fastparquet=0.1.6 \
-    fiona=1.7.13 \
+    fiona=1.8.6 \
     fusepy=2.0.4 \
     gcsfs=0.1.2 \
-    gdal=3.0.0 \
+    gdal=2.4.1 \
     geoalchemy2=0.5.0 \
     geopy=1.17.0 \
-    geoviews=1.5.1 \
+    geoviews=1.6.2 \
     git=2.22.0 \
     gitpython=2.1.11 \
-    holoviews=1.10.7 \
+    holoviews=1.12.3 \
     ipdb=0.11 \
     ipympl=0.2.1 \
     ipywidgets=7.4.2 \
@@ -46,21 +46,21 @@ RUN conda install --yes -c conda-forge \
     nb_conda_kernels=2.1.1 \
     nbserverproxy=0.8.3 \
     ncurses=6.1 \
-    netcdf-fortran=4.4.4 \
-    netcdf4=1.3.1 \
+    netcdf-fortran=4.4.5 \
+    netcdf4=1.5.1.2 \
     nomkl=2.0 \
     nose=1.3.7 \
     numba=0.40.0 \
-    numcodecs=0.5.5 \
+    numcodecs=0.6.3 \
     numpy=1.15.4 \
     pandas=0.23.4 \
     pip=18.1 \
     pyshp=1.2.12 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
-    pyviz_comms=0.6.0 \
+    pyviz_comms=0.7.2 \
     PyYAML=3.12 \
-    rasterio=0.36.0 \
+    rasterio=1.0.24 \
     scikit-image=0.14.1 \
     scikit-learn=0.20.0 \
     scipy=1.1.0 \
@@ -70,10 +70,10 @@ RUN conda install --yes -c conda-forge \
     tornado=5.0.2 \
     tqdm=4.24.0 \
     urllib3=1.23 \
-    xarray=0.10.9 \
-    xesmf==0.1.1 \
-    zarr=2.2.0 \
-    zict=0.1.3
+    xarray=0.12.1 \
+    xesmf=0.1.1 \
+    zarr=2.3.2 \
+    zict=0.1.4
 
 RUN conda install --yes --channel conda-forge/label/dev geopandas
 
