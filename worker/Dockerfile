@@ -14,13 +14,13 @@ RUN conda create -n worker --yes -c conda-forge \
     click=6.7 \
     cloudpickle=0.5.3 \
     cytoolz=0.9.0.1 \
-    dask-core=0.19.4 \
+    dask-core=1.2.0 \
     dask-glm=0.1.0 \
     dask-ml=0.11.0 \
     dask-searchcv=0.2.0 \
-    dask=0.19.4 \
+    dask=1.2.0 \
     datashader=0.6.8 \
-    distributed=1.23.3 \
+    distributed=1.28.1 \
     esmpy=7.1.0 \
     fastparquet=0.1.6 \
     fiona=1.8.6 \

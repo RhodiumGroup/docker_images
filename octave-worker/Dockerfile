@@ -9,10 +9,10 @@ RUN apt-get update && apt-get install -y octave
 RUN conda config --add channels conda-forge
 RUN conda update --yes conda
 RUN conda create -n octave --yes -c conda-forge \
-    dask-core=0.19.4 \
-    dask=0.19.4 \
+    dask-core=1.2.0 \
+    dask=1.2.0 \
     cloudpickle=0.5.3 \
-    distributed=1.23.3 \
+    distributed=1.28.1 \
     fastparquet=0.1.6 \
     fusepy=2.0.4 \
     gcsfs=0.1.2 \
