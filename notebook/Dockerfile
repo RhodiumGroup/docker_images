@@ -18,7 +18,7 @@ RUN conda install --yes -c conda-forge \
     dask-glm \
     dask-kubernetes \
     dask-ml \
-    dask0 \
+    dask \
     datashader \
     distributed \
     esmpy \
