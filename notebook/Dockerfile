@@ -1,4 +1,4 @@
-FROM climateimpactlab/gfortran-netcdf-notebook:v1.0.3
+FROM climateimpactlab/gfortran-netcdf-notebook:apt-get-netcdf
 
 # build conda
 
@@ -7,102 +7,98 @@ USER $NB_USER
 RUN conda config --add channels conda-forge
 RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
-    beautifulsoup4=4.6.1 \
-    bokeh=1.2.0 \
+    beautifulsoup4 \
+    bokeh \
+    bumpversion \
     bqplot \
-    cartopy=0.16.0 \
-    click=6.7 \
-    cloudpickle=0.5.3 \
-    cytoolz=0.9.0.1 \
-    dask-core=1.2.0 \
-    dask-glm=0.1.0 \
-    dask-ml=0.11.0 \
-    dask-searchcv=0.2.0 \
-    dask=1.2.0 \
-    datashader=0.6.8 \
-    distributed=1.28.1 \
-    esmpy=7.1.0 \
-    fastparquet=0.1.6 \
-    fiona=1.8.6 \
-    fusepy=2.0.4 \
-    gcsfs=0.1.2 \
-    gdal=2.4.1 \
-    geoalchemy2=0.5.0 \
-    geopy=1.17.0 \
-    geoviews=1.6.2 \
-    git=2.22.0 \
-    gitpython=2.1.11 \
-    holoviews=1.12.3 \
-    ipdb=0.11 \
-    ipympl=0.2.1 \
-    ipywidgets=7.4.2 \
-    jedi=0.12.0 \
-    jupyter=1.0.0 \
-    jupyterhub=0.9.4 \
-    jupyterlab=0.35.4 \
-    lz4-c=1.8.1.2 \
-    lz4=1.1.0 \
-    matplotlib=3.0.2 \
-    nb_conda_kernels=2.1.1 \
-    nbserverproxy=0.8.3 \
-    ncurses=6.1 \
-    netcdf-fortran=4.4.5 \
-    netcdf4=1.5.1.2 \
-    nomkl=2.0 \
-    nose=1.3.7 \
-    numba=0.40.0 \
-    numcodecs=0.6.3 \
-    numpy=1.15.4 \
-    pandas=0.23.4 \
-    pip=18.1 \
-    pyshp=1.2.12 \
-    python-blosc=1.4.4 \
-    python-snappy=0.5.3 \
-    pyviz_comms=0.7.2 \
-    PyYAML=3.12 \
-    rasterio=1.0.24 \
-    scikit-image=0.14.1 \
-    scikit-learn=0.20.0 \
-    scipy=1.1.0 \
-    seaborn=0.9.0 \
-    setuptools=39.2.0 \
-    statsmodels=0.9.0 \
-    tornado=5.0.2 \
-    tqdm=4.24.0 \
-    urllib3=1.23 \
-    xarray=0.12.1 \
-    xesmf=0.1.1 \
-    zarr=2.3.2 \
-    zict=0.1.4
+    cartopy \
+    click \
+    cloudpickle \
+    cytoolz \
+    dask-glm \
+    dask-kubernetes \
+    dask-ml \
+    dask0 \
+    datashader \
+    distributed \
+    esmpy \
+    fastparquet \
+    flake8 \
+    fiona \
+    fusepy \
+    gcsfs \
+    gdal \
+    geoalchemy2 \
+    geopandas \
+    geopy \
+    geoviews \
+    git \
+    gitpython \
+    google-cloud-storage \
+    holoviews \
+    ipdb \
+    ipympl \
+    ipywidgets \
+    jedi \
+    jupyterhub \
+    jupyterlab \
+    lz4-c \
+    lz4 \
+    matplotlib \
+    nb_conda_kernels \
+    nbserverproxy \
+    ncurses \
+    netcdf-fortran \
+    netcdf4 \
+    nomkl \
+    nose \
+    numba \
+    numcodecs \
+    pandas \
+    pip \
+    pyshp \
+    pytest \
+    pytest-cov \
+    pytest-runner \
+    python-blosc\
+    python-snappy \
+    pyviz_comms \
+    PyYAML \
+    rasterio \
+    scikit-image \
+    scikit-learn \
+    scipy \
+    seaborn \
+    setuptools \
+    sphinx \
+    statsmodels \
+    tornado \
+    tox \
+    tqdm \
+    urllib3 \
+    wget \
+    wheel \
+    widgetsnbextension \
+    xarray \
+    xesmf \
+    xlrd \
+    zarr \
+    zict
 
-RUN conda install --yes --channel conda-forge/label/dev geopandas
+# RUN conda install --yes --channel conda-forge/label/dev geopandas
 
 RUN pip install \
-    bumpversion==0.5.3 \
-    coverage==4.5.1 \
-    git+git://github.com/dask/dask-kubernetes.git@295f06428119bc8e674a2e6a59cd97000fae69e8 \
-    flake8==3.5.0 \
-    google-cloud-storage==1.12.0 \
-    kubernetes==6.0.0 \
-    mapbox==0.16.2 \
-    py-noaa==0.2.2 \
-    pytest-cov==2.5.1 \
-    pytest-runner==4.2 \
-    pytest==3.6.2 \
-    Sphinx==1.7.5 \
-    tox==3.1.1 \
-    wget==3.2 \
-    wheel==0.31.1 \
-    xlrd==1.1.0 \
+    mapbox \
+    py-noaa \
     --no-cache-dir
 
 RUN jupyter labextension install \
-    @jupyter-widgets/jupyterlab-manager@0.38.1 \
-    @jupyterlab/hub-extension@0.12.0 \
-    jupyterlab_bokeh@0.6.3 \
-    @pyviz/jupyterlab_pyviz@0.6.3 \
-    dask-labextension@0.2.0 \
-    jupyter-matplotlib@0.3.0
+    @jupyter-widgets/jupyterlab-manager \
+    @jupyterlab/hub-extension \
+    jupyterlab_bokeh \
+    @pyviz/jupyterlab_pyviz \
+    dask-labextension \
+    jupyter-matplotlib
 
 RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
@@ -152,10 +148,10 @@ WORKDIR $HOME
 # (keeping down here so that rest of image will stay
 # cached when updating these versions)
 RUN pip install \
-  git+git://github.com/RhodiumGroup/rhg_compute_tools.git@f49c253653b2a11786c7ad67b95e00513eecc0e4 \
-  impactlab-tools==0.3.1 \
-  climate-toolbox==0.1.4 \
-  parameterize_jobs==0.1.0 \
+  rhg_compute_tools \
+  impactlab-tools \
+  climate-toolbox \
+  parameterize_jobs \
   --no-cache-dir
 
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
