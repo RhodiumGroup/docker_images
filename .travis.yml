@@ -5,6 +5,12 @@ language: python
 services:
   - docker
 
+env:
+  matrix:
+    - IMAGE_NAME=notebook
+    - IMAGE_NAME=worker
+    - IMAGE_NAME=octave-worker
+
 jobs:
   include:
     - stage: build
