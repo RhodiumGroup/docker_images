@@ -9,7 +9,7 @@ RUN conda update --yes conda
 RUN conda install --yes -c conda-forge \
     beautifulsoup4=4.7.1 \
     bokeh=1.2.0 \
-    bumpversion \
+    bumpversion=0.5.3 \
     bqplot=0.11.5 \
     cartopy0.17.0 \
     click=7.0 \
@@ -87,6 +87,7 @@ RUN conda install --yes -c conda-forge \
     zarr=2.3.2 \
     zict=0.1.4
 
+# trying out new master branch version (0.5) instead of dev
 # RUN conda install --yes --channel conda-forge/label/dev geopandas
 
 RUN pip install \
@@ -150,10 +151,10 @@ WORKDIR $HOME
 # (keeping down here so that rest of image will stay
 # cached when updating these versions)
 RUN pip install \
-  rhg_compute_tools \
-  impactlab-tools \
-  climate-toolbox \
-  parameterize_jobs \
+  climate-toolbox=0.1.4 \
+  impactlab-tools=0.3.1 \
+  parameterize_jobs=0.1.0 \
+  rhg_compute_tools=0.1.6 \
   --no-cache-dir
 
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
