@@ -34,7 +34,7 @@ build-stage2: &build-stage2
 
 deploy-branch: &deploy-branch
   stage: deploy
-  name: "Deploy to $TRAVIS_BRANCH"
+  name: "Deploy to branch"
   script:
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
     - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
@@ -58,7 +58,7 @@ deploy-master: &deploy-master
 
 deploy-tag: &deploy-tag
   stage: deploy
-  name: "Deploy as $TRAVIS_TAG"
+  name: "Deploy as tag"
   script:
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
     - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
