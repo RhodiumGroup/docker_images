@@ -137,10 +137,10 @@ RUN mkdir /gcs
 # (keeping down here so that rest of image will stay
 # cached when updating these versions)
 RUN pip install \
-  climate-toolbox=0.1.4 \
-  impactlab-tools=0.3.1 \
-  parameterize_jobs=0.1.0 \
-  rhg_compute_tools=0.1.6 \
+  climate-toolbox==0.1.4 \
+  impactlab-tools==0.3.1 \
+  parameterize_jobs==0.1.0 \
+  rhg_compute_tools==0.1.6 \
   --no-cache-dir
 
 ENTRYPOINT ["/usr/local/bin/dumb-init", "/usr/bin/prepare.sh"]
