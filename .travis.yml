@@ -63,6 +63,15 @@ jobs:
     - <<: *build
       env:
         IMAGE_NAME=octave-worker
+    - stage: build-stage2
+      env:
+        IMAGE_NAME=notebook
+      script:
+        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+        - docker pull rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}
+        - docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT --build-arg TRAVIS_COMMIT=${TRAVIS_COMMIT} -f $IMAGE_NAME/Dockerfile.stage2 $IMAGE_NAME
+        - docker push rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
+      skip_cleanup: true
     - <<: *deploy-branch
       env:
         IMAGE_NAME=notebook
