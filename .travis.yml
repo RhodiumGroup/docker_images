@@ -17,7 +17,7 @@ build-stage1: &build-stage1
     - docker build --pull --cache-from rhodium/$IMAGE_NAME:$TRAVIS_BRANCH-stage1 -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT-stage1 -f Dockerfile.stage1 .
     - docker push rhodium/$IMAGE_NAME:$TRAVIS_COMMIT-stage1
     - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT-stage1 rhodium/$IMAGE_NAME:$TRAVIS_BRANCH-stage1
-    - docker push rhodium $IMAGE_NAME:$TRAVIS_BRANCH-stage1
+    - docker push rhodium/$IMAGE_NAME:$TRAVIS_BRANCH-stage1
   skip_cleanup: true
 
 build-stage2: &build-stage2
