@@ -11,7 +11,7 @@ RUN conda install --yes -c conda-forge \
     bokeh=1.2.0 \
     bumpversion=0.5.3 \
     bqplot=0.11.5 \
-    cartopy0.17.0 \
+    cartopy=0.17.0 \
     click=7.0 \
     cloudpickle=1.2.1 \
     cytoolz=0.9.0.1 \
@@ -107,6 +107,64 @@ RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
 USER root
 
+# install R kernel
+RUN conda create -n r -c conda-forge \
+    'rpy2=2.8*' \
+    'r-base=3.4.1' \
+    'r-irkernel=0.8*' \
+    'r-plyr=1.8*' \
+    'r-devtools=1.13*' \
+    'r-tidyverse=1.2*' \
+    'r-shiny=1.0*' \
+    'r-rmarkdown=1.8*' \
+    'r-forecast=8.2*' \
+    'r-rsqlite=2.0*' \
+    'r-reshape2=1.4*' \
+    'r-nycflights13=0.2*' \
+    'r-caret=6.0*' \
+    'r-rcurl=1.95*' \
+    'r-crayon=1.3*' \
+    'r-randomforest=4.6*' \
+    'r-htmltools=0.3*' \
+    'r-sparklyr=0.7*' \
+    'r-htmlwidgets=1.0*' \
+    'r-hexbin=1.27*'
+
+# install Octave kernel
+RUN apt-get update && apt-get install -y octave
+RUN conda create -n octave \
+  dask=1.2.0 \
+  dask-kubernetes=0.8.0 \
+  cloudpickle=1.2.1 \
+  distributed=1.28.1 \
+  fastparquet=0.3.1 \
+  fusepy=3.0.1 \
+  gcsfs=0.2.2 \
+  google-cloud-storage=1.16.1
+  lz4=2.1.9 \
+  lz4-c=1.8.3 \
+  matplotlib=3.1.0 \
+  metakernel==0.24.2 \
+  nb_conda_kernels=2.2.2 \
+  netcdf-fortran=4.4.5 \
+  netcdf4=1.5.1.2 \
+  nomkl=3.0 \
+  numba=0.43.1 \
+  numcodecs=0.6.3 \
+  numpy=1.16.4 \
+  octave_kernel==0.31.0 \
+  pandas=0.24.2 \
+  pip=19.1.1 \
+  pyasn1==0.4.5 \
+  pyasn1-modules==0.2.5 \
+  tornado=6.0.2 \
+  texinfo=6.6 \
+  urllib3=1.24.3 \
+  wget=1.20.1 \
+  xarray=0.12.1 \
+  zarr=2.3.2 \
+  zict=0.1.4
+
 COPY prepare.sh /usr/bin/prepare.sh
 RUN chmod +x /usr/bin/prepare.sh
 RUN mkdir /pre-home && chown -R $NB_USER /pre-home
@@ -129,9 +187,11 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && apt-get install gcsfuse \
   && alias googlefuse=/usr/bin/gcsfuse
 
-USER root
 RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/bin/cloud_sql_proxy
 RUN chmod +x /usr/bin/cloud_sql_proxy
+
+COPY travis-utils.sh /usr/bin/travis-utils.sh
+RUN /bin/bash -c "source /usr/bin/travis-utils.sh; travis_wait 40 fix-permissions $CONDA_DIR && travis_wait 20 fix-permissions /home/$NB_USER"
 
 # clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*

@@ -1,4 +1,4 @@
-FROM climateimpactlab/miniconda3-gfortran-netcdf:v1.0.2
+FROM climateimpactlab/miniconda3-gfortran-netcdf:apt-get-netcdf
 
 # build conda
 
@@ -8,33 +8,38 @@ RUN apt-get update && apt-get install -y octave
 
 RUN conda config --add channels conda-forge
 RUN conda update --yes conda
-RUN conda create -n octave --yes -c conda-forge \
-    dask-core=1.2.0 \
-    dask=1.2.0 \
-    cloudpickle=0.5.3 \
-    distributed=1.28.1 \
-    fastparquet=0.1.6 \
-    fusepy=2.0.4 \
-    gcsfs=0.1.2 \
-    lz4-c=1.8.1.2 \
-    lz4=1.1.0 \
-    matplotlib=3.0.2 \
-    nb_conda_kernels=2.1.1 \
-    netcdf-fortran=4.4.5 \
-    netcdf4=1.5.1.2 \
-    nomkl=2.0 \
-    numba=0.40.0 \
-    numcodecs=0.6.3 \
-    numpy=1.15.4 \
-    pandas=0.23.4 \
-    pip=18.1 \
-    python=3.6 \
-    tornado=5.0.2 \
-    texinfo=6.6 \
-    urllib3=1.23 \
-    xarray=0.12.1 \
-    zarr=2.3.2 \
-    zict=0.1.4
+RUN conda create -n octave \
+  dask=1.2.0 \
+  dask-kubernetes=0.8.0 \
+  cloudpickle=1.2.1 \
+  distributed=1.28.1 \
+  fastparquet=0.3.1 \
+  fusepy=3.0.1 \
+  gcsfs=0.2.2 \
+  google-cloud-storage=1.16.1
+  lz4=2.1.9 \
+  lz4-c=1.8.3 \
+  matplotlib=3.1.0 \
+  metakernel==0.24.2 \
+  nb_conda_kernels=2.2.2 \
+  netcdf-fortran=4.4.5 \
+  netcdf4=1.5.1.2 \
+  nomkl=3.0 \
+  numba=0.43.1 \
+  numcodecs=0.6.3 \
+  numpy=1.16.4 \
+  octave_kernel==0.31.0 \
+  pandas=0.24.2 \
+  pip=19.1.1 \
+  pyasn1==0.4.5 \
+  pyasn1-modules==0.2.5 \
+  tornado=6.0.2 \
+  texinfo=6.6 \
+  urllib3=1.24.3 \
+  wget=1.20.1 \
+  xarray=0.12.1 \
+  zarr=2.3.2 \
+  zict=0.1.4
 
 RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
     echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
@@ -47,16 +52,6 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && apt-get update \
   && apt-get install gcsfuse \
   && alias googlefuse=/usr/bin/gcsfuse
-
-RUN /opt/conda/envs/octave/bin/pip install \
-    git+git://github.com/dask/dask-kubernetes.git@295f06428119bc8e674a2e6a59cd97000fae69e8 \
-    google-cloud-storage==1.12.0 \
-    pyasn1-modules==0.2.2 \
-    pyasn1==0.4.3 \
-    wget==3.2 \
-    metakernel==0.24.2 \
-    octave_kernel==0.31.0 \
-    --no-cache-dir
 
 # clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -81,10 +76,10 @@ RUN mkdir /gcs
 # (keeping down here so that rest of image will stay
 # cached when updating these versions)
 RUN pip install \
-    git+git://github.com/RhodiumGroup/rhg_compute_tools.git@f49c253653b2a11786c7ad67b95e00513eecc0e4 \
-  impactlab-tools==0.3.1 \
-  climate-toolbox==0.1.4 \
-  parameterize_jobs==0.1.0 \
+  climate-toolbox=0.1.4 \
+  impactlab-tools=0.3.1 \
+  parameterize_jobs=0.1.0 \
+  rhg_compute_tools=0.1.6 \
   --no-cache-dir
 
 ENTRYPOINT ["/usr/local/bin/dumb-init", "/usr/bin/prepare.sh"]

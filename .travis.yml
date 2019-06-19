@@ -3,115 +3,88 @@ sudo: required
 services:
   - docker
 
+env:
+  matrix:
+    - FROM_TAG=dev
 jobs:
   include:
-    - stage: build-stage1
+    - stage: build
       env:
         - IMAGE_NAME=notebook
       script:
         - "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then sed -i.bak 's/image: rhodium\\/worker.*/image: rhodium\\/worker:'\"$TRAVIS_COMMIT\"'/' notebook/worker-template.yml; else sed -i.bak 's/image: rhodium\\/worker:.*/image: rhodium\\/worker:'\"$TRAVIS_TAG\"'/' notebook/worker-template.yml; fi"
         - "rm notebook/worker-template.yml.bak"
         - "cat notebook/worker-template.yml | grep image:"
-        - "docker pull rhodium/$IMAGE_NAME:dev"
+        - "docker pull rhodium/$IMAGE_NAME:$FROM_TAG"
         - cd $IMAGE_NAME
-        - "docker build --pull --cache-from rhodium/$IMAGE_NAME:dev -t rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}.stage1 ."
+        - "docker build --pull --cache-from rhodium/$IMAGE_NAME:$FROM_TAG -t rhodium/$IMAGE_NAME:${TRAVIS_COMMIT} ."
         - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-        - docker push "rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}.stage1"
+        - docker push "rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}"
       skip_cleanup: true
 
-    - stage: build-stage1
+    - stage: build
       env:
         - IMAGE_NAME=worker
       script:
         - "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then sed -i.bak 's/image: rhodium\\/worker.*/image: rhodium\\/worker:'\"$TRAVIS_COMMIT\"'/' notebook/worker-template.yml; else sed -i.bak 's/image: rhodium\\/worker:.*/image: rhodium\\/worker:'\"$TRAVIS_TAG\"'/' notebook/worker-template.yml; fi"
         - "rm notebook/worker-template.yml.bak"
         - "cat notebook/worker-template.yml | grep image:"
-        - "docker pull rhodium/$IMAGE_NAME:dev"
+        - "docker pull rhodium/$IMAGE_NAME:$FROM_TAG"
         - cd $IMAGE_NAME
-        - "docker build --pull --cache-from rhodium/$IMAGE_NAME:dev -t rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}.stage1 ."
+        - "docker build --pull --cache-from rhodium/$IMAGE_NAME:$FROM_TAG -t rhodium/$IMAGE_NAME:${TRAVIS_COMMIT} ."
         - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-        - docker push "rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}.stage1"
+        - docker push "rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}"
       skip_cleanup: true
 
-    - stage: build-stage1
+    - stage: build
       env:
         - IMAGE_NAME=octave-worker
       script:
         - "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then sed -i.bak 's/image: rhodium\\/worker.*/image: rhodium\\/worker:'\"$TRAVIS_COMMIT\"'/' notebook/worker-template.yml; else sed -i.bak 's/image: rhodium\\/worker:.*/image: rhodium\\/worker:'\"$TRAVIS_TAG\"'/' notebook/worker-template.yml; fi"
         - "rm notebook/worker-template.yml.bak"
         - "cat notebook/worker-template.yml | grep image:"
-        - "docker pull rhodium/$IMAGE_NAME:dev"
+        - "docker pull rhodium/$IMAGE_NAME:$FROM_TAG"
         - cd $IMAGE_NAME
-        - "docker build --pull --cache-from rhodium/$IMAGE_NAME:dev -t rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}.stage1 ."
+        - "docker build --pull --cache-from rhodium/$IMAGE_NAME:$FROM_TAG -t rhodium/$IMAGE_NAME:${TRAVIS_COMMIT} ."
         - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-        - docker push "rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}.stage1"
+        - docker push "rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}"
       skip_cleanup: true
 
-    - stage: build-stage2
-      env:
-        - IMAGE_NAME=notebook
-      script:
-        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-        - docker pull rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}.stage1
-        - docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT --build-arg TRAVIS_COMMIT=${TRAVIS_COMMIT}.stage1 -f $IMAGE_NAME/Dockerfile.stage2 $IMAGE_NAME
-        - docker push rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
-      skip_cleanup: true
-
-    - stage: build-stage2
-      env:
-        - IMAGE_NAME=worker
-      script:
-        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-        - docker pull rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}.stage1
-        - docker tag rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}.stage1 rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}
-        - docker push rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
-      skip_cleanup: true
-
-    - stage: build-stage2
-      env:
-        - IMAGE_NAME=octave-worker
-      script:
-        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-        - docker pull rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}.stage1
-        - docker tag rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}.stage1 rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}
-        - docker push rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
-      skip_cleanup: true
-
-    - stage: deploy-dev
+    - stage: deploy-branch
       env:
         - IMAGE_NAME=notebook
       script:
         - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
         - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
-        - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:dev
+        - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:$TRAVIS_BRANCH
         - docker push "rhodium/$IMAGE_NAME:$TRAVIS_COMMIT"
         - docker push "rhodium/$IMAGE_NAME:dev"
       skip_cleanup: true
-      if: branch = dev
+      if: branch != master
 
-    - stage: deploy-dev
+    - stage: deploy-branch
       env:
         - IMAGE_NAME=worker
       script:
         - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
         - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
-        - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:dev
+        - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:$TRAVIS_BRANCH
         - docker push "rhodium/$IMAGE_NAME:$TRAVIS_COMMIT"
         - docker push "rhodium/$IMAGE_NAME:dev"
       skip_cleanup: true
-      if: branch = dev
+      if: branch != master
 
-    - stage: deploy-dev
+    - stage: deploy-branch
       env:
         - IMAGE_NAME=octave-worker
       script:
         - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
         - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
-        - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:dev
+        - docker tag rhodium/$IMAGE_NAME:$TRAVIS_COMMIT rhodium/$IMAGE_NAME:$TRAVIS_BRANCH
         - docker push "rhodium/$IMAGE_NAME:$TRAVIS_COMMIT"
         - docker push "rhodium/$IMAGE_NAME:dev"
       skip_cleanup: true
-      if: branch = dev
+      if: branch != master
 
     - stage: deploy-master
       env:

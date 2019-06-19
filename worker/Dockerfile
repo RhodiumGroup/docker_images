@@ -11,7 +11,7 @@ RUN conda create -n worker --yes -c conda-forge \
   bokeh=1.2.0 \
   bumpversion=0.5.3 \
   bqplot=0.11.5 \
-  cartopy0.17.0 \
+  cartopy=0.17.0 \
   click=7.0 \
   cloudpickle=1.2.1 \
   cytoolz=0.9.0.1 \
@@ -126,7 +126,6 @@ USER root
 RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/bin/cloud_sql_proxy
 RUN chmod +x /usr/bin/cloud_sql_proxy
 
-USER root
 COPY prepare.sh /usr/bin/prepare.sh
 RUN chmod +x /usr/bin/prepare.sh
 COPY add_service_creds.py /usr/bin/add_service_creds.py
