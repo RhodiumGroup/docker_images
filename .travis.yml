@@ -22,7 +22,7 @@ build-stage2: &build-stage2
   stage: build-stage2
   script:
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-    - docker pull rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}
+    - docker pull rhodium/$STAGE1_NAME:${TRAVIS_COMMIT}-stage1
     - docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT --build-arg STAGE1_TAG=${TRAVIS_COMMIT}-stage1 -f $IMAGE_NAME/Dockerfile.stage2 $IMAGE_NAME
     - docker push rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
   skip_cleanup: true
@@ -72,12 +72,15 @@ jobs:
     - <<: *build-stage2
       env:
         IMAGE_NAME=notebook
+        STAGE1_NAME=notebook
     - <<: *build-stage2
       env:
         IMAGE_NAME=worker
+        STAGE1_NAME=worker-base
     - <<: *build-stage2
       env:
         IMAGE_NAME=octave-worker
+        STAGE1_NAME=worker-base
     - <<: *deploy-branch
       env:
         IMAGE_NAME=notebook
