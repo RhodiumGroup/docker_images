@@ -7,6 +7,7 @@ services:
 
 build-stage1: &build-stage1
   stage: build-stage1
+  name: "Build Stage 1"
   script:
     - "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then sed -i.bak 's/image: rhodium\\/worker.*/image: rhodium\\/worker:'\"$TRAVIS_COMMIT\"'/' notebook/worker-template.yml; else sed -i.bak 's/image: rhodium\\/worker:.*/image: rhodium\\/worker:'\"$TRAVIS_TAG\"'/' notebook/worker-template.yml; fi"
     - rm notebook/worker-template.yml.bak
@@ -22,6 +23,7 @@ build-stage1: &build-stage1
 
 build-stage2: &build-stage2
   stage: build-stage2
+  name: "Deploy commit"
   script:
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
     - docker pull rhodium/$STAGE1_NAME:$TRAVIS_COMMIT-stage1
@@ -32,7 +34,7 @@ build-stage2: &build-stage2
 
 deploy-branch: &deploy-branch
   stage: deploy
-  name: "Deploy Branch"
+  name: "Deploy to $TRAVIS_BRANCH"
   script:
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
     - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
@@ -43,7 +45,7 @@ deploy-branch: &deploy-branch
 
 deploy-master: &deploy-master
   stage: deploy
-  name: "Deploy Master"
+  name: "Deploy to master and dev"
   script:
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
     - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
@@ -56,7 +58,7 @@ deploy-master: &deploy-master
 
 deploy-tag: &deploy-tag
   stage: deploy
-  name: "Deploy Tag"
+  name: "Deploy as $TRAVIS_TAG"
   script:
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
     - docker pull rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
