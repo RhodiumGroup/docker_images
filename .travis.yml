@@ -11,9 +11,9 @@ build: &build
     - "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then sed -i.bak 's/image: rhodium\\/worker.*/image: rhodium\\/worker:'\"$TRAVIS_COMMIT\"'/' notebook/worker-template.yml; else sed -i.bak 's/image: rhodium\\/worker:.*/image: rhodium\\/worker:'\"$TRAVIS_TAG\"'/' notebook/worker-template.yml; fi"
     - "rm notebook/worker-template.yml.bak"
     - "cat notebook/worker-template.yml | grep image:"
-    - "docker pull rhodium/$IMAGE_NAME:dev"
+    - "docker pull rhodium/$IMAGE_NAME:$TRAVIS_BRANCH || true"
     - cd $IMAGE_NAME
-    - "docker build --pull --cache-from rhodium/$IMAGE_NAME:dev -t rhodium/$IMAGE_NAME:${TRAVIS_COMMIT} ."
+    - "docker build --pull --cache-from rhodium/$IMAGE_NAME:$TRAVIS_BRANCH -t rhodium/$IMAGE_NAME:${TRAVIS_COMMIT} ."
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
     - docker push "rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}"
   skip_cleanup: true
