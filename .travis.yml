@@ -5,17 +5,26 @@ language: python
 services:
   - docker
 
-build: &build
-  stage: build
+build-stage1: &build-stage1
+  stage: build-stage1
   script:
     - "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then sed -i.bak 's/image: rhodium\\/worker.*/image: rhodium\\/worker:'\"$TRAVIS_COMMIT\"'/' notebook/worker-template.yml; else sed -i.bak 's/image: rhodium\\/worker:.*/image: rhodium\\/worker:'\"$TRAVIS_TAG\"'/' notebook/worker-template.yml; fi"
     - "rm notebook/worker-template.yml.bak"
     - "cat notebook/worker-template.yml | grep image:"
-    - "docker pull rhodium/$IMAGE_NAME:$TRAVIS_BRANCH || true"
+    - "docker pull rhodium/$IMAGE_NAME:$TRAVIS_BRANCH-stage1 || true"
     - cd $IMAGE_NAME
-    - "docker build --pull --cache-from rhodium/$IMAGE_NAME:$TRAVIS_BRANCH -t rhodium/$IMAGE_NAME:${TRAVIS_COMMIT} ."
+    - "docker build --pull --cache-from rhodium/$IMAGE_NAME:$TRAVIS_BRANCH-stage1 -t rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}-stage1 -f Dockerfile.stage1 ."
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-    - docker push "rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}"
+    - docker push "rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}-stage1"
+  skip_cleanup: true
+
+build-stage2: &build-stage2
+  stage: build-stage2
+  script:
+    - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+    - docker pull rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}
+    - docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT --build-arg STAGE1_TAG=${TRAVIS_COMMIT}-stage1 -f $IMAGE_NAME/Dockerfile.stage2 $IMAGE_NAME
+    - docker push rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
   skip_cleanup: true
 
 deploy-branch: &deploy-branch
@@ -54,24 +63,21 @@ deploy-tag: &deploy-tag
 
 jobs:
   include:
-    - <<: *build
+    - <<: *build-stage1
       env:
         IMAGE_NAME=notebook
-    - <<: *build
+    - <<: *build-stage1
+      env:
+        IMAGE_NAME=worker-base
+    - <<: *build-stage2
+      env:
+        IMAGE_NAME=notebook
+    - <<: *build-stage2
       env:
         IMAGE_NAME=worker
-    - <<: *build
+    - <<: *build-stage2
       env:
         IMAGE_NAME=octave-worker
-    - stage: build-stage2
-      env:
-        IMAGE_NAME=notebook
-      script:
-        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-        - docker pull rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}
-        - docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT --build-arg TRAVIS_COMMIT=${TRAVIS_COMMIT} -f $IMAGE_NAME/Dockerfile.stage2 $IMAGE_NAME
-        - docker push rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
-      skip_cleanup: true
     - <<: *deploy-branch
       env:
         IMAGE_NAME=notebook
