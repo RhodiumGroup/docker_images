@@ -13,7 +13,7 @@ build-stage1: &build-stage1
     - "cat notebook/worker-template.yml | grep image:"
     - "docker pull rhodium/$IMAGE_NAME:$TRAVIS_BRANCH || true"
     - cd $IMAGE_NAME
-    - "docker build --pull --cache-from rhodium/$IMAGE_NAME:$TRAVIS_BRANCH-stage1 -t rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}-stage1 -f Dockerfile.stage1 ."
+    - "docker build --pull --cache-from rhodium/$IMAGE_NAME:$TRAVIS_BRANCH -t rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}-stage1 -f Dockerfile.stage1 ."
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
     - docker push "rhodium/$IMAGE_NAME:${TRAVIS_COMMIT}-stage1"
   skip_cleanup: true
