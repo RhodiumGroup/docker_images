@@ -1,11 +1,13 @@
 sudo: required
 
+language: python
+
 services:
   - docker
 
 env:
-  matrix:
-    - FROM_TAG=dev
+  - FROM_TAG=dev
+  
 jobs:
   include:
     - stage: build
