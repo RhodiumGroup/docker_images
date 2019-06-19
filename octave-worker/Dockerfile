@@ -16,7 +16,7 @@ RUN conda create -n octave \
   fastparquet=0.3.1 \
   fusepy=3.0.1 \
   gcsfs=0.2.2 \
-  google-cloud-storage=1.16.1
+  google-cloud-storage=1.16.1 \
   lz4=2.1.9 \
   lz4-c=1.8.3 \
   matplotlib=3.1.0 \
