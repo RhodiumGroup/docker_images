@@ -90,7 +90,7 @@ RUN pip install \
   climate-toolbox==0.1.4 \
   impactlab-tools==0.3.1 \
   parameterize_jobs==0.1.0 \
-  rhg_compute_tools==0.1.6 \
+  rhg_compute_tools==0.1.7 \
   --no-cache-dir
 
 # clean up
