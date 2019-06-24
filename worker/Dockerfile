@@ -34,6 +34,7 @@ RUN conda create -n worker --yes -c conda-forge \
     gitpython=2.1.11 \
     holoviews=1.12.3 \
     ipdb=0.11 \
+    ipython=6.3.1 \
     ipywidgets=7.4.2 \
     jedi=0.12.0 \
     jupyter=1.0.0 \

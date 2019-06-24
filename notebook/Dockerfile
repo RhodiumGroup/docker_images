@@ -35,6 +35,7 @@ RUN conda install --yes -c conda-forge \
     holoviews=1.12.3 \
     ipdb=0.11 \
     ipympl=0.2.1 \
+    ipython=6.3.1 \
     ipywidgets=7.4.2 \
     jedi=0.12.0 \
     jupyter=1.0.0 \
