@@ -87,7 +87,7 @@ jobs:
         - docker push "rhodium/$IMAGE_NAME:$TRAVIS_COMMIT"
         - docker push "rhodium/$IMAGE_NAME:dev"
       skip_cleanup: true
-      if: branch = dev
+      if: (branch = dev) AND (type = push)
 
     - stage: deploy-dev
       env:
@@ -99,7 +99,7 @@ jobs:
         - docker push "rhodium/$IMAGE_NAME:$TRAVIS_COMMIT"
         - docker push "rhodium/$IMAGE_NAME:dev"
       skip_cleanup: true
-      if: branch = dev
+      if: (branch = dev) AND (type = push)
 
     - stage: deploy-dev
       env:
@@ -111,7 +111,7 @@ jobs:
         - docker push "rhodium/$IMAGE_NAME:$TRAVIS_COMMIT"
         - docker push "rhodium/$IMAGE_NAME:dev"
       skip_cleanup: true
-      if: branch = dev
+      if: (branch = dev) AND (type = push)
 
     - stage: deploy-master
       env:
@@ -125,7 +125,7 @@ jobs:
         - docker push "rhodium/$IMAGE_NAME:dev"
         - docker push "rhodium/$IMAGE_NAME:latest"
       skip_cleanup: true
-      if: branch = master
+      if: (branch = master) AND (type = push)
 
     - stage: deploy-master
       env:
@@ -139,7 +139,7 @@ jobs:
         - docker push "rhodium/$IMAGE_NAME:dev"
         - docker push "rhodium/$IMAGE_NAME:latest"
       skip_cleanup: true
-      if: branch = master
+      if: (branch = master) AND (type = push)
 
     - stage: deploy-master
       env:
@@ -153,7 +153,7 @@ jobs:
         - docker push "rhodium/$IMAGE_NAME:dev"
         - docker push "rhodium/$IMAGE_NAME:latest"
       skip_cleanup: true
-      if: branch = master
+      if: (branch = master) AND (type = push)
 
     - stage: deploy-tag
       env:
@@ -165,7 +165,7 @@ jobs:
         - docker push "rhodium/$IMAGE_NAME:$TRAVIS_TAG"
       skip_cleanup: true
       if:
-        tag IS present
+        (tag IS present) AND (type = push)
 
     - stage: deploy-tag
       env:
@@ -177,7 +177,7 @@ jobs:
         - docker push "rhodium/$IMAGE_NAME:$TRAVIS_TAG"
       skip_cleanup: true
       if:
-        tag IS present
+        t(ag IS present) AND (type = push)
 
     - stage: deploy-tag
       env:
@@ -189,4 +189,4 @@ jobs:
         - docker push "rhodium/$IMAGE_NAME:$TRAVIS_TAG"
       skip_cleanup: true
       if:
-        tag IS present
+        ta(g IS present) AND (type = push)
