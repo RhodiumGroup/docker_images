@@ -19,10 +19,10 @@ RUN conda create -n worker --yes -c conda-forge \
     dask-ml=0.11.0 \
     dask-searchcv=0.2.0 \
     dask=1.2.0 \
-    datashader=0.6.8 \
+    datashader=0.7.0 \
     distributed=1.28.1 \
     esmpy=7.1.0 \
-    fastparquet=0.1.6 \
+    fastparquet=0.3.1 \
     fiona=1.8.6 \
     fusepy=2.0.4 \
     gcsfs=0.1.2 \
@@ -38,7 +38,7 @@ RUN conda create -n worker --yes -c conda-forge \
     jupyter=1.0.0 \
     lz4-c=1.8.1.2 \
     lz4=1.1.0 \
-    matplotlib=3.0.2 \
+    matplotlib=3.0.3 \
     nb_conda_kernels=2.1.1 \
     nbserverproxy=0.8.3 \
     ncurses=6.1 \
@@ -48,7 +48,7 @@ RUN conda create -n worker --yes -c conda-forge \
     nose=1.3.7 \
     numba=0.40.0 \
     numcodecs=0.6.3 \
-    numpy=1.15.4 \
+    numpy=1.16.4 \
     pandas=0.23.4 \
     pip=18.1 \
     pyshp=1.2.12 \
@@ -66,21 +66,18 @@ RUN conda create -n worker --yes -c conda-forge \
     tornado=5.0.2 \
     tqdm=4.24.0 \
     urllib3=1.23 \
-    xarray=0.12.1 \
+    xarray=0.11.3 \
     xesmf=0.1.1 \
     zarr=2.3.2 \
-    zict=0.1.4
-
-RUN conda install -n worker --yes --channel conda-forge/label/dev geopandas
-
-RUN conda install --yes --channel pyviz \
-    geoviews=1.6.2 \
-    holoviews=1.12.3 \
-    holoviz=0.1.0 \
-    param=1.9.1 \
-    panel=0.6.0 \
-    pyviz=0.10.3 \
-    pyviz_comms=0.7.2
+    zict=0.1.4 \
+    conda-forge/label/dev::geopandas \
+    pyviz::geoviews=1.6.2 \
+    pyviz::holoviews=1.12.3 \
+    pyviz::holoviz=0.1.0 \
+    pyviz::param=1.9.1 \
+    pyviz::panel=0.6.0 \
+    pyviz::pyviz=0.10.3 \
+    pyviz::pyviz_comms=0.7.2
 
 RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
     echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
