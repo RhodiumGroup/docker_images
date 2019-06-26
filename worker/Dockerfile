@@ -79,7 +79,7 @@ RUN conda install --yes --channel pyviz \
     holoviz=0.1.0 \
     param=1.9.1 \
     panel=0.6.0 \
-    pyviz=0.7.2 \
+    pyviz=0.10.3 \
     pyviz_comms=0.7.2
 
 RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
