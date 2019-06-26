@@ -29,10 +29,8 @@ RUN conda create -n worker --yes -c conda-forge \
     gdal=2.4.1 \
     geoalchemy2=0.5.0 \
     geopy=1.17.0 \
-    geoviews=1.6.2 \
     git=2.22.0 \
     gitpython=2.1.11 \
-    holoviews=1.12.3 \
     ipdb=0.11 \
     ipython=6.3.1 \
     ipywidgets=7.4.2 \
@@ -56,7 +54,6 @@ RUN conda create -n worker --yes -c conda-forge \
     pyshp=1.2.12 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
-    pyviz_comms=0.7.2 \
     python=3.6 \
     PyYAML=3.12 \
     rasterio=1.0.24 \
@@ -75,6 +72,15 @@ RUN conda create -n worker --yes -c conda-forge \
     zict=0.1.4
 
 RUN conda install -n worker --yes --channel conda-forge/label/dev geopandas
+
+RUN conda install --yes --channel pyviz \
+    geoviews=1.6.2 \
+    holoviews=1.12.3 \
+    holoviz=0.1.0 \
+    param=1.9.1 \
+    panel=0.6.0 \
+    pyviz=0.7.2 \
+    pyviz_comms=0.7.2
 
 RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
     echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \

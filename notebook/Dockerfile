@@ -29,10 +29,8 @@ RUN conda install --yes -c conda-forge \
     gdal=2.4.1 \
     geoalchemy2=0.5.0 \
     geopy=1.17.0 \
-    geoviews=1.6.2 \
     git=2.22.0 \
     gitpython=2.1.11 \
-    holoviews=1.12.3 \
     ipdb=0.11 \
     ipympl=0.2.1 \
     ipython=6.3.1 \
@@ -59,7 +57,6 @@ RUN conda install --yes -c conda-forge \
     pyshp=1.2.12 \
     python-blosc=1.4.4 \
     python-snappy=0.5.3 \
-    pyviz_comms=0.7.2 \
     PyYAML=3.12 \
     rasterio=1.0.24 \
     scikit-image=0.14.1 \
@@ -97,11 +94,20 @@ RUN pip install \
     xlrd==1.1.0 \
     --no-cache-dir
 
+RUN conda install --yes --channel pyviz \
+    geoviews=1.6.2 \
+    holoviews=1.12.3 \
+    holoviz=0.1.0 \
+    param=1.9.1 \
+    panel=0.6.0 \
+    pyviz=0.7.2 \
+    pyviz_comms=0.7.2
+
 RUN jupyter labextension install \
     @jupyter-widgets/jupyterlab-manager@0.38.1 \
     @jupyterlab/hub-extension@0.12.0 \
     jupyterlab_bokeh@0.6.3 \
-    @pyviz/jupyterlab_pyviz@0.6.3 \
+    @pyviz/jupyterlab_pyviz@0.7.2 \
     dask-labextension@0.2.0 \
     jupyter-matplotlib@0.3.0
 
