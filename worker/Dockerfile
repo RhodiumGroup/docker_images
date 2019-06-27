@@ -56,7 +56,7 @@ RUN conda create -n worker --yes -c conda-forge \
     python=3.6 \
     PyYAML=3.12 \
     rasterio=1.0.24 \
-    rise=5.5.0 \
+    rise=5.4.1 \
     scikit-image=0.14.1 \
     scikit-learn=0.20.0 \
     scipy=1.1.0 \

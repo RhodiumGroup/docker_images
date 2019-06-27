@@ -28,7 +28,7 @@ RUN conda create -n octave --yes -c conda-forge \
     pandas=0.23.4 \
     pip=18.1 \
     python=3.6 \
-    rise=5.5.0 \
+    rise=5.4.1 \
     tornado=5.0.2 \
     texinfo=6.6 \
     urllib3=1.23 \
