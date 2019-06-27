@@ -5,7 +5,7 @@ FROM climateimpactlab/miniconda3-gfortran-netcdf:v1.0.2
 USER $NB_USER
 
 RUN conda config --add channels conda-forge
-RUN conda update --yes conda
+RUN conda install --yes conda=4.7.5
 RUN conda create -n worker --yes -c conda-forge \
     beautifulsoup4=4.6.1 \
     bokeh=1.2.0 \

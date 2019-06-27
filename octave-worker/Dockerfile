@@ -7,7 +7,7 @@ USER $NB_USER
 RUN apt-get update && apt-get install -y octave
 
 RUN conda config --add channels conda-forge
-RUN conda update --yes conda
+RUN conda install --yes conda=4.7.5
 RUN conda create -n octave --yes -c conda-forge \
     dask-core=1.2.0 \
     dask=1.2.0 \
