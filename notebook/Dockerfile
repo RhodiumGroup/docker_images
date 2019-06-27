@@ -37,8 +37,8 @@ RUN conda install --yes -c conda-forge \
     ipywidgets=7.4.2 \
     jedi=0.12.0 \
     jupyter=1.0.0 \
-    jupyterhub=0.9.4 \
-    jupyterlab=0.35.4 \
+    jupyterhub=1.0.0 \
+    jupyterlab=0.35.6 \
     lz4-c=1.8.1.2 \
     lz4=1.1.0 \
     matplotlib=3.0.3 \
