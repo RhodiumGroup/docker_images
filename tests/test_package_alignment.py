@@ -10,13 +10,11 @@ PKG_ROOT = os.path.dirname(os.path.dirname(__file__))
 IMAGES_TO_CHECK = [
     'notebook',
     'worker',
-    'octave-worker',
     ]
 
 PAIRINGS = {
     'notebook': {
         'base': ['worker'],
-        'octave': ['octave-worker'],
     },
 }
 
