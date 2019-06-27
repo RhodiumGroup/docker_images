@@ -17,8 +17,8 @@ jobs:
         - conda config --set always_yes yes --set changeps1 no
         - conda update -q conda
         - conda info -a
-        - conda create -q -n test-env python=3.6 pytest pytest-cov
-        - source activate test-env
+        - conda install pytest pytest-cov
+        - pytest
 
     - stage: build-stage1
       env:
