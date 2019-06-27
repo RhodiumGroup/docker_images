@@ -38,7 +38,7 @@ RUN jupyter kernelspec install --name R \
 
 # set the r kernel R to the r environment R
 RUN sed -i 's/R/\/opt\/conda\/envs\/r\/bin\/R/' \
-    /usr/local/share/jupyter/kernels/ir/kernel.json
+    /usr/local/share/jupyter/kernels/r/kernel.json
 
 RUN jupyter kernelspec install --name octave \
     /opt/conda/envs/octave/share/jupyter/kernels/octave
