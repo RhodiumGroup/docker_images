@@ -16,6 +16,7 @@ RUN conda create -n octave --yes -c conda-forge \
     fastparquet=0.3.1 \
     fusepy=2.0.4 \
     gcsfs=0.1.2 \
+    intake=0.5.1 \
     lz4-c=1.8.1.2 \
     lz4=1.1.0 \
     matplotlib=3.0.3 \
@@ -28,7 +29,6 @@ RUN conda create -n octave --yes -c conda-forge \
     pandas=0.23.4 \
     pip=18.1 \
     python=3.6 \
-    rise=5.4.1 \
     tornado=5.0.2 \
     texinfo=6.6 \
     urllib3=1.23 \

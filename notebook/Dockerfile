@@ -31,6 +31,7 @@ RUN conda install --yes -c conda-forge \
     geopy=1.17.0 \
     git=2.22.0 \
     gitpython=2.1.11 \
+    intake=0.5.1 \
     ipdb=0.11 \
     ipympl=0.2.1 \
     ipython=6.3.1 \
@@ -59,7 +60,6 @@ RUN conda install --yes -c conda-forge \
     python-snappy=0.5.3 \
     PyYAML=3.12 \
     rasterio=1.0.24 \
-    rise=5.4.1 \
     scikit-image=0.14.1 \
     scikit-learn=0.20.0 \
     scipy=1.1.0 \
@@ -75,12 +75,13 @@ RUN conda install --yes -c conda-forge \
     zarr=2.3.2 \
     zict=0.1.4 \
     conda-forge/label/dev::geopandas \
-    pyviz::geoviews=1.6.2 \
-    pyviz::holoviews=1.12.3 \
-    pyviz::holoviz=0.1.0 \
-    pyviz::param=1.9.1 \
-    pyviz::panel=0.6.0 \
-    pyviz::pyviz_comms=0.7.2
+    colorcet=2.0.1 \
+    geoviews=1.6.2 \
+    holoviews=1.12.3 \
+    hvplot=0.4.0 \
+    param=1.9.1 \
+    panel=0.6.0 \
+    pyviz_comms=0.7.2
 
 RUN pip install \
     bumpversion==0.5.3 \
