@@ -44,7 +44,6 @@ RUN conda create -n worker --yes -c conda-forge \
     ncurses=6.1 \
     netcdf-fortran=4.4.5 \
     netcdf4=1.5.1.2 \
-    nomkl=2.0 \
     nose=1.3.7 \
     numba=0.40.0 \
     numcodecs=0.6.3 \
@@ -57,6 +56,7 @@ RUN conda create -n worker --yes -c conda-forge \
     python=3.6 \
     PyYAML=3.12 \
     rasterio=1.0.24 \
+    rise=5.5.0 \
     scikit-image=0.14.1 \
     scikit-learn=0.20.0 \
     scipy=1.1.0 \

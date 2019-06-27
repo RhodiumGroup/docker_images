@@ -47,7 +47,7 @@ RUN conda install --yes -c conda-forge \
     ncurses=6.1 \
     netcdf-fortran=4.4.5 \
     netcdf4=1.5.1.2 \
-    nomkl=2.0 \
+    nodejs=11.14.0 \
     nose=1.3.7 \
     numba=0.40.0 \
     numcodecs=0.6.3 \
@@ -59,6 +59,7 @@ RUN conda install --yes -c conda-forge \
     python-snappy=0.5.3 \
     PyYAML=3.12 \
     rasterio=1.0.24 \
+    rise=5.5.0 \
     scikit-image=0.14.1 \
     scikit-learn=0.20.0 \
     scipy=1.1.0 \
@@ -68,6 +69,7 @@ RUN conda install --yes -c conda-forge \
     tornado=5.0.2 \
     tqdm=4.24.0 \
     urllib3=1.23 \
+    widgetsnbextension=3.4.2 \
     xarray=0.11.3 \
     xesmf=0.1.1 \
     zarr=2.3.2 \

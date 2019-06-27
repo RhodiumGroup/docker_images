@@ -22,13 +22,13 @@ RUN conda create -n octave --yes -c conda-forge \
     nb_conda_kernels=2.1.1 \
     netcdf-fortran=4.4.5 \
     netcdf4=1.5.1.2 \
-    nomkl=2.0 \
     numba=0.40.0 \
     numcodecs=0.6.3 \
     numpy=1.16.4 \
     pandas=0.23.4 \
     pip=18.1 \
     python=3.6 \
+    rise=5.5.0 \
     tornado=5.0.2 \
     texinfo=6.6 \
     urllib3=1.23 \

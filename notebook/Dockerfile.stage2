@@ -28,7 +28,7 @@ RUN conda create -n r -c conda-forge \
 
 # install Octave kernel
 RUN apt-get update && apt-get install -y octave
-RUN conda create -n octave texinfo python=3.6 pip
+RUN conda create -n octave -c conda-forge texinfo=6.6 python=3.6 pip=18.1
 RUN /opt/conda/envs/octave/bin/pip install octave_kernel
 
 # # enable use of R and Octave kernels in jupyterlab
