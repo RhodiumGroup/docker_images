@@ -4,7 +4,7 @@ FROM rhodium/notebook:$TRAVIS_COMMIT
 USER root
 
 # install R kernel
-RUN conda create -n r -c conda-forge \
+RUN conda create --yes -n r -c conda-forge \
     'rpy2=2.8*' \
     'r-base=3.4.1' \
     'r-irkernel=0.8*' \
@@ -28,8 +28,52 @@ RUN conda create -n r -c conda-forge \
 
 # install Octave kernel
 RUN apt-get update && apt-get install -y octave
-RUN conda create -n octave -c conda-forge texinfo=6.6 python=3.6 pip=18.1
-RUN /opt/conda/envs/octave/bin/pip install octave_kernel
+RUN conda create --yes -n octave --yes -c conda-forge \
+    cloudpickle=1.2.1 \
+    dask=2.0.0 \
+    distributed=2.0.1 \
+    fastparquet=0.3.1 \
+    fusepy=3.0.1 \
+    gcsfs=0.2.2 \
+    geoviews=1.6.2 \
+    holoviews=1.12.3 \
+    hvplot=0.4.0 \
+    intake=0.5.1 \
+    ipython=7.6.0 \
+    ipywidgets=7.4.2 \
+    jedi=0.14.0 \
+    lz4-c=1.8.1.2 \
+    lz4=2.1.9 \
+    matplotlib=3.0.3 \
+    nb_conda_kernels=2.2.2 \
+    netcdf-fortran=4.4.5 \
+    netcdf4=1.5.1.2 \
+    numba=0.44.1 \
+    numcodecs=0.6.3 \
+    numpy=1.15.4 \
+    pandas=0.24.2 \
+    pip=19.1.1 \
+    python=3.6 \
+    pyviz_comms=0.7.2 \
+    requests=2.22.0 \
+    texinfo=6.6 \
+    tornado=6.0.3 \
+    urllib3=1.24.3 \
+    xarray=0.11.3 \
+    zarr=2.3.2 \
+    zict=0.1.4 \
+    conda-forge/label/dev::geopandas
+
+RUN /opt/conda/envs/octave/bin/pip install \
+    git+git://github.com/dask/dask-kubernetes.git@295f06428119bc8e674a2e6a59cd97000fae69e8 \
+    google-cloud-storage==1.12.0 \
+    pyasn1-modules==0.2.2 \
+    pyasn1==0.4.3 \
+    wget==3.2 \
+    metakernel==0.24.2 \
+    octave_kernel==0.31.0 \
+    oct2py==5.0.4 \
+    --no-cache-dir
 
 # enable use of R and Octave kernels in jupyterlab
 

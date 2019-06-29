@@ -9,32 +9,40 @@ RUN apt-get update && apt-get install -y octave
 RUN conda config --add channels conda-forge
 RUN conda install --yes conda=4.7.5
 RUN conda create -n octave --yes -c conda-forge \
-    dask-core=1.2.0 \
-    dask=1.2.0 \
-    cloudpickle=0.5.3 \
-    distributed=1.28.1 \
+    cloudpickle=1.2.1 \
+    dask=2.0.0 \
+    distributed=2.0.1 \
     fastparquet=0.3.1 \
-    fusepy=2.0.4 \
-    gcsfs=0.1.2 \
+    fusepy=3.0.1 \
+    gcsfs=0.2.2 \
+    geoviews=1.6.2 \
+    holoviews=1.12.3 \
+    hvplot=0.4.0 \
     intake=0.5.1 \
+    ipython=7.6.0 \
+    ipywidgets=7.4.2 \
+    jedi=0.14.0 \
     lz4-c=1.8.1.2 \
-    lz4=1.1.0 \
+    lz4=2.1.9 \
     matplotlib=3.0.3 \
-    nb_conda_kernels=2.1.1 \
+    nb_conda_kernels=2.2.2 \
     netcdf-fortran=4.4.5 \
     netcdf4=1.5.1.2 \
-    numba=0.40.0 \
+    numba=0.44.1 \
     numcodecs=0.6.3 \
-    numpy=1.16.4 \
-    pandas=0.23.4 \
-    pip=18.1 \
+    numpy=1.15.4 \
+    pandas=0.24.2 \
+    pip=19.1.1 \
     python=3.6 \
-    tornado=5.0.2 \
+    pyviz_comms=0.7.2 \
+    requests=2.22.0 \
     texinfo=6.6 \
-    urllib3=1.23 \
+    tornado=6.0.3 \
+    urllib3=1.24.3 \
     xarray=0.11.3 \
     zarr=2.3.2 \
-    zict=0.1.4
+    zict=0.1.4 \
+    conda-forge/label/dev::geopandas
 
 RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
     echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
@@ -56,6 +64,7 @@ RUN /opt/conda/envs/octave/bin/pip install \
     wget==3.2 \
     metakernel==0.24.2 \
     octave_kernel==0.31.0 \
+    oct2py==5.0.4 \
     --no-cache-dir
 
 # clean up
