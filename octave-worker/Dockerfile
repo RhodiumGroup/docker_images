@@ -69,7 +69,7 @@ RUN /opt/conda/envs/octave/bin/pip install \
 
 # clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN conda clean -tipsy
+RUN conda clean --all --yes
 
 ENV OMP_NUM_THREADS=1
 ENV DASK_TICK_MAXIMUM_DELAY=5s
