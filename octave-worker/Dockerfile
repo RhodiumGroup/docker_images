@@ -37,12 +37,14 @@ RUN conda create -n octave --yes -c conda-forge \
     pyviz_comms=0.7.2 \
     requests=2.22.0 \
     texinfo=6.6 \
-    tornado=5.1.1 \  # don't upgrade - see https://github.com/jupyterlab/jupyterlab/issues/6062
+    tornado=5.1.1 \
     urllib3=1.24.3 \
     xarray=0.11.3 \
     zarr=2.3.2 \
     zict=0.1.4 \
     conda-forge/label/dev::geopandas
+
+# don't upgrade tornado - see https://github.com/jupyterlab/jupyterlab/issues/6062
 
 RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
     echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \

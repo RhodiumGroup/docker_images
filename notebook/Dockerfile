@@ -74,7 +74,7 @@ RUN conda install --yes -c conda-forge \
     seaborn=0.9.0 \
     setuptools=39.2.0 \
     statsmodels=0.9.0 \
-    tornado=5.1.1 \  # don't upgrade - see https://github.com/jupyterlab/jupyterlab/issues/6062
+    tornado=5.1.1 \
     tqdm=4.24.0 \
     urllib3=1.24.3 \
     widgetsnbextension=3.4.2 \
@@ -83,6 +83,8 @@ RUN conda install --yes -c conda-forge \
     zarr=2.3.2 \
     zict=0.1.4 \
     conda-forge/label/dev::geopandas
+
+# don't upgrade tornado - see https://github.com/jupyterlab/jupyterlab/issues/6062
 
 RUN pip install \
     bumpversion==0.5.3 \

@@ -62,7 +62,7 @@ RUN conda create -n worker --yes -c conda-forge \
     seaborn=0.9.0 \
     setuptools=39.2.0 \
     statsmodels=0.9.0 \
-    tornado=5.1.1 \  # don't upgrade - see https://github.com/jupyterlab/jupyterlab/issues/6062
+    tornado=5.1.1 \
     tqdm=4.24.0 \
     urllib3=1.24.3 \
     xarray=0.11.3 \
@@ -77,6 +77,8 @@ RUN conda create -n worker --yes -c conda-forge \
     param=1.9.1 \
     panel=0.6.0 \
     pyviz_comms=0.7.2
+
+# don't upgrade tornado - see https://github.com/jupyterlab/jupyterlab/issues/6062
 
 RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
     echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
