@@ -44,7 +44,7 @@ def get_conda_specs(dockerfile):
 
         while True:
             try:
-                line = next(f).strip()
+                line = next(f).split('#')[0].strip()
             except StopIteration:
                 break
 
