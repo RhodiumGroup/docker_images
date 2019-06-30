@@ -37,7 +37,7 @@ RUN conda create -n octave --yes -c conda-forge \
     pyviz_comms=0.7.2 \
     requests=2.22.0 \
     texinfo=6.6 \
-    tornado=6.0.3 \
+    tornado=5.1.1 \  # don't upgrade - see https://github.com/jupyterlab/jupyterlab/issues/6062
     urllib3=1.24.3 \
     xarray=0.11.3 \
     zarr=2.3.2 \
