@@ -81,19 +81,19 @@ RUN /opt/conda/envs/octave/bin/pip install \
 
 # enable use of R and Octave kernels in jupyterlab
 
-RUN jupyter kernelspec install --name R \
-    /opt/conda/envs/r/share/jupyter/kernels/ir
-
-# set the r kernel R to the r environment R
-RUN sed -i 's/R/\/opt\/conda\/envs\/r\/bin\/R/' \
-    /usr/local/share/jupyter/kernels/r/kernel.json
-
-RUN jupyter kernelspec install --name octave \
-    /opt/conda/envs/octave/share/jupyter/kernels/octave
-
-# set the octave kernel python to the octave environment python
-RUN sed -i 's/python/\/opt\/conda\/envs\/octave\/bin\/python/' \
-    /usr/local/share/jupyter/kernels/octave/kernel.json
+# RUN jupyter kernelspec install --name R \
+#     /opt/conda/envs/r/share/jupyter/kernels/ir
+# 
+# # set the r kernel R to the r environment R
+# RUN sed -i 's/R/\/opt\/conda\/envs\/r\/bin\/R/' \
+#     /usr/local/share/jupyter/kernels/r/kernel.json
+# 
+# RUN jupyter kernelspec install --name octave \
+#     /opt/conda/envs/octave/share/jupyter/kernels/octave
+# 
+# # set the octave kernel python to the octave environment python
+# RUN sed -i 's/python/\/opt\/conda\/envs\/octave\/bin\/python/' \
+#     /usr/local/share/jupyter/kernels/octave/kernel.json
 
 # clean up apt cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
