@@ -56,7 +56,7 @@ RUN conda install --yes -c conda-forge \
     numba=0.44.1 \
     numcodecs=0.6.3 \
     numpy=1.15.4 \
-    pandas=0.24.2 \
+    pandas=0.23.4 \
     panel=0.6.0 \
     param=1.9.1 \
     pip=19.1.1 \

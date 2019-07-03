@@ -48,7 +48,7 @@ RUN conda create -n worker --yes -c conda-forge \
     numba=0.44.1 \
     numcodecs=0.6.3 \
     numpy=1.15.4 \
-    pandas=0.24.2 \
+    pandas=0.23.4 \
     pip=19.1.1 \
     pyshp=1.2.12 \
     python-blosc=1.4.4 \
