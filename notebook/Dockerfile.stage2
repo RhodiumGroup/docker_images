@@ -75,10 +75,10 @@ RUN /opt/conda/envs/octave/bin/pip install \
     metakernel==0.24.2 \
     octave_kernel==0.31.0 \
     oct2py==5.0.4 \
-    git+git://github.com/RhodiumGroup/rhg_compute_tools.git@f49c253653b2a11786c7ad67b95e00513eecc0e4 \
-  impactlab-tools==0.3.1 \
-  climate-toolbox==0.1.4 \
-  parameterize_jobs==0.1.0 \
+    rhg_compute_tools==0.1.8 \
+    impactlab-tools==0.3.1 \
+    climate-toolbox==0.1.4 \
+    parameterize_jobs==0.1.0 \
     --no-cache-dir
 
 # enable use of R and Octave kernels in jupyterlab

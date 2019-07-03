@@ -91,8 +91,8 @@ RUN mkdir /gcs
 # pip install the RHG packages that we update frequently
 # (keeping down here so that rest of image will stay
 # cached when updating these versions)
-RUN pip install \
-    git+git://github.com/RhodiumGroup/rhg_compute_tools.git@f49c253653b2a11786c7ad67b95e00513eecc0e4 \
+RUN /opt/conda/envs/octave/bin/pip install \
+  rhg_compute_tools==0.1.8 \
   impactlab-tools==0.3.1 \
   climate-toolbox==0.1.4 \
   parameterize_jobs==0.1.0 \
