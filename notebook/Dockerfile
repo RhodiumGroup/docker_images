@@ -6,8 +6,11 @@ USER $NB_USER
 
 RUN conda config --add channels conda-forge
 RUN conda update --yes conda
-RUN conda env update -f environment.yml
-RUN conda env create -f environment_r.yml
+
+COPY environment.yml /home/jovyan/environment.yml
+RUN conda env update -f /home/jovyan/environment.yml
+COPY environment_r.yml /home/jovyan/environment_r.yml
+RUN conda env create -f /home/jovyan/environment_r.yml
 
 RUN jupyter labextension install \
   @jupyter-widgets/jupyterlab-manager@0.38 \
