@@ -12,12 +12,17 @@ RUN conda env update -f /home/jovyan/environment.yml
 COPY environment_r.yml /home/jovyan/environment_r.yml
 RUN conda env create -f /home/jovyan/environment_r.yml
 
-RUN jupyter labextension install \
-  @jupyter-widgets/jupyterlab-manager@0.38 \
-  @jupyterlab/hub-extension@0.12.0 \
-  jupyterlab_bokeh@0.6.3 \
-  @pyviz/jupyterlab_pyviz \
-  dask-labextension
+RUN jupyter labextension update --all && \
+    jupyter labextension install \
+    @jupyterlab/hub-extension \
+    @jupyterlab/plotly-extension \
+    @jupyter-widgets/jupyterlab-manager \
+    @jupyter-widgets/jupyterlab-sidecar \
+    @pyviz/jupyterlab_pyviz \
+    dask-labextension \
+    itk-jupyter-widgets \
+    jupyterlab_bokeh \
+    jupyter-leaflet
 
 RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
 
