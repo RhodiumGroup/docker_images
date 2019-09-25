@@ -45,8 +45,8 @@ if [[ "$SQL_TOKEN" ]]; then
     fi;
 fi
 
-if [[ "$GCLOUD_DEFAULT_TOKEN_FILE" ]]; then
-    gcloud auth activate-service-account --key-file $GCLOUD_DEFAULT_TOKEN_FILE;
+if [[ "$GOOGLE_APPLICATION_CREDENTIALS" ]]; then
+    gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS;
 fi
 
 # Run extra commands
