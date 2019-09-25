@@ -24,7 +24,7 @@ RUN jupyter labextension update --all && \
     jupyterlab_bokeh \
     jupyter-leaflet
 
-RUN jupyter serverextension enable --py nbserverproxy --sys-prefix
+RUN jupyter serverextension enable --sys-prefix jupyter_server_proxy
 
 USER root
 COPY prepare.sh /usr/bin/prepare.sh
