@@ -6,7 +6,7 @@ USER $NB_USER
 
 RUN conda config --add channels conda-forge
 RUN conda update --yes conda
-RUN conda env update -n worker --yes -f environment.yml
+RUN conda env create -n worker -f environment.yml
 
 RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
     echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
