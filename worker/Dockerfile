@@ -48,7 +48,7 @@ RUN conda create -n worker --yes -c conda-forge \
     numba=0.44.1 \
     numcodecs=0.6.3 \
     numpy=1.15.4 \
-    pandas=0.24.2 \
+    pandas=0.23.4 \
     pip=19.1.1 \
     pyshp=1.2.12 \
     python-blosc=1.4.4 \
@@ -89,7 +89,7 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \
   && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
   && apt-get update \
-  && apt-get install gcsfuse \
+  && apt-get install gcsfuse kubectl \
   && alias googlefuse=/usr/bin/gcsfuse
 
 RUN /opt/conda/envs/worker/bin/pip install \
