@@ -47,6 +47,7 @@ dependencies:
   - ncurses
   - netcdf-fortran
   - netcdf4=1.5.1.2
+  - nodejs
   - nose
   - numba=0.45.1
   - numcodecs=0.6.3
