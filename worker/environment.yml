@@ -32,6 +32,7 @@ dependencies:
   - holoviews=1.12.5
   - ipdb=0.12.2
   - ipython=7.8.0
+  - ipyleaflet=0.11.2
   - ipywidgets=7.5.1
   - jedi=0.15.1
   - jupyter_client=5.3.3
