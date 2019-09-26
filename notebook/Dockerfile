@@ -27,6 +27,7 @@ RUN jupyter labextension update --all && \
 RUN jupyter serverextension enable --py jupyterlab --sys-prefix
 RUN jupyter serverextension enable --py jupyterlab --user
 RUN jupyter serverextension enable --sys-prefix jupyter_server_proxy
+RUN jupyter serverextension enable --py --sys-prefix dask_labextension
 
 USER root
 COPY prepare.sh /usr/bin/prepare.sh
