@@ -6,6 +6,7 @@ USER $NB_USER
 
 RUN conda config --add channels conda-forge
 RUN conda update --yes conda
+
 COPY environment.yml /opt/conda/environment.yml
 RUN conda env create -f /opt/conda/environment.yml
 
