@@ -24,6 +24,8 @@ RUN jupyter labextension update --all && \
     jupyterlab_bokeh \
     jupyter-leaflet
 
+RUN jupyter serverextension enable --py jupyterlab --sys-prefix
+RUN jupyter serverextension enable --py jupyterlab --user
 RUN jupyter serverextension enable --sys-prefix jupyter_server_proxy
 
 USER root
