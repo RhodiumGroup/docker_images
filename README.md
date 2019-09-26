@@ -6,10 +6,27 @@ Dockerfiles for compute deployments compute.rhg.com, compute-test.rhg.com, and c
 
 Need a new package? Find a bug? Have a feature request? [File an issue](https://github.com/RhodiumGroup/docker_images/issues/new) and we'll try to help out.
 
-## Contributing
-
-This package is tested extensively before deployment, so don't be shy about creating a branch and trying your hand at modifying the [notebook](https://github.com/RhodiumGroup/docker_images/tree/master/notebook/) and [worker](https://github.com/RhodiumGroup/docker_images/tree/master/worker/) images.
-
-## Contact
+1. Clone it to your local machine
+2. Create a new branch
+3. Make edits to the dockerfiles in the `worker` and `notebook` directories.  
+4. Commit your changes
+5. Tag your image with `python bump.py`
+6. Push to github and make a pull request to master
+7. If your build passes on Travis, we'll merge it and it will deploy to dockerhub
 
 Any questions please email mdelgado@rhg.com
+
+# Cluster overview
+
+* compute.rhg.com: flagship Rhodium compute cluster
+* impactlab.rhg.org: flagship Climate Impact Lab compute cluster
+
+Preemptable clusters:
+
+* coastal.rhg.com: pods in this cluster are cheaper but can disappear at any time. expect less stability, more bugs, popup errors, and lower bills.
+
+Testing clusters:
+
+* compute-test.rhg.com: staging deployment with stable users & user directories. This cluster should be used to beta-test deployments scheduled for the production servers in an environment similar to production. users should not expect their data here to be safe, but admins should make an effort to simulate production roll-outs and to ensure data/user safety in upgrading the cluster. admins should encourage production users to test their workflows on this cluster before a major production upgrade.
+* testing.climate-kube.com: bleeding-edge test cluster. absolutely no guarantee of data/user/environment preservation. users should expect the entire cluster to be deleted at any point.
+* test2.climate-kube.com: same purpose as testing.climate-kube.com, but another one to parallelize the madness.
