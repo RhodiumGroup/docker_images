@@ -3,10 +3,6 @@ sudo: required
 services:
   - docker
 
-
-
-
-
 jobs:
   include:
     - stage: alignment
@@ -21,7 +17,7 @@ jobs:
         - conda config --set always_yes yes --set changeps1 no
         - conda update -q conda
         - conda info -a
-        - conda install pytest pytest-cov
+        - conda install pytest pytest-cov pyyaml
         - pytest
 
     - stage: docker
@@ -29,7 +25,7 @@ jobs:
         matrix:
           - IMAGE_NAME=notebook
           - IMAGE_NAME=worker
-  
+
       install:
         - "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then sed -i.bak 's/image: rhodium\\/worker.*/image: rhodium\\/worker:'\"$TRAVIS_COMMIT\"'/' notebook/worker-template.yml; else sed -i.bak 's/image: rhodium\\/worker:.*/image: rhodium\\/worker:'\"$TRAVIS_TAG\"'/' notebook/worker-template.yml; fi"
         - "rm notebook/worker-template.yml.bak"
