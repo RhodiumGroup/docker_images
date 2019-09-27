@@ -20,13 +20,13 @@ PKG_ROOT = os.path.dirname(os.path.dirname(__file__))
 IMAGES_TO_CHECK = {
     'notebook': ['notebook/Dockerfile'],
     'worker': ['worker/Dockerfile'],
-    'octave': ['octave/Dockerfile'],
+    'octave': ['octave-worker/Dockerfile'],
     }
 
 
 PAIRINGS = [
     ('notebook', 'base', 'worker', 'worker'),
-    ('notebook', 'octave', 'worker', 'octave'),
+    ('notebook', 'octave', 'octave-worker', 'octave'),
 ]
 '''
 PAIRINGS
