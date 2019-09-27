@@ -7,10 +7,14 @@ USER $NB_USER
 RUN conda config --add channels conda-forge
 RUN conda update --yes conda
 
-COPY environment.yml /home/jovyan/environment.yml
-RUN conda env update -f /home/jovyan/environment.yml
-COPY environment_r.yml /home/jovyan/environment_r.yml
-RUN conda env create -f /home/jovyan/environment_r.yml
+RUN mkdir /opt/conda/specs
+
+COPY environment.yml /opt/conda/specs/environment.yml
+RUN conda env update -f /opt/conda/specs/environment.yml
+COPY environment_r.yml /opt/conda/specs/environment_r.yml
+RUN conda env create -f /opt/conda/specs/environment_r.yml
+COPY environment_octave.yml /opt/conda/specs/environment_octave.yml
+RUN conda env create -f /opt/conda/specs/environment_octave.yml
 
 RUN jupyter labextension update --all && \
     jupyter labextension install \

@@ -22,9 +22,9 @@ jobs:
 
     - stage: docker
       env:
-        matrix:
-          - IMAGE_NAME=notebook
-          - IMAGE_NAME=worker
+        - IMAGE_NAME=notebook
+        - IMAGE_NAME=worker
+        - IMAGE_NAME=octave_worker
 
       install:
         - "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then sed -i.bak 's/image: rhodium\\/worker.*/image: rhodium\\/worker:'\"$TRAVIS_COMMIT\"'/' notebook/worker-template.yml; else sed -i.bak 's/image: rhodium\\/worker:.*/image: rhodium\\/worker:'\"$TRAVIS_TAG\"'/' notebook/worker-template.yml; fi"

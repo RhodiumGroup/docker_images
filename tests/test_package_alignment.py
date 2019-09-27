@@ -20,11 +20,13 @@ PKG_ROOT = os.path.dirname(os.path.dirname(__file__))
 IMAGES_TO_CHECK = {
     'notebook': ['notebook/Dockerfile'],
     'worker': ['worker/Dockerfile'],
+    'octave': ['octave/Dockerfile'],
     }
 
 
 PAIRINGS = [
     ('notebook', 'base', 'worker', 'worker'),
+    ('notebook', 'octave', 'worker', 'octave'),
 ]
 '''
 PAIRINGS
@@ -32,6 +34,7 @@ PAIRINGS
 A  list of tuples of (notebook image, notebook env, worker image, worker env)
 pairings. For each pairing, all packages will be tested against each other to
 ensure we don't have any dependency conflicts.
+
 '''
 
 
