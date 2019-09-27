@@ -4,6 +4,7 @@ channels:
 dependencies:
   - octave=4.2.1
   - octave_kernel=0.31.0
+  - oct2py=5.0.4
   - portaudio=19.6.0
   - click
   - cloudpickle=1.2.2
