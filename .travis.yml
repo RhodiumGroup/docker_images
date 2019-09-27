@@ -7,24 +7,9 @@ env:
 - IMAGE_NAME=notebook
 - IMAGE_NAME=worker
 
-stages:
-
-    # - stage: alignment
-    #   language: python
-    #   python:
-    #     - 3.6
-    #   script:
-    #     - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
-    #     - bash miniconda.sh -b -p $HOME/miniconda
-    #     - export PATH="$HOME/miniconda/bin:$PATH"
-    #     - hash -r
-    #     - conda config --set always_yes yes --set changeps1 no
-    #     - conda update -q conda
-    #     - conda info -a
-    #     - conda install pytest pytest-cov pyyaml
-    #     - pytest
-
-    - name: docker
+jobs:
+  include:
+    - stage: docker
 
       install:
         - "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then sed -i.bak 's/image: rhodium\\/worker.*/image: rhodium\\/worker:'\"$TRAVIS_COMMIT\"'/' notebook/worker-template.yml; else sed -i.bak 's/image: rhodium\\/worker:.*/image: rhodium\\/worker:'\"$TRAVIS_TAG\"'/' notebook/worker-template.yml; fi"
@@ -55,3 +40,18 @@ stages:
           skip_cleanup: true
           on:
             tags: true
+
+  # - stage: alignment
+  #   language: python
+  #   python:
+  #     - 3.6
+  #   script:
+  #     - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+  #     - bash miniconda.sh -b -p $HOME/miniconda
+  #     - export PATH="$HOME/miniconda/bin:$PATH"
+  #     - hash -r
+  #     - conda config --set always_yes yes --set changeps1 no
+  #     - conda update -q conda
+  #     - conda info -a
+  #     - conda install pytest pytest-cov pyyaml
+  #     - pytest
