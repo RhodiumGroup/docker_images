@@ -30,7 +30,6 @@ dependencies:
   - git=2.23.0
   - gitpython=3.0.2
   - holoviews=1.12.5
-  - icu=64.2
   - ipdb=0.12.2
   - ipython=7.8.0
   - ipyleaflet=0.11.2
