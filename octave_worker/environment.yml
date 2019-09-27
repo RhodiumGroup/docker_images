@@ -57,5 +57,4 @@ dependencies:
     - kubernetes
     - wget
     - wheel
-    - xesmf
     - xlrd
