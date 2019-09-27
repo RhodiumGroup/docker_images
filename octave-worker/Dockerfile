@@ -31,7 +31,7 @@ RUN conda create -n octave --yes -c conda-forge \
     numba=0.44.1 \
     numcodecs=0.6.3 \
     numpy=1.15.4 \
-    pandas=0.24.2 \
+    pandas=0.23.4 \
     pip=19.1.1 \
     python=3.6 \
     pyviz_comms=0.7.2 \
@@ -55,7 +55,7 @@ RUN export GCSFUSE_REPO=gcsfuse-xenial \
   && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \
   && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
   && apt-get update \
-  && apt-get install gcsfuse \
+  && apt-get install gcsfuse kubectl \
   && alias googlefuse=/usr/bin/gcsfuse
 
 RUN /opt/conda/envs/octave/bin/pip install \
