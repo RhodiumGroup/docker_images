@@ -72,15 +72,23 @@ RUN echo "$NB_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/notebook
 RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CONDA_DIR/bin\"#" /etc/sudoers
 USER $NB_USER
 
-RUN pip install \
-  rhg_compute_tools==0.1.8 \
-  impactlab-tools==0.3.1 \
-  climate-toolbox==0.1.5 \
-  parameterize_jobs==0.1.1 \
-  --no-cache-dir
-
 # update pip
-RUN pip install --upgrade pip
+RUN /opt/conda/bin/pip install --upgrade pip
+RUN /opt/conda/envs/octave/bin/pip install --upgrade pip
+
+RUN /opt/conda/bin/pip install \
+    rhg_compute_tools==0.1.8 \
+    impactlab-tools==0.3.1 \
+    climate-toolbox==0.1.5 \
+    parameterize_jobs==0.1.1 \
+    --no-cache-dir
+
+RUN /opt/conda/envs/octave/bin/pip install \
+    rhg_compute_tools==0.1.8 \
+    impactlab-tools==0.3.1 \
+    climate-toolbox==0.1.5 \
+    parameterize_jobs==0.1.1 \
+    --no-cache-dir
 
 WORKDIR $HOME
 

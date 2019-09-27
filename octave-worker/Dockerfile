@@ -42,10 +42,11 @@ RUN mkdir /opt/app
 RUN mkdir /gcs
 
 RUN /opt/conda/envs/worker/bin/pip install \
-  rhg_compute_tools==0.1.0 \
-  impactlab-tools==0.3.1 \
-  climate-toolbox==0.1.4 \
-  --no-cache-dir
+    rhg_compute_tools==0.1.8 \
+    impactlab-tools==0.3.1 \
+    climate-toolbox==0.1.5 \
+    parameterize_jobs==0.1.1 \
+    --no-cache-dir
 
 # update pip
 RUN /opt/conda/envs/worker/bin/pip install --upgrade pip
