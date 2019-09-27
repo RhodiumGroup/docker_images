@@ -80,5 +80,7 @@ RUN pip install --upgrade pip
 
 WORKDIR $HOME
 
+COPY overrides.json /opt/conda/share/jupyter/lab/settings/overrides.json
+
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
 CMD ["start.sh jupyter lab"]

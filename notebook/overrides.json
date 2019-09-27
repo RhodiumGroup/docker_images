@@ -1,0 +1,7 @@
+{
+  "@jupyterlab/fileeditor-extension:plugin": {
+    "editorConfig": {
+        "rulers": [79]
+    }
+  }
+}
