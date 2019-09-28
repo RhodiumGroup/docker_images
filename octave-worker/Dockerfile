@@ -1,5 +1,9 @@
 FROM climateimpactlab/miniconda3-gfortran-netcdf:v1.0.2
 
+RUN apt-get update \
+    && apt-get install libgl1-mesa-glx -y \
+    && apt-get upgrade gnuplot -y
+
 # build conda
 
 USER $NB_USER
