@@ -13,7 +13,7 @@ COPY environment.yml /home/jovyan/environment.yml
 
 
 ## perform a bunch of common actions
-RUN /home/jovyan/common.sh
+RUN sudo bash /home/jovyan/common.sh
 
 
 ###########
@@ -44,6 +44,7 @@ RUN conda env update -f /home/jovyan/environment.yml
 
 
 ## clean up
+USER root
 RUN rm -rf /var/lib/apt/lists/*
 RUN conda clean --all -y -f
 
