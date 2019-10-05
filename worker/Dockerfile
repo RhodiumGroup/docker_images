@@ -17,14 +17,13 @@ RUN /home/jovyan/common.sh
 
 
 ###########
-# adapted from continuumio/miniconda3:4.6.14
+# adapted from continuumio/miniconda3
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
 
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.7.10-Linux-x86_64.sh -O ~/miniconda.sh && \
     /bin/bash ~/miniconda.sh -b -p /opt/conda && \
     rm ~/miniconda.sh && \
-    /opt/conda/bin/conda clean -tipsy && \
     ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
     echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
     echo "conda activate base" >> ~/.bashrc
@@ -46,7 +45,7 @@ RUN conda env update -f /home/jovyan/environment.yml
 
 ## clean up
 RUN rm -rf /var/lib/apt/lists/*
-RUN conda clean -tipsy
+RUN conda clean --all -y -f
 
 
 ## prepare container

@@ -24,6 +24,7 @@ COPY worker-template.yml /pre-home
 
 ## perform a bunch of common actions
 RUN /home/jovyan/common.sh
+RUN chown -R $NB_USER /gcs
 
 
 ## set up python env
@@ -59,8 +60,8 @@ RUN jupyter serverextension enable --py --sys-prefix dask_labextension
 
 ## clean up
 RUN rm -rf /var/lib/apt/lists/*
-RUN conda clean -tipsy
-RUN chown -R $NB_USER /gcs
+RUN conda clean --all -y -f
+
 
 ## prepare container
 WORKDIR $HOME
