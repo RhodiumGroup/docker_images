@@ -1,6 +1,7 @@
 FROM jupyter/base-notebook:python-3.7.3
 
 ## Add NB_USER to sudo
+USER root
 RUN echo "$NB_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/notebook
 RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CONDA_DIR/bin\"#" /etc/sudoers
 USER $NB_USER
@@ -28,11 +29,12 @@ RUN chown -R $NB_USER /gcs
 
 
 ## set up python env
-# install cythonized version of geopandas
-RUN conda install --yes --channel conda-forge/label/dev geopandas
 
 #  update environemnt with common packages across worker and nb
 RUN conda env update -f /home/jovyan/base_environment.yml
+
+# update with cythonized geopandas
+RUN conda install -n worker --channel conda-forge/label/dev geopandas
 
 # update environment with nb-specific packages
 RUN conda env update -f /home/jovyan/environment.yml

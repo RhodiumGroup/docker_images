@@ -33,13 +33,13 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.7.10-Linux-x86
 ## set up python env
 USER $NB_USER
 
-# install cythonized version of geopandas
-RUN conda install --yes -n worker --channel conda-forge/label/dev geopandas
-
-#  update environemnt with common packages across worker and nb
+#  create environemnt with common packages across worker and nb
 RUN conda env create -f /home/jovyan/base_environment.yml -n worker
 
-# update environment with nb-specific packages
+# update with cythonized geopandas
+RUN conda install -n worker --channel conda-forge/label/dev geopandas
+
+# update environment with worker-specific packages
 RUN conda env update -f /home/jovyan/environment.yml
 
 
