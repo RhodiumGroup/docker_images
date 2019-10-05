@@ -1,11 +1,20 @@
-# using same container as jupyter/base-notebook:python-3.7.3
+## using same container as jupyter/base-notebook:python-3.7.3
 ARG BASE_CONTAINER=ubuntu:bionic-20190612@sha256:9b1702dcfe32c873a770a32cfd306dd7fc1c4fd134adfb783db68defc8894b3c
 FROM $BASE_CONTAINER
 
+
+## filepath curation
 USER root
-RUN apt-get-installs.sh
-RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/bin/cloud_sql_proxy
-RUN chmod +x /usr/bin/cloud_sql_proxy
+COPY common.sh /home/jovyan/common.sh
+COPY prepare.sh /usr/bin/prepare.sh
+COPY add_service_creds.py /usr/bin/add_service_creds.py
+COPY base_environment.yml /home/jovyan/base_environment.yml
+COPY environment.yml /home/jovyan/environment.yml
+
+
+## perform a bunch of common actions
+RUN /home/jovyan/common.sh
+
 
 ###########
 # adapted from continuumio/miniconda3:4.6.14
@@ -21,36 +30,26 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.7.10-Linux-x86
     echo "conda activate base" >> ~/.bashrc
 ###########
 
-# build conda
 
+## set up python env
 USER $NB_USER
-
-RUN conda config --add channels conda-forge
-RUN conda update --yes -n base conda
 
 # install cythonized version of geopandas
 RUN conda install --yes -n worker --channel conda-forge/label/dev geopandas
 
 #  update environemnt with common packages across worker and nb
-COPY base_environment.yml /home/jovyan/base_environment.yml
 RUN conda env create -f /home/jovyan/base_environment.yml -n worker
 
 # update environment with nb-specific packages
-COPY environment.yml /home/jovyan/environment.yml
 RUN conda env update -f /home/jovyan/environment.yml
 
-# clean up
+
+## clean up
 RUN rm -rf /var/lib/apt/lists/*
 RUN conda clean -tipsy
 
+
+## prepare container
 ENV OMP_NUM_THREADS=1
 ENV DASK_TICK_MAXIMUM_DELAY=5s
-
-USER root
-COPY prepare.sh /usr/bin/prepare.sh
-COPY add_service_creds.py /usr/bin/add_service_creds.py
-RUN chmod +x /usr/bin/prepare.sh
-RUN mkdir /opt/app
-RUN mkdir /gcs
-
 ENTRYPOINT ["/usr/local/bin/dumb-init", "/usr/bin/prepare.sh"]

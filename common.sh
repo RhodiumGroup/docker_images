@@ -1,4 +1,5 @@
-apt-get update --fix-missing --no-install-recommends
+ #!/bin/sh
+ apt-get update --fix-missing --no-install-recommends
 
 apt-get install -yq --no-install-recommends apt-utils \
     wget bzip2 ca-certificates curl git gnupg2 apt-transport-https
@@ -23,3 +24,16 @@ alias googlefuse=/usr/bin/gcsfuse
 apt-get upgrade -yq --no-install-recommends
 
 apt-get clean
+
+# get cloud sql proxy
+wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/bin/cloud_sql_proxy
+chmod +x /usr/bin/cloud_sql_proxy
+
+# set up conda
+conda config --add channels conda-forge
+conda update --yes -n base conda
+
+# filepath curating
+chmod +x /usr/bin/prepare.sh
+mkdir /gcs
+mkdir /opt/app
