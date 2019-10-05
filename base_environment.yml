@@ -62,7 +62,6 @@ dependencies:
   - scipy
   - seaborn
   - shapely
-  - sidecar
   - statsmodels
   - toolz
   - tornado
