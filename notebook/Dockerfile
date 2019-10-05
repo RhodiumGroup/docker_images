@@ -5,8 +5,7 @@ FROM jupyter/base-notebook:python-3.7.3
 USER $NB_USER
 
 RUN conda config --add channels conda-forge
-RUN conda update --yes conda
-RUN conda update --yes conda
+RUN conda update --yes -n base conda
 
 # install cythonized version of geopandas
 RUN conda install --yes --channel conda-forge/label/dev geopandas

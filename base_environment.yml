@@ -53,7 +53,7 @@ dependencies:
   - plotly
   - pyshp
   - python-blosc
-  - python-snapp
+  - python-snappy
   - pyviz_comms
   - PyYAML
   - rasterio
@@ -80,6 +80,7 @@ dependencies:
   - pip:
     - mapbox
     - py-noaa
+    - sidecar
     - rhg_compute_tools
     - impactlab-tools
     - climate-toolbox
