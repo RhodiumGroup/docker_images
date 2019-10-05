@@ -1,4 +1,4 @@
-FROM climateimpactlab/gfortran-netcdf-notebook:v1.0.3
+FROM jupyter/base-notebook:python-3.7.3
 
 # build conda
 
@@ -7,8 +7,18 @@ USER $NB_USER
 RUN conda config --add channels conda-forge
 RUN conda update --yes conda
 
+# install cythonized version of geopandas
+RUN conda install --yes --channel conda-forge/label/dev geopandas
+
+#  update environemnt with common packages across worker and nb
+COPY ../base_environment.yml /home/jovyan/base_environment.yml
+RUN conda env update -f /home/jovyan/base_environment.yml
+
+# update environment with nb-specific packages
 COPY environment.yml /home/jovyan/environment.yml
 RUN conda env update -f /home/jovyan/environment.yml
+
+# create r environment
 COPY environment_r.yml /home/jovyan/environment_r.yml
 RUN conda env create -f /home/jovyan/environment_r.yml
 
@@ -67,16 +77,6 @@ RUN mkdir /opt/app
 RUN echo "$NB_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/notebook
 RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CONDA_DIR/bin\"#" /etc/sudoers
 USER $NB_USER
-
-RUN pip install \
-  rhg_compute_tools==0.1.8 \
-  impactlab-tools==0.3.1 \
-  climate-toolbox==0.1.5 \
-  parameterize_jobs==0.1.1 \
-  --no-cache-dir
-
-# update pip
-RUN pip install --upgrade pip
 
 WORKDIR $HOME
 

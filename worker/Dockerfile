@@ -1,4 +1,27 @@
-FROM climateimpactlab/miniconda3-gfortran-netcdf:v1.0.2
+# using same container as jupyter/base-notebook:python-3.7.3
+ARG BASE_CONTAINER=ubuntu:bionic-20190612@sha256:9b1702dcfe32c873a770a32cfd306dd7fc1c4fd134adfb783db68defc8894b3c
+FROM $BASE_CONTAINER
+
+USER root
+
+###########
+# adapted from continuumio/miniconda3:4.6.14
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+ENV PATH /opt/conda/bin:$PATH
+
+RUN apt-get update --fix-missing && \
+    apt-get install -y wget bzip2 ca-certificates curl git dumb-init && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.11-Linux-x86_64.sh -O ~/miniconda.sh && \
+    /bin/bash ~/miniconda.sh -b -p /opt/conda && \
+    rm ~/miniconda.sh && \
+    /opt/conda/bin/conda clean -tipsy && \
+    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
+    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
+    echo "conda activate base" >> ~/.bashrc
+###########
 
 # build conda
 
@@ -7,8 +30,13 @@ USER $NB_USER
 RUN conda config --add channels conda-forge
 RUN conda update --yes conda
 
-COPY environment.yml /opt/conda/environment.yml
-RUN conda env create -f /opt/conda/environment.yml
+#  update environemnt with common packages across worker and nb
+COPY ../base_environment.yml /home/jovyan/base_environment.yml
+RUN conda env create -f /home/jovyan/base_environment.yml -n worker
+
+# update environment with nb-specific packages
+COPY environment.yml /home/jovyan/environment.yml
+RUN conda env update -f /home/jovyan/environment.yml
 
 RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
     echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
@@ -39,14 +67,5 @@ COPY add_service_creds.py /usr/bin/add_service_creds.py
 RUN chmod +x /usr/bin/prepare.sh
 RUN mkdir /opt/app
 RUN mkdir /gcs
-
-RUN /opt/conda/envs/worker/bin/pip install \
-  rhg_compute_tools==0.1.0 \
-  impactlab-tools==0.3.1 \
-  climate-toolbox==0.1.4 \
-  --no-cache-dir
-
-# update pip
-RUN /opt/conda/envs/worker/bin/pip install --upgrade pip
 
 ENTRYPOINT ["/usr/local/bin/dumb-init", "/usr/bin/prepare.sh"]
