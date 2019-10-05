@@ -1,0 +1,12 @@
+{
+  "@jupyterlab/fileeditor-extension:plugin": {
+    "editorConfig": {
+        "rulers": [79]
+    }
+  },
+  "@jupyterlab/notebook-extension:tracker": {
+    "codeCellConfig": {
+      "rulers": [79]
+    }
+  }
+}
