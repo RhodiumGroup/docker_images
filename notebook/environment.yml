@@ -2,7 +2,9 @@ name: base
 channels:
   - conda-forge
 dependencies:
+  - coverage
   - dask-labextension
+  - flake8
   - graphviz
   - ipywidgets
   - nbconvert

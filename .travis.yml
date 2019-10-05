@@ -12,6 +12,7 @@ install:
 - "rm notebook/worker-template.yml.bak"
 - "cat notebook/worker-template.yml | grep image:"
 - "cp base_environment.yml $IMAGE_NAME/base_environment.yml"
+- "cp apt-get-installs.sh $IMAGE_NAME/apt-get-installs.sh && chmod +x $IMAGE_NAME/apt-get-installs.sh"
 - "cd $IMAGE_NAME"
 - "docker pull rhodium/$IMAGE_NAME:dev"
 - "docker build --pull --cache-from rhodium/$IMAGE_NAME:dev -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT ."

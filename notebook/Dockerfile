@@ -2,6 +2,11 @@ FROM jupyter/base-notebook:python-3.7.3
 
 # build conda
 
+USER root
+RUN bash apt-get-installs.sh
+RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/bin/cloud_sql_proxy
+RUN chmod +x /usr/bin/cloud_sql_proxy
+
 USER $NB_USER
 
 RUN conda config --add channels conda-forge
@@ -50,24 +55,10 @@ COPY run_sql_proxy.py /pre-home
 COPY config.yaml /pre-home
 COPY worker-template.yml /pre-home
 
-RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
-    echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
-    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
-    apt-get update -y && apt-get install google-cloud-sdk kubectl -y
-
-RUN export GCSFUSE_REPO=gcsfuse-xenial \
-  && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \
-  && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
-  && apt-get update \
-  && apt-get install gcsfuse -y \
-  && alias googlefuse=/usr/bin/gcsfuse
-
 USER root
-RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/bin/cloud_sql_proxy
-RUN chmod +x /usr/bin/cloud_sql_proxy
 
 # clean up
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN rm -rf /var/lib/apt/lists/*
 RUN conda clean -tipsy
 
 RUN mkdir /gcs && chown -R $NB_USER /gcs
