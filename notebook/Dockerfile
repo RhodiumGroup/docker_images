@@ -3,7 +3,7 @@ FROM jupyter/base-notebook:python-3.7.3
 # build conda
 
 USER root
-RUN bash apt-get-installs.sh
+RUN apt-get-installs.sh
 RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/bin/cloud_sql_proxy
 RUN chmod +x /usr/bin/cloud_sql_proxy
 

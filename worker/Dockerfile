@@ -3,7 +3,7 @@ ARG BASE_CONTAINER=ubuntu:bionic-20190612@sha256:9b1702dcfe32c873a770a32cfd306dd
 FROM $BASE_CONTAINER
 
 USER root
-RUN bash apt-get-installs.sh
+RUN apt-get-installs.sh
 RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/bin/cloud_sql_proxy
 RUN chmod +x /usr/bin/cloud_sql_proxy
 
