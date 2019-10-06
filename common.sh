@@ -5,7 +5,6 @@ apt-get update -y
 apt-get install -yq --no-install-recommends \
   apt-utils \
   bzip2 \
-  ca-certificates \
   curl \
   lsb-release \
   gnupg2 \
