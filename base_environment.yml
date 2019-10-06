@@ -5,8 +5,10 @@ channels:
 dependencies:
   - beautifulsoup4
   - bokeh
+  - boto3
   - bqplot
   - bumpversion
+  - cachecontrol
   - cartopy
   - click
   - cloudpickle

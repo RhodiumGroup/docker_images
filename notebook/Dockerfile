@@ -34,7 +34,8 @@ COPY overrides.json /opt/conda/share/jupyter/lab/settings/overrides.json
 RUN conda env update -f /home/jovyan/base_environment.yml
 
 # update environment with nb-specific packages
-RUN conda env update -f /home/jovyan/environment.yml
+# (nopin needed b/c base-notebook pins python version)
+RUN conda env update -f /home/jovyan/environment.yml --no-pin
 
 # create r environment
 RUN conda env create -f /home/jovyan/environment_r.yml
