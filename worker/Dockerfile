@@ -46,7 +46,7 @@ RUN conda env update -f /home/jovyan/environment.yml
 
 
 ## install kubectl
-gcloud components install kubectl
+RUN gcloud components install kubectl
 
 
 ## clean up

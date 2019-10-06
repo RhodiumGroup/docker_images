@@ -60,7 +60,7 @@ RUN jupyter serverextension enable --py --sys-prefix dask_labextension
 
 
 ## install kubectl
-gcloud components install kubectl
+RUN gcloud components install kubectl
 
 
 ## clean up
