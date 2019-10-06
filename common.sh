@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # install apt-get packages
-apt-get update --no-install-recommends -y
+apt-get update -y
 apt-get install -yq --no-install-recommends \
   apt-utils \
   bzip2 \
@@ -22,6 +22,7 @@ echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] \
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | \
   apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+apt-get update -y
 apt-get install -yq --no-install-recommends gcsfuse google-cloud-sdk kubectl
 alias googlefuse=/usr/bin/gcsfuse
 
@@ -34,6 +35,7 @@ chmod +x /usr/bin/cloud_sql_proxy
 # conda updates
 conda update -n base conda
 conda config --set channel_priority strict
+cat ~/.condarc
 
 # filepath curating
 chmod +x /usr/bin/prepare.sh

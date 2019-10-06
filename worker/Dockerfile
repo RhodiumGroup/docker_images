@@ -9,8 +9,8 @@ COPY prepare.sh /usr/bin/prepare.sh
 
 
 ###########
-apt-get update --no-install-recommends -y
-apt-get install -yq --no-install-recommends wget
+RUN apt-get update --no-install-recommends -y
+RUN apt-get install -yq --no-install-recommends wget
 
 # adapted from continuumio/miniconda3
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
