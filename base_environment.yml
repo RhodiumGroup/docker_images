@@ -29,6 +29,7 @@ dependencies:
   - geoviews
   - git
   - gitpython
+  - google-cloud-sdk
   - google-cloud-container
   - google-cloud-storage
   - holoviews

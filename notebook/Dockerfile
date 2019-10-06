@@ -1,9 +1,10 @@
 FROM jupyter/base-notebook:python-3.7.3
 
 ## Add NB_USER to sudo
+USER root
 RUN echo "$NB_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/notebook
 RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CONDA_DIR/bin\"#" /etc/sudoers
-USER $NB_USER
+
 
 ## filepath curation
 COPY common.sh /home/jovyan/common.sh
@@ -19,7 +20,7 @@ COPY worker-template.yml /pre-home
 
 
 ## perform a bunch of common actions
-RUN sudo bash /home/jovyan/common.sh
+RUN bash /home/jovyan/common.sh
 RUN chown -R $NB_USER /gcs
 
 
@@ -56,6 +57,10 @@ RUN jupyter serverextension enable --py jupyterlab --sys-prefix
 RUN jupyter serverextension enable --py jupyterlab --user
 RUN jupyter serverextension enable --sys-prefix jupyter_server_proxy
 RUN jupyter serverextension enable --py --sys-prefix dask_labextension
+
+
+## install kubectl
+gcloud components install kubectl
 
 
 ## clean up

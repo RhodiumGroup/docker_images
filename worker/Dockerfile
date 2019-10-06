@@ -8,12 +8,11 @@ RUN apt-get update --fix-missing --no-install-recommends && \
 
 
 ## filepath curation
-USER root
 COPY common.sh /home/jovyan/common.sh
 COPY prepare.sh /usr/bin/prepare.sh
 
 ## perform a bunch of common actions
-RUN sudo bash /home/jovyan/common.sh
+RUN bash /home/jovyan/common.sh
 
 
 ###########
@@ -44,6 +43,10 @@ RUN conda install -n worker --channel conda-forge/label/dev geopandas
 
 # update environment with worker-specific packages
 RUN conda env update -f /home/jovyan/environment.yml
+
+
+## install kubectl
+gcloud components install kubectl
 
 
 ## clean up
