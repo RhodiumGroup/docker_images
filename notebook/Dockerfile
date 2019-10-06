@@ -1,4 +1,5 @@
 FROM jupyter/base-notebook:python-3.7.3
+ARG DEBIAN_FRONTEND=noninteractive
 
 ## Add NB_USER to sudo
 USER root

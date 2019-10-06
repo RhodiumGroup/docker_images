@@ -1,21 +1,17 @@
 ## using same container as jupyter/base-notebook:python-3.7.3
-ARG BASE_CONTAINER=ubuntu:bionic-20190612@sha256:9b1702dcfe32c873a770a32cfd306dd7fc1c4fd134adfb783db68defc8894b3c
-FROM $BASE_CONTAINER
-
-## get sudo
-RUN apt-get update --fix-missing --no-install-recommends && \
-  apt-get install -yq --no-install-recommends sudo
+FROM ubuntu:bionic-20190612@sha256:9b1702dcfe32c873a770a32cfd306dd7fc1c4fd134adfb783db68defc8894b3c
+ARG DEBIAN_FRONTEND=noninteractive
 
 
 ## filepath curation
 COPY common.sh /home/jovyan/common.sh
 COPY prepare.sh /usr/bin/prepare.sh
 
-## perform a bunch of common actions
-RUN bash /home/jovyan/common.sh
-
 
 ###########
+apt-get update --no-install-recommends -y
+apt-get install -yq --no-install-recommends wget
+
 # adapted from continuumio/miniconda3
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
@@ -27,6 +23,10 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.7.10-Linux-x86
     echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
     echo "conda activate base" >> ~/.bashrc
 ###########
+
+
+## perform a bunch of common actions
+RUN bash /home/jovyan/common.sh
 
 
 ## set up python env
