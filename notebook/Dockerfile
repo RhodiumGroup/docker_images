@@ -13,6 +13,7 @@ RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CO
 ## filepath curation
 COPY common.sh /home/jovyan/common.sh
 COPY prepare.sh /usr/bin/prepare.sh
+COPY patch_geopandas.sh /home/jovyan/patch_geopandas.sh
 COPY base_environment.yml /home/jovyan/base_environment.yml
 
 RUN mkdir /pre-home && chown -R $NB_USER /pre-home
@@ -63,6 +64,10 @@ RUN jupyter serverextension enable --py --sys-prefix dask_labextension
 ## clean up
 RUN rm -rf /var/lib/apt/lists/*
 RUN conda clean --all -y -f
+
+# needed until cythonized geopandas updated for new pandas
+RUN sudo /home/jovyan/patch_geopandas.sh
+USER $NB_USER
 
 
 ## prepare container

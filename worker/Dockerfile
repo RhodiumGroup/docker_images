@@ -6,6 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ## filepath curation
 COPY common.sh /home/jovyan/common.sh
 COPY prepare.sh /usr/bin/prepare.sh
+COPY patch_geopandas.sh /home/jovyan/patch_geopandas.sh
 
 
 ###########
@@ -33,21 +34,22 @@ RUN bash /home/jovyan/common.sh
 USER $NB_USER
 COPY add_service_creds.py /usr/bin/add_service_creds.py
 COPY base_environment.yml /home/jovyan/base_environment.yml
-COPY environment.yml /home/jovyan/environment.yml
 
 #  create environemnt with common packages across worker and nb
 RUN conda env update -f /home/jovyan/base_environment.yml
-
-# update environment with worker-specific packages
-RUN conda env update -f /home/jovyan/environment.yml
 
 
 ## clean up
 RUN rm -rf /var/lib/apt/lists/*
 RUN conda clean --all -y -f
 
+# needed until cythonized geopandas updated for new pandas
+USER root
+RUN sudo /home/jovyan/patch_geopandas.sh
+USER $NB_USER
+
 
 ## prepare container
 ENV OMP_NUM_THREADS=1
 ENV DASK_TICK_MAXIMUM_DELAY=5s
-ENTRYPOINT ["/usr/local/bin/dumb-init", "/usr/bin/prepare.sh"]
+ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]

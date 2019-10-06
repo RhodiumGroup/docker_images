@@ -1,6 +1,0 @@
-name: base
-channels:
-  - conda-forge
-dependencies:
-  - jupyter
-  - jupyter_client

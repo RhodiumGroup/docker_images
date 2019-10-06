@@ -13,6 +13,7 @@ install:
 - "cat notebook/worker-template.yml | grep image:"
 - "cp base_environment.yml $IMAGE_NAME/base_environment.yml"
 - "cp common.sh $IMAGE_NAME/common.sh && chmod +x $IMAGE_NAME/common.sh"
+- "cp patch_geopandas.sh $IMAGE_NAME/patch_geopandas.sh && chmod +x $IMAGE_NAME/patch_geopandas.sh"
 - "cd $IMAGE_NAME"
 - "docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT ."
 
