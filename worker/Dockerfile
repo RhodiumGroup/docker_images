@@ -36,10 +36,7 @@ COPY base_environment.yml /home/jovyan/base_environment.yml
 COPY environment.yml /home/jovyan/environment.yml
 
 #  create environemnt with common packages across worker and nb
-RUN conda env create -f /home/jovyan/base_environment.yml -n worker
-
-# update with cythonized geopandas
-RUN conda install -n worker --channel conda-forge/label/dev geopandas
+RUN conda env create -f /home/jovyan/base_environment.yml
 
 # update environment with worker-specific packages
 RUN conda env update -f /home/jovyan/environment.yml
@@ -50,7 +47,6 @@ RUN gcloud components install kubectl
 
 
 ## clean up
-USER root
 RUN rm -rf /var/lib/apt/lists/*
 RUN conda clean --all -y -f
 

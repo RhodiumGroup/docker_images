@@ -1,4 +1,5 @@
 #!/bin/sh
+export CONDA_VERSION=4.7.12
 
 # install apt-get packages
 apt-get update -y
@@ -32,8 +33,7 @@ wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/bin/clou
 chmod +x /usr/bin/cloud_sql_proxy
 
 # conda updates
-conda update -n base conda
-conda config --set channel_priority strict
+conda install -n base conda=$CONDA_VERSION --no-pin
 
 # filepath curating
 chmod +x /usr/bin/prepare.sh

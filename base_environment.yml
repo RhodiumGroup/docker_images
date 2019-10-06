@@ -1,6 +1,7 @@
 name: base
 channels:
   - conda-forge
+  - conda-forge/label/dev
 dependencies:
   - beautifulsoup4
   - bokeh
@@ -24,6 +25,7 @@ dependencies:
   - gcsfs
   - gdal
   - geoalchemy2
+  - geopandas=1.0.0.dev
   - geopy
   - geotiff
   - geoviews
@@ -49,8 +51,8 @@ dependencies:
   - pandas
   - pip
   - plotly
-  - pyshp
   - python=3.6
+  - pyshp
   - python-blosc
   - python-snappy
   - pyviz_comms

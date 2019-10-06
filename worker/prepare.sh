@@ -4,19 +4,19 @@ set -x
 
 if [[ -e "/opt/app/environment.yml" ]]; then
     echo "environment.yml found. Installing packages"
-    /opt/conda/bin/conda env update -n worker -f /opt/app/environment.yml
+    /opt/conda/bin/conda env update -f /opt/app/environment.yml
 else
     echo "no environment.yml"
 fi
 
 if [[ "$EXTRA_CONDA_PACKAGES" ]]; then
     echo "EXTRA_CONDA_PACKAGES environment variable found.  Installing."
-    /opt/conda/bin/conda install -n worker --yes $EXTRA_CONDA_PACKAGES
+    /opt/conda/bin/conda install --yes $EXTRA_CONDA_PACKAGES
 fi
 
 if [[ "$EXTRA_PIP_PACKAGES" ]]; then
     echo "EXTRA_PIP_PACKAGES environment variable found.  Installing".
-    /opt/conda/envs/worker/bin/pip install $EXTRA_PIP_PACKAGES
+    /opt/conda/bin/pip install $EXTRA_PIP_PACKAGES
 fi
 
 if [[ "$GCSFUSE_TOKENS" ]]; then
@@ -50,4 +50,4 @@ if [[ "$GCLOUD_DEFAULT_TOKEN_FILE" ]]; then
 fi
 
 # Run extra commands
-source activate worker && $@
+$@

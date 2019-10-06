@@ -33,9 +33,6 @@ COPY overrides.json /opt/conda/share/jupyter/lab/settings/overrides.json
 #  update environemnt with common packages across worker and nb
 RUN conda env update -f /home/jovyan/base_environment.yml
 
-# update with cythonized geopandas
-RUN conda install --channel conda-forge/label/dev geopandas
-
 # update environment with nb-specific packages
 RUN conda env update -f /home/jovyan/environment.yml
 
@@ -70,6 +67,7 @@ RUN conda clean --all -y -f
 
 
 ## prepare container
+USER $NB_USER
 WORKDIR $HOME
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
 CMD ["start.sh jupyter lab"]

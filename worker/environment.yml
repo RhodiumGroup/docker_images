@@ -1,4 +1,4 @@
-name: worker
+name: base
 channels:
   - conda-forge
 dependencies:
