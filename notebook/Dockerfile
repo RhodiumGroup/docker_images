@@ -1,9 +1,9 @@
 FROM jupyter/base-notebook:python-3.7.3
 
 ## Add NB_USER to sudo
-USER root
 RUN echo "$NB_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/notebook
 RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CONDA_DIR/bin\"#" /etc/sudoers
+USER $NB_USER
 
 ## filepath curation
 COPY common.sh /home/jovyan/common.sh
@@ -24,7 +24,6 @@ RUN chown -R $NB_USER /gcs
 
 
 ## set up python env
-USER $NB_USER
 COPY environment.yml /home/jovyan/environment.yml
 COPY environment_r.yml /home/jovyan/environment_r.yml
 COPY overrides.json /opt/conda/share/jupyter/lab/settings/overrides.json
@@ -60,13 +59,11 @@ RUN jupyter serverextension enable --py --sys-prefix dask_labextension
 
 
 ## clean up
-USER root
 RUN rm -rf /var/lib/apt/lists/*
 RUN conda clean --all -y -f
 
 
 ## prepare container
 WORKDIR $HOME
-USER $NB_USER
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
 CMD ["start.sh jupyter lab"]

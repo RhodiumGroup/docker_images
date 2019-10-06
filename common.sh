@@ -29,10 +29,6 @@ apt-get clean
 wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/bin/cloud_sql_proxy
 chmod +x /usr/bin/cloud_sql_proxy
 
-# set up conda
-conda config --add channels conda-forge
-conda update --yes -n base conda
-
 # filepath curating
 chmod +x /usr/bin/prepare.sh
 mkdir /gcs
