@@ -36,7 +36,7 @@ COPY base_environment.yml /home/jovyan/base_environment.yml
 COPY environment.yml /home/jovyan/environment.yml
 
 #  create environemnt with common packages across worker and nb
-RUN conda env create -f /home/jovyan/base_environment.yml
+RUN conda env update -f /home/jovyan/base_environment.yml
 
 # update environment with worker-specific packages
 RUN conda env update -f /home/jovyan/environment.yml
