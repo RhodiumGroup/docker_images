@@ -10,8 +10,6 @@ dependencies:
   - nbconvert
   - nodejs
   - nose
-  - jupyterhub
-  - jupyterlab
   - pytest
   - pytest-cov
   - pytest-runner
