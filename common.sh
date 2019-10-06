@@ -35,7 +35,6 @@ chmod +x /usr/bin/cloud_sql_proxy
 # conda updates
 conda update -n base conda
 conda config --set channel_priority strict
-cat ~/.condarc
 
 # filepath curating
 chmod +x /usr/bin/prepare.sh
