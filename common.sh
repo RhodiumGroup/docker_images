@@ -2,7 +2,7 @@
 apt-get update --fix-missing --no-install-recommends
 
 apt-get install -yq --no-install-recommends apt-utils \
-    wget bzip2 ca-certificates curl git gnupg2 apt-transport-https sudo
+    wget bzip2 ca-certificates curl git gnupg2 apt-transport-https
 
 # install google cloud sdk
 echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] \

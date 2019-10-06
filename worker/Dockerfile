@@ -2,15 +2,15 @@
 ARG BASE_CONTAINER=ubuntu:bionic-20190612@sha256:9b1702dcfe32c873a770a32cfd306dd7fc1c4fd134adfb783db68defc8894b3c
 FROM $BASE_CONTAINER
 
+## get sudo
+RUN apt-get update --fix-missing --no-install-recommends && \
+  apt-get install -yq --no-install-recommends sudo
+
 
 ## filepath curation
 USER root
 COPY common.sh /home/jovyan/common.sh
 COPY prepare.sh /usr/bin/prepare.sh
-COPY add_service_creds.py /usr/bin/add_service_creds.py
-COPY base_environment.yml /home/jovyan/base_environment.yml
-COPY environment.yml /home/jovyan/environment.yml
-
 
 ## perform a bunch of common actions
 RUN sudo bash /home/jovyan/common.sh
@@ -32,6 +32,9 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.7.10-Linux-x86
 
 ## set up python env
 USER $NB_USER
+COPY add_service_creds.py /usr/bin/add_service_creds.py
+COPY base_environment.yml /home/jovyan/base_environment.yml
+COPY environment.yml /home/jovyan/environment.yml
 
 #  create environemnt with common packages across worker and nb
 RUN conda env create -f /home/jovyan/base_environment.yml -n worker

@@ -4,15 +4,11 @@ FROM jupyter/base-notebook:python-3.7.3
 USER root
 RUN echo "$NB_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/notebook
 RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CONDA_DIR/bin\"#" /etc/sudoers
-USER $NB_USER
 
 ## filepath curation
 COPY common.sh /home/jovyan/common.sh
 COPY prepare.sh /usr/bin/prepare.sh
 COPY base_environment.yml /home/jovyan/base_environment.yml
-COPY environment.yml /home/jovyan/environment.yml
-COPY environment_r.yml /home/jovyan/environment_r.yml
-COPY overrides.json /opt/conda/share/jupyter/lab/settings/overrides.json
 
 RUN mkdir /pre-home && chown -R $NB_USER /pre-home
 COPY worker-template.yml /pre-home
@@ -28,6 +24,10 @@ RUN chown -R $NB_USER /gcs
 
 
 ## set up python env
+USER $NB_USER
+COPY environment.yml /home/jovyan/environment.yml
+COPY environment_r.yml /home/jovyan/environment_r.yml
+COPY overrides.json /opt/conda/share/jupyter/lab/settings/overrides.json
 
 #  update environemnt with common packages across worker and nb
 RUN conda env update -f /home/jovyan/base_environment.yml
