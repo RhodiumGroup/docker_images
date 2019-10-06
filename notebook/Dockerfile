@@ -4,7 +4,7 @@ FROM jupyter/base-notebook:python-3.7.3
 USER root
 RUN echo "$NB_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/notebook
 RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CONDA_DIR/bin\"#" /etc/sudoers
-
+USER $NB_USER
 
 ## filepath curation
 COPY common.sh /home/jovyan/common.sh
@@ -28,7 +28,6 @@ RUN chown -R $NB_USER /gcs
 
 
 ## set up python env
-USER $NB_USER
 
 #  update environemnt with common packages across worker and nb
 RUN conda env update -f /home/jovyan/base_environment.yml
@@ -68,5 +67,6 @@ RUN conda clean --all -y -f
 
 ## prepare container
 WORKDIR $HOME
+USER $NB_USER
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
 CMD ["start.sh jupyter lab"]
