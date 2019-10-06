@@ -1,6 +1,9 @@
 FROM jupyter/base-notebook:latest
 ARG DEBIAN_FRONTEND=noninteractive
 
+## get rid of conda pin file that causes update problems
+RUN rm /opt/conda/conda-meta/pinned
+
 ## Add NB_USER to sudo
 USER root
 RUN echo "$NB_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/notebook
@@ -34,8 +37,7 @@ COPY overrides.json /opt/conda/share/jupyter/lab/settings/overrides.json
 RUN conda env update -f /home/jovyan/base_environment.yml
 
 # update environment with nb-specific packages
-# (nopin needed b/c base-notebook pins python version)
-RUN conda env update -f /home/jovyan/environment.yml --no-pin
+RUN conda env update -f /home/jovyan/environment.yml
 
 # create r environment
 RUN conda env create -f /home/jovyan/environment_r.yml
@@ -56,10 +58,6 @@ RUN jupyter serverextension enable --py jupyterlab --sys-prefix
 RUN jupyter serverextension enable --py jupyterlab --user
 RUN jupyter serverextension enable --sys-prefix jupyter_server_proxy
 RUN jupyter serverextension enable --py --sys-prefix dask_labextension
-
-
-## install kubectl
-RUN gcloud components install kubectl
 
 
 ## clean up

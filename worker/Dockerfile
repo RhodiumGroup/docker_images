@@ -42,10 +42,6 @@ RUN conda env update -f /home/jovyan/base_environment.yml
 RUN conda env update -f /home/jovyan/environment.yml
 
 
-## install kubectl
-RUN gcloud components install kubectl
-
-
 ## clean up
 RUN rm -rf /var/lib/apt/lists/*
 RUN conda clean --all -y -f
