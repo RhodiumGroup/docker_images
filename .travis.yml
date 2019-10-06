@@ -14,8 +14,7 @@ install:
 - "cp base_environment.yml $IMAGE_NAME/base_environment.yml"
 - "cp common.sh $IMAGE_NAME/common.sh && chmod +x $IMAGE_NAME/common.sh"
 - "cd $IMAGE_NAME"
-- "docker pull rhodium/$IMAGE_NAME:dev"
-- "docker build --pull --cache-from rhodium/$IMAGE_NAME:dev -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT ."
+- "docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT ."
 
 script:
 - docker images rhodium/$IMAGE_NAME:$TRAVIS_COMMIT
