@@ -1,19 +1,24 @@
 #!/bin/sh
 
-# add gcsfuse dist. URL to apt as package source & import public key
+# install apt-get packages
+apt-get update --no-install-recommends -y
+apt-get install -yq --no-install-recommends \
+  apt-utils \
+  wget \
+  bzip2 \
+  ca-certificates \
+  curl \
+  gnupg2
+
+# install gcsfuse
+# (need curl to be installed earlier)
 export GCSFUSE_REPO=gcsfuse-`lsb_release -c -s`
 echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-
-# install apt-get packages
-apt-get update --no-install-recommends -y
-apt-get install -yq --no-install-recommends apt-utils \
-    wget bzip2 ca-certificates curl git gnupg2 gcsfuse
-apt-get upgrade -yq --no-install-recommends
-apt-get clean
-
-# set up aliases
+apt-get install -yq --no-install-recommends gcsfuse
 alias googlefuse=/usr/bin/gcsfuse
+
+apt-get clean
 
 # install google cloud sdk
 # echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] \
