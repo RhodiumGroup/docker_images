@@ -31,7 +31,7 @@ RUN bash /home/jovyan/common.sh
 
 
 ## set up python env
-RUN conda install -n base conda=$CONDA_VERSION --no-pin
+RUN conda install -n base conda=4.7.12 --no-pin
 COPY add_service_creds.py /usr/bin/add_service_creds.py
 COPY base_environment.yml /home/jovyan/base_environment.yml
 

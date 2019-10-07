@@ -1,6 +1,4 @@
 #!/bin/sh
-export CONDA_VERSION=4.7.12
-
 # install apt-get packages
 apt-get update -y
 apt-get install -yq --no-install-recommends \

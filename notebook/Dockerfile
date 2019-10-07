@@ -30,9 +30,12 @@ COPY base_environment.yml /home/jovyan/base_environment.yml
 RUN sudo bash /home/jovyan/common.sh
 RUN sudo chown -R $NB_USER /gcs
 
+# more apt-get
+RUN apt-get install -yq --no-install-recommends vim && apt-get clean
+
 
 ## set up python env
-RUN conda install -n base conda=$CONDA_VERSION --no-pin
+RUN conda install -n base conda=4.7.12 --no-pin
 COPY environment.yml /home/jovyan/environment.yml
 COPY environment_r.yml /home/jovyan/environment_r.yml
 COPY overrides.json /opt/conda/share/jupyter/lab/settings/overrides.json
