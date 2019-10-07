@@ -4,30 +4,31 @@ ARG DEBIAN_FRONTEND=noninteractive
 ## get rid of conda pin file that causes update problems
 RUN rm /opt/conda/conda-meta/pinned
 
+
 ## Add NB_USER to sudo
 USER root
 RUN echo "$NB_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/notebook
 RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CONDA_DIR/bin\"#" /etc/sudoers
+USER $NB_USER
 
 
 ## filepath curation
-COPY common.sh /home/jovyan/common.sh
-COPY prepare.sh /usr/bin/prepare.sh
-COPY patch_geopandas.sh /home/jovyan/patch_geopandas.sh
-COPY base_environment.yml /home/jovyan/base_environment.yml
-
-RUN mkdir /pre-home && chown -R $NB_USER /pre-home
+RUN sudo mkdir /pre-home && sudo chown -R $NB_USER /pre-home
 COPY worker-template.yml /pre-home
 COPY add_service_creds.py /pre-home
 COPY run_sql_proxy.py /pre-home
 COPY config.yaml /pre-home
 COPY worker-template.yml /pre-home
 
+COPY common.sh /home/jovyan/common.sh
+COPY prepare.sh /usr/bin/prepare.sh
+COPY patch_geopandas.sh /home/jovyan/patch_geopandas.sh
+COPY base_environment.yml /home/jovyan/base_environment.yml
+
 
 ## perform a bunch of common actions
-RUN bash /home/jovyan/common.sh
-RUN chown -R $NB_USER /gcs
-
+RUN sudo bash /home/jovyan/common.sh
+RUN sudo chown -R $NB_USER /gcs
 
 ## set up python env
 COPY environment.yml /home/jovyan/environment.yml
@@ -62,16 +63,14 @@ RUN jupyter serverextension enable --py --sys-prefix dask_labextension
 
 
 ## clean up
-RUN rm -rf /var/lib/apt/lists/*
+RUN sudo rm -rf /var/lib/apt/lists/*
 RUN conda clean --all -y -f
 
 # needed until cythonized geopandas updated for new pandas
-RUN sudo /home/jovyan/patch_geopandas.sh
-USER $NB_USER
+RUN /home/jovyan/patch_geopandas.sh
 
 
 ## prepare container
-USER $NB_USER
 WORKDIR $HOME
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
 CMD ["start.sh jupyter lab"]

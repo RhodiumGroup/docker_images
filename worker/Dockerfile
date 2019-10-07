@@ -31,7 +31,6 @@ RUN bash /home/jovyan/common.sh
 
 
 ## set up python env
-USER $NB_USER
 COPY add_service_creds.py /usr/bin/add_service_creds.py
 COPY base_environment.yml /home/jovyan/base_environment.yml
 
@@ -44,9 +43,7 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN conda clean --all -y -f
 
 # needed until cythonized geopandas updated for new pandas
-USER root
-RUN sudo /home/jovyan/patch_geopandas.sh
-USER $NB_USER
+RUN /home/jovyan/patch_geopandas.sh
 
 
 ## prepare container
