@@ -31,7 +31,7 @@ RUN sudo bash /home/jovyan/common.sh
 RUN sudo chown -R $NB_USER /gcs
 
 # more apt-get
-RUN sudo apt-get install -yq --no-install-recommends vim && apt-get clean
+RUN sudo apt-get install -yq --no-install-recommends vim && sudo apt-get clean
 
 
 ## set up python env
