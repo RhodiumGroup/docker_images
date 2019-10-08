@@ -41,7 +41,8 @@ RUN conda env update -f /home/jovyan/base_environment.yml
 
 ## clean up
 RUN rm -rf /var/lib/apt/lists/*
-RUN conda clean --all -y -f
+RUN conda clean --all -y -f && \
+  conda config --add channels conda-forge
 
 # needed until cythonized geopandas updated for new pandas
 RUN /home/jovyan/patch_geopandas.sh
