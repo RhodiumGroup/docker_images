@@ -70,6 +70,7 @@ RUN jupyter serverextension enable --py --sys-prefix dask_labextension
 ## clean up
 RUN sudo rm -rf /var/lib/apt/lists/*
 RUN conda clean --all -y -f && \
+  conda config --add channels conda-forge/label/dev && \
   conda config --add channels conda-forge
 
 # needed until cythonized geopandas updated for new pandas
