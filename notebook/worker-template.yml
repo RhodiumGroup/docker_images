@@ -7,7 +7,7 @@ spec:
     env:
       - name: GCSFUSE_BUCKET
         value: rhg-data
-    image: rhodium/worker:dev-update-packages
+    image: rhodium/worker:WILL_BE_REPLACED_BY_TRAVIS
     name: dask-worker
     securityContext:
       capabilities:
