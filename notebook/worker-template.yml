@@ -2,19 +2,12 @@ metadata:
 spec:
   restartPolicy: Never
   containers:
-  - args:
-      - dask-worker
-      - --nthreads
-      - '1'
-      - --no-bokeh
-      - --memory-limit
-      - 11.5GB
-      - --death-timeout
-      - '60'
+  - args: [dask-worker, $(DASK_SCHEDULER_ADDRESS), --nthreads, '1', --no-bokeh,
+          --memory-limit, 11.5GB, --death-timeout, '60']
     env:
       - name: GCSFUSE_BUCKET
         value: rhg-data
-    image: rhodium/worker:d15fbe5fa4c4f78740cd3ab566007adf2f801947
+    image: rhodium/worker:WILL_BE_REPLACED_BY_TRAVIS
     name: dask-worker
     securityContext:
       capabilities:

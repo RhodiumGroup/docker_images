@@ -11,9 +11,11 @@ install:
 - "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then sed -i.bak 's/image: rhodium\\/worker.*/image: rhodium\\/worker:'\"$TRAVIS_COMMIT\"'/' notebook/worker-template.yml; else sed -i.bak 's/image: rhodium\\/worker:.*/image: rhodium\\/worker:'\"$TRAVIS_TAG\"'/' notebook/worker-template.yml; fi"
 - "rm notebook/worker-template.yml.bak"
 - "cat notebook/worker-template.yml | grep image:"
+- "cp base_environment.yml $IMAGE_NAME/base_environment.yml"
+- "cp common.sh $IMAGE_NAME/common.sh && chmod +x $IMAGE_NAME/common.sh"
+- "cp patch_geopandas.sh $IMAGE_NAME/patch_geopandas.sh && chmod +x $IMAGE_NAME/patch_geopandas.sh"
 - "cd $IMAGE_NAME"
-- "docker pull rhodium/$IMAGE_NAME:dev"
-- "docker build --pull --cache-from rhodium/$IMAGE_NAME:dev -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT ."
+- "docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT ."
 
 script:
 - docker images rhodium/$IMAGE_NAME:$TRAVIS_COMMIT

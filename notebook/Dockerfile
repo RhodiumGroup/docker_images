@@ -1,15 +1,52 @@
-FROM climateimpactlab/gfortran-netcdf-notebook:v1.0.3
+FROM jupyter/base-notebook:latest
+ARG DEBIAN_FRONTEND=noninteractive
 
-# build conda
+## get rid of conda pin file that causes update problems
+RUN rm /opt/conda/conda-meta/pinned
 
+
+## Add NB_USER to sudo
+USER root
+RUN echo "$NB_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/notebook
+RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CONDA_DIR/bin\"#" /etc/sudoers
 USER $NB_USER
 
-RUN conda config --add channels conda-forge
-RUN conda update --yes conda
 
+## filepath curation
+RUN sudo mkdir /pre-home && sudo chown -R $NB_USER /pre-home
+COPY worker-template.yml /pre-home
+COPY add_service_creds.py /pre-home
+COPY run_sql_proxy.py /pre-home
+COPY config.yaml /pre-home
+COPY worker-template.yml /pre-home
+
+COPY common.sh /home/jovyan/common.sh
+COPY prepare.sh /usr/bin/prepare.sh
+COPY patch_geopandas.sh /home/jovyan/patch_geopandas.sh
+COPY base_environment.yml /home/jovyan/base_environment.yml
+
+
+## perform a bunch of common actions
+RUN sudo bash /home/jovyan/common.sh
+RUN sudo chown -R $NB_USER /gcs
+
+# more apt-get
+RUN sudo apt-get install -yq --no-install-recommends vim && sudo apt-get clean
+
+
+## set up python env
+RUN conda install -n base conda=4.7.12
 COPY environment.yml /home/jovyan/environment.yml
-RUN conda env update -f /home/jovyan/environment.yml
 COPY environment_r.yml /home/jovyan/environment_r.yml
+COPY overrides.json /opt/conda/share/jupyter/lab/settings/overrides.json
+
+#  update environemnt with common packages across worker and nb
+RUN conda env update -f /home/jovyan/base_environment.yml
+
+# update environment with nb-specific packages
+RUN conda env update -f /home/jovyan/environment.yml
+
+# create r environment
 RUN conda env create -f /home/jovyan/environment_r.yml
 
 RUN jupyter labextension update --all && \
@@ -29,58 +66,18 @@ RUN jupyter serverextension enable --py jupyterlab --user
 RUN jupyter serverextension enable --sys-prefix jupyter_server_proxy
 RUN jupyter serverextension enable --py --sys-prefix dask_labextension
 
-USER root
-COPY prepare.sh /usr/bin/prepare.sh
-RUN chmod +x /usr/bin/prepare.sh
-RUN mkdir /pre-home && chown -R $NB_USER /pre-home
-COPY worker-template.yml /pre-home
-COPY add_service_creds.py /pre-home
-COPY run_sql_proxy.py /pre-home
 
-COPY config.yaml /pre-home
-COPY worker-template.yml /pre-home
+## clean up
+RUN sudo rm -rf /var/lib/apt/lists/*
+RUN conda clean --all -y -f && \
+  conda config --add channels conda-forge/label/dev && \
+  conda config --add channels conda-forge
 
-RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
-    echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
-    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
-    apt-get update -y && apt-get install google-cloud-sdk kubectl -y
+# needed until cythonized geopandas updated for new pandas
+RUN /home/jovyan/patch_geopandas.sh
 
-RUN export GCSFUSE_REPO=gcsfuse-xenial \
-  && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \
-  && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
-  && apt-get update \
-  && apt-get install gcsfuse -y \
-  && alias googlefuse=/usr/bin/gcsfuse
 
-USER root
-RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/bin/cloud_sql_proxy
-RUN chmod +x /usr/bin/cloud_sql_proxy
-
-# clean up
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN conda clean -tipsy
-
-RUN mkdir /gcs && chown -R $NB_USER /gcs
-RUN mkdir /opt/app
-
-# Add NB_USER to sudo
-RUN echo "$NB_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/notebook
-RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CONDA_DIR/bin\"#" /etc/sudoers
-USER $NB_USER
-
-RUN pip install \
-  rhg_compute_tools==0.1.8 \
-  impactlab-tools==0.3.1 \
-  climate-toolbox==0.1.5 \
-  parameterize_jobs==0.1.1 \
-  --no-cache-dir
-
-# update pip
-RUN pip install --upgrade pip
-
+## prepare container
 WORKDIR $HOME
-
-COPY overrides.json /opt/conda/share/jupyter/lab/settings/overrides.json
-
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
 CMD ["start.sh jupyter lab"]
