@@ -1,0 +1,25 @@
+name: base
+channels:
+  - conda-forge
+dependencies:
+  - coverage
+  - dask-labextension
+  - flake8
+  - graphviz
+  - ipdb
+  - ipywidgets
+  - nano
+  - nbconvert
+  - nodejs
+  - nose
+  - octave
+  - octave_kernel
+  - oct2py
+  - openssh
+  - pytest
+  - pytest-cov
+  - pytest-runner
+  - sphinx
+  - tox
+  - tqdm
+  - wheel

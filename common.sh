@@ -7,7 +7,8 @@ apt-get install -yq --no-install-recommends \
   curl \
   lsb-release \
   gnupg2 \
-  sudo
+  sudo \
+  libgl1-mesa-glx
 
 # install gcsfuse, google cloud sdk, kubectl
 # (need curl to be installed earlier)

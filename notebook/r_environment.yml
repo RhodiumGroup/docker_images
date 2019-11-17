@@ -1,0 +1,24 @@
+name: r
+channels:
+  - conda-forge
+  - r
+dependencies:
+  - rpy2
+  - r-base
+  - r-irkernel
+  - r-plyr
+  - r-devtools
+  - r-tidyverse
+  - r-shiny
+  - r-rmarkdown
+  - r-forecast
+  - r-rsqlite
+  - r-reshape2
+  - r-nycflights13
+  - r-caret
+  - r-rcurl
+  - r-crayon
+  - r-randomforest
+  - r-sparklyr
+  - r-htmlwidgets
+  - r-hexbin

@@ -18,36 +18,42 @@ COPY worker-template.yml /pre-home
 COPY add_service_creds.py /pre-home
 COPY run_sql_proxy.py /pre-home
 COPY config.yaml /pre-home
-COPY worker-template.yml /pre-home
 
-COPY common.sh /home/jovyan/common.sh
-COPY prepare.sh /usr/bin/prepare.sh
-COPY patch_geopandas.sh /home/jovyan/patch_geopandas.sh
-COPY base_environment.yml /home/jovyan/base_environment.yml
+RUN sudo mkdir /tempdir
+COPY common.sh /tempdir
+COPY patch_geopandas.sh /tempdir
+
+COPY prepare.sh /usr/bin
+
+RUN mkdir /opt/conda/specs
+COPY base_environment.yml /opt/conda/specs
+COPY notebook_environment.yml /opt/conda/specs
+COPY r_environment.yml /opt/conda/specs
+
+COPY overrides.json /opt/conda/share/jupyter/lab/settings
 
 
 ## perform a bunch of common actions
-RUN sudo bash /home/jovyan/common.sh
+RUN sudo bash /pre-home/common.sh
 RUN sudo chown -R $NB_USER /gcs
 
-# more apt-get
+
+## more apt-get
 RUN sudo apt-get install -yq --no-install-recommends vim && sudo apt-get clean
 
 
-## set up python env
-RUN conda install -n base conda=4.7.12
-COPY environment.yml /home/jovyan/environment.yml
-COPY environment_r.yml /home/jovyan/environment_r.yml
-COPY overrides.json /opt/conda/share/jupyter/lab/settings/overrides.json
+## set up conda
+RUN conda install -n base conda
 
 #  update environemnt with common packages across worker and nb
-RUN conda env update -f /home/jovyan/base_environment.yml
+RUN conda env update -f /opt/conda/specs/base_environment.yml
 
 # update environment with nb-specific packages
-RUN conda env update -f /home/jovyan/environment.yml
+RUN conda env update -f /opt/conda/specs/notebook_environment.yml
 
 # create r environment
-RUN conda env create -f /home/jovyan/environment_r.yml
+RUN conda env create -f /opt/conda/specs/r_environment.yml
+
 
 RUN jupyter labextension update --all && \
     jupyter labextension install \
@@ -67,14 +73,14 @@ RUN jupyter serverextension enable --sys-prefix jupyter_server_proxy
 RUN jupyter serverextension enable --py --sys-prefix dask_labextension
 
 
+## needed until cythonized geopandas updated for new pandas
+RUN /tempdir/patch_geopandas.sh
+
 ## clean up
-RUN sudo rm -rf /var/lib/apt/lists/*
+RUN sudo rm -rf /var/lib/apt/lists/* /tempdir
 RUN conda clean --all -y -f && \
   conda config --add channels conda-forge/label/dev && \
   conda config --add channels conda-forge
-
-# needed until cythonized geopandas updated for new pandas
-RUN /home/jovyan/patch_geopandas.sh
 
 
 ## prepare container

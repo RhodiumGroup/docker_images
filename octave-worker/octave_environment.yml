@@ -1,0 +1,7 @@
+name: base
+channels:
+  - conda-forge
+dependencies:
+  - octave
+  - octave_kernel
+  - oct2py

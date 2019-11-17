@@ -2,11 +2,16 @@
 FROM ubuntu:bionic-20190612@sha256:9b1702dcfe32c873a770a32cfd306dd7fc1c4fd134adfb783db68defc8894b3c
 ARG DEBIAN_FRONTEND=noninteractive
 
-
 ## filepath curation
-COPY common.sh /home/jovyan/common.sh
-COPY prepare.sh /usr/bin/prepare.sh
-COPY patch_geopandas.sh /home/jovyan/patch_geopandas.sh
+RUN mkdir /opt/conda/specs
+COPY base_environment.yml /opt/conda/specs
+
+RUN mkdir /tempdir
+COPY common.sh /tempdir
+COPY patch_geopandas.sh /tempdir
+
+COPY add_service_creds.py /usr/bin
+COPY prepare.sh /usr/bin
 
 
 ###########
@@ -27,26 +32,24 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.7.10-Linux-x86
 
 
 ## perform a bunch of common actions
-RUN bash /home/jovyan/common.sh
-
+RUN bash /tempdir/common.sh
 
 ## set up python env
-RUN conda install -n base conda=4.7.12
-COPY add_service_creds.py /usr/bin/add_service_creds.py
-COPY base_environment.yml /home/jovyan/base_environment.yml
+RUN conda update -n base conda
 
 #  create environemnt with common packages across worker and nb
-RUN conda env update -f /home/jovyan/base_environment.yml
+RUN conda env update -f /opt/conda/specs/base_environment.yml
+
+
+## needed until cythonized geopandas updated for new pandas
+RUN /tempdir/patch_geopandas.sh
 
 
 ## clean up
-RUN rm -rf /var/lib/apt/lists/*
+RUN rm -rf /var/lib/apt/lists/* /tempdir
 RUN conda clean --all -y -f && \
   conda config --add channels conda-forge/label/dev && \
   conda config --add channels conda-forge
-
-# needed until cythonized geopandas updated for new pandas
-RUN /home/jovyan/patch_geopandas.sh
 
 
 ## prepare container
