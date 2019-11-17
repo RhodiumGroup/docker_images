@@ -21,10 +21,10 @@ dependencies:
   - dropbox
   - esmpy
   - fastparquet
-  - fiona
+  - fiona=1.8.9.post2
   - fusepy
   - gcsfs
-  - gdal
+  - gdal=2.4.3
   - geoalchemy2
   - geopandas=1.0.0.dev
   - geopy
@@ -32,7 +32,6 @@ dependencies:
   - geoviews
   - git
   - gitpython
-  - gnuplot
   - google-cloud-container
   - google-cloud-storage
   - holoviews
@@ -64,7 +63,7 @@ dependencies:
   - python-snappy
   - pyviz_comms
   - PyYAML
-  - rasterio
+  - rasterio=1.0.28
   - regionmask
   - scikit-image
   - scikit-learn

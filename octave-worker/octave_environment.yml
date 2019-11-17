@@ -2,6 +2,7 @@ name: base
 channels:
   - conda-forge
 dependencies:
+  - gnuplot=5.2.7
   - octave
   - octave_kernel
   - oct2py

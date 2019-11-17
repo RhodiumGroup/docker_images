@@ -5,6 +5,7 @@ dependencies:
   - coverage
   - dask-labextension
   - flake8
+  - gnuplot=5.2.7
   - graphviz
   - ipdb
   - nano
