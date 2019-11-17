@@ -7,7 +7,6 @@
   },
   "@jupyterlab/notebook-extension:tracker": {
     "codeCellConfig": {
-      "rulers": [79],
       "lineNumbers":true
     }
   }
