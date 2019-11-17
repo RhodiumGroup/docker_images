@@ -59,7 +59,6 @@ dependencies:
   - pygeos
   - pyinterp
   - pyshp
-  - python=3.8
   - python-blosc
   - python-snappy
   - pyviz_comms
