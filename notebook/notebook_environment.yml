@@ -12,7 +12,7 @@ dependencies:
   - nbconvert
   - nodejs
   - nose
-  - octave
+  # - octave
   - octave_kernel
   - oct2py
   - openssh
