@@ -2,17 +2,6 @@
 FROM ubuntu:bionic-20190612@sha256:9b1702dcfe32c873a770a32cfd306dd7fc1c4fd134adfb783db68defc8894b3c
 ARG DEBIAN_FRONTEND=noninteractive
 
-## filepath curation
-RUN mkdir /opt/conda/specs
-COPY base_environment.yml /opt/conda/specs
-
-RUN mkdir /tempdir
-COPY common.sh /tempdir
-COPY patch_geopandas.sh /tempdir
-
-COPY add_service_creds.py /usr/bin
-COPY prepare.sh /usr/bin
-
 
 ###########
 RUN apt-get update --no-install-recommends -y
@@ -31,13 +20,24 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.7.10-Linux-x86
 ###########
 
 
+## filepath curation
+RUN mkdir /opt/conda/specs
+COPY base_environment.yml /opt/conda/specs
+
+RUN mkdir /tempdir
+COPY common.sh /tempdir
+COPY patch_geopandas.sh /tempdir
+
+COPY add_service_creds.py /usr/bin
+COPY prepare.sh /usr/bin
+
+
 ## perform a bunch of common actions
 RUN bash /tempdir/common.sh
 
+
 ## set up python env
 RUN conda update -n base conda
-
-#  create environemnt with common packages across worker and nb
 RUN conda env update -f /opt/conda/specs/base_environment.yml
 
 

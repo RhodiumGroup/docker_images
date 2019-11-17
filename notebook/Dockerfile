@@ -34,7 +34,7 @@ COPY overrides.json /opt/conda/share/jupyter/lab/settings
 
 
 ## perform a bunch of common actions
-RUN sudo bash /pre-home/common.sh
+RUN sudo bash /tempdir/common.sh
 RUN sudo chown -R $NB_USER /gcs
 
 
