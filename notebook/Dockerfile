@@ -24,12 +24,6 @@ COPY common.sh /tempdir
 COPY patch_geopandas.sh /tempdir
 
 COPY prepare.sh /usr/bin
-
-RUN mkdir /opt/conda/specs
-COPY base_environment.yml /opt/conda/specs
-COPY notebook_environment.yml /opt/conda/specs
-COPY r_environment.yml /opt/conda/specs
-
 COPY overrides.json /opt/conda/share/jupyter/lab/settings
 
 
@@ -43,6 +37,10 @@ RUN sudo apt-get install -yq --no-install-recommends vim && sudo apt-get clean
 
 
 # set up conda channels
+RUN mkdir /opt/conda/specs
+COPY base_environment.yml /opt/conda/specs
+COPY notebook_environment.yml /opt/conda/specs
+COPY r_environment.yml /opt/conda/specs
 RUN conda config --add channels conda-forge/label/dev && \
   conda config --add channels conda-forge
 

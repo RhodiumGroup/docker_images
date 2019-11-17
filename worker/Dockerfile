@@ -4,9 +4,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 
 ## filepath curation
-RUN mkdir /opt/conda/specs
-COPY base_environment.yml /opt/conda/specs
-
 RUN mkdir /tempdir
 COPY common.sh /tempdir
 COPY patch_geopandas.sh /tempdir
@@ -36,6 +33,8 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.7.12.1-Linux-x
 
 
 ## set up conda channels
+RUN mkdir /opt/conda/specs
+COPY base_environment.yml /opt/conda/specs
 RUN conda config --add channels conda-forge/label/dev && \
   conda config --add channels conda-forge
 
