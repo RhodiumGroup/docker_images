@@ -13,8 +13,8 @@ dependencies:
   - nodejs
   - nose
   # - octave
-  - octave_kernel
-  - oct2py
+  # - octave_kernel
+  # - oct2py
   - openssh
   - pytest
   - pytest-cov
