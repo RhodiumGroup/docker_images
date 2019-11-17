@@ -20,6 +20,11 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.7.10-Linux-x86
 ###########
 
 
+## set up conda channels
+RUN conda config --add channels conda-forge/label/dev && \
+  conda config --add channels conda-forge
+
+
 ## filepath curation
 RUN mkdir /opt/conda/specs
 COPY base_environment.yml /opt/conda/specs
@@ -47,9 +52,7 @@ RUN /tempdir/patch_geopandas.sh
 
 ## clean up
 RUN rm -rf /var/lib/apt/lists/* /tempdir
-RUN conda clean --all -y -f && \
-  conda config --add channels conda-forge/label/dev && \
-  conda config --add channels conda-forge
+RUN conda clean --all -f
 
 
 ## prepare container

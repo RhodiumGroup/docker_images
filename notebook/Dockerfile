@@ -42,8 +42,13 @@ RUN sudo chown -R $NB_USER /gcs
 RUN sudo apt-get install -yq --no-install-recommends vim && sudo apt-get clean
 
 
+# set up conda channels
+RUN conda config --add channels conda-forge/label/dev && \
+  conda config --add channels conda-forge
+
+
 ## set up conda
-RUN conda install -n base conda
+RUN conda update -n base conda
 
 #  update environemnt with common packages across worker and nb
 RUN conda env update -f /opt/conda/specs/base_environment.yml
@@ -55,6 +60,7 @@ RUN conda env update -f /opt/conda/specs/notebook_environment.yml
 RUN conda env create -f /opt/conda/specs/r_environment.yml
 
 
+## Set up jupyter lab extensions
 RUN jupyter labextension update --all && \
     jupyter labextension install \
     @jupyterlab/hub-extension \
@@ -76,11 +82,10 @@ RUN jupyter serverextension enable --py --sys-prefix dask_labextension
 ## needed until cythonized geopandas updated for new pandas
 RUN /tempdir/patch_geopandas.sh
 
+
 ## clean up
 RUN sudo rm -rf /var/lib/apt/lists/* /tempdir
-RUN conda clean --all -y -f && \
-  conda config --add channels conda-forge/label/dev && \
-  conda config --add channels conda-forge
+RUN conda clean --all -f
 
 
 ## prepare container
