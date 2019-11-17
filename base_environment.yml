@@ -59,6 +59,7 @@ dependencies:
   - pygeos
   - pyinterp
   - pyshp
+  - python
   - python-blosc
   - python-snappy
   - pyviz_comms
