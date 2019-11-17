@@ -3,11 +3,26 @@ FROM ubuntu:bionic-20190612@sha256:9b1702dcfe32c873a770a32cfd306dd7fc1c4fd134adf
 ARG DEBIAN_FRONTEND=noninteractive
 
 
-###########
-RUN apt-get update --no-install-recommends -y
-RUN apt-get install -yq --no-install-recommends wget ca-certificates
+## filepath curation
+RUN mkdir /opt/conda/specs
+COPY base_environment.yml /opt/conda/specs
 
+RUN mkdir /tempdir
+COPY common.sh /tempdir
+COPY patch_geopandas.sh /tempdir
+
+COPY add_service_creds.py /usr/bin
+COPY prepare.sh /usr/bin
+
+
+## perform a bunch of common actions
+RUN bash /tempdir/common.sh
+
+
+###########
+## install miniconda
 # adapted from continuumio/miniconda3
+
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
 
@@ -23,22 +38,6 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.7.12.1-Linux-x
 ## set up conda channels
 RUN conda config --add channels conda-forge/label/dev && \
   conda config --add channels conda-forge
-
-
-## filepath curation
-RUN mkdir /opt/conda/specs
-COPY base_environment.yml /opt/conda/specs
-
-RUN mkdir /tempdir
-COPY common.sh /tempdir
-COPY patch_geopandas.sh /tempdir
-
-COPY add_service_creds.py /usr/bin
-COPY prepare.sh /usr/bin
-
-
-## perform a bunch of common actions
-RUN bash /tempdir/common.sh
 
 
 ## set up python env

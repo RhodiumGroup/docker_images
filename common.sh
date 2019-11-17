@@ -1,14 +1,16 @@
 #!/bin/sh
 # install apt-get packages
-apt-get update -y
+apt-get update -y --no-install-recommends
 apt-get install -yq --no-install-recommends \
   apt-utils \
   bzip2 \
+  ca-certificates \
   curl \
   lsb-release \
   gnupg2 \
   sudo \
-  libgl1-mesa-glx
+  libgl1-mesa-glx \
+  wget
 
 # install gcsfuse, google cloud sdk, kubectl
 # (need curl to be installed earlier)
