@@ -1,7 +1,8 @@
 {
   "@jupyterlab/fileeditor-extension:plugin": {
     "editorConfig": {
-        "rulers": [79]
+        "rulers": [79],
+        "lineNumbers": true
     }
   }
 }
