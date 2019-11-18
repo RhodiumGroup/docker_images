@@ -33,7 +33,10 @@ RUN sudo chown -R $NB_USER /gcs
 
 
 ## more apt-get
-RUN sudo apt-get install -yq --no-install-recommends vim && sudo apt-get clean
+RUN sudo apt-get install -yq --no-install-recommends
+  vim \
+  octave && \
+  sudo apt-get clean
 
 
 # set up conda channels

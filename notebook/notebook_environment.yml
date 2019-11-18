@@ -10,7 +10,6 @@ dependencies:
   - ipdb
   - nano
   - nose
-  - octave
   - octave_kernel
   - oct2py
   - openssh
