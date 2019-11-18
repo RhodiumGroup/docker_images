@@ -24,7 +24,7 @@ COPY common.sh /tempdir
 COPY patch_geopandas.sh /tempdir
 
 COPY prepare.sh /usr/bin
-COPY overrides.json /opt/conda/share/jupyter/lab/settings
+COPY overrides.json /opt/conda/share/jupyter/lab/settings/overrides.json
 
 
 ## perform a bunch of common actions
