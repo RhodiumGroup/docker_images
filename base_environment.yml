@@ -41,8 +41,9 @@ dependencies:
   - holoviews
   - h5netcdf
   - icu
-  - ipyleaflet
   - jedi
+# need server proxy on workers if using remote scheduler
+  - jupyter-server-proxy
   - kubernetes
   - lapack
   - lz4
