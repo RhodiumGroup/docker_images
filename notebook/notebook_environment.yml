@@ -6,10 +6,8 @@ dependencies:
   - coverage
   - dask-labextension
   - flake8
-  - graphviz
   - ipdb
   - ipyleaflet
-  - jupyter_bokeh
   - jupyterlab_code_formatter
   - nano
   - nb_conda_kernels
@@ -20,6 +18,7 @@ dependencies:
   - pytest
   - pytest-cov
   - pytest-runner
+  - python-graphviz
   - sphinx
   - tox
   - pip:
