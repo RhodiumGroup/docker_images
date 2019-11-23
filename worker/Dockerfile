@@ -50,5 +50,7 @@ RUN conda clean --all -f
 
 ## prepare container
 ENV OMP_NUM_THREADS=1
-ENV DASK_TICK_MAXIMUM_DELAY=5s
+ENV MKL_NUM_THREADS=1
+ENV OPENBLAS_NUM_THREADS=1
+
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
