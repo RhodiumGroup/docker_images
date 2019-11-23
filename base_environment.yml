@@ -50,7 +50,6 @@ dependencies:
   - lz4
   - make
   - matplotlib
-  - nb_conda_kernels
   - nc-time-axis
   - ncurses
   - netcdf-fortran
