@@ -32,7 +32,7 @@ RUN sudo chown -R $NB_USER /gcs
 
 
 ## more apt-get
-RUN sudo apt-get install -yq --no-install-recommends \
+RUN sudo apt-get install -yq \
   vim \
   octave && \
   sudo apt-get clean
@@ -68,6 +68,7 @@ RUN jupyter labextension update --all && \
     @jupyter-widgets/jupyterlab-manager \
     @jupyter-widgets/jupyterlab-sidecar \
     @pyviz/jupyterlab_pyviz \
+    @ryantam626/jupyterlab_black \
     dask-labextension \
     itk-jupyter-widgets \
     jupyterlab_bokeh \
@@ -77,6 +78,7 @@ RUN jupyter serverextension enable --py jupyterlab --sys-prefix
 RUN jupyter serverextension enable --py jupyterlab --user
 RUN jupyter serverextension enable --sys-prefix jupyter_server_proxy
 RUN jupyter serverextension enable --py --sys-prefix dask_labextension
+RUN jupyter serverextension enable --py jupyterlab_black
 
 
 ## clean up

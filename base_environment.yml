@@ -21,7 +21,6 @@ dependencies:
   - esmpy
   - fastparquet
   - fiona
-  # - fiona=1.8.9.post2
   - fusepy
 # this gcc pin is necessary b/c of a weird feature in the h553295d_15 build
 # which makes it hard to build numpy-based cython extensions (like pyclaw).
@@ -30,7 +29,6 @@ dependencies:
   - gcc_linux-64=7.3.0=h553295d_14
   - gcsfs
   - gdal
-  # - gdal=2.4.3
   - geoalchemy2
   - geopandas
   - geopy
@@ -69,7 +67,6 @@ dependencies:
   - pyviz_comms
   - PyYAML
   - rasterio
-  # - rasterio=1.0.28
   - regionmask
   - scikit-image
   - scikit-learn

@@ -2,12 +2,10 @@ name: base
 channels:
   - conda-forge
 dependencies:
+  - black
   - coverage
   - dask-labextension
   - flake8
-  - ghostscript
-  - gnuplot
-  # - gnuplot=5.2.7
   - graphviz
   - ipdb
   - nano
@@ -21,3 +19,6 @@ dependencies:
   - pytest-runner
   - sphinx
   - tox
+  - pip:
+    - black_nbconvert
+    - https://github.com/ryantam626/jupyterlab_black/archive/master.zip
