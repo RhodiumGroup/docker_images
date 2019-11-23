@@ -63,22 +63,14 @@ RUN conda env create -f /opt/conda/specs/r_environment.yml
 ## Set up jupyter lab extensions
 RUN jupyter labextension update --all && \
     jupyter labextension install \
-    @jupyterlab/hub-extension \
-    @jupyterlab/plotly-extension \
+    @bokeh/jupyter_bokeh \
     @jupyter-widgets/jupyterlab-manager \
     @jupyter-widgets/jupyterlab-sidecar \
     @pyviz/jupyterlab_pyviz \
-    @ryantam626/jupyterlab_black \
     dask-labextension \
-    itk-jupyter-widgets \
-    jupyterlab_bokeh \
-    jupyter-leaflet
-
-RUN jupyter serverextension enable --py jupyterlab --sys-prefix
-RUN jupyter serverextension enable --py jupyterlab --user
-RUN jupyter serverextension enable --sys-prefix jupyter_server_proxy
-RUN jupyter serverextension enable --py --sys-prefix dask_labextension
-RUN jupyter serverextension enable --py jupyterlab_black
+    jupyter-leaflet \
+    jupyterlab-plotly \
+    plotlywidget
 
 
 ## clean up

@@ -8,6 +8,9 @@ dependencies:
   - flake8
   - graphviz
   - ipdb
+  - ipyleaflet
+  - jupyter_bokeh
+  - jupyterlab_code_formatter
   - nano
   - nb_conda_kernels
   - nose
@@ -21,4 +24,3 @@ dependencies:
   - tox
   - pip:
     - black_nbconvert
-    - https://github.com/ryantam626/jupyterlab_black/archive/master.zip

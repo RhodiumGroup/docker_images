@@ -6,10 +6,3 @@
     }
   }
 }
-
-{
-  "@ryantam626/jupyterlab_black:settings": {
-    "blackPythonBin": "/opt/conda/bin/python",
-    "lineLength": 79
-  }
-}
