@@ -6,10 +6,12 @@ dependencies:
   - dask-labextension
   - flake8
   - ghostscript
-  - gnuplot=5.2.7
+  - gnuplot
+  # - gnuplot=5.2.7
   - graphviz
   - ipdb
   - nano
+  - nb_conda_kernels
   - nose
   - octave_kernel
   - oct2py

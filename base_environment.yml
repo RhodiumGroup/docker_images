@@ -1,7 +1,6 @@
 name: base
 channels:
   - conda-forge
-  - conda-forge/label/dev
 dependencies:
   - beautifulsoup4
   - boto3
@@ -21,12 +20,19 @@ dependencies:
   - dropbox
   - esmpy
   - fastparquet
-  - fiona=1.8.9.post2
+  - fiona
+  # - fiona=1.8.9.post2
   - fusepy
+# this gcc pin is necessary b/c of a weird feature in the h553295d_15 build
+# which makes it hard to build numpy-based cython extensions (like pyclaw).
+# we should try removing it whenever we next do an update and see if Clawpack
+# can still be built
+  - gcc_linux-64=7.3.0=h553295d_14
   - gcsfs
-  - gdal=2.4.3
+  - gdal
+  # - gdal=2.4.3
   - geoalchemy2
-  - geopandas=1.0.0.dev
+  - geopandas
   - geopy
   - geotiff
   - geoviews
@@ -63,7 +69,8 @@ dependencies:
   - python-snappy
   - pyviz_comms
   - PyYAML
-  - rasterio=1.0.28
+  - rasterio
+  # - rasterio=1.0.28
   - regionmask
   - scikit-image
   - scikit-learn

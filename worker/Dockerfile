@@ -6,7 +6,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 ## filepath curation
 RUN mkdir /tempdir
 COPY common.sh /tempdir
-COPY patch_geopandas.sh /tempdir
 
 COPY add_service_creds.py /usr/bin
 COPY prepare.sh /usr/bin
@@ -42,10 +41,6 @@ RUN conda config --add channels conda-forge/label/dev && \
 ## set up python env
 RUN conda update -n base conda
 RUN conda env update -f /opt/conda/specs/base_environment.yml
-
-
-## needed until cythonized geopandas updated for new pandas
-RUN /tempdir/patch_geopandas.sh
 
 
 ## clean up

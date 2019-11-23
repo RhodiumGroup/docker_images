@@ -80,10 +80,6 @@ RUN jupyter serverextension enable --sys-prefix jupyter_server_proxy
 RUN jupyter serverextension enable --py --sys-prefix dask_labextension
 
 
-## needed until cythonized geopandas updated for new pandas
-RUN /tempdir/patch_geopandas.sh
-
-
 ## clean up
 RUN sudo rm -rf /var/lib/apt/lists/* /tempdir
 RUN conda clean --all -f

@@ -3,6 +3,7 @@ channels:
   - conda-forge
 dependencies:
   - ghostscript
-  - gnuplot=5.2.7
+  - gnuplot
+  # - gnuplot=5.2.7
   - octave_kernel
   - oct2py
