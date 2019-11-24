@@ -95,5 +95,5 @@ dependencies:
     - climate-toolbox
     - impactlab-tools
     - parameterize_jobs
-    - rhg_compute_tools
+    - git+https://github.com/rhodiumgroup/rhg_compute_tools.git@allow-remote-scheduler
     - git+https://github.com/NCAR/intake-esm.git
