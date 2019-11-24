@@ -2,8 +2,15 @@ metadata:
 spec:
   restartPolicy: Never
   containers:
-  - args: [dask-worker, $(DASK_SCHEDULER_ADDRESS), --nthreads, '1', --no-bokeh,
-          --memory-limit, 11.5GB, --death-timeout, '60']
+  - args:
+    - dask-worker
+    - --nthreads
+    - '1'
+    - --no-dashboard
+    - --memory-limit
+    - 11.5GB
+    - --death-timeout
+    - '60'
     env:
       - name: GCSFUSE_BUCKET
         value: rhg-data
