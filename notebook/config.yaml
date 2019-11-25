@@ -1,6 +1,27 @@
+# this config file is adapted from the one used by Pangeo:
+# https://github.com/pangeo-data/pangeo-stacks/blob/master/base-notebook/binder/dask_config.yaml
+
 distributed:
   dashboard:
     link: "{JUPYTERHUB_SERVICE_PREFIX}proxy/{port}/status"
+
+  admin:
+    tick:
+      limit: 5s
+
+logging:
+  distributed: warning
+  bokeh: critical
+  # http://stackoverflow.com/questions/21234772/python-tornado-disable-logging-to-stderr
+  tornado: critical
+  tornado.application: error
+
+labextension:
+  factory:
+    module: dask_kubernetes
+    class: KubeCluster
+    args: []
+    kwargs: {}
 
 kubernetes:
   worker-template-path: "/home/{NB_USER}/worker-template.yml"
