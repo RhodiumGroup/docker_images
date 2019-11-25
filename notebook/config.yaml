@@ -16,6 +16,10 @@ logging:
   tornado: critical
   tornado.application: error
 
+# the below section gives defaults for launching clusters from the dask
+# labextension viewer. We could customize this but right now it should load
+# a default cluster from the worker-template.yml file (as sepecified in the
+# following section)
 labextension:
   factory:
     module: dask_kubernetes
