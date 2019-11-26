@@ -69,6 +69,7 @@ RUN jupyter labextension update --all && \
     @pyviz/jupyterlab_pyviz \
     dask-labextension \
     jupyter-leaflet \
+    jupyter-matplotlib \
     jupyterlab-plotly \
     plotlywidget
 

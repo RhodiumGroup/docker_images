@@ -8,6 +8,7 @@ dependencies:
   - flake8
   - ipdb
   - ipyleaflet
+  - ipympl
   - jupyterlab_code_formatter
   - nano
   - nb_conda_kernels
