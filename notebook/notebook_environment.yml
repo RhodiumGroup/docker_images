@@ -16,7 +16,11 @@ dependencies:
   - octave_kernel
   - oct2py
   - openssh
+  - pytest
+  - pytest-cov
+  - pytest-runner
   - python-graphviz
+  - sphinx
   - tox
   - pip:
     - black_nbconvert
