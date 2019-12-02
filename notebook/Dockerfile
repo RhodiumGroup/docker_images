@@ -1,6 +1,10 @@
 FROM jupyter/base-notebook:latest
 ARG DEBIAN_FRONTEND=noninteractive
 
+## needed to make sure things with cython compile correctly
+## (this will eventually become default in numpy)
+ENV NPY_DISTUTILS_APPEND_FLAGS=1
+
 ## get rid of conda pin file that causes update problems
 RUN rm /opt/conda/conda-meta/pinned
 
