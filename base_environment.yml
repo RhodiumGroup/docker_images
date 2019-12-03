@@ -104,4 +104,4 @@ dependencies:
 # need to install from master until 0.10.1
 # 6762b474dd61f316bd952db0fa1d3ad96dc54174 is a known good commit but for now
 # not pinning the hash
-    - git+https://github.com/dask/dask-kubernetes
+    - git+https://github.com/dask/dask-kubernetes@master
