@@ -104,4 +104,4 @@ dependencies:
 # need to install from master until 0.10.1
 # due to handling of remote scheduler
 # (we also should at some point switch to dask-gateway instead of dask-kubernetes)
-    - git+https://github.com/dask/dask-kubernetes@b481bbbc6c1bb7d0719bc385c0537c4ba4a0ee57
+    - git+https://github.com/dask/dask-kubernetes.git
