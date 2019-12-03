@@ -17,7 +17,9 @@ dependencies:
   - datashader
   - distributed
   - dropbox
-  - esmpy
+# need to make sure we get esmpy compiled with mpi otherwise xesmf regridding
+# won't work
+  - esmpy=8.0.0=mpi_mpich_py37ha9b28fa_101
   - fastparquet
   - fiona
   - fusepy
