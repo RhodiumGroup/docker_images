@@ -102,6 +102,6 @@ dependencies:
     - git+https://github.com/rhodiumgroup/rhg_compute_tools.git@allow-remote-scheduler
     - git+https://github.com/NCAR/intake-esm.git
 # need to install from master until 0.10.1
-# 6762b474dd61f316bd952db0fa1d3ad96dc54174 is a known good commit but for now
-# not pinning the hash
-    - git+https://github.com/dask/dask-kubernetes@master
+# due to handling of remote scheduler
+# (we also should at some point switch to dask-gateway instead of dask-kubernetes)
+    - git+https://github.com/dask/dask-kubernetes@b481bbbc6c1bb7d0719bc385c0537c4ba4a0ee57
