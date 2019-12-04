@@ -99,9 +99,9 @@ dependencies:
     - climate-toolbox
     - impactlab-tools
     - parameterize_jobs
-    - git+https://github.com/rhodiumgroup/rhg_compute_tools.git@allow-remote-scheduler
-    - git+https://github.com/NCAR/intake-esm.git
+    - git+https://github.com/rhodiumgroup/rhg_compute_tools.git@allow-remote-scheduler#egg=rhg_compute_tools
+    - git+https://github.com/NCAR/intake-esm.git#egg=intake_esm
 # need to install from master until 0.10.1
 # due to handling of remote scheduler
 # (we also should at some point switch to dask-gateway instead of dask-kubernetes)
-    - git+https://github.com/dask/dask-kubernetes.git
+    - git+https://github.com/dask/dask-kubernetes.git#egg=dask_kubernetes
