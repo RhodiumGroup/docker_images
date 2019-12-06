@@ -57,6 +57,8 @@ dependencies:
   - numba
   - numcodecs
   - pandas
+  # for geoviews
+  - phantomjs
   - pip
   - plotly
   - polyline
@@ -77,6 +79,8 @@ dependencies:
   - scikit-learn
   - scipy
   - seaborn
+  # for geoviews
+  - selenium
   - shapely
   - sparse
   - statsmodels
