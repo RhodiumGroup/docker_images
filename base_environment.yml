@@ -42,6 +42,7 @@ dependencies:
   - holoviews
   - h5netcdf
   - icu
+  - iris
   - jedi
 # need server proxy on workers if using remote scheduler
   - jupyter-server-proxy
