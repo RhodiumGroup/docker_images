@@ -73,9 +73,7 @@ dependencies:
   - PyYAML
   - rasterio
   - regionmask
-# the pinned rtree can be deleted from this requirements file once this is
-# solved and a new release is made: https://github.com/Toblerity/rtree/issues/124
-  - rtree=0.8.3
+  - rtree
   - scikit-image
   - scikit-learn
   - scipy
