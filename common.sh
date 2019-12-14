@@ -41,4 +41,4 @@ mkdir /opt/app
 # super sketchy hack to get around our need for compiler_compat binaries and some
 # other things that cause problems together?
 # see https://github.com/ContinuumIO/anaconda-issues/issues/11152
-RUN -rf /opt/conda/compiler_compat/ld
+rm -rf /opt/conda/compiler_compat/ld
