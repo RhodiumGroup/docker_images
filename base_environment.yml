@@ -70,7 +70,7 @@ dependencies:
   - python-blosc
   - python-snappy
   - pyviz_comms
-  - PyYAML
+  - pyyaml
   - rasterio
   - regionmask
   - rtree
@@ -101,7 +101,7 @@ dependencies:
     - sidecar
     - climate-toolbox
     - impactlab-tools
-    - parameterize_jobs
+    - parameterize-jobs
     - git+https://github.com/rhodiumgroup/rhg_compute_tools.git@allow-remote-scheduler#egg=rhg_compute_tools
     - git+https://github.com/NCAR/intake-esm.git#egg=intake_esm
 # need to install from master until 0.10.1
