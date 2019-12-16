@@ -8,6 +8,19 @@ import sys
 from ruamel.yaml import YAML
 
 def get_versions_in_current_environment(envname='base'):
+    '''
+    Calls ``conda env export -n {envname} --json`` and returns spec
+    
+    Parameters
+    ----------
+    envname : str
+        Name of environment to query (default 'base')
+    
+    Returns
+    -------
+    spec : dict
+        Environment spec
+    '''
     assert re.match(r'[a-zA-Z0-9]+$', envname), (
         'illegal environment name "{}"'.format(envname))
 
@@ -24,6 +37,9 @@ def get_versions_in_current_environment(envname='base'):
 
 
 def parse_conda_dependencies(conda_dependencies):
+    '''
+    Splits conda dependencies into `conda` and other provider dependencies (e.g. `pip`)
+    '''
     formatted_dependencies = {'conda': {}}
     for dep in conda_dependencies:
         if isinstance(dep, dict):
@@ -38,7 +54,26 @@ def parse_conda_dependencies(conda_dependencies):
     return formatted_dependencies
 
 
-def get_pinned_version(dependency, pinned_versions):
+def determine_pinned_version(dependency, pinned_versions):
+    '''
+    Handle individual packages and pinned versions to get package spec
+    
+    Defines the line-by-line logic that decides how the line from the original yaml
+    file and the dependencies from the local environment should be used to construct
+    the pinned dependency in the new spec file.
+    
+    Parameters
+    ----------
+    dependency : str
+        Package name or spec from current environment file
+    pinned_versions : dict
+        Dictionary of package names and pinned versions from local environment
+    
+    Returns
+    -------
+    pinned : str
+        Pinned package spec
+    '''
     if ('git+' in dependency) or ('http' in dependency):
         return dependency
     return pinned_versions.get(dependency.split('=')[0], dependency)
@@ -47,8 +82,18 @@ def get_pinned_version(dependency, pinned_versions):
 def pin_dependencies_in_conda_env_file_from_version_spec(
         filepath, versions_to_pin, dry_run=False):
     '''
+    Pin package versions to a given spec
+
     Parameters
     ----------
+    filepath : str
+        Conda environment yml file to be pinned
+    versions_to_pin : dict
+        Dictionary of package specs, with keys package sources (e.g. ``conda``,
+        ``pip``), and values dictionaries of package names and pinned versions.
+    dry_run : bool
+        Print the updated environment files, rather than overwriting them. Default
+        False.
     '''
 
     indent_config = dict(mapping=2, sequence=2, offset=2)
@@ -64,10 +109,10 @@ def pin_dependencies_in_conda_env_file_from_version_spec(
         if isinstance(dep, dict):
             for k, v in dep.items():
                 for si, subdep in enumerate(v):
-                    pinned = get_pinned_version(subdep, versions_to_pin[k])
+                    pinned = determine_pinned_version(subdep, versions_to_pin[k])
                     file_spec['dependencies'][di][k][si] = pinned
         else:
-            pinned = get_pinned_version(dep, versions_to_pin['conda'])
+            pinned = determine_pinned_version(dep, versions_to_pin['conda'])
             file_spec['dependencies'][di] = pinned
 
     if dry_run:
@@ -82,6 +127,22 @@ def pin_dependencies_in_conda_env_file_from_version_spec(
 
 
 def pin_files(environment_files, dry_run=False):
+    '''
+    Pin package versions in provided environment files
+    
+    Parameters
+    ----------
+    environment_files : list of tuples
+        List of (environment file path, pin source env name) tuples to be pinned. The
+        second tuple element will be used as the source environment on the local
+        machine to look for pinned versions.
+    versions_to_pin : dict
+        Dictionary of package specs, with keys package sources (e.g. ``conda``,
+        ``pip``), and values dictionaries of package names and pinned versions.
+    dry_run : bool
+        Print the updated environment files, rather than overwriting them. Default
+        False.
+    '''
     environment_specs = {}
     for envfile, envname in environment_files:
         if envname not in environment_specs:
@@ -100,11 +161,13 @@ def pin_files(environment_files, dry_run=False):
 
 @click.group()
 def pinversions():
+    '''View and modify package version pins'''
     pass
 
 
 @pinversions.group()
 def pin():
+    '''Pin packages in environment files based on environments on the local machine'''
     pass
 
 
@@ -112,6 +175,7 @@ def pin():
 @click.option(
     '--dry-run', is_flag=True, default=False, help='print proposed spec rather than modifying it')
 def base(dry_run=False):
+    '''Pin the base environment file'''
     pin_files([('base_environment.yml', 'base')], dry_run=dry_run)
 
 
@@ -119,6 +183,7 @@ def base(dry_run=False):
 @click.option(
     '--dry-run', is_flag=True, default=False, help='print proposed spec rather than modifying it')
 def notebook(dry_run=False):
+    '''Pin the notebook base environment file'''
     pin_files([('notebook/notebook_environment.yml', 'base')], dry_run=dry_run)
 
 
@@ -126,6 +191,7 @@ def notebook(dry_run=False):
 @click.option(
     '--dry-run', is_flag=True, default=False, help='print proposed spec rather than modifying it')
 def octave(dry_run=False):
+    '''Pin the worker octave environment files'''
     pin_files([('octave-worker/octave_environment.yml', 'base')], dry_run=dry_run)
 
 
@@ -133,6 +199,7 @@ def octave(dry_run=False):
 @click.option(
     '--dry-run', is_flag=True, default=False, help='print proposed spec rather than modifying it')
 def r(dry_run=False):
+    '''Pin the notebook r environment files'''
     pin_files([('notebook/r_environment.yml', 'r')], dry_run=dry_run)
 
 
@@ -140,6 +207,7 @@ def r(dry_run=False):
 @click.option(
     '--dry-run', is_flag=True, default=False, help='print proposed spec rather than modifying it')
 def all(dry_run=False):
+    '''Pin all environment files'''
     pin_files(
         [
             ('base_environment.yml', 'base'),
