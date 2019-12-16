@@ -19,7 +19,7 @@ dependencies:
   - dropbox=9.4.0=py_0
 # need to make sure we get esmpy compiled with mpi otherwise xesmf regridding
 # won't work
-  - esmpy=8.0.0=mpi_mpich_py37ha9b28fa_101
+  - esmpy=8.0.0=mpi_mpich_py37ha9b28fa_101 # pinkeep: esmpy=8.0.0=mpi_mpich_py37ha9b28fa_101
   - fastparquet=0.3.2=py37hc1659b7_0
   - fiona=1.8.13=py37h900e953_0
   - fusepy=3.0.1=py_0
@@ -27,7 +27,7 @@ dependencies:
 # which makes it hard to build numpy-based cython extensions (like pyclaw).
 # we should try removing it whenever we next do an update and see if Clawpack
 # can still be built
-  - gcc_linux-64=7.3.0=h553295d_14
+  - gcc_linux-64=7.3.0=h553295d_14 # pinkeep: gcc_linux-64=7.3.0=h553295d_14
   - gcsfs=0.5.3=py_0
   - gdal=3.0.2=py37hbb6b9fb_5
   - geoalchemy2=0.6.3=py_0
@@ -66,7 +66,7 @@ dependencies:
   - pygeos=0.5=py37h5d51c17_1
   - pyinterp=0.0.7=py37h97f2665_0
   - pyshp=2.1.0=py_0
-  - python=3.7.3=h357f687_2
+  - python=3.7.3=h357f687_2 # pinkeep: python=3.7
   - python-blosc=1.8.1=py37hf484d3e_0
   - python-snappy=0.5.4=py37hee44bf9_1
   - pyviz_comms=0.7.2=py_0

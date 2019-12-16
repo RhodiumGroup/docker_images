@@ -73,10 +73,18 @@ def determine_pinned_version(dependency, pinned_versions):
     -------
     pinned : str
         Pinned package spec
+    comment : str or None
+        Comment to include in file if a pinning flag should be included
     '''
     if ('git+' in dependency) or ('http' in dependency):
-        return dependency
-    return pinned_versions.get(dependency.split('=')[0], dependency)
+        return dependency, None
+
+    if '=' in dependency:
+        comment = 'pinkeep: {}'.format(dependency)
+    else:
+        comment = None
+
+    return pinned_versions.get(dependency.split('=')[0], dependency), comment
 
 
 def pin_dependencies_in_conda_env_file_from_version_spec(
@@ -109,11 +117,20 @@ def pin_dependencies_in_conda_env_file_from_version_spec(
         if isinstance(dep, dict):
             for k, v in dep.items():
                 for si, subdep in enumerate(v):
-                    pinned = determine_pinned_version(subdep, versions_to_pin[k])
+                    pinned, comment = determine_pinned_version(
+                        subdep, versions_to_pin[k])
+
                     file_spec['dependencies'][di][k][si] = pinned
+                    if comment is not None:
+                        file_spec['dependencies'][di][k].yaml_add_eol_comment(
+                            comment, si)
         else:
-            pinned = determine_pinned_version(dep, versions_to_pin['conda'])
+            pinned, comment = determine_pinned_version(dep, versions_to_pin['conda'])
             file_spec['dependencies'][di] = pinned
+            
+            if comment is not None:
+                file_spec['dependencies'].yaml_add_eol_comment(
+                    comment, di)
 
     if dry_run:
         sys.stdout.write("filename: {}\n{}\n".format(filepath, '-'*50))
