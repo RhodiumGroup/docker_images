@@ -25,8 +25,8 @@ IMAGES_TO_CHECK = {
 
 
 PAIRINGS = [
-    ('notebook', 'base', 'worker', 'worker'),
-    ('notebook', 'octave', 'octave-worker', 'worker'),
+    ('notebook', 'base', 'worker', 'base'),
+    ('notebook', 'base', 'octave-worker', 'base'),
 ]
 '''
 PAIRINGS

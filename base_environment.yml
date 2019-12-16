@@ -1,0 +1,110 @@
+name: base
+channels:
+  - conda-forge
+dependencies:
+  - beautifulsoup4
+  - boto3
+  - bqplot
+  - bumpversion
+  - cachecontrol
+  - cartopy
+  - cftime
+  - click
+  - compilers
+  - dask
+  - dask-glm
+  - dask-ml
+  - datashader
+  - distributed
+  - dropbox
+# need to make sure we get esmpy compiled with mpi otherwise xesmf regridding
+# won't work
+  - esmpy=8.0.0=mpi_mpich_py37ha9b28fa_101
+  - fastparquet
+  - fiona
+  - fusepy
+# this gcc pin is necessary b/c of a weird feature in the h553295d_15 build
+# which makes it hard to build numpy-based cython extensions (like pyclaw).
+# we should try removing it whenever we next do an update and see if Clawpack
+# can still be built
+  - gcc_linux-64=7.3.0=h553295d_14
+  - gcsfs
+  - gdal
+  - geoalchemy2
+  - geopandas
+  - geopy
+  - geotiff
+  - geoviews
+  - git
+  - gitpython
+  - google-cloud-container
+  - google-cloud-storage
+  - holoviews
+  - h5netcdf
+  - icu
+  - iris
+  - jedi
+# need server proxy on workers if using remote scheduler
+  - jupyter-server-proxy
+  - kubernetes
+  - lapack
+  - lz4
+  - make
+  - matplotlib
+  - nc-time-axis
+  - ncurses
+  - netcdf-fortran
+  - netcdf4
+  - numba
+  - numcodecs
+  - pandas
+  # for geoviews
+  - phantomjs
+  - pip
+  - plotly
+  - polyline
+  - pygeos
+  - pyinterp
+  - pyshp
+  - python
+  - python-blosc
+  - python-snappy
+  - pyviz_comms
+  - PyYAML
+  - rasterio
+  - regionmask
+  - rtree
+  - scikit-image
+  - scikit-learn
+  - scipy
+  - seaborn
+  # for geoviews
+  - selenium
+  - shapely
+  - sparse
+  - statsmodels
+  - tini
+  - unzip
+  - uritemplate
+  - xarray
+  - xesmf
+  - xgcm
+  - xhistogram
+  - xlrd
+  - xrft
+  - zarr
+  - zeromq
+  - zict
+  - pip:
+    - mapbox
+    - py-noaa
+    - sidecar
+    - climate-toolbox
+    - impactlab-tools
+    - parameterize_jobs
+    - git+https://github.com/rhodiumgroup/rhg_compute_tools.git@allow-remote-scheduler#egg=rhg_compute_tools
+    - git+https://github.com/NCAR/intake-esm.git#egg=intake_esm
+# need to install from master until 0.10.1
+# due to handling of remote scheduler
+# (we also should at some point switch to dask-gateway instead of dask-kubernetes)
+    - git+https://github.com/dask/dask-kubernetes.git#egg=dask_kubernetes

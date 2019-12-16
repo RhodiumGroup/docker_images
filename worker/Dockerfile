@@ -1,58 +1,56 @@
-FROM climateimpactlab/miniconda3-gfortran-netcdf:v1.0.2
+## using same container as jupyter/base-notebook:python-3.7.3
+FROM ubuntu:bionic-20190612@sha256:6e9f67fa63b0323e9a1e587fd71c561ba48a034504fb804fd26fd8800039835d
+ARG DEBIAN_FRONTEND=noninteractive
+ENV NPY_DISTUTILS_APPEND_FLAGS=1
 
-RUN apt-get update \
-    && apt-get install libgl1-mesa-glx -y \
-    && apt-get upgrade gnuplot -y
+## filepath curation
+RUN mkdir /tempdir
+COPY common.sh /tempdir
 
-# build conda
+COPY add_service_creds.py /usr/bin
+COPY prepare.sh /usr/bin
 
-USER $NB_USER
 
-RUN conda config --add channels conda-forge
-RUN conda update --yes conda
+## perform a bunch of common actions
+RUN bash /tempdir/common.sh
 
+
+###########
+## install miniconda
+# adapted from continuumio/miniconda3
+
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+ENV PATH /opt/conda/bin:$PATH
+
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.7.12.1-Linux-x86_64.sh -O ~/miniconda.sh && \
+    /bin/bash ~/miniconda.sh -b -p /opt/conda && \
+    rm ~/miniconda.sh && \
+    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
+    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
+    echo "conda activate base" >> ~/.bashrc
+###########
+
+
+## set up conda channels
 RUN mkdir /opt/conda/specs
-COPY environment.yml /opt/conda/specs/environment.yml
-RUN conda env create -f /opt/conda/specs/environment.yml
+COPY base_environment.yml /opt/conda/specs
+RUN conda config --add channels conda-forge/label/dev && \
+  conda config --add channels conda-forge
 
-RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
-    echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
-    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
-    apt-get update -y && apt-get install google-cloud-sdk kubectl -y
 
-RUN export GCSFUSE_REPO=gcsfuse-xenial \
-  && echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | tee /etc/apt/sources.list.d/gcsfuse.list \
-  && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
-  && apt-get update \
-  && apt-get install gcsfuse -y \
-  && alias googlefuse=/usr/bin/gcsfuse
+## set up python env
+RUN conda update -n base conda
+RUN conda env update -f /opt/conda/specs/base_environment.yml
 
-# clean up
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN conda clean -tipsy
 
+## clean up
+RUN rm -rf /var/lib/apt/lists/* /tempdir
+RUN conda clean --all -f
+
+
+## prepare container
 ENV OMP_NUM_THREADS=1
-ENV DASK_TICK_MAXIMUM_DELAY=5s
+ENV MKL_NUM_THREADS=1
+ENV OPENBLAS_NUM_THREADS=1
 
-USER root
-RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/bin/cloud_sql_proxy
-RUN chmod +x /usr/bin/cloud_sql_proxy
-
-USER root
-COPY prepare.sh /usr/bin/prepare.sh
-COPY add_service_creds.py /usr/bin/add_service_creds.py
-RUN chmod +x /usr/bin/prepare.sh
-RUN mkdir /opt/app
-RUN mkdir /gcs
-
-RUN /opt/conda/envs/worker/bin/pip install \
-    rhg_compute_tools==0.1.8 \
-    impactlab-tools==0.3.1 \
-    climate-toolbox==0.1.5 \
-    parameterize_jobs==0.1.1 \
-    --no-cache-dir
-
-# update pip
-RUN /opt/conda/envs/worker/bin/pip install --upgrade pip
-
-ENTRYPOINT ["/usr/local/bin/dumb-init", "/usr/bin/prepare.sh"]
+ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
