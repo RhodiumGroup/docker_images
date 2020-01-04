@@ -11,11 +11,11 @@ dependencies:
   - cftime=1.0.4.2=py37hc1659b7_0
   - click=7.0=py_0
   - compilers=1.0.4=0
-  - dask=2.9.0=py_0
+  - dask=2.8.1=py_0
   - dask-glm=0.2.0=py_1
   - dask-ml=1.1.1=py_0
-  - datashader=0.9.0=py_0
-  - distributed=2.9.0=py_0
+  - datashader=0.8.0=py_0
+  - distributed=2.8.1=py_0
   - dropbox=9.4.0=py_0
 # need to make sure we get esmpy compiled with mpi otherwise xesmf regridding
 # won't work
@@ -101,7 +101,7 @@ dependencies:
     - sidecar==0.3.0
     - climate-toolbox==0.1.5
     - impactlab-tools==0.4.0
-    - parameterize_jobs
+    - parameterize-jobs==0.1.1
     - git+https://github.com/rhodiumgroup/rhg_compute_tools.git@allow-remote-scheduler#egg=rhg_compute_tools
     - git+https://github.com/NCAR/intake-esm.git#egg=intake_esm
 # need to install from master until 0.10.1

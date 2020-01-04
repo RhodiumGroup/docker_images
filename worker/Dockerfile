@@ -1,5 +1,5 @@
 ## using same container as jupyter/base-notebook:python-3.7.3
-FROM ubuntu:bionic-20190612@sha256:9b1702dcfe32c873a770a32cfd306dd7fc1c4fd134adfb783db68defc8894b3c
+FROM ubuntu:bionic-20190612@sha256:6e9f67fa63b0323e9a1e587fd71c561ba48a034504fb804fd26fd8800039835d
 ARG DEBIAN_FRONTEND=noninteractive
 ENV NPY_DISTUTILS_APPEND_FLAGS=1
 

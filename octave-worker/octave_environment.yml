@@ -2,5 +2,5 @@ name: base
 channels:
   - conda-forge
 dependencies:
-  - octave_kernel
-  - oct2py
+  - octave_kernel=0.31.0=py_0
+  - oct2py=5.0.4=py_0

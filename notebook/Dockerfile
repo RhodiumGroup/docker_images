@@ -1,4 +1,4 @@
-FROM jupyter/base-notebook:latest
+FROM jupyter/base-notebook:notebook-6.0.0
 ARG DEBIAN_FRONTEND=noninteractive
 
 ## needed to make sure things with cython compile correctly
@@ -37,7 +37,7 @@ RUN sudo chown -R $NB_USER /gcs
 
 ## more apt-get
 RUN sudo apt-get install -yq \
-  vim \
+  vim less man locate kmod dialog \
   octave && \
   sudo apt-get clean
 

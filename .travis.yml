@@ -78,7 +78,7 @@ deploy:
   script: >-
     docker tag rhodium/octave-worker:$TRAVIS_COMMIT
     rhodium/octave-worker:dev &&
-    docker tag rhodium/octave-worker$TRAVIS_COMMIT
+    docker tag rhodium/octave-worker:$TRAVIS_COMMIT
     rhodium/octave-worker:latest &&
     docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" &&
     docker push "rhodium/octave-worker:$TRAVIS_COMMIT" &&
