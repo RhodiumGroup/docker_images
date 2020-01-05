@@ -23,7 +23,7 @@ dependencies:
 # won't work
   - esmpy=8.0.0=mpi_mpich_py37ha9b28fa_101 # pinkeep: esmpy=8.0.0=mpi_mpich_py37ha9b28fa_101
   - fastparquet=0.3.2=py37hc1659b7_0
-  - fiona=1.8.13=py37h900e953_0
+  - fiona=1.8.13
   - fusepy=3.0.1=py_0
 # this gcc pin is necessary b/c of a weird feature in the h553295d_15 build
 # which makes it hard to build numpy-based cython extensions (like pyclaw).
@@ -31,49 +31,49 @@ dependencies:
 # can still be built
   - gcc_linux-64=7.3.0=h553295d_14 # pinkeep: gcc_linux-64=7.3.0=h553295d_14
   - gcsfs=0.5.3=py_0
-  - gdal=3.0.2=py37hbb6b9fb_5
+  - gdal
   - geoalchemy2=0.6.3=py_0
-  - geopandas=0.6.2=py_0
-  - geopy=1.20.0=py_0
-  - geotiff=1.5.1=hbd99317_7
-  - geoviews=1.6.6=py_0
+  - geopandas
+  - geopy
+  - geotiff
+  - geoviews
   - git=2.24.0=pl526hce37bd2_1
   - gitpython=3.0.5=py_0
   - google-cloud-container=0.3.0=py37_0
   - google-cloud-storage=1.23.0=py37_0
-  - holoviews=1.12.7=py_0
-  - h5netcdf=0.7.4=py_0
-  - icu=64.2=he1b5a44_1
-  - iris=2.2.0=py37_1003
-  - jedi=0.15.1=py37_0
+  - holoviews
+  - h5netcdf
+  - icu
+  - iris
+  - jedi
 # need server proxy on workers if using remote scheduler
   - jupyter-server-proxy=1.3.2=py_0
   - kubernetes
-  - lapack=3.6.1=ha44fe06_2
-  - lz4=2.2.1=py37hd79334b_0
+  - lapack
+  - lz4
   - make=4.2.1=h14c3975_2004
   - matplotlib=3.1.2=py37_1
   - nc-time-axis=1.2.0=py_0
   - ncurses=6.1=hf484d3e_1002
-  - netcdf-fortran=4.5.2=mpi_mpich_ha8580a0_2
-  - netcdf4=1.5.3=mpi_mpich_py37h01ee55b_1
-  - numba=0.46.0=py37hb3f55d8_1
-  - numcodecs=0.6.4=py37he1b5a44_0
+  - netcdf-fortran
+  - netcdf4
+  - numba
+  - numcodecs
   - pandas=0.25.3=py37hb3f55d8_0
   # for geoviews
   - phantomjs=2.1.1=1
   - pip=19.3.1=py37_0
   - plotly=4.3.0=py_0
   - polyline=1.4.0=py_0
-  - pygeos=0.5=py37h5d51c17_1
-  - pyinterp=0.0.7=py37h97f2665_0
-  - pyshp=2.1.0=py_0
+  - pygeos
+  - pyinterp
+  - pyshp
   - python=3.7.3=h357f687_2 # pinkeep: python=3.7
-  - python-blosc=1.8.1=py37hf484d3e_0
+  - python-blosc
   - python-snappy=0.5.4=py37hee44bf9_1
   - pyviz_comms=0.7.2=py_0
   - pyyaml=5.2=py37h516909a_0
-  - rasterio=1.1.1=py37h900e953_0
+  - rasterio
   - regionmask=0.4.0=py_0
   - rtree=0.8.3=py37h7b0cdae_1003
   - scikit-image=0.16.2=py37hb3f55d8_0
@@ -82,15 +82,15 @@ dependencies:
   - seaborn=0.9.0=py_2
   # for geoviews
   - selenium=3.141.0=py37h516909a_1000
-  - shapely=1.6.4=py37h5d51c17_1007
+  - shapely
   - sparse=0.8.0=py_0
   - statsmodels=0.10.2=py37hc1659b7_0
   - tini=0.18.0=h14c3975_1001
   - unzip=6.0=h516909a_0
   - uritemplate=3.0.0=py_1
   - xarray=0.14.1=py_0
-  - xesmf=0.2.1=py_0
-  - xgcm=0.2.0=py_0
+  - xesmf
+  - xgcm
   - xhistogram=0.1.1=py_0
   - xlrd=1.2.0=py_0
   - xrft=0.2.0=py_0
