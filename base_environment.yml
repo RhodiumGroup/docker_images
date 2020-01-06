@@ -23,7 +23,7 @@ dependencies:
 # won't work
   - esmpy=8.0.0=mpi_mpich_py37ha9b28fa_101 # pinkeep: esmpy=8.0.0=mpi_mpich_py37ha9b28fa_101
   - fastparquet=0.3.2=py37hc1659b7_0
-  - fiona=1.8.13
+  - fiona=1.8.13=py37h900e953_0
   - fusepy=3.0.1=py_0
 # this gcc pin is necessary b/c of a weird feature in the h553295d_15 build
 # which makes it hard to build numpy-based cython extensions (like pyclaw).
@@ -33,10 +33,10 @@ dependencies:
   - gcsfs=0.5.3=py_0
   - gdal
   - geoalchemy2=0.6.3=py_0
-  - geopandas
-  - geopy
-  - geotiff
-  - geoviews
+  - geopandas=0.6.2=py_0
+  - geopy=1.20.0=py_0
+  - geotiff=1.5.1=hbd99317_7
+  - geoviews=1.6.6=py_0
   - git=2.24.0=pl526hce37bd2_1
   - gitpython=3.0.5=py_0
   - google-cloud-container=0.3.0=py37_0
@@ -65,9 +65,9 @@ dependencies:
   - pip=19.3.1=py37_0
   - plotly=4.3.0=py_0
   - polyline=1.4.0=py_0
-  - pygeos
-  - pyinterp
-  - pyshp
+  - pygeos=0.5=py37h5d51c17_1
+  - pyinterp=0.0.7=py37h97f2665_0
+  - pyshp=2.1.0=py_0
   - python=3.7.3=h357f687_2 # pinkeep: python=3.7
   - python-blosc
   - python-snappy=0.5.4=py37hee44bf9_1
@@ -82,7 +82,7 @@ dependencies:
   - seaborn=0.9.0=py_2
   # for geoviews
   - selenium=3.141.0=py37h516909a_1000
-  - shapely
+  - shapely=1.6.4=py37h5d51c17_1007
   - sparse=0.8.0=py_0
   - statsmodels=0.10.2=py37hc1659b7_0
   - tini=0.18.0=h14c3975_1001
