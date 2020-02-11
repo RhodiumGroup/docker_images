@@ -13,6 +13,7 @@ dependencies:
   - compilers=1.0.4=0
   - dask=2.8.1=py_0
   - dask-glm=0.2.0=py_1
+  - dask-kubernetes=0.10.1
   - dask-ml=1.1.1=py_0
   - datashader=0.8.0=py_0
   - distributed=2.8.1=py_0
@@ -42,6 +43,7 @@ dependencies:
   - holoviews=1.12.7=py_0
   - h5netcdf=0.7.4=py_0
   - icu=64.2=he1b5a44_1
+  - intake-esm=2019.12.13
   - iris=2.2.0=py37_1003
   - jedi=0.15.1=py37_0
 # need server proxy on workers if using remote scheduler
@@ -73,7 +75,7 @@ dependencies:
   - pyyaml=5.2=py37h516909a_0
   - rasterio=1.1.1=py37h900e953_0
   - regionmask=0.4.0=py_0
-  - rtree=0.8.3=py37h7b0cdae_1003
+  - rtree=0.9.4
   - scikit-image=0.16.2=py37hb3f55d8_0
   - scikit-learn=0.22=py37hcdab131_0
   - scipy=1.3.2=py37h921218d_0
@@ -103,8 +105,3 @@ dependencies:
     - impactlab-tools==0.4.0
     - parameterize-jobs==0.1.1
     - git+https://github.com/rhodiumgroup/rhg_compute_tools.git@allow-remote-scheduler#egg=rhg_compute_tools
-    - git+https://github.com/NCAR/intake-esm.git#egg=intake_esm
-# need to install from master until 0.10.1
-# due to handling of remote scheduler
-# (we also should at some point switch to dask-gateway instead of dask-kubernetes)
-    - git+https://github.com/dask/dask-kubernetes.git#egg=dask_kubernetes
