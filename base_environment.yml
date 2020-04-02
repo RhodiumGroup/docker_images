@@ -88,6 +88,7 @@ dependencies:
   - tini=0.18.0=h14c3975_1001
   - unzip=6.0=h516909a_0
   - uritemplate=3.0.0=py_1
+  - us
   - xarray=0.14.1=py_0
   - xesmf=0.2.1=py_0
   - xgcm=0.2.0=py_0
