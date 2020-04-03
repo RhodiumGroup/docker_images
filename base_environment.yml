@@ -15,6 +15,7 @@ dependencies:
   - dask-glm=0.2.0=py_1
   - dask-ml=1.1.1=py_0
   - datashader=0.8.0=py_0
+  - descartes
   - distributed=2.8.1=py_0
   - dropbox=9.4.0=py_0
 # need to make sure we get esmpy compiled with mpi otherwise xesmf regridding
