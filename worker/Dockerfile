@@ -41,7 +41,7 @@ RUN conda config --add channels conda-forge/label/dev && \
 ## set up python env
 RUN conda update -n base conda
 RUN conda env update -f /opt/conda/specs/base_environment.yml
-
+RUN conda list -n base
 
 ## clean up
 RUN rm -rf /var/lib/apt/lists/* /tempdir
