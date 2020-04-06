@@ -3,6 +3,7 @@ channels:
   - conda-forge
 dependencies:
   - beautifulsoup4=4.8.1=py37_0
+  - bottleneck=1.3.1=py37hc1659b7_0
   - boto3=1.10.34=py_0
   - bqplot=0.12.1=py_0
   - bumpversion=0.5.3=py_1001
