@@ -60,9 +60,12 @@ RUN conda env update -f /opt/conda/specs/base_environment.yml
 # update environment with nb-specific packages
 RUN conda env update -f /opt/conda/specs/notebook_environment.yml
 
+RUN conda list -n base
+
 # create r environment
 RUN conda env create -f /opt/conda/specs/r_environment.yml
 
+RUN conda list -n r
 
 ## Set up jupyter lab extensions
 RUN jupyter labextension update --all && \
