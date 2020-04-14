@@ -47,7 +47,7 @@ dependencies:
   - iris=2.2.0=py37_1003
   - jedi=0.15.1=py37_0
 # need server proxy on workers if using remote scheduler
-  - jupyter-server-proxy=1.2.0=py_0
+  - jupyter-server-proxy=1.3.2=py_0
   - kubernetes
   - lapack=3.6.1=ha44fe06_2
   - lz4=2.2.1=py37hd79334b_0
