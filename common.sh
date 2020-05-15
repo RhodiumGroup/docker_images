@@ -3,6 +3,7 @@
 apt-get update -y --no-install-recommends
 apt-get install -yq --no-install-recommends \
   apt-utils \
+  zip \
   bzip2 \
   ca-certificates \
   curl \
