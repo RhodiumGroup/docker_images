@@ -5,6 +5,7 @@ apt-get install -yq --no-install-recommends \
   apt-utils \
   zip \
   bzip2 \
+  unzip \
   ca-certificates \
   curl \
   lsb-release \
