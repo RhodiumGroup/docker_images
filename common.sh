@@ -34,10 +34,13 @@ apt-get clean
 wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/bin/cloud_sql_proxy
 chmod +x /usr/bin/cloud_sql_proxy
 
-# test vdatum download
+# download vdatum
 wget https://vdatum.noaa.gov/download/data/vdatum_v4.0.1.zip -O /usr/bin/vdatum.zip
+wget https://vdatum.noaa.gov/download/data/vdatum_EGM1996.zip -O /usr/bin/vdatum_EGM1996.zip
 unzip /usr/bin/vdatum.zip
+unzip -o /usr/bin/vdatum_EGM1996.zip
 rm /usr/bin/vdatum.zip
+rm /usr/bin/vdatum_EGM1996.zip
 
 # filepath curating
 chmod +x /usr/bin/prepare.sh
