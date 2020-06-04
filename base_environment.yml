@@ -14,6 +14,7 @@ dependencies:
   - compilers=1.0.4=0
   - dask=2.8.1=py_0
   - dask-glm=0.2.0=py_1
+  - dask_kubernetes==0.10.1
   - dask-ml=1.1.1=py_0
   - datashader=0.8.0=py_0
   - descartes=1.1.0=py_4
@@ -44,6 +45,7 @@ dependencies:
   - holoviews
   - h5netcdf
   - icu
+  - intake-esm
   - iris
   - jedi
 # need server proxy on workers if using remote scheduler
@@ -105,8 +107,3 @@ dependencies:
     - impactlab-tools==0.4.0
     - parameterize-jobs==0.1.1
     - rhg_compute_tools==0.2.1
-    - git+https://github.com/NCAR/intake-esm.git@v2020.3.16.2#egg=intake_esm
-# need to install from master until 0.10.1
-# due to handling of remote scheduler
-# (we also should at some point switch to dask-gateway instead of dask-kubernetes)
-    - dask_kubernetes==0.10.1
