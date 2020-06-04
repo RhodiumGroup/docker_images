@@ -3,6 +3,7 @@ channels:
   - conda-forge
 dependencies:
   - beautifulsoup4=4.8.1=py37_0
+  - bottleneck=1.3.1=py37hc1659b7_0
   - boto3=1.10.34=py_0
   - bqplot=0.12.1=py_0
   - bumpversion=0.5.3=py_1001
@@ -15,6 +16,7 @@ dependencies:
   - dask-glm=0.2.0=py_1
   - dask-ml=1.1.1=py_0
   - datashader=0.8.0=py_0
+  - descartes=1.1.0=py_4
   - distributed=2.8.1=py_0
   - dropbox=9.4.0=py_0
 # need to make sure we get esmpy compiled with mpi otherwise xesmf regridding
@@ -45,7 +47,7 @@ dependencies:
   - iris
   - jedi
 # need server proxy on workers if using remote scheduler
-  - jupyter-server-proxy=1.2.0=py_0
+  - jupyter-server-proxy=1.3.2=py_0
   - kubernetes
   - lapack
   - lz4
@@ -102,9 +104,9 @@ dependencies:
     - climate-toolbox==0.1.5
     - impactlab-tools==0.4.0
     - parameterize-jobs==0.1.1
-    - git+https://github.com/rhodiumgroup/rhg_compute_tools.git@allow-remote-scheduler#egg=rhg_compute_tools
-    - git+https://github.com/NCAR/intake-esm.git#egg=intake_esm
+    - rhg_compute_tools==0.2.1
+    - git+https://github.com/NCAR/intake-esm.git@v2020.3.16.2#egg=intake_esm
 # need to install from master until 0.10.1
 # due to handling of remote scheduler
 # (we also should at some point switch to dask-gateway instead of dask-kubernetes)
-    - git+https://github.com/dask/dask-kubernetes.git#egg=dask_kubernetes
+    - dask_kubernetes==0.10.1
