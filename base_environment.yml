@@ -2,46 +2,46 @@ name: base
 channels:
   - conda-forge
 dependencies:
-  - beautifulsoup4=4.8.1=py37_0
-  - bottleneck=1.3.1=py37hc1659b7_0
-  - boto3=1.10.34=py_0
-  - bqplot=0.12.1=py_0
-  - bumpversion=0.5.3=py_1001
-  - cachecontrol=0.12.5=py_0
-  - cartopy=0.17.0=py37h423102d_1009
-  - cftime=1.0.4.2=py37hc1659b7_0
-  - click=7.0=py_0
-  - compilers=1.0.4=0
-  - dask=2.8.1=py_0
-  - dask-glm=0.2.0=py_1
-  - dask-kubernetes==0.10.1
-  - dask-ml=1.1.1=py_0
-  - datashader=0.8.0=py_0
-  - descartes=1.1.0=py_4
-  - distributed=2.8.1=py_0
-  - dropbox=9.4.0=py_0
+  - beautifulsoup4
+  - bottleneck
+  - boto3
+  - bqplot
+  - bumpversion
+  - cachecontrol
+  - cartopy
+  - cftime
+  - click
+  - compilers
+  - dask
+  - dask-glm
+  - dask-kubernetes
+  - dask-ml
+  - datashader
+  - descartes
+  - distributed
+  - dropbox
 # need to make sure we get esmpy compiled with mpi otherwise xesmf regridding
 # won't work
-  - esmpy=8.0.0=mpi_mpich_py37ha9b28fa_101 # pinkeep: esmpy=8.0.0=mpi_mpich_py37ha9b28fa_101
-  - fastparquet=0.3.2=py37hc1659b7_0
-  - fiona=1.8.13=py37h900e953_0
-  - fusepy=3.0.1=py_0
+  - esmpy
+  - fastparquet
+  - fiona
+  - fusepy
 # this gcc pin is necessary b/c of a weird feature in the h553295d_15 build
 # which makes it hard to build numpy-based cython extensions (like pyclaw).
 # we should try removing it whenever we next do an update and see if Clawpack
 # can still be built
-  - gcc_linux-64=7.3.0=h553295d_14 # pinkeep: gcc_linux-64=7.3.0=h553295d_14
-  - gcsfs=0.5.3=py_0
-  - gdal
-  - geoalchemy2=0.6.3=py_0
-  - geopandas=0.6.2=py_0
-  - geopy=1.20.0=py_0
-  - geotiff=1.5.1=hbd99317_7
-  - geoviews=1.6.6=py_0
-  - git=2.24.0=pl526hce37bd2_1
-  - gitpython=3.0.5=py_0
-  - google-cloud-container=0.3.0=py37_0
-  - google-cloud-storage=1.23.0=py37_0
+  - gcc_linux-64
+  - gcsfs
+  - gda
+  - geoalchemy2
+  - geopandas
+  - geopy
+  - geotiff
+  - geoviews
+  - git
+  - gitpython
+  - google-cloud-container
+  - google-cloud-storage
   - holoviews
   - h5netcdf
   - icu
@@ -49,61 +49,61 @@ dependencies:
   - iris
   - jedi
 # need server proxy on workers if using remote scheduler
-  - jupyter-server-proxy=1.3.2=py_0
+  - jupyter-server-proxy
   - kubernetes
   - lapack
   - lz4
-  - make=4.2.1=h14c3975_2004
-  - matplotlib=3.1.2=py37_1
-  - nc-time-axis=1.2.0=py_0
-  - ncurses=6.1=hf484d3e_1002
+  - make
+  - matplotlib
+  - nc-time-axis
+  - ncurses
   - netcdf-fortran
   - netcdf4
   - numba
   - numcodecs
-  - pandas=0.25.3=py37hb3f55d8_0
+  - pandas
   # for geoviews
-  - phantomjs=2.1.1=1
-  - pip=19.3.1=py37_0
-  - plotly=4.3.0=py_0
-  - polyline=1.4.0=py_0
-  - pygeos=0.5=py37h5d51c17_1
-  - pyinterp=0.0.7=py37h97f2665_0
-  - pyshp=2.1.0=py_0
-  - python=3.7.3=h357f687_2 # pinkeep: python=3.7
+  - phantomjs
+  - pip
+  - plotly
+  - polyline
+  - pygeos
+  - pyinterp
+  - pyshp
+  - python
   - python-blosc
-  - python-snappy=0.5.4=py37hee44bf9_1
-  - pyviz_comms=0.7.2=py_0
-  - pyyaml=5.2=py37h516909a_0
+  - python-snappy
+  - pyviz_comms
+  - pyyaml
   - rasterio
-  - regionmask=0.4.0=py_0
-  - rtree=0.8.3=py37h7b0cdae_1003
-  - scikit-image=0.16.2=py37hb3f55d8_0
-  - scikit-learn=0.22=py37hcdab131_0
-  - scipy=1.3.2=py37h921218d_0
-  - seaborn=0.9.0=py_2
+  - regionmask
+  - rtree
+  - scikit-image
+  - scikit-learn
+  - scipy
+  - seaborn
   # for geoviews
-  - selenium=3.141.0=py37h516909a_1000
-  - shapely=1.6.4=py37h5d51c17_1007
-  - sparse=0.8.0=py_0
-  - statsmodels=0.10.2=py37hc1659b7_0
-  - tini=0.18.0=h14c3975_1001
-  - unzip=6.0=h516909a_0
-  - uritemplate=3.0.0=py_1
-  - xarray=0.14.1=py_0
+  - selenium
+  - shapely
+  - sparse
+  - statsmodels
+  - tini
+  - unzip
+  - uritemplate
+  - xarray
   - xesmf
   - xgcm
-  - xhistogram=0.1.1=py_0
-  - xlrd=1.2.0=py_0
-  - xrft=0.2.0=py_0
-  - zarr=2.3.2=py37_0
-  - zeromq=4.3.2=he1b5a44_2
-  - zict=1.0.0=py_0
+  - xhistogram
+  - xlrd
+  - xrft
+  - zarr
+  - zeromq
+  - zict
   - pip:
-    - mapbox==0.18.0
-    - py-noaa==1.0
-    - sidecar==0.3.0
-    - climate-toolbox==0.1.5
-    - impactlab-tools==0.4.0
-    - parameterize-jobs==0.1.1
-    - rhg_compute_tools==0.2.2
+    - mapbox
+    - py-noaa
+    - sidecar
+    - climate-toolbox
+    - impactlab-tools
+    - parameterize-jobs
+    - rhg_compute_tools
