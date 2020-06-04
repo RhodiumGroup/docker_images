@@ -32,7 +32,7 @@ dependencies:
 # can still be built
   - gcc_linux-64
   - gcsfs
-  - gda
+  - gdal
   - geoalchemy2
   - geopandas
   - geopy
