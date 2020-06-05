@@ -2,6 +2,7 @@ channels:
 - conda-forge
 dependencies:
 - beautifulsoup4=4.9
+- blas
 - bottleneck=1.3
 - boto3=1.13
 - bqplot=0.12
@@ -24,7 +25,6 @@ dependencies:
 - gcsfs=0.6
 - gdal=3.0
 - geopandas=0.7
-- geopy=1.22
 - geotiff=1.5
 - geoviews=1.8
 - git=2.26
@@ -33,34 +33,25 @@ dependencies:
 - google-cloud-storage=1.28
 - holoviews=1.13
 - h5netcdf=0.8
-- icu=58.2
 - intake-esm=2020.5
-- iris=2.4
 - jedi=0.17
 - jupyter-server-proxy=1.5
 - kubernetes=1.18
-- lapack=3.6
 - lz4=3.0
 - make=4.3
 - matplotlib=3.1
 - nc-time-axis=1.2
-- ncurses=6.1
 - netcdf-fortran=4.4
 - netcdf4=1.5
 - numba=0.48
-- numcodecs=0.6
 - pandas=1.0
-- phantomjs=2.1
+- phantomjs=2.1 # optional dependency of geoviews
+- pillow  # optional dependency of geoviews
 - pip=19.3
 - plotly=4.8
-- polyline=1.4
-- pygeos=0.6
 - pyinterp=0.3
 - pyshp=2.1
 - python=3.7
-- python-blosc=1.9
-- python-snappy=0.5
-- pyviz_comms=0.7
 - pyyaml=5.3
 - rasterio=1.1
 - regionmask=0.5
@@ -69,7 +60,7 @@ dependencies:
 - scikit-learn=0.23
 - scipy=1.4
 - seaborn=0.10
-- selenium=3.141
+- selenium=3.141 # optional dependency of geoviews
 - shapely=1.7
 - sparse=0.9
 - statsmodels=0.11
