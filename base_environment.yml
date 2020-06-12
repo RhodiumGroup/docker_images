@@ -24,7 +24,6 @@ dependencies:
   - esmpy
   - fastparquet
   - fiona
-  - fusepy
   - gcsfs
   - gdal
   - geopandas
