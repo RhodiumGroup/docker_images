@@ -1,98 +1,107 @@
-channels:
-- conda-forge
-dependencies:
-- beautifulsoup4=4.9
-- bottleneck=1.3
-- boto3=1.13
-- bqplot=0.12
-- bumpversion=0.5
-- cachecontrol=0.12
-- cartopy=0.17
-- cftime=1.1
-- click=7.1
-- compilers=1.0
-- dask=2.17
-- dask-glm=0.2
-- dask-kubernetes=0.10
-- dask-ml=1.5
-- datashader=0.11
-- descartes=1.1
-- distributed=2.17
-- dropbox=9.4
-- esmpy=7.1
-- fastparquet=0.4
-- fiona=1.8
-- fusepy=3.0
-- gcc_linux-64=7.5
-- gcsfs=0.6
-- gdal=3.0
-- geoalchemy2=0.6
-- geopandas=0.7
-- geopy=1.22
-- geotiff=1.5
-- geoviews=1.8
-- git=2.26
-- gitpython=3.1
-- google-cloud-container=0.3
-- google-cloud-storage=1.28
-- holoviews=1.13
-- h5netcdf=0.8
-- icu=58.2
-- intake-esm=2020.5
-- iris=2.4
-- jedi=0.17
-- jupyter-server-proxy=1.5
-- kubernetes=1.18
-- lapack=3.6
-- lz4=3.0
-- make=4.3
-- matplotlib=3.1
-- nc-time-axis=1.2
-- ncurses=6.1
-- netcdf-fortran=4.4
-- netcdf4=1.5
-- numba=0.48
-- numcodecs=0.6
-- pandas=1.0
-- phantomjs=2.1
-- pip=19.3
-- plotly=4.8
-- polyline=1.4
-- pygeos=0.6
-- pyinterp=0.3
-- pyshp=2.1
-- python=3.7
-- python-blosc=1.9
-- python-snappy=0.5
-- pyviz_comms=0.7
-- pyyaml=5.3
-- rasterio=1.1
-- regionmask=0.5
-- rtree=0.9
-- scikit-image=0.17
-- scikit-learn=0.23
-- scipy=1.4
-- seaborn=0.10
-- selenium=3.141
-- shapely=1.7
-- sparse=0.9
-- statsmodels=0.11
-- tini=0.18
-- unzip=6.0
-- uritemplate=3.0
-- xarray=0.15
-- xesmf=0.3
-- xgcm=0.3
-- xhistogram=0.1
-- xlrd=1.2
-- xrft=0.2
-- zarr=2.4
-- zeromq=4.3
-- zict=2.0
-- pip:
-  - py-noaa
-  - sidecar
-  - climate-toolbox
-  - parameterize-jobs
-  - rhg_compute_tools
 name: base
+channels:
+  - conda-forge
+dependencies:
+  - beautifulsoup4
+  - bottleneck
+  - boto3
+  - bqplot
+  - bumpversion
+  - cachecontrol
+  - cartopy
+  - cftime
+  - click
+  - compilers
+  - dask
+  - dask-glm
+  - dask-kubernetes
+  - dask-ml
+  - datashader
+  - descartes
+  - distributed
+  - dropbox
+# need to make sure we get esmpy compiled with mpi otherwise xesmf regridding
+# won't work
+  - esmpy
+  - fastparquet
+  - fiona
+  - fusepy
+# this gcc pin is necessary b/c of a weird feature in the h553295d_15 build
+# which makes it hard to build numpy-based cython extensions (like pyclaw).
+# we should try removing it whenever we next do an update and see if Clawpack
+# can still be built
+  - gcc_linux-64
+  - gcsfs
+  - gdal
+  - geoalchemy2
+  - geopandas
+  - geopy
+  - geotiff
+  - geoviews
+  - git
+  - gitpython
+  - google-cloud-container
+  - google-cloud-storage
+  - holoviews
+  - h5netcdf
+  - icu
+  - intake-esm
+  - iris
+  - jedi
+# need server proxy on workers if using remote scheduler
+  - jupyter-server-proxy
+  - kubernetes
+  - lapack
+  - lz4
+  - make
+  - matplotlib
+  - nc-time-axis
+  - ncurses
+  - netcdf-fortran
+  - netcdf4
+  - numba
+  - numcodecs
+  - pandas
+  # for geoviews
+  - phantomjs
+  - pip
+  - plotly
+  - polyline
+  - pygeos
+  - pyinterp
+  - pyshp
+  - python
+  - python-blosc
+  - python-snappy
+  - pyviz_comms
+  - pyyaml
+  - rasterio
+  - regionmask
+  - rtree
+  - scikit-image
+  - scikit-learn
+  - scipy
+  - seaborn
+  # for geoviews
+  - selenium
+  - shapely
+  - sparse
+  - statsmodels
+  - tini
+  - unzip
+  - uritemplate
+  - xarray
+  - xesmf
+  - xgcm
+  - xhistogram
+  - xlrd
+  - xrft
+  - zarr
+  - zeromq
+  - zict
+  - pip:
+    - py-noaa
+    - sidecar
+    - climate-toolbox
+    - parameterize-jobs
+    - rhg_compute_tools
