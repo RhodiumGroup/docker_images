@@ -51,6 +51,7 @@ dependencies:
   - pandas
   # for geoviews
   - phantomjs
+  - pillow
   - pip
   - plotly
   - pyinterp
