@@ -27,7 +27,6 @@ dependencies:
   - gcsfs
   - gdal
   - geopandas
-  - geopy
   - geotiff
   - geoviews
   - git
@@ -36,9 +35,7 @@ dependencies:
   - google-cloud-storage
   - holoviews
   - h5netcdf
-  - icu
   - intake-esm
-  - iris
   - jedi
 # need server proxy on workers if using remote scheduler
   - jupyter-server-proxy
@@ -48,24 +45,17 @@ dependencies:
   - make
   - matplotlib
   - nc-time-axis
-  - ncurses
   - netcdf-fortran
   - netcdf4
   - numba
-  - numcodecs
   - pandas
   # for geoviews
   - phantomjs
   - pip
   - plotly
-  - polyline
-  - pygeos
   - pyinterp
   - pyshp
   - python
-  - python-blosc
-  - python-snappy
-  - pyviz_comms
   - pyyaml
   - rasterio
   - regionmask
