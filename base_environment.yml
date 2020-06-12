@@ -2,11 +2,11 @@ channels:
   - conda-forge
 dependencies:
   - beautifulsoup4
-  # - blas
+  - blas
   - bottleneck
   - boto3
   - bqplot
-  # - bump2version
+  - bump2version
   - cachecontrol
   - cartopy
   - cftime
@@ -46,7 +46,7 @@ dependencies:
   - numba
   - pandas
   - phantomjs # optional dependency of geoviews
-  # - pillow  # optional dependency of geoviews
+  - pillow  # optional dependency of geoviews
   - pip
   - plotly
   - pyinterp
