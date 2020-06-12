@@ -72,9 +72,11 @@ dependencies:
   - zarr
   - zeromq
   - pip:
+    - mapbox
     - py-noaa
     - sidecar
     - climate-toolbox
+    - impactlab-tools
     - parameterize-jobs
     - rhg_compute_tools
 name: base
