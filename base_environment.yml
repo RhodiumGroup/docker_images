@@ -6,7 +6,7 @@ dependencies:
   - bottleneck
   - boto3
   - bqplot
-  - bumpversion
+  - bump2version
   - cachecontrol
   - cartopy
   - cftime
