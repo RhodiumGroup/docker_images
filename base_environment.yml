@@ -3,6 +3,7 @@ channels:
   - conda-forge
 dependencies:
   - beautifulsoup4
+  - blas
   - bottleneck
   - boto3
   - bqplot
@@ -40,7 +41,6 @@ dependencies:
 # need server proxy on workers if using remote scheduler
   - jupyter-server-proxy
   - kubernetes
-  - lapack
   - lz4
   - make
   - matplotlib
