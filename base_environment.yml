@@ -1,80 +1,80 @@
 channels:
-  - conda-forge
+- conda-forge
 dependencies:
-  - beautifulsoup4
-  - blas
-  - bottleneck
-  - boto3
-  - bqplot
-  - bump2version
-  - cachecontrol
-  - cartopy
-  - cftime
-  - click
-  - compilers
-  - dask
-  - dask-glm
-  - dask-kubernetes
-  - dask-ml
-  - datashader
-  - distributed
-  - dropbox
-  - esmpy
-  - fastparquet
-  - fiona
-  - gcsfs
-  - gdal
-  - geopandas
-  - geotiff
-  - geoviews
-  - git
-  - gitpython
-  - google-cloud-container
-  - google-cloud-storage
-  - holoviews
-  - h5netcdf
-  - intake-esm
-  - jedi
-  - jupyter-server-proxy
-  - kubernetes
-  - lz4
-  - make
-  - matplotlib
-  - nc-time-axis
-  - netcdf-fortran
-  - netcdf4
-  - numba
-  - pandas
-  - phantomjs # optional dependency of geoviews
-  - pillow  # optional dependency of geoviews
-  - pip
-  - plotly
-  - pyinterp
-  - pyshp
-  - python
-  - pyyaml
-  - rasterio
-  - regionmask
-  - rtree
-  - scikit-image
-  - scikit-learn
-  - scipy
-  - seaborn
-  - selenium # optional dependency of geoviews
-  - shapely
-  - sparse
-  - statsmodels
-  - tini
-  - xarray
-  - xesmf
-  - xhistogram
-  - xlrd
-  - zarr
-  - zeromq
-  - pip:
-    - py-noaa
-    - sidecar
-    - climate-toolbox
-    - parameterize-jobs
-    - rhg_compute_tools
+- beautifulsoup4
+- blas
+- bottleneck
+- boto3
+- bqplot
+- bump2version
+- cachecontrol
+- cartopy
+- cftime
+- click
+- compilers
+- dask
+- dask-glm
+- dask-kubernetes
+- dask-ml
+- datashader
+- distributed
+- dropbox
+- esmpy
+- fastparquet
+- fiona
+- gcsfs
+- gdal
+- geopandas
+- geotiff
+- geoviews
+- git
+- gitpython
+- google-cloud-container
+- google-cloud-storage
+- holoviews
+- h5netcdf
+- intake-esm
+- jedi
+- jupyter-server-proxy
+- kubernetes
+- lz4
+- make
+- matplotlib
+- nc-time-axis
+- netcdf-fortran
+- netcdf4
+- numba
+- pandas
+- phantomjs # optional dependency of geoviews
+- pillow  # optional dependency of geoviews
+- pip
+- plotly
+- pyinterp
+- pyshp
+- python
+- pyyaml
+- rasterio
+- regionmask
+- rtree
+- scikit-image
+- scikit-learn
+- scipy
+- seaborn
+- selenium # optional dependency of geoviews
+- shapely
+- sparse
+- statsmodels
+- tini
+- xarray
+- xesmf
+- xhistogram
+- xlrd
+- zarr
+- zeromq
+- pip:
+  - py-noaa
+  - sidecar
+  - climate-toolbox
+  - parameterize-jobs
+  - rhg_compute_tools
 name: base
