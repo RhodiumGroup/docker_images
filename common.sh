@@ -47,8 +47,8 @@ rm /usr/bin/vdatum_EGM1996.zip
 wget https://github.com/CLIMADA-project/climada_python/archive/v1.4.2.zip -O /usr/bin/climada_python-1.4.2.zip
 unzip /usr/bin/climada_python-1.4.2.zip
 rm /usr/bin/climada_python-1.4.2.zip
-sed -i 's/==/=/g' /usr/bin/climada_python-1.4.2/requirements/env_climada.yml
-sed -i 's/=/>=/g' /usr/bin/climada_python-1.4.2/requirements/env_climada.yml
+sed -i 's/==/=/g' /usr/bin/climada_python-1.4.2/env_climada.yml
+sed -i 's/=/>=/g' /usr/bin/climada_python-1.4.2/env_climada.yml
 
 # filepath curating
 chmod +x /usr/bin/prepare.sh
