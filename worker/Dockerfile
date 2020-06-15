@@ -34,8 +34,7 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.2-Linux
 ## set up conda channels
 RUN mkdir /opt/conda/specs
 COPY base_environment.yml /opt/conda/specs
-RUN conda config --add channels conda-forge/label/dev && \
-  conda config --add channels conda-forge
+RUN conda config --add channels conda-forge
 
 
 ## set up python env

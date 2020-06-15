@@ -47,8 +47,7 @@ RUN mkdir /opt/conda/specs
 COPY base_environment.yml /opt/conda/specs
 COPY notebook_environment.yml /opt/conda/specs
 COPY r_environment.yml /opt/conda/specs
-RUN conda config --add channels conda-forge/label/dev && \
-  conda config --add channels conda-forge
+RUN conda config --add channels conda-forge
 
 
 ## set up conda
