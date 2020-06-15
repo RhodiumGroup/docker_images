@@ -1,4 +1,4 @@
-FROM jupyter/base-notebook:notebook-6.0.0
+FROM jupyter/base-notebook:notebook-6.0.3
 ARG DEBIAN_FRONTEND=noninteractive
 
 ## needed to make sure things with cython compile correctly
