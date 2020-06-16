@@ -46,7 +46,6 @@ RUN sudo apt-get install -yq \
 RUN mkdir /opt/conda/specs
 COPY base_environment.yml /opt/conda/specs
 COPY notebook_environment.yml /opt/conda/specs
-COPY r_environment.yml /opt/conda/specs
 RUN conda config --add channels conda-forge && \
   conda config --set channel_priority strict
 
@@ -61,10 +60,6 @@ RUN conda env update -f /opt/conda/specs/notebook_environment.yml
 
 RUN conda list -n base
 
-# create r environment
-RUN conda env create -f /opt/conda/specs/r_environment.yml
-
-RUN conda list -n r
 
 ## Set up jupyter lab extensions
 RUN jupyter labextension update --all && \

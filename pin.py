@@ -297,8 +297,8 @@ def pin(file, dry_run):
     spec_files = [
             ('base_environment.yml', 'base'),
             ('notebook/notebook_environment.yml', 'base'),
-            ('octave-worker/octave_environment.yml', 'base'),
-            ('notebook/r_environment.yml', 'r')]
+            ('octave-worker/octave_environment.yml', 'base')
+    ]
     
     if file == 'all':
         pin_files(spec_files, dry_run=dry_run)
@@ -332,8 +332,8 @@ def unpin(file, dry_run):
     spec_files = [
             ('base_environment.yml', 'base'),
             ('notebook/notebook_environment.yml', 'base'),
-            ('octave-worker/octave_environment.yml', 'base'),
-            ('notebook/r_environment.yml', 'r')]
+            ('octave-worker/octave_environment.yml', 'base')
+    ]
     
     if file == 'all':
         unpin_files(spec_files, dry_run=dry_run)
