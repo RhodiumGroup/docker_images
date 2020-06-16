@@ -1,86 +1,81 @@
-name: base
 channels:
-  - conda-forge
+- conda-forge
 dependencies:
-  - beautifulsoup4
-  - blas
-  - bottleneck
-  - boto3
-  - bqplot
-  - bump2version
-  - cachecontrol
-  - cartopy
-  - cftime
-  - click
-  - compilers
-  - dask
-  - dask-glm
-  - dask-kubernetes
-  - dask-ml
-  - datashader
-  - distributed
-  - dropbox
-# need to make sure we get esmpy compiled with mpi otherwise xesmf regridding
-# won't work
-  - esmpy
-  - fastparquet
-  - fiona
-  - fusepy
-  - gcsfs
-  - gdal
-  - geopandas
-  - geotiff
-  - geoviews
-  - git
-  - gitpython
-  - google-cloud-container
-  - google-cloud-storage
-  - holoviews
-  - h5netcdf
-  - intake-esm
-  - jedi
-# need server proxy on workers if using remote scheduler
-  - jupyter-server-proxy
-  - kubernetes
-  - lz4
-  - make
-  - matplotlib
-  - nc-time-axis
-  - netcdf-fortran
-  - netcdf4
-  - numba
-  - pandas
-  # for geoviews
-  - phantomjs
-  - pillow
-  - pip
-  - plotly
-  - pyinterp
-  - pyshp
-  - python
-  - pyyaml
-  - rasterio
-  - regionmask
-  - rtree
-  - scikit-image
-  - scikit-learn
-  - scipy
-  - seaborn
-  # for geoviews
-  - selenium
-  - shapely
-  - sparse
-  - statsmodels
-  - tini
-  - xarray
-  - xesmf
-  - xhistogram
-  - xlrd
-  - zarr
-  - zeromq
-  - pip:
-    - py-noaa
-    - sidecar
-    - climate-toolbox
-    - parameterize-jobs
-    - rhg_compute_tools
+- beautifulsoup4=4.9.1=py37hc8dfbb8_0
+- blas=2.15=mkl
+- bottleneck=1.3.2=py37h03ebfcd_1
+- boto3=1.14.3=pyh9f0ad1d_0
+- bqplot=0.12.12=pyh9f0ad1d_0
+- bump2version=1.0.0=pyh9f0ad1d_0
+- cachecontrol=0.12.6=py_0
+- cartopy=0.17.0=py37h423102d_1009
+- cftime=1.1.3=py37h03ebfcd_0
+- click=7.1.2=pyh9f0ad1d_0
+- compilers=1.0.4=0
+- dask=2.18.1=py_0
+- dask-glm=0.2.0=py_1
+- dask-kubernetes=0.10.1=py_0
+- dask-ml=1.5.0=py_0
+- datashader=0.11.0=pyh9f0ad1d_0
+- distributed=2.18.0=py37hc8dfbb8_0
+- dropbox=10.1.1=pyh9f0ad1d_0
+- esmpy=7.1.0=py37h5ca1d4c_3
+- fastparquet=0.4.0=py37h03ebfcd_0
+- fiona=1.8.13=py37h900e953_0
+- fusepy=3.0.1=py_0
+- gcsfs=0.6.2=py_0
+- gdal=3.0.2=py37hbb2a789_0
+- geopandas=0.7.0=py_1
+- geotiff=1.5.1=hbd99317_7
+- geoviews=1.8.1=py_0
+- git=2.26.0=pl526hf241897_0
+- gitpython=3.1.3=py_0
+- google-cloud-container=0.3.0=py37_0
+- google-cloud-storage=1.28.1=pyh9f0ad1d_0
+- holoviews=1.13.2=pyh9f0ad1d_0
+- h5netcdf=0.8.0=py_0
+- intake-esm=2020.6.11=py_0
+- jedi=0.17.0=py37hc8dfbb8_0
+- jupyter-server-proxy=1.5.0=py_0 # need server proxy on workers if using remote scheduler
+- kubernetes=1.18.3=0
+- lz4=3.0.2=py37hb076c26_1
+- make=4.3=h516909a_0
+- matplotlib=3.1.1=py37_0
+- nc-time-axis=1.2.0=py_1
+- netcdf-fortran=4.4.5=hea25ff8_1000
+- netcdf4=1.5.1.2=py37had58050_0
+- numba=0.48.0=py37hb3f55d8_0
+- pandas=1.0.4=py37h0da4684_0
+- phantomjs=2.1.1=1 # for geoviews
+- pillow=7.1.2=py37h718be6c_0
+- pip=20.1.1=py_1
+- plotly=4.8.1=pyh9f0ad1d_0
+- pyinterp=0.3.2=openblas_py37hcf60e08_2
+- pyshp=2.1.0=py_0
+- python=3.7.3=h5b0a415_0
+- pyyaml=5.3.1=py37h8f50634_0
+- rasterio=1.1.1=py37h900e953_0
+- regionmask=0.5.0=py_1
+- rtree=0.9.4=py37h8526d28_1
+- scikit-image=0.17.2=py37h0da4684_1
+- scikit-learn=0.23.1=py37h8a51577_0
+- scipy=1.4.1=py37ha3d9a3c_3
+- seaborn=0.10.1=1
+- selenium=3.141.0=py37h8f50634_1001 # for geoviews
+- shapely=1.7.0=py37hb106bac_1
+- sparse=0.9.1=py_0
+- statsmodels=0.11.1=py37h8f50634_2
+- tini=0.18.0=h14c3975_1001
+- xarray=0.15.1=py_0
+- xesmf=0.3.0=py_0
+- xhistogram=0.1.1=py_0
+- xlrd=1.2.0=py_0
+- zarr=2.4.0=py_0
+- zeromq=4.3.2=he1b5a44_2
+- pip:
+  - py-noaa
+  - sidecar
+  - climate-toolbox
+  - parameterize-jobs
+  - rhg_compute_tools
+name: base
