@@ -47,8 +47,8 @@ RUN mkdir /opt/conda/specs
 COPY base_environment.yml /opt/conda/specs
 COPY notebook_environment.yml /opt/conda/specs
 COPY r_environment.yml /opt/conda/specs
-RUN conda config --add channels conda-forge
-
+RUN conda config --add channels conda-forge && \
+  conda config --set channel_priority strict
 
 ## set up conda
 RUN conda update -n base conda
@@ -73,11 +73,13 @@ RUN jupyter labextension update --all && \
     @jupyter-widgets/jupyterlab-manager \
     @jupyter-widgets/jupyterlab-sidecar \
     @pyviz/jupyterlab_pyviz \
+    @ryantam626/jupyterlab_code_formatter \
     dask-labextension \
     jupyter-leaflet \
     jupyter-matplotlib \
     jupyterlab-plotly \
-    plotlywidget
+    plotlywidget && \
+    jupyter serverextension enable --py jupyterlab_code_formatter
 
 
 ## clean up
