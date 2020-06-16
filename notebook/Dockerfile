@@ -66,12 +66,9 @@ RUN jupyter labextension update --all && \
     jupyter labextension install \
     @bokeh/jupyter_bokeh \
     @jupyter-widgets/jupyterlab-manager \
-    @jupyter-widgets/jupyterlab-sidecar \
     @pyviz/jupyterlab_pyviz \
     @ryantam626/jupyterlab_code_formatter \
     dask-labextension \
-    jupyter-leaflet \
-    jupyter-matplotlib \
     jupyterlab-plotly \
     plotlywidget && \
     jupyter serverextension enable --py jupyterlab_code_formatter
