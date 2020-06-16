@@ -3,7 +3,9 @@
 apt-get update -y --no-install-recommends
 apt-get install -yq --no-install-recommends \
   apt-utils \
+  zip \
   bzip2 \
+  unzip \
   ca-certificates \
   curl \
   lsb-release \
@@ -33,12 +35,16 @@ apt-get clean
 wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /usr/bin/cloud_sql_proxy
 chmod +x /usr/bin/cloud_sql_proxy
 
+# download vdatum
+wget https://vdatum.noaa.gov/download/data/vdatum_v4.0.1.zip -O /usr/bin/vdatum.zip
+wget https://vdatum.noaa.gov/download/data/vdatum_EGM1996.zip -O /usr/bin/vdatum_EGM1996.zip
+unzip /usr/bin/vdatum.zip
+unzip -o /usr/bin/vdatum_EGM1996.zip
+rm /usr/bin/vdatum.zip
+rm /usr/bin/vdatum_EGM1996.zip
+
 # filepath curating
 chmod +x /usr/bin/prepare.sh
 mkdir /gcs
 mkdir /opt/app
 
-# super sketchy hack to get around our need for compiler_compat binaries and some
-# other things that cause problems together?
-# see https://github.com/ContinuumIO/anaconda-issues/issues/11152
-rm -rf /opt/conda/compiler_compat/ld

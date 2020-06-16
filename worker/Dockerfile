@@ -1,5 +1,5 @@
 ## using same container as jupyter/base-notebook:python-3.7.3
-FROM ubuntu:bionic-20190612@sha256:6e9f67fa63b0323e9a1e587fd71c561ba48a034504fb804fd26fd8800039835d
+FROM ubuntu:bionic-20200403@sha256:b58746c8a89938b8c9f5b77de3b8cf1fe78210c696ab03a1442e235eea65d84f
 ARG DEBIAN_FRONTEND=noninteractive
 ENV NPY_DISTUTILS_APPEND_FLAGS=1
 
@@ -22,7 +22,7 @@ RUN bash /tempdir/common.sh
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
 
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.7.12.1-Linux-x86_64.sh -O ~/miniconda.sh && \
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.2-Linux-x86_64.sh -O ~/miniconda.sh && \
     /bin/bash ~/miniconda.sh -b -p /opt/conda && \
     rm ~/miniconda.sh && \
     ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
@@ -34,14 +34,14 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.7.12.1-Linux-x
 ## set up conda channels
 RUN mkdir /opt/conda/specs
 COPY base_environment.yml /opt/conda/specs
-RUN conda config --add channels conda-forge/label/dev && \
-  conda config --add channels conda-forge
+RUN conda config --add channels conda-forge && \
+    conda config --set channel_priority strict
 
 
 ## set up python env
 RUN conda update -n base conda
 RUN conda env update -f /opt/conda/specs/base_environment.yml
-
+RUN conda list -n base
 
 ## clean up
 RUN rm -rf /var/lib/apt/lists/* /tempdir

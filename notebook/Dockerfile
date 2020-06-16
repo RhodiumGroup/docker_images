@@ -1,4 +1,4 @@
-FROM jupyter/base-notebook:notebook-6.0.0
+FROM jupyter/base-notebook:notebook-6.0.3
 ARG DEBIAN_FRONTEND=noninteractive
 
 ## needed to make sure things with cython compile correctly
@@ -46,10 +46,8 @@ RUN sudo apt-get install -yq \
 RUN mkdir /opt/conda/specs
 COPY base_environment.yml /opt/conda/specs
 COPY notebook_environment.yml /opt/conda/specs
-COPY r_environment.yml /opt/conda/specs
-RUN conda config --add channels conda-forge/label/dev && \
-  conda config --add channels conda-forge
-
+RUN conda config --add channels conda-forge && \
+  conda config --set channel_priority strict
 
 ## set up conda
 RUN conda update -n base conda
@@ -60,8 +58,7 @@ RUN conda env update -f /opt/conda/specs/base_environment.yml
 # update environment with nb-specific packages
 RUN conda env update -f /opt/conda/specs/notebook_environment.yml
 
-# create r environment
-RUN conda env create -f /opt/conda/specs/r_environment.yml
+RUN conda list -n base
 
 
 ## Set up jupyter lab extensions
@@ -71,11 +68,13 @@ RUN jupyter labextension update --all && \
     @jupyter-widgets/jupyterlab-manager \
     @jupyter-widgets/jupyterlab-sidecar \
     @pyviz/jupyterlab_pyviz \
+    @ryantam626/jupyterlab_code_formatter \
     dask-labextension \
     jupyter-leaflet \
     jupyter-matplotlib \
     jupyterlab-plotly \
-    plotlywidget
+    plotlywidget && \
+    jupyter serverextension enable --py jupyterlab_code_formatter
 
 
 ## clean up
