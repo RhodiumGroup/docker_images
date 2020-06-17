@@ -38,8 +38,8 @@ chmod +x /usr/bin/cloud_sql_proxy
 # download vdatum
 wget https://vdatum.noaa.gov/download/data/vdatum_v4.0.1.zip -O /usr/bin/vdatum.zip
 wget https://vdatum.noaa.gov/download/data/vdatum_EGM1996.zip -O /usr/bin/vdatum_EGM1996.zip
-unzip /usr/bin/vdatum.zip -d /usr/bin/vdatum
-unzip -o /usr/bin/vdatum_EGM1996.zip -d /usr/bin/vdatum
+unzip /usr/bin/vdatum.zip -d /usr/bin
+unzip -o /usr/bin/vdatum_EGM1996.zip -d /usr/bin
 rm /usr/bin/vdatum.zip
 rm /usr/bin/vdatum_EGM1996.zip
 
