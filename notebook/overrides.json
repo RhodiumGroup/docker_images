@@ -1,8 +1,14 @@
 {
   "@jupyterlab/fileeditor-extension:plugin": {
     "editorConfig": {
-        "rulers": [79],
+        "rulers": [88],
         "lineNumbers": true
+    }
+  },
+  "@jupyterlab/notebook-extension:tracker": {
+    "codeCellConfig": {
+      "rulers": [88],
+      "lineNumbers": true
     }
   }
 }
