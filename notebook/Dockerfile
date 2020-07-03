@@ -36,7 +36,7 @@ RUN sudo chown -R $NB_USER /gcs
 
 
 ## more apt-get
-RUN sudo apt-get install -yq \
+RUN sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq \
   vim less man locate kmod dialog \
   octave && \
   sudo apt-get clean
