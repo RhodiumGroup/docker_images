@@ -71,7 +71,7 @@ RUN jupyter labextension update --all && \
     dask-labextension \
     jupyterlab-plotly \
     plotlywidget && \
-    jupyter serverextension enable --py jupyterlab_code_formatter
+    jupyter serverextension enable --py jupyterlab_code_formatter --system
 
 
 ## clean up
