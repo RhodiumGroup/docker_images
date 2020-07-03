@@ -13,3 +13,4 @@ worker-config.yml
 .coverage
 __pycache__
 .pytest_cache
+.vscode/settings.json
