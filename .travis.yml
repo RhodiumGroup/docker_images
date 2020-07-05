@@ -99,4 +99,4 @@ deploy:
     condition: $IMAGE_NAME = worker
 
 after_deploy:
-  - if [ "${IMAGE_NAME}" = "notebook" ]; then node build_clawpack.js; fi
+  - if [ "${IMAGE_NAME}" = "worker" ]; then node build_clawpack.js; fi
