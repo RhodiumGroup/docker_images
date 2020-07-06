@@ -57,7 +57,7 @@ ENV OPENBLAS_NUM_THREADS=1
 ## clawpack added for coastal-specific image
 ##################
 
-COPY . /clawpack
+COPY ./clawpack /clawpack
 
 ## install Clawpack
 ENV CLAW=/clawpack
