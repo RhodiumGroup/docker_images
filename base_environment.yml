@@ -71,7 +71,6 @@ dependencies:
   - zarr=2.4.0=py_0
   - zeromq=4.3.2=he1b5a44_2
   - pip:
-    - --no-cache-dir
     - climate-toolbox==0.1.5
     - noaa-coops==0.1.5
     - parameterize-jobs==0.1.1
