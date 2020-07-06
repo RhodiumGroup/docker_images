@@ -15,7 +15,6 @@ dependencies:
   - jupyterlab_code_formatter=1.3.1=py_0
   - nano=2.9.8=h969982e_1000
   - nb_conda_kernels=2.2.3=py37_0
-  - nose=1.3.7=py37hc8dfbb8_1004
   - octave_kernel=0.32.0=pyh9f0ad1d_0
   - oct2py=5.0.4=py_0
   - openssh=8.3p1=h5957347_0
