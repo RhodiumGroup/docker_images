@@ -34,5 +34,8 @@ if [ -f "/home/jovyan/worker-template.yml" ]; then
     python /home/jovyan/add_service_creds.py;
 fi
 
+# needed for CLAWPACK to not throw segfaults sometimes
+ulimit -s unlimited
+
 # Run extra commands
 $@
