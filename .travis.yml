@@ -25,8 +25,7 @@ install:
 
 
 script:
-- docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT \
-  --build-arg CLAWPACK_COMMIT .
+- docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT --build-arg CLAWPACK_COMMIT .
 
 deploy:
 - provider: script
