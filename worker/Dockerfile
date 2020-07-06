@@ -58,17 +58,9 @@ ENV OPENBLAS_NUM_THREADS=1
 ## clawpack added for coastal-specific image
 ##################
 
-COPY ./clawpack /clawpack
-
-## install Clawpack
 ENV CLAW=/clawpack
 ENV NETCDF4_DIR=/opt/conda
 ENV FC=gfortran
-
-WORKDIR /clawpack
-
-# need to change shell in order for source command to work
-SHELL ["/bin/bash", "-c"]
 
 # super sketchy hack to get around our need for compiler_compat binaries and some
 # other things that cause problems together?
@@ -76,9 +68,7 @@ SHELL ["/bin/bash", "-c"]
 RUN mv /opt/conda/compiler_compat/ld /opt/conda/compiler_compat/ld-conda
 
 # install clawpack
-RUN pip install -e .
-
-WORKDIR /
+RUN pip install -e --user --src=/clawpack git+https://github.com/climateimpactlab/clawpack.git@c85461231106286f9ba037261bccfe1fb2f76bac
 
 ##################
 
