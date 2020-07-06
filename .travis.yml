@@ -18,7 +18,6 @@ install:
 - "cat notebook/worker-template.yml | grep image:"
 - "cp base_environment.yml $IMAGE_NAME/base_environment.yml"
 - "cp common.sh $IMAGE_NAME/common.sh && chmod +x $IMAGE_NAME/common.sh"
-- "cp -r clawpack $IMAGE_NAME/clawpack"
 - "cd $IMAGE_NAME"
 
 
