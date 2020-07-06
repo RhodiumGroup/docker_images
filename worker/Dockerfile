@@ -68,7 +68,7 @@ ENV FC=gfortran
 RUN mv /opt/conda/compiler_compat/ld /opt/conda/compiler_compat/ld-conda
 
 # install clawpack
-RUN pip install --src=${CLAW}-e git+https://github.com/climateimpactlab/clawpack.git@c85461231106286f9ba037261bccfe1fb2f76bac
+RUN pip install --src=${CLAW} -e git+https://github.com/climateimpactlab/clawpack.git@c85461231106286f9ba037261bccfe1fb2f76bac#egg=clawpack
 
 ##################
 
