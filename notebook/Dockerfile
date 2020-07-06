@@ -77,17 +77,19 @@ RUN jupyter labextension update --all && \
 ## clawpack added for coastal-specific image
 ##################
 
+ARG CLAWPACK_COMMIT
 ENV CLAW=/clawpack
 ENV NETCDF4_DIR=/opt/conda
 ENV FC=gfortran
 
-# super sketchy hack to get around our need for compiler_compat binaries and some
-# other things that cause problems together?
-# see https://github.com/ContinuumIO/anaconda-issues/issues/11152
-RUN mv /opt/conda/compiler_compat/ld /opt/conda/compiler_compat/ld-conda
+# need to change shell in order for source command to work
+SHELL ["/bin/bash", "-c"]
 
 # install clawpack
-RUN pip install --src=${CLAW} -e git+https://github.com/climateimpactlab/clawpack.git@c85461231106286f9ba037261bccfe1fb2f76bac#egg=clawpack
+RUN source /opt/conda/etc/profile.d/conda.sh \
+    && conda activate \
+    && pip install --src=$(dirname $CLAW) -e \
+      git+https://github.com/climateimpactlab/clawpack.git@${CLAWPACK_COMMIT}#egg=clawpack
 
 ##################
 

@@ -2,8 +2,11 @@ services:
   - docker
 
 env:
-- IMAGE_NAME=notebook
-- IMAGE_NAME=worker
+  jobs:
+    - IMAGE_NAME=notebook
+    - IMAGE_NAME=worker
+  global:
+    - CLAWPACK_COMMIT=c85461231106286f9ba037261bccfe1fb2f76bac
 
 install:
 - "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then 
@@ -22,7 +25,8 @@ install:
 
 
 script:
-- docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT .
+- docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT \
+  --build-arg CLAWPACK_COMMIT .
 
 deploy:
 - provider: script
