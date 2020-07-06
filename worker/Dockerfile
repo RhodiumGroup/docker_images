@@ -53,4 +53,31 @@ ENV OMP_NUM_THREADS=1
 ENV MKL_NUM_THREADS=1
 ENV OPENBLAS_NUM_THREADS=1
 
+##################
+## clawpack added for coastal-specific image
+##################
+
+COPY . /clawpack
+
+## install Clawpack
+ENV CLAW=/clawpack
+ENV NETCDF4_DIR=/opt/conda
+ENV FC=gfortran
+ENV MPLBACKEND=Agg
+
+# this is needed to find libraries when building geoclaw (particularly lapack)
+ENV LIB_PATHS=/opt/conda/lib
+
+WORKDIR /clawpack
+
+# need to change shell in order for source command to work
+SHELL ["/bin/bash", "-c"]
+
+# install clawpack
+RUN pip install -e .
+
+WORKDIR /
+
+##################
+
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
