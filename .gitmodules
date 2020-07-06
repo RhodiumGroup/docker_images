@@ -1,0 +1,3 @@
+[submodule "clawpack"]
+	path = clawpack
+	url = https://github.com/ClimateImpactLab/clawpack
