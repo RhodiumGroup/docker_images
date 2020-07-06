@@ -2,6 +2,7 @@
 FROM ubuntu:bionic-20200403@sha256:b58746c8a89938b8c9f5b77de3b8cf1fe78210c696ab03a1442e235eea65d84f
 ARG DEBIAN_FRONTEND=noninteractive
 ENV NPY_DISTUTILS_APPEND_FLAGS=1
+ENV MPLBACKEND=Agg
 
 ## filepath curation
 RUN mkdir /tempdir
@@ -63,15 +64,16 @@ COPY ./clawpack /clawpack
 ENV CLAW=/clawpack
 ENV NETCDF4_DIR=/opt/conda
 ENV FC=gfortran
-ENV MPLBACKEND=Agg
-
-# this is needed to find libraries when building geoclaw (particularly lapack)
-ENV LIB_PATHS=/opt/conda/lib
 
 WORKDIR /clawpack
 
 # need to change shell in order for source command to work
 SHELL ["/bin/bash", "-c"]
+
+# super sketchy hack to get around our need for compiler_compat binaries and some
+# other things that cause problems together?
+# see https://github.com/ContinuumIO/anaconda-issues/issues/11152
+RUN mv /opt/conda/compiler_compat/ld /opt/conda/compiler_compat/ld-conda
 
 # install clawpack
 RUN pip install -e .
