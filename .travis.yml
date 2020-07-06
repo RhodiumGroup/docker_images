@@ -2,12 +2,8 @@ services:
   - docker
 
 env:
-  matrix:
-    - IMAGE_NAME=notebook
-    - IMAGE_NAME=worker  
-  global:
-    secure: FD1HCYWd/H7VDC2O+bWkJP4WooHigMW0XWqcbKZ+M5dYwVzzDeAgds36CT6Le+kREvKbmaDPxGDCoW33Ceu96lgZWla1Le0YjdJyiyvx34dGJnX3IrucRXbvc3+UN+qwfOj8UMadPGexVwcgcWSTIc0fwdibW9fE020fQF47XgxsXU5Ouro0e0ktvqfTs2revr2sU5aMDyxs4wyfVo8K905LfrqGSbIBSPCcjxLK9clByRNwwr4rWfSocBKnIF9xq6H4piDnC67rWfymTW4Lr9H9AMbH/kVErTAc+RACgmjVKMKYhP2DHk2N3SwE7bzcCgEkgj6LoC/8mogrY0Sml6Wa2zvNuFBzsSgocb07fGV/cPCFzgmqI6fLNtmDdrK5t5MEAvFB3XhsNgI8S04Rtzgijfp5tEEs53JAOjty3Uajv+pnrJOSP+ilo4VxB0aTpFJG0k+aCHLFY0lUuxWKEkgo3xRAhOgXmg1qbetarwR7EF4jQCEwARFlipbBHh8aJdTYSpqmLbrkzVU4luP3ycdFCea4b4HNfhC/OdnV+0j6NE8LEV29Sv8+QNbDeYJuexLJ3Kjo3BWkR1rVCa+ciqDoYBriPPTmQ1S/tj2ttFVZubyTx4u2yDP0ZMxeJsJvmCbFh2N+LujO4xTxadTcLMxadvCOJkB9w1i5XiO1Zg4=
-
+- IMAGE_NAME=notebook
+- IMAGE_NAME=worker
 
 install:
 - "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then 
@@ -97,6 +93,3 @@ deploy:
   on:
     tags: true
     condition: $IMAGE_NAME = worker
-
-after_deploy:
-  - if [ "${IMAGE_NAME}" = "worker" ]; then node build_clawpack.js; fi
