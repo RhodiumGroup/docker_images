@@ -91,7 +91,7 @@ SHELL ["/bin/bash", "-c"]
 USER root
 RUN source /opt/conda/etc/profile.d/conda.sh \
     && conda activate \
-    && sudo pip install --src=$(dirname $CLAW) -e \
+    && pip install --src=$(dirname $CLAW) -e \
       git+https://github.com/climateimpactlab/clawpack.git@${CLAWPACK_COMMIT}#egg=clawpack
 USER $NB_USER
 RUN fix-permissions.sh /clawpack
