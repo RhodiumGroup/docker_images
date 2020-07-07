@@ -90,7 +90,7 @@ SHELL ["/bin/bash", "-c"]
 # install clawpack
 RUN source /opt/conda/etc/profile.d/conda.sh \
     && conda activate \
-    && pip install --src=$(dirname $CLAW) -e \
+    && sudo pip install --src=$(dirname $CLAW) -e \
       git+https://github.com/climateimpactlab/clawpack.git@${CLAWPACK_COMMIT}#egg=clawpack
 
 RUN export EXE=$CLAW/geoclaw/xgeoclaw && \
