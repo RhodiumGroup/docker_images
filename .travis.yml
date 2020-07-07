@@ -6,7 +6,7 @@ env:
     - IMAGE_NAME=notebook
     - IMAGE_NAME=worker
   global:
-    - CLAWPACK_COMMIT=6309956baeb39e8cf69e91037ed7820ca1cc0356
+    - CLAWPACK_COMMIT=bf4eefb3543d65331eb92848b2c0514a218194eb
 
 install:
 - "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then 
@@ -26,8 +26,7 @@ install:
 
 script:
 - docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT --build-arg CLAWPACK_COMMIT .
-- docker run --ulimit stack=8277716992:8277716992 
-  -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT bash /clawpack/run_tests.sh
+- docker run -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT bash /clawpack/run_tests.sh
 
 deploy:
 - provider: script
