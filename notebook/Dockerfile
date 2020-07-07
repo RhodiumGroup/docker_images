@@ -26,6 +26,7 @@ COPY config.yaml /pre-home
 RUN sudo mkdir /tempdir
 COPY common.sh /tempdir
 COPY Makefile.clawpack /tempdir
+COPY fix-permissions.sh /tempdir
 
 COPY prepare.sh /usr/bin
 COPY overrides.json /opt/conda/share/jupyter/lab/settings/overrides.json
@@ -87,14 +88,14 @@ ENV LIB_PATHS=/opt/conda/lib
 # need to change shell in order for source command to work
 SHELL ["/bin/bash", "-c"]
 
-# install clawpack (use root to access /clawpack)
+# install clawpack (use root to access /clawpack and then fix permissions)
 USER root
 RUN source /opt/conda/etc/profile.d/conda.sh \
     && conda activate \
     && pip install --src=$(dirname $CLAW) -e \
       git+https://github.com/climateimpactlab/clawpack.git@${CLAWPACK_COMMIT}#egg=clawpack
+RUN /tempdir/fix-permissions.sh /clawpack
 USER $NB_USER
-RUN fix-permissions.sh /clawpack
 
 RUN export EXE=$CLAW/geoclaw/xgeoclaw && \
   export FFLAGS="-DNETCDF -O3 -funroll-loops -finline-functions \
@@ -108,7 +109,7 @@ RUN export EXE=$CLAW/geoclaw/xgeoclaw && \
 
 ## clean up
 RUN sudo rm -rf /var/lib/apt/lists/* /tempdir
-RUN conda clean --all -f
+RUN conda clean -yaf
 
 ## prepare container
 WORKDIR $HOME

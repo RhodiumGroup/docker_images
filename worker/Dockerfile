@@ -76,7 +76,7 @@ RUN export EXE=$CLAW/geoclaw/xgeoclaw && \
 
 ## clean up
 RUN rm -rf /var/lib/apt/lists/* /tempdir
-RUN conda clean --all -f
+RUN conda clean -yaf
 
 ## prepare container
 ENV OMP_NUM_THREADS=1
