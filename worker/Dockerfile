@@ -62,6 +62,7 @@ ARG CLAWPACK_COMMIT
 ENV CLAW=/clawpack
 ENV NETCDF4_DIR=/opt/conda
 ENV FC=gfortran
+ENV LIB_PATHS=/opt/conda/lib
 
 # need to change shell in order for source command to work
 SHELL ["/bin/bash", "-c"]
