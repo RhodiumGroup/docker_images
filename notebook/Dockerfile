@@ -87,11 +87,13 @@ ENV LIB_PATHS=/opt/conda/lib
 # need to change shell in order for source command to work
 SHELL ["/bin/bash", "-c"]
 
-# install clawpack
+# install clawpack (use root to access /clawpack)
+USER root
 RUN source /opt/conda/etc/profile.d/conda.sh \
     && conda activate \
     && sudo pip install --src=$(dirname $CLAW) -e \
       git+https://github.com/climateimpactlab/clawpack.git@${CLAWPACK_COMMIT}#egg=clawpack
+USER $NB_USER
 
 RUN export EXE=$CLAW/geoclaw/xgeoclaw && \
   export FFLAGS="-DNETCDF -O3 -funroll-loops -finline-functions \
