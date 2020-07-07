@@ -26,7 +26,7 @@ install:
 
 script:
 - docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT --build-arg CLAWPACK_COMMIT .
-- docker run --ulimit stack=8277716992:8277716992 \
+- docker run --ulimit stack=8277716992:8277716992 
   -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT bash /clawpack/run_tests.sh
 
 deploy:
