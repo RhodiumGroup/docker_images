@@ -86,7 +86,7 @@ ENV FC=gfortran
 ENV LIB_PATHS=/opt/conda/lib
 
 # need to change shell in order for source command to work
-SHELL ["/bin/bash", "-c"]
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # install clawpack (use root to access /clawpack and then fix permissions)
 USER root
@@ -114,4 +114,4 @@ RUN conda clean -yaf
 ## prepare container
 WORKDIR $HOME
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
-CMD ["start.sh jupyter lab"]
+CMD ["start-notebook.sh"]
