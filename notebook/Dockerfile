@@ -25,6 +25,7 @@ COPY config.yaml /pre-home
 
 RUN sudo mkdir /tempdir
 COPY common.sh /tempdir
+COPY Makefile.clawpack /tempdir
 
 COPY prepare.sh /usr/bin
 COPY overrides.json /opt/conda/share/jupyter/lab/settings/overrides.json
@@ -92,12 +93,19 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
     && pip install --src=$(dirname $CLAW) -e \
       git+https://github.com/climateimpactlab/clawpack.git@${CLAWPACK_COMMIT}#egg=clawpack
 
+RUN export EXE=$CLAW/geoclaw/xgeoclaw && \
+  export FFLAGS="-DNETCDF -O3 -funroll-loops -finline-functions \
+      -L/opt/conda/lib -lnetcdf -lnetcdff -I/opt/conda/include" && \
+  make -f /tempdir/Makefile.clawpack new && \
+  export EXE=$CLAW/geoclaw/xgeoclaw_omp && \
+  export FFLAGS="$FFLAGS -fopenmp" && \
+  make -f /tempdir/Makefile.clawpack new
+
 ##################
 
 ## clean up
 RUN sudo rm -rf /var/lib/apt/lists/* /tempdir
 RUN conda clean --all -f
-
 
 ## prepare container
 WORKDIR $HOME

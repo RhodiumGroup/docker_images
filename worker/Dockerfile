@@ -7,6 +7,7 @@ ENV MPLBACKEND=Agg
 ## filepath curation
 RUN mkdir /tempdir
 COPY common.sh /tempdir
+COPY Makefile.clawpack /tempdir
 
 COPY add_service_creds.py /usr/bin
 COPY prepare.sh /usr/bin
@@ -44,16 +45,6 @@ RUN conda update -n base conda
 RUN conda env update -f /opt/conda/specs/base_environment.yml
 RUN conda list -n base
 
-## clean up
-RUN rm -rf /var/lib/apt/lists/* /tempdir
-RUN conda clean --all -f
-
-
-## prepare container
-ENV OMP_NUM_THREADS=1
-ENV MKL_NUM_THREADS=1
-ENV OPENBLAS_NUM_THREADS=1
-
 ##################
 ## clawpack added for coastal-specific image
 ##################
@@ -73,6 +64,23 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
     && pip install --src=$(dirname $CLAW) -e \
         git+https://github.com/climateimpactlab/clawpack.git@${CLAWPACK_COMMIT}#egg=clawpack
 
+RUN export EXE=$CLAW/geoclaw/xgeoclaw && \
+  export FFLAGS="-DNETCDF -O3 -funroll-loops -finline-functions \
+      -L/opt/conda/lib -lnetcdf -lnetcdff -I/opt/conda/include" && \
+  make -f /tempdir/Makefile.clawpack new && \
+  export EXE=$CLAW/geoclaw/xgeoclaw_omp && \
+  export FFLAGS="$FFLAGS -fopenmp" && \
+  make -f /tempdir/Makefile.clawpack new
+
 ##################
+
+## clean up
+RUN rm -rf /var/lib/apt/lists/* /tempdir
+RUN conda clean --all -f
+
+## prepare container
+ENV OMP_NUM_THREADS=1
+ENV MKL_NUM_THREADS=1
+ENV OPENBLAS_NUM_THREADS=1
 
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
