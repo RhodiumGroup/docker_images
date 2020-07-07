@@ -52,6 +52,7 @@ dependencies:
   - pyinterp=0.3.2=mkl_py37he448baa_102
   - pyshp=2.1.0=py_0
   - python=3.7.6=cpython_h8356626_6
+  - python-snappy=0.5.4=py37h7cfaab3_1
   - pyyaml=5.3.1=py37h8f50634_0
   - rasterio=1.1.5=py37h0492a4a_0
   - regionmask=0.5.0=py_1
