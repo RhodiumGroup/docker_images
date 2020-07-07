@@ -19,9 +19,7 @@ install:
       notebook/worker-template.yml; fi"
 - "rm notebook/worker-template.yml.bak"
 - "cat notebook/worker-template.yml | grep image:"
-- "cp base_environment.yml $IMAGE_NAME/base_environment.yml"
-- "cp common.sh $IMAGE_NAME/common.sh && chmod +x $IMAGE_NAME/common.sh"
-- "cp Makefile.clawpack $IMAGE_NAME/Makefile.clawpack"
+- "cp shared_resources/* $IMAGE_NAME && chmod -R +x $IMAGE_NAME"
 - "cd $IMAGE_NAME"
 
 

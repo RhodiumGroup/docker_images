@@ -1,4 +1,4 @@
-FROM jupyter/base-notebook:notebook-6.0.3
+FROM jupyter/base-notebook@sha256:135779f39abfdfe75a6dbc50c7a15c55cc79c8231cd75f83aaabf87127c60adf
 ARG DEBIAN_FRONTEND=noninteractive
 
 ## needed to make sure things with cython compile correctly
@@ -91,9 +91,10 @@ SHELL ["/bin/bash", "-c"]
 USER root
 RUN source /opt/conda/etc/profile.d/conda.sh \
     && conda activate \
-    && pip install --src=$(dirname $CLAW) -e \
+    && sudo pip install --src=$(dirname $CLAW) -e \
       git+https://github.com/climateimpactlab/clawpack.git@${CLAWPACK_COMMIT}#egg=clawpack
 USER $NB_USER
+RUN fix-permissions.sh /clawpack
 
 RUN export EXE=$CLAW/geoclaw/xgeoclaw && \
   export FFLAGS="-DNETCDF -O3 -funroll-loops -finline-functions \
