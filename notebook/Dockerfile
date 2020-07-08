@@ -95,6 +95,7 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
     && pip install --src=$(dirname $CLAW) -e \
       git+https://github.com/climateimpactlab/clawpack.git@${CLAWPACK_COMMIT}#egg=clawpack
 RUN /tempdir/fix-permissions.sh /clawpack
+RUN /tempdir/fix-permissions.sh /opt/conda
 USER $NB_USER
 
 RUN export EXE=$CLAW/geoclaw/xgeoclaw && \
