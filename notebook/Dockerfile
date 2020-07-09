@@ -69,7 +69,7 @@ RUN jupyter labextension update --all && \
     @bokeh/jupyter_bokeh \
     @jupyter-widgets/jupyterlab-manager \
     @pyviz/jupyterlab_pyviz \
-    @ryantam626/jupyterlab_code_formatter \
+    @ryantam626/jupyterlab_code_formatter@1.3.1 \
     dask-labextension \
     jupyterlab-plotly \
     plotlywidget && \
