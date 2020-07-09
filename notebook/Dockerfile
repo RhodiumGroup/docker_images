@@ -98,7 +98,7 @@ ENV LIB_PATHS=/opt/conda/lib
 # the list of conda-based flags, as it was throwing segfaults.
 ENV CLAW_FFLAGS="-DNETCDF -L/opt/conda/lib -lnetcdf -lnetcdff -I/opt/conda/include \
   -fauto-inc-dec -fbranch-count-reg -fcombine-stack-adjustments -fcompare-elim \
-  -fcprop-registers -fdce -fdefer-pop -fdelayed-branch -fdse -fforward-propagate \
+  -fcprop-registers -fdce -fdefer-pop -fdse -fforward-propagate \
   -fguess-branch-probability -fif-conversion -fif-conversion2 \
   -finline-functions-called-once -fipa-profile -fipa-pure-const -fipa-reference \
   -fmerge-constants -fmove-loop-invariants -fomit-frame-pointer -freorder-blocks \
