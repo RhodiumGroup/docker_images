@@ -143,7 +143,7 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
   && make -f /tempdir/Makefile.clawpack new \
   && export EXE=$CLAW/geoclaw/xgeoclaw_omp \
   && export FFLAGS="$FFLAGS -fopenmp" \
-  make -f /tempdir/Makefile.clawpack new
+  && make -f /tempdir/Makefile.clawpack new
 
 ##################
 
