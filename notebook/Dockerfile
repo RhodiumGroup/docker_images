@@ -84,6 +84,44 @@ ENV CLAW=/clawpack
 ENV NETCDF4_DIR=/opt/conda
 ENV FC=gfortran
 ENV LIB_PATHS=/opt/conda/lib
+# Was getting weird behavior with any broad optimization flags (-O, -O2, -O3) wherein
+# the boundary velocity error might be triggered on different boundaries if you piped
+# both stdout and stderr to a file. If you only piped one or didn't pipe any, you 
+# got one answer and if you piped both you got a different answer. Without the flags,
+# you would get the same answer regardless (the one originally obtained when piping
+# both out and err). To maintain a level of optimization, I just took all of the flags
+# from O3 here: https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html and put them
+# in individually. A few were removed due to compile or runtime errors. In addition, I
+# added some flags applied by default from the conda gfortran compiler (-ftree-vectorize 
+# -fPIC -fno-plt -ffunction-sections). I also added the march flag for the google 
+# machines we are using (broadwell currently), and dropped fstack-protector-strong from
+# the list of conda-based flags, as it was throwing segfaults.
+ENV CLAW_FFLAGS="-DNETCDF -L/opt/conda/lib -lnetcdf -lnetcdff -I/opt/conda/include \
+  -fauto-inc-dec -fbranch-count-reg -fcombine-stack-adjustments -fcompare-elim \
+  -fcprop-registers -fdce -fdefer-pop -fdelayed-branch -fdse -fforward-propagate \
+  -fguess-branch-probability -fif-conversion -fif-conversion2 \
+  -finline-functions-called-once -fipa-profile -fipa-pure-const -fipa-reference \
+  -fmerge-constants -fmove-loop-invariants -fomit-frame-pointer -freorder-blocks \
+  -fshrink-wrap -fshrink-wrap-separate -fsplit-wide-types -fssa-backprop -fssa-phiopt \
+  -ftree-bit-ccp -ftree-ccp -ftree-ch -ftree-coalesce-vars -ftree-copy-prop -ftree-dce \
+  -ftree-dominator-opts -ftree-dse -ftree-forwprop -ftree-fre -ftree-phiprop \
+  -ftree-pta -ftree-scev-cprop -ftree-sink -ftree-slsr -ftree-sra -ftree-ter \
+  -funit-at-a-time -freorder-blocks-algorithm=stc -freorder-blocks-and-partition \
+  -freorder-functions -frerun-cse-after-loop -fschedule-insns -fschedule-insns2 \
+  -fsched-interblock -fsched-spec -fstore-merging -fstrict-aliasing -fthread-jumps \
+  -ftree-builtin-call-dce -ftree-pre -ftree-switch-conversion  -ftree-tail-merge \
+  -ftree-vrp -fgcse  -fgcse-lm  -fhoist-adjacent-loads -finline-functions \
+  -finline-small-functions -findirect-inlining -fipa-bit-cp  -fipa-cp  -fipa-icf \
+  -fipa-ra  -fipa-sra  -fipa-vrp -fisolate-erroneous-paths-dereference -flra-remat \
+  -foptimize-sibling-calls -foptimize-strlen -fpartial-inlining -fpeephole2 \
+  -falign-functions -falign-jumps -falign-labels  -falign-loops -fcaller-saves \
+  -fcode-hoisting -fcrossjumping -fcse-follow-jumps  -fcse-skip-blocks \
+  -fdelete-null-pointer-checks -fdevirtualize  -fdevirtualize-speculatively \
+  -fexpensive-optimizations -fgcse-after-reload -floop-unroll-and-jam -fpeel-loops \
+  -fpredictive-commoning -fsplit-loops -fsplit-paths -ftree-loop-distribution \
+  -ftree-loop-vectorize -ftree-partial-pre -ftree-slp-vectorize -funswitch-loops \
+  -fvect-cost-model -fvect-cost-model=dynamic -march=broadwell -ftree-vectorize -fPIC \
+  -fno-plt -ffunction-sections"
 
 # need to change shell in order for source command to work
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -91,19 +129,20 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # install clawpack (use root to access /clawpack and then fix permissions)
 USER root
 RUN source /opt/conda/etc/profile.d/conda.sh \
-    && conda activate \
-    && pip install --src=$(dirname $CLAW) -e \
-      git+https://github.com/climateimpactlab/clawpack.git@${CLAWPACK_COMMIT}#egg=clawpack
+  && conda activate \
+  && pip install --src=$(dirname $CLAW) -e \
+    git+https://github.com/climateimpactlab/clawpack.git@${CLAWPACK_COMMIT}#egg=clawpack
 RUN /tempdir/fix-permissions.sh /clawpack
 RUN /tempdir/fix-permissions.sh /opt/conda
 USER $NB_USER
 
-RUN export EXE=$CLAW/geoclaw/xgeoclaw && \
-  export FFLAGS="-DNETCDF -O3 -funroll-loops -finline-functions \
-      -L/opt/conda/lib -lnetcdf -lnetcdff -I/opt/conda/include" && \
-  make -f /tempdir/Makefile.clawpack new && \
-  export EXE=$CLAW/geoclaw/xgeoclaw_omp && \
-  export FFLAGS="$FFLAGS -fopenmp" && \
+RUN source /opt/conda/etc/profile.d/conda.sh \
+  && conda activate \
+  && export EXE=$CLAW/geoclaw/xgeoclaw \
+  && export FFLAGS=$CLAW_FFLAGS \
+  && make -f /tempdir/Makefile.clawpack new \
+  && export EXE=$CLAW/geoclaw/xgeoclaw_omp \
+  && export FFLAGS="$FFLAGS -fopenmp" \
   make -f /tempdir/Makefile.clawpack new
 
 ##################
