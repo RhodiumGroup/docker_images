@@ -26,7 +26,7 @@ dependencies:
   - pytest-runner
   - python-graphviz
   - sidecar
-  - sphinx
+  - sphinx_rtd_theme
   - tox
   - pip:
     - black_nbconvert
