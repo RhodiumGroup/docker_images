@@ -11,6 +11,7 @@ dependencies:
   - ipdb
   - ipyleaflet
   - ipympl
+  - ipypublish
   # pinning isort and jupyterlab_code_formatter until there's a version of the latter
   # on conda-forget that can support v5 of the former
   - isort=4
