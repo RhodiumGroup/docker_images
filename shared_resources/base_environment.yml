@@ -77,6 +77,6 @@ dependencies:
     - climate-toolbox==0.1.5
     - noaa-coops==0.1.5
     - parameterize-jobs==0.1.1
-    - rhg_compute_tools
-    - git+https://github.com/maritimeplanning/pytides.git@master
+    - rhg_compute_tools==0.2.2
+    - git+https://github.com/maritimeplanning/pytides.git@a8397a0e12645d22c62612385d18e63c4d67d6fa#egg=pytides
 name: base
