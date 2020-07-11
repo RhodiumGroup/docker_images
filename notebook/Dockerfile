@@ -76,7 +76,7 @@ RUN jupyter labextension update --all && \
     plotlywidget && \
     jupyter serverextension enable --py jupyterlab_code_formatter nbdime --sys-prefix
 
-RUN jupyter labextension disable jupyterlab_vim
+RUN jupyter labextension disable @ryantam626/jupyterlab_vim
 
 ##################
 ## clawpack added for coastal-specific image
