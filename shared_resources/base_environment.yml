@@ -36,6 +36,7 @@ dependencies:
   - jedi=0.17.1=py37hc8dfbb8_0
   - jupyter-server-proxy=1.5.0=py_0 # need server proxy on workers if using remote scheduler
   - kubernetes=1.18.5=0
+  - libmatio=1.5.12=hf54d351_1004
   - lz4=3.1.0=py37h5a7ed16_0
   - make=4.3=h516909a_0
   - matplotlib=3.2.2=0

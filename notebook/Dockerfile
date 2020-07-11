@@ -23,10 +23,7 @@ COPY add_service_creds.py /pre-home
 COPY run_sql_proxy.py /pre-home
 COPY config.yaml /pre-home
 
-RUN sudo mkdir /tempdir
-COPY common.sh /tempdir
-COPY Makefile.clawpack /tempdir
-COPY fix-permissions.sh /tempdir
+COPY shared_resources /tempdir
 
 COPY prepare.sh /usr/bin
 COPY overrides.json /opt/conda/share/jupyter/lab/settings/overrides.json
@@ -46,7 +43,7 @@ RUN sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recomme
 
 # set up conda channels
 RUN mkdir /opt/conda/specs
-COPY base_environment.yml /opt/conda/specs
+COPY shared_resources/base_environment.yml /opt/conda/specs
 COPY notebook_environment.yml /opt/conda/specs
 RUN conda config --add channels conda-forge && \
   conda config --set channel_priority strict
@@ -62,6 +59,11 @@ RUN conda env update -f /opt/conda/specs/notebook_environment.yml
 
 RUN conda list -n base
 
+# Compile MatI/O
+RUN source /opt/conda/etc/profile.d/conda.sh \
+  && conda activate \
+  && g++ $CFLAGS -L/opt/conda/lib -lmatio /tempdir/matio_73to5.c -o \
+    /opt/conda/bin/matio_73to5
 
 ## Set up jupyter lab extensions
 RUN jupyter labextension update --all && \

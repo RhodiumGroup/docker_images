@@ -19,7 +19,8 @@ install:
       notebook/worker-template.yml; fi"
 - "rm notebook/worker-template.yml.bak"
 - "cat notebook/worker-template.yml | grep image:"
-- "cp shared_resources/* $IMAGE_NAME && chmod -R +x $IMAGE_NAME"
+- "cp -r shared_resources $IMAGE_NAME/shared_resources && chmod -R +x \
+    $IMAGE_NAME/shared_resources"
 - "cd $IMAGE_NAME"
 
 

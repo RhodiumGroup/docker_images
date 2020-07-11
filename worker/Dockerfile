@@ -5,9 +5,7 @@ ENV NPY_DISTUTILS_APPEND_FLAGS=1
 ENV MPLBACKEND=Agg
 
 ## filepath curation
-RUN mkdir /tempdir
-COPY common.sh /tempdir
-COPY Makefile.clawpack /tempdir
+COPY shared_resources /tempdir
 
 COPY add_service_creds.py /usr/bin
 COPY prepare.sh /usr/bin
@@ -35,7 +33,7 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.2-Linux
 
 ## set up conda channels
 RUN mkdir /opt/conda/specs
-COPY base_environment.yml /opt/conda/specs
+COPY shared_resources/base_environment.yml /opt/conda/specs
 RUN conda config --add channels conda-forge && \
     conda config --set channel_priority strict
 
@@ -114,8 +112,9 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
 ##################
 
 ## clean up
-RUN rm -rf /var/lib/apt/lists/* /tempdir
-RUN conda clean -yaf
+RUN rm -rf /var/lib/apt/lists/* /tempdir \
+    && conda clean -yaf \
+    && sudo apt-get clean
 
 ## prepare container
 ENV OMP_NUM_THREADS=1
