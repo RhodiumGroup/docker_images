@@ -2,7 +2,7 @@ ARG TRAVIS_COMMIT=${TRAVIS_COMMIT}
 FROM rhodium/worker:${TRAVIS_COMMIT}
 ARG DEBIAN_FRONTEND=noninteractive
 
-COPY ../shared_resources /tempdir
+COPY shared_resources /tempdir
 
 ## filepath curation
 COPY octave_environment.yml /opt/conda/specs/octave_environment.yml

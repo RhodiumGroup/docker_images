@@ -19,6 +19,10 @@ install:
       notebook/worker-template.yml; fi"
 - "rm notebook/worker-template.yml.bak"
 - "cat notebook/worker-template.yml | grep image:"
+- "cp -r shared_resources $IMAGE_NAME/shared_resources && chmod -R +x \
+    $IMAGE_NAME/shared_resources"
+- "if [[ $IMAGE_NAME == worker ]]; then cp -r shared_resources \
+    octave-worker/shared_resources && chmod -R +x octave-worker/shared_resources; fi"
 - "cd $IMAGE_NAME"
 
 

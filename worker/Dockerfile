@@ -5,7 +5,7 @@ ENV NPY_DISTUTILS_APPEND_FLAGS=1
 ENV MPLBACKEND=Agg
 
 ## filepath curation
-COPY ../shared_resources /tempdir
+COPY shared_resources /tempdir
 
 COPY add_service_creds.py /usr/bin
 COPY prepare.sh /usr/bin

@@ -23,7 +23,7 @@ COPY add_service_creds.py /pre-home
 COPY run_sql_proxy.py /pre-home
 COPY config.yaml /pre-home
 
-COPY ../shared_resources /tempdir
+COPY shared_resources /tempdir
 
 COPY prepare.sh /usr/bin
 COPY overrides.json /opt/conda/share/jupyter/lab/settings/overrides.json
