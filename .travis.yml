@@ -69,7 +69,7 @@ deploy:
 - provider: script
   script: >-
     docker tag rhodium/octave-worker:$TRAVIS_COMMIT
-      rhodium/octave-worker:$TRAVIS_BRANCH &&
+    rhodium/octave-worker:$TRAVIS_BRANCH &&
     docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" &&
     docker push "rhodium/octave-worker:$TRAVIS_COMMIT" &&
     docker push "rhodium/octave-worker:$TRAVIS_BRANCH"
@@ -80,9 +80,9 @@ deploy:
 - provider: script
   script: >-
     docker tag rhodium/octave-worker:$TRAVIS_COMMIT
-      rhodium/octave-worker:dev &&
+    rhodium/octave-worker:dev &&
     docker tag rhodium/octave-worker:$TRAVIS_COMMIT
-      rhodium/octave-worker:latest &&
+    rhodium/octave-worker:latest &&
     docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" &&
     docker push "rhodium/octave-worker:$TRAVIS_COMMIT" &&
     docker push "rhodium/octave-worker:dev" &&
@@ -94,7 +94,7 @@ deploy:
 - provider: script
   script: >-
     docker tag rhodium/octave-worker:$TRAVIS_COMMIT
-      rhodium/octave-worker:$TRAVIS_TAG &&
+    rhodium/octave-worker:$TRAVIS_TAG &&
     docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" &&
     docker push "rhodium/octave-worker:$TRAVIS_TAG"
   on:
