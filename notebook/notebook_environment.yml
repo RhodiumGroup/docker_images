@@ -22,6 +22,7 @@ dependencies:
   - octave_kernel=0.32.0=pyh9f0ad1d_0
   - oct2py=5.0.4=py_0
   - openssh
+  - papermill
   - pip
   - pytest
   - pytest-cov
