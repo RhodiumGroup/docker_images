@@ -28,6 +28,9 @@ install:
 
 script:
 - docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT --build-arg CLAWPACK_COMMIT .
+- "if [[ $IMAGE_NAME == worker ]]; then docker build -t \
+    rhodium/octave-worker:$TRAVIS_COMMIT --build-arg TRAVIS_COMMIT=$TRAVIS_COMMIT \
+    ../octave-worker; fi"
 - docker run -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT bash /clawpack/run_tests.sh
 
 deploy:
@@ -65,10 +68,8 @@ deploy:
 # octave-worker builds
 - provider: script
   script: >-
-    docker build -t rhodium/octave-worker:$TRAVIS_COMMIT
-    --build-arg TRAVIS_COMMIT=$TRAVIS_COMMIT ../octave-worker &&
     docker tag rhodium/octave-worker:$TRAVIS_COMMIT
-    rhodium/octave-worker:$TRAVIS_BRANCH &&
+      rhodium/octave-worker:$TRAVIS_BRANCH &&
     docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" &&
     docker push "rhodium/octave-worker:$TRAVIS_COMMIT" &&
     docker push "rhodium/octave-worker:$TRAVIS_BRANCH"
@@ -79,9 +80,9 @@ deploy:
 - provider: script
   script: >-
     docker tag rhodium/octave-worker:$TRAVIS_COMMIT
-    rhodium/octave-worker:dev &&
+      rhodium/octave-worker:dev &&
     docker tag rhodium/octave-worker:$TRAVIS_COMMIT
-    rhodium/octave-worker:latest &&
+      rhodium/octave-worker:latest &&
     docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" &&
     docker push "rhodium/octave-worker:$TRAVIS_COMMIT" &&
     docker push "rhodium/octave-worker:dev" &&
@@ -93,7 +94,7 @@ deploy:
 - provider: script
   script: >-
     docker tag rhodium/octave-worker:$TRAVIS_COMMIT
-    rhodium/octave-worker:$TRAVIS_TAG &&
+      rhodium/octave-worker:$TRAVIS_TAG &&
     docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" &&
     docker push "rhodium/octave-worker:$TRAVIS_TAG"
   on:
