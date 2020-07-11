@@ -70,10 +70,13 @@ RUN jupyter labextension update --all && \
     @jupyter-widgets/jupyterlab-manager \
     @pyviz/jupyterlab_pyviz \
     @ryantam626/jupyterlab_code_formatter@1.3.1 \
+    @ryantam626/jupyterlab_vim \
     dask-labextension \
     jupyterlab-plotly \
+    nbdime-jupyterlab \
     plotlywidget && \
-    sudo jupyter serverextension enable --py jupyterlab_code_formatter --system
+    jupyter serverextension enable --py jupyterlab_code_formatter nbdime --sys-prefix && \
+    jupyter labextension disable jupyterlab_vim
 
 ##################
 ## clawpack added for coastal-specific image
