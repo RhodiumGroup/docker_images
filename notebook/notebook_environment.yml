@@ -3,7 +3,6 @@ channels:
   - conda-forge
 dependencies:
   - black
-  - blackbook
   - bump2version
   - coverage
   - dask-labextension
@@ -32,3 +31,5 @@ dependencies:
   - sidecar
   - sphinx_rtd_theme
   - tox
+  - pip:
+    - black_nbconvert
