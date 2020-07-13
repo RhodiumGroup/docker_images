@@ -10,8 +10,5 @@
       "rulers": [88],
       "lineNumbers": true
     }
-  },
-  "jupyterlab-flake8:plugins": {
-    "toggled": false
   }
 }
