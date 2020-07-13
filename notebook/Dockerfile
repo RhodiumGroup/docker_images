@@ -73,6 +73,7 @@ RUN jupyter labextension update --all && \
       @pyviz/jupyterlab_pyviz \
       @ryantam626/jupyterlab_code_formatter@1.3.1 \
       dask-labextension \
+      jupyterlab-flake8 \
       jupyterlab-plotly \
       plotlywidget && \
     jupyter serverextension enable --py jupyterlab_code_formatter nbdime --sys-prefix
