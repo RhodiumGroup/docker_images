@@ -70,6 +70,7 @@ RUN jupyter labextension update --all && \
     jupyter labextension install \
       @bokeh/jupyter_bokeh \
       @jupyter-widgets/jupyterlab-manager \
+      @lckr/jupyterlab_variableinspector \
       @pyviz/jupyterlab_pyviz \
       @ryantam626/jupyterlab_code_formatter@1.3.1 \
       dask-labextension \
