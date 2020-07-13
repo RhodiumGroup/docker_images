@@ -7,7 +7,6 @@ dependencies:
   - coverage
   - dask-labextension
   - flake8
-  - gitpython
   - ipdb
   - ipyleaflet
   - ipympl
