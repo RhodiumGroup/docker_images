@@ -52,6 +52,7 @@ dependencies:
   - pillow=7.2.0=py37h718be6c_0
   - pip=20.1.1=py_1
   - plotly=4.8.2=pyh9f0ad1d_0
+  - pygeos=0.7.1=py37hc88ce51_0
   - pyinterp=0.3.2=mkl_py37he448baa_102
   - pyshp=2.1.0=py_0
   - python=3.7.6=cpython_h8356626_6
