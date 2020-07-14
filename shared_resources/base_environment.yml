@@ -70,7 +70,7 @@ dependencies:
   - sparse=0.10.0=py_0
   - statsmodels=0.11.1=py37h8f50634_2
   - tini=0.18.0=h14c3975_1001
-  - xarray=0.14.1=py_1                 # pinkeep: xarray=0.14
+  - xarray=0.16.0=py_0
   - xesmf=0.3.0=py_0
   - xhistogram=0.1.1=py_0
   - xlrd=1.2.0=py_0
