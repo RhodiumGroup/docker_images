@@ -16,12 +16,9 @@ RUN sed -ri "s#Defaults\s+secure_path=\"([^\"]+)\"#Defaults secure_path=\"\1:$CO
 USER $NB_USER
 
 
-## filepath curation
-RUN sudo mkdir /pre-home && sudo chown -R $NB_USER /pre-home
-COPY worker-template.yml /pre-home
-COPY add_service_creds.py /pre-home
-COPY run_sql_proxy.py /pre-home
-COPY config.yaml /pre-home
+## create temporary directory for injecting user content into ~ on container boot
+COPY pre-home /
+RUN sudo chown -R $NB_USER /pre-home
 
 RUN sudo mkdir /tempdir
 COPY common.sh /tempdir
