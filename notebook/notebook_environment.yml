@@ -12,6 +12,7 @@ dependencies:
   - ipympl
   - ipypublish
   - isort
+# need jupyterhub version to match that running on the hub
   - jupyterhub=1.0.0  # pinkeep: jupyterhub=1.0.0
   - jupyterlab_code_formatter
   - nano

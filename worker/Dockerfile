@@ -1,5 +1,5 @@
-## using same container as jupyter/base-notebook:python-3.7.3
-FROM ubuntu:focal-20200423@sha256:238e696992ba9913d24cfc3727034985abd136e08ee3067982401acdc30cbf3f
+## using same base image as the "base image for the base image" of the notebook image
+FROM ubuntu:focal-20200606@sha256:93fd0705706e5bdda6cc450b384d8d5afb18fecc19e054fe3d7a2c8c2aeb2c83
 ARG DEBIAN_FRONTEND=noninteractive
 ENV NPY_DISTUTILS_APPEND_FLAGS=1
 ENV MPLBACKEND=Agg
