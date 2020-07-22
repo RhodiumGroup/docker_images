@@ -8,6 +8,7 @@ apt-get install -yq --no-install-recommends \
   unzip \
   ca-certificates \
   curl \
+  default-jre \
   lsb-release \
   gnupg2 \
   sudo \
