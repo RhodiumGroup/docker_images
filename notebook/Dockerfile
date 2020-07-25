@@ -69,6 +69,7 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
 RUN jupyter labextension update --all && \
     jupyter labextension install \
       @bokeh/jupyter_bokeh \
+      @jupyterlab/toc \
       @jupyter-widgets/jupyterlab-manager \
       @lckr/jupyterlab_variableinspector \
       @pyviz/jupyterlab_pyviz \
