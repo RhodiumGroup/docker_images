@@ -80,6 +80,9 @@ RUN jupyter labextension update --all && \
     jupyterlab-plotly \
     plotlywidget
 
+# Also install NBDIME jupyterlab extension
+# https://nbdime.readthedocs.io/en/latest/extensions.html
+RUN nbdime extensions --enable 
 
 ## clean up
 RUN sudo rm -rf /var/lib/apt/lists/* /tempdir
