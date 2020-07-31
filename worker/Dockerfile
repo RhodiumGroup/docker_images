@@ -1,28 +1,48 @@
 ## using same base image as the "base image for the base image" of the notebook image
-FROM ubuntu:focal-20200606@sha256:93fd0705706e5bdda6cc450b384d8d5afb18fecc19e054fe3d7a2c8c2aeb2c83
+FROM ubuntu:focal-20200703@sha256:d5a6519d9f048100123c568eb83f7ef5bfcad69b01424f420f17c932b00dea76
 ARG DEBIAN_FRONTEND=noninteractive
+
+# needed to properly install packages that use numpy libraries
 ENV NPY_DISTUTILS_APPEND_FLAGS=1
+
+# needed so that matplotlib will work headless
 ENV MPLBACKEND=Agg
+
+# from jupyter/base-notebook
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+ENV CONDA_DIR=/opt/conda \
+    SHELL=/bin/bash \
+    LC_ALL=en_US.UTF-8 \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US.UTF-8
+ENV PATH=$CONDA_DIR/bin:$PATH
 
 ## filepath curation
 COPY shared_resources /tempdir
-
 COPY add_service_creds.py /usr/bin
 COPY prepare.sh /usr/bin
-
 
 ## perform a bunch of common actions
 RUN bash /tempdir/common.sh
 
 
 ###########
-## install miniconda
-# adapted from continuumio/miniconda3
+## install miniconda (following jupyter/base-notebook
+ENV MINICONDA_VERSION=4.8.3 \
+    MINICONDA_MD5=d63adf39f2c220950a063e0529d4ff74 \
+    CONDA_VERSION=4.8.3
 
-ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV PATH /opt/conda/bin:$PATH
+WORKDIR /tmp
+RUN wget --quiet https://repo.continuum.io/miniconda/Miniconda3-py38_${MINICONDA_VERSION}-Linux-x86_64.sh && \
+    echo "${MINICONDA_MD5} *Miniconda3-py38_${MINICONDA_VERSION}-Linux-x86_64.sh" | md5sum -c - && \
+    /bin/bash Miniconda3-py38_${MINICONDA_VERSION}-Linux-x86_64.sh -f -b -p $CONDA_DIR && \
+    rm Miniconda3-py38_${MINICONDA_VERSION}-Linux-x86_64.sh && \
+    conda config --system --prepend channels conda-forge && \
+    conda config --system --set channel_priority strict && \
+    conda update -n base --yes conda \
+    conda update --all --yes &&
 
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.2-Linux-x86_64.sh -O ~/miniconda.sh && \
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py38_4.8.3-Linux-x86_64.sh -O ~/miniconda.sh && \
     /bin/bash ~/miniconda.sh -b -p /opt/conda && \
     rm ~/miniconda.sh && \
     ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
@@ -30,16 +50,9 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.2-Linux
     echo "conda activate base" >> ~/.bashrc
 ###########
 
-
-## set up conda channels
+## set up python env
 RUN mkdir /opt/conda/specs
 COPY shared_resources/base_environment.yml /opt/conda/specs
-RUN conda config --add channels conda-forge && \
-    conda config --set channel_priority strict
-
-
-## set up python env
-RUN conda update -n base conda
 RUN conda env update -f /opt/conda/specs/base_environment.yml
 RUN conda list -n base
 
