@@ -25,6 +25,13 @@ import sys
 from ruamel.yaml import YAML
 
 
+SPEC_FILES = [
+            ('shared_resources/base_environment.yml', 'base'),
+            ('notebook/notebook_environment.yml', 'base'),
+            ('octave-worker/octave_environment.yml', 'base'),
+            ('notebook/r_environment.yml', 'r')]
+
+
 def get_versions_in_current_environment(envname='base'):
     '''
     Calls ``conda env export -n {envname} --json`` and returns spec
@@ -294,22 +301,16 @@ def pinversions():
 def pin(file, dry_run):
     '''Pin packages in environment files based on environments on the local machine'''
     
-    spec_files = [
-            ('base_environment.yml', 'base'),
-            ('notebook/notebook_environment.yml', 'base'),
-            ('octave-worker/octave_environment.yml', 'base'),
-            ('notebook/r_environment.yml', 'r')]
-    
     if file == 'all':
-        pin_files(spec_files, dry_run=dry_run)
+        pin_files(SPEC_FILES, dry_run=dry_run)
     elif file == 'base':
-        pin_files([spec_files[0]], dry_run=dry_run)
+        pin_files([SPEC_FILES[0]], dry_run=dry_run)
     elif file == 'notebook':
-        pin_files([spec_files[1]], dry_run=dry_run)
+        pin_files([SPEC_FILES[1]], dry_run=dry_run)
     elif file == 'octave':
-        pin_files([spec_files[2]], dry_run=dry_run)
+        pin_files([SPEC_FILES[2]], dry_run=dry_run)
     elif file == 'r':
-        pin_files([spec_files[3]], dry_run=dry_run)
+        pin_files([SPEC_FILES[3]], dry_run=dry_run)
     else:
         raise ValueError(
             'env type not recognized: {}'
@@ -329,22 +330,16 @@ def pin(file, dry_run):
 def unpin(file, dry_run):
     '''Unpin packages in environment files'''
     
-    spec_files = [
-            ('base_environment.yml', 'base'),
-            ('notebook/notebook_environment.yml', 'base'),
-            ('octave-worker/octave_environment.yml', 'base'),
-            ('notebook/r_environment.yml', 'r')]
-    
     if file == 'all':
-        unpin_files(spec_files, dry_run=dry_run)
+        unpin_files(SPEC_FILES, dry_run=dry_run)
     elif file == 'base':
-        unpin_files([spec_files[0]], dry_run=dry_run)
+        unpin_files([SPEC_FILES[0]], dry_run=dry_run)
     elif file == 'notebook':
-        unpin_files([spec_files[1]], dry_run=dry_run)
+        unpin_files([SPEC_FILES[1]], dry_run=dry_run)
     elif file == 'octave':
-        unpin_files([spec_files[2]], dry_run=dry_run)
+        unpin_files([SPEC_FILES[2]], dry_run=dry_run)
     elif file == 'r':
-        unpin_files([spec_files[3]], dry_run=dry_run)
+        unpin_files([SPEC_FILES[3]], dry_run=dry_run)
     else:
         raise ValueError(
             'env type not recognized: {}'
