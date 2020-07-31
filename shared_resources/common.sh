@@ -9,6 +9,7 @@ apt-get install -yq --no-install-recommends \
   ca-certificates \
   curl \
   default-jre \
+  locales \
   lsb-release \
   gnupg2 \
   sudo \
