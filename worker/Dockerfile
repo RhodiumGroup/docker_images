@@ -40,7 +40,7 @@ RUN wget --quiet https://repo.continuum.io/miniconda/Miniconda3-py38_${MINICONDA
     rm Miniconda3-py38_${MINICONDA_VERSION}-Linux-x86_64.sh && \
     conda config --system --prepend channels conda-forge && \
     conda config --system --set channel_priority strict && \
-    conda update -n base --yes conda \
+    conda update -n base --yes conda && \
     conda update --all --yes
 ###########
 
