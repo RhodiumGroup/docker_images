@@ -104,8 +104,8 @@ dependencies:
     - climate-toolbox==0.1.5
     - impactlab-tools==0.4.0
     - parameterize-jobs==0.1.1
-    - rhg_compute_tools==0.2.1
-    - intake-esm
+    - rhg_compute_tools==0.2.2
+    - intake-esm==2020.6.11
 # need to install from master until 0.10.1
 # due to handling of remote scheduler
 # (we also should at some point switch to dask-gateway instead of dask-kubernetes)
