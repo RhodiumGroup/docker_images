@@ -88,7 +88,7 @@ dependencies:
   - tini=0.18.0=h14c3975_1001
   - unzip=6.0=h516909a_0
   - uritemplate=3.0.0=py_1
-  - xarray=0.14.1=py_0
+  - xarray=0.16.0=py_0
   - xesmf=0.2.1=py_0
   - xgcm=0.2.0=py_0
   - xhistogram=0.1.1=py_0
@@ -105,7 +105,7 @@ dependencies:
     - impactlab-tools==0.4.0
     - parameterize-jobs==0.1.1
     - rhg_compute_tools==0.2.1
-    - git+https://github.com/NCAR/intake-esm.git@v2020.3.16.2#egg=intake_esm
+    - intake-esm
 # need to install from master until 0.10.1
 # due to handling of remote scheduler
 # (we also should at some point switch to dask-gateway instead of dask-kubernetes)
