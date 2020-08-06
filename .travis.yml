@@ -9,6 +9,17 @@ env:
     - CLAWPACK_COMMIT=32a7991daa7242558ebcbbc01a4bd3b27f4f17a5
 
 install:
+- "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then 
+    sed -i.bak \
+      's/image: rhodium\\/worker.*/image: rhodium\\/worker:'\"$TRAVIS_COMMIT\"'/' \
+      notebook/worker-template.yml; 
+  else
+    sed -i.bak \
+      's/image: gcr.io\\/rhg-project-1\\/pytc-image-devbase:.*/\
+      image: \gcr.io\\/rhg-project-1\\/pytc-image-devbase:'\"$TRAVIS_TAG\"'/' \
+      notebook/worker-template.yml; fi"
+- "rm notebook/worker-template.yml.bak"
+- "cat notebook/worker-template.yml | grep image:"
 - "cp -r shared_resources $IMAGE_NAME/shared_resources && chmod -R +x \
     $IMAGE_NAME/shared_resources"
 - "if [[ $IMAGE_NAME == worker ]]; then cp -r shared_resources \
