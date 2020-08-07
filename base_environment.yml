@@ -66,6 +66,7 @@ dependencies:
   - pip=19.3.1=py37_0
   - plotly=4.3.0=py_0
   - polyline=1.4.0=py_0
+  - pydap=3.2.2=py37_1000
   - pygeos=0.5=py37h5d51c17_1
   - pyinterp=0.0.7=py37h97f2665_0
   - pyshp=2.1.0=py_0
