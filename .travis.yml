@@ -6,7 +6,7 @@ env:
     - IMAGE_NAME=notebook
     - IMAGE_NAME=worker
   global:
-    - CLAWPACK_COMMIT=32a7991daa7242558ebcbbc01a4bd3b27f4f17a5
+    - CLAWPACK_COMMIT=c8d07a22bb5c86c39e5f7730a15ac1585f29e828
 
 install:
 - "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then 
