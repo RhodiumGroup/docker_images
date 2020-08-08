@@ -16,7 +16,7 @@ install:
   else
     sed -i.bak \
       's/image: gcr.io\\/rhg-project-1\\/pytc-image-devbase:.*/\
-      image: \gcr.io\\/rhg-project-1\\/pytc-image-devbase:'\"$TRAVIS_TAG\"'/' \
+      image: gcr.io\\/rhg-project-1\\/pytc-image-devbase:'\"$TRAVIS_TAG\"'/' \
       notebook/worker-template.yml; fi"
 - "rm notebook/worker-template.yml.bak"
 - "cat notebook/worker-template.yml | grep image:"
