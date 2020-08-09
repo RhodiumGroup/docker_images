@@ -82,7 +82,10 @@ RUN jupyter labextension update --all && \
 
 # Also install NBDIME jupyterlab extension
 # https://nbdime.readthedocs.io/en/latest/extensions.html
-RUN nbdime extensions --enable 
+RUN nbdime extensions --enable && \
+    nbdime config-git --enable --system
+# This json sends web-based diff and merge tools to an IP that is accessible
+COPY nbdime_config.json /opt/conda/etc/jupyter
 
 ## clean up
 RUN sudo rm -rf /var/lib/apt/lists/* /tempdir
