@@ -79,6 +79,13 @@ RUN jupyter labextension update --all && \
       plotlywidget && \
     jupyter serverextension enable --py jupyterlab_code_formatter nbdime --sys-prefix
 
+## configure nbdime
+RUN source /opt/conda/etc/profile.d/conda.sh \
+  && conda activate \
+  && nbdime config-git --enable --system
+# makes sure that the web-tools allow accessible IP
+COPY nbdime_config.json /opt/conda/etc/jupyter
+
 ##################
 ## clawpack added for coastal-specific image
 ##################
