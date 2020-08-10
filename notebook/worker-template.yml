@@ -15,6 +15,7 @@ spec:
       - name: GCSFUSE_BUCKET
         value: rhg-data
     image: gcr.io/rhg-project-1/pytc-image-devbase:WILL_BE_REPLACED_BY_TRAVIS
+    imagePullPolicy: Always
     name: dask-worker
     securityContext:
       capabilities:
