@@ -4,8 +4,13 @@ set -x
 
 echo "Copy Dask configuration files from pre-load directory into home/.config"
 mkdir -p /home/jovyan/.config/dask
-cp -r -v /pre-home /home/jovyan
-# sudo rm -r /pre-home
+
+cp -r -v /pre-home/worker-template.yml /home/jovyan/
+
+
+echo "Copy files from pre-load directory into home"
+cp --update -r -v /pre-home/. /home/jovyan
+sudo rm -r /pre-home
 
 # mirror directory used on workers
 sudo mkdir -p /opt/gcsfuse_tokens/
