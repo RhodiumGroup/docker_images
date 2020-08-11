@@ -10,11 +10,11 @@ env:
 install:
 - "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then sed -i.bak \
 's/image: rhodium\\/worker.*/image: rhodium\\/worker:'\"$TRAVIS_COMMIT\"'/' \
-notebook/worker-template.yml; else sed -i.bak \
+notebook/pre-home/worker-template.yml; else sed -i.bak \
 's/image: rhodium\\/worker:.*/image: rhodium\\/worker:'\"$TRAVIS_TAG\"'/' \
-notebook/worker-template.yml; fi"
-- "rm notebook/worker-template.yml.bak"
-- "cat notebook/worker-template.yml | grep image:"
+notebook/pre-home/worker-template.yml; fi"
+- "rm notebook/pre-home/worker-template.yml.bak"
+- "cat notebook/pre-home/worker-template.yml | grep image:"
 - "cp base_environment.yml $IMAGE_NAME/base_environment.yml"
 - "cp common.sh $IMAGE_NAME/common.sh && chmod +x $IMAGE_NAME/common.sh"
 - "cd $IMAGE_NAME"
