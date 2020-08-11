@@ -42,6 +42,7 @@ dependencies:
   - jupyter-server-proxy=1.5.0=py_0 # need server proxy on workers if using remote scheduler
   - kubernetes=1.18.6=0
   - libmatio=1.5.12=hf54d351_1004
+  - lxml=4.5.2=py38hbb43d70_0
   - lz4=3.1.0=py38h66f7c9e_0
   - make=4.3=h516909a_0
   - matplotlib=3.3.0=1
@@ -50,6 +51,7 @@ dependencies:
   - netcdf4=1.5.4=nompi_py38hfd55d45_100
   - nose=1.3.7=py38h32f6830_1004
   - numba=0.50.1=py38hcb8c335_1
+  - openpyxl=3.0.4=py_0
   - pandas=1.1.0=py38h950e882_0
   - phantomjs=2.1.1=1 # for geoviews
   - pillow=7.2.0=py38h9776b28_1
