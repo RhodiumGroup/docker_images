@@ -60,6 +60,7 @@ dependencies:
   - netcdf4=1.5.3=mpi_mpich_py37h01ee55b_1
   - numba=0.46.0=py37hb3f55d8_1
   - numcodecs=0.6.4=py37he1b5a44_0
+  - openpyxl=3.0.4=py_0
   - pandas=0.25.3=py37hb3f55d8_0
   # for geoviews
   - phantomjs=2.1.1=1
