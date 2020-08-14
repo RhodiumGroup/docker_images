@@ -1,4 +1,4 @@
-FROM jupyter/base-notebook@sha256:b5abe43c6d312b5a7dd63e33f2291df52cddfc1ac15547542ac8b0990a30b0e5
+FROM jupyter/base-notebook@sha256:6e276c402aa19799798b84b46e0e08fc03be193de9a81490158ca4d9026b8cae
 ARG DEBIAN_FRONTEND=noninteractive
 
 ## needed to make sure things with cython compile correctly
@@ -55,7 +55,9 @@ RUN conda update -n base conda
 RUN conda env update -f /opt/conda/specs/base_environment.yml
 
 # need access to settings/page_config.json for elyra
+USER root
 RUN /tempdir/fix-permissions.sh /opt/conda/share/jupyter/lab/settings
+USER $NB_USER
 
 # update environment with nb-specific packages
 RUN conda env update -f /opt/conda/specs/notebook_environment.yml
