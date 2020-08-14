@@ -29,7 +29,7 @@ install:
 
 
 script:
-- travis_wait docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT --build-arg CLAWPACK_COMMIT .
+- docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT --build-arg CLAWPACK_COMMIT .
 - "if [[ $IMAGE_NAME == worker ]]; then docker build -t \
     rhodium/octave-worker:$TRAVIS_COMMIT --build-arg TRAVIS_COMMIT=$TRAVIS_COMMIT \
     ../octave-worker; fi"
