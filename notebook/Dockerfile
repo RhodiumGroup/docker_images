@@ -54,6 +54,9 @@ RUN conda update -n base conda
 #  update environemnt with common packages across worker and nb
 RUN conda env update -f /opt/conda/specs/base_environment.yml
 
+# need access to settings/page_config.json for elyra
+RUN /tempdir/fix-permissions.sh /opt/conda/share/jupyter/lab/settings
+
 # update environment with nb-specific packages
 RUN conda env update -f /opt/conda/specs/notebook_environment.yml
 

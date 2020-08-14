@@ -31,3 +31,4 @@ dependencies:
   - tox
   - pip:
     - black_nbconvert
+    - elyra
