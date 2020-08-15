@@ -71,18 +71,17 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
     /opt/conda/bin/matio_73to5
 
 ## Set up jupyter lab extensions
-RUN jupyter labextension update --all && \
-    jupyter labextension install \
+RUN jupyter labextension update --all 
+RUN jupyter labextension install \
       @bokeh/jupyter_bokeh \
-      @jupyterlab/toc \
       @jupyter-widgets/jupyterlab-manager \
       @lckr/jupyterlab_variableinspector \
       @pyviz/jupyterlab_pyviz \
       @ryantam626/jupyterlab_code_formatter \
       dask-labextension \
       jupyterlab-plotly \
-      plotlywidget && \
-    jupyter serverextension enable --py jupyterlab_code_formatter nbdime --sys-prefix
+      plotlywidget
+RUN jupyter serverextension enable --py jupyterlab_code_formatter nbdime --sys-prefix
 
 ## configure nbdime
 RUN source /opt/conda/etc/profile.d/conda.sh \
