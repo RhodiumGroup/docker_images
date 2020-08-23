@@ -28,8 +28,7 @@ from ruamel.yaml import YAML
 SPEC_FILES = [
             ('shared_resources/base_environment.yml', 'base'),
             ('notebook/notebook_environment.yml', 'base'),
-            ('octave-worker/octave_environment.yml', 'base'),
-            ('notebook/r_environment.yml', 'r')]
+            ('octave-worker/octave_environment.yml', 'base')]
 
 
 def get_versions_in_current_environment(envname='base'):
