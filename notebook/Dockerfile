@@ -37,7 +37,7 @@ RUN sudo chown -R $NB_USER /gcs
 ## more apt-get
 RUN sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
   vim less man locate kmod dialog \
-  octave octave-optim && \
+  octave octave-optim gnuplot fonts-freefont-otf ghostscript && \
   sudo apt-get clean
 
 

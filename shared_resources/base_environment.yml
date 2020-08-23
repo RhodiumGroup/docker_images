@@ -1,30 +1,30 @@
 channels:
   - conda-forge
 dependencies:
-  - beautifulsoup4=4.9.1=py38h32f6830_0
-  - blas=2.17=openblas
+  - beautifulsoup4=4.9.1=py_1
+  - blas=2.14=openblas
   - bottleneck=1.3.2=py38h8790de6_1
-  - boto3=1.14.42=pyh9f0ad1d_0
-  - bqplot=0.12.15=pyh9f0ad1d_0
+  - boto3=1.14.47=pyh9f0ad1d_0
+  - bqplot=0.12.16=pyh9f0ad1d_0
   - cachecontrol=0.12.6=py_0
   - cartopy=0.18.0=py38h172510d_0
   - cftime=1.2.1=py38h8790de6_0
   - click=7.1.2=pyh9f0ad1d_0
   - compilers=1.1.1=0
-  - dask=2.22.0=py_0
+  - dask=2.23.0=py_0
   - dask-glm=0.2.0=py_1
   - dask-kubernetes=0.10.1=py_0
   - dask-ml=1.6.0=py_0
-  - datashader=0.10.0=py_0
+  - datashader=0.11.1=pyh9f0ad1d_0
   - descartes=1.1.0=py_4
-  - distributed=2.22.0=py38h32f6830_0
+  - distributed=2.24.0=py38h32f6830_0
   - dropbox=10.1.1=pyh9f0ad1d_0
   - esmpy=8.0.1=nompi_py38hbd9704b_0
   - fastparquet=0.4.1=py38h8790de6_0
   - fiona=1.8.13=py38h033e0f6_1
   - fusepy=3.0.1=py_0
   - fuzzywuzzy=0.17.0=py_0
-  - gcsfs=0.6.2=py_0
+  - gcsfs=0.7.0=py_0
   - gdal=3.0.4=py38h172510d_10
   - geopandas=0.8.1=py_0
   - geotiff=1.6.0=h05acad5_0
@@ -36,7 +36,7 @@ dependencies:
   - holoviews=1.13.3=pyh9f0ad1d_0
   - hvplot=0.6.0=pyh9f0ad1d_0
   - h5netcdf=0.8.1=py_0
-  - intake-esm=2020.6.11=py_0
+  - intake-esm=2020.8.15=py_0
   - jedi=0.17.2=py38h32f6830_0
   - jellyfish=0.7.2=py38h1e0a361_1 # needed for "us" package
   - jupyter-server-proxy=1.5.0=py_0 # need server proxy on workers if using remote scheduler
@@ -45,34 +45,34 @@ dependencies:
   - lxml=4.5.2=py38hbb43d70_0
   - lz4=3.1.0=py38h66f7c9e_0
   - make=4.3=h516909a_0
-  - matplotlib=3.3.0=1
+  - matplotlib=3.3.1=1
   - nc-time-axis=1.2.0=py_1
   - netcdf-fortran=4.5.3=nompi_hfef6a68_100
-  - netcdf4=1.5.4=nompi_py38hfd55d45_100
+  - netcdf4=1.5.4=nompi_py38hec8b9af_101
   - nose=1.3.7=py38h32f6830_1004
-  - numba=0.50.1=py38hcb8c335_1
-  - openpyxl=3.0.4=py_0
+  - numba=0.51.0=py38hc5bc63f_0
+  - openpyxl=3.0.5=py_0
   - pandas=1.1.0=py38h950e882_0
   - phantomjs=2.1.1=1 # for geoviews
   - pillow=7.2.0=py38h9776b28_1
-  - pip=20.2=py_0
+  - pip=20.2.2=py_0
   - plotly=4.9.0=pyh9f0ad1d_0
   - pygeos=0.7.1=py38hd168ffb_0
   - pyinterp=0.3.2=mkl_py38hefd7b46_102
   - pyshp=2.1.0=py_0
-  - python=3.8.5=h4d41432_2_cpython
+  - python=3.8.5=h1103e12_5_cpython
   - python-snappy=0.5.4=py38h7cfaab3_1
   - pyyaml=5.3.1=py38h1e0a361_0
   - rasterio=1.1.5=py38h033e0f6_1
-  - regionmask=0.6.0=py_0
+  - regionmask=0.6.1=py_0
   - rtree=0.9.4=py38h08f867b_1
   - scikit-image=0.17.2=py38hcb8c335_1
   - scikit-learn=0.23.2=py38hee58b96_0
   - scipy=1.5.2=py38h8c5af15_0
   - seaborn=0.10.1=1
   - selenium=3.141.0=py38h1e0a361_1001 # for geoviews
-  - shapely=1.7.0=py38hd168ffb_3
-  - sparse=0.10.0=py_0
+  - shapely=1.7.1=py38hc7361b7_0
+  - sparse=0.11.0=py_0
   - statsmodels=0.11.1=py38h1e0a361_2
   - tini=0.18.0=h14c3975_1001
   - xarray=0.16.0=py_0
@@ -82,8 +82,8 @@ dependencies:
   - zarr=2.4.0=py_0
   - zeromq=4.3.2=he1b5a44_3
   - pip:
-    - climate-toolbox==0.1.5 
-    - noaa-coops==0.1.5
+    - climate-toolbox==0.1.5
+    - noaa-coops==0.1.8
     - parameterize-jobs==0.1.1
     - rhg_compute_tools==0.2.2
     - git+https://github.com/maritimeplanning/pytides.git@a8397a0e12645d22c62612385d18e63c4d67d6fa#egg=pytides
