@@ -14,6 +14,7 @@ dependencies:
   - isort
 # need jupyterhub version to match that running on the hub
   - jupyterhub=1.0.0=py38_0 # pinkeep: jupyterhub=1.0.0
+  - jupyterlab
   - jupyterlab_code_formatter
   - mypy
   - nano
