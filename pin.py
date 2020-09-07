@@ -309,12 +309,10 @@ def pin(file, dry_run):
         pin_files([SPEC_FILES[1]], dry_run=dry_run)
     elif file == 'octave':
         pin_files([SPEC_FILES[2]], dry_run=dry_run)
-    elif file == 'r':
-        pin_files([SPEC_FILES[3]], dry_run=dry_run)
     else:
         raise ValueError(
             'env type not recognized: {}'
-            'choose from "base", "notebook", "octave", "r", or "all".'
+            'choose from "base", "notebook", "octave", or "all".'
             .format(file))
 
         
