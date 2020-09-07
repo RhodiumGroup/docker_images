@@ -13,7 +13,7 @@ dependencies:
   - ipypublish
   - isort
 # need jupyterhub version to match that running on the hub
-  - jupyterhub=1.0.0=py38_0 # pinkeep: jupyterhub=1.0.0
+  - jupyterhub=1.0.0 # pinkeep: jupyterhub=1.0.0
   - jupyterlab
   - jupyterlab_code_formatter
   - mypy
@@ -33,4 +33,6 @@ dependencies:
   - tox
   - pip:
     - black_nbconvert
-    - elyra
+    # need to clone from repo until version > 1.1.0 to fix setup.py bug
+    # (https://github.com/elyra-ai/elyra/commit/2ad2e66ca1ba26c99d39f1d2eea21bd508ce6cdb)
+    - git+https://github.com/elyra-ai/elyra.git@2ad2e66ca1ba26c99d39f1d2eea21bd508ce6cdb#egg=elyra

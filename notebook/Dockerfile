@@ -80,6 +80,7 @@ RUN jupyter labextension install \
       @ryantam626/jupyterlab_code_formatter \
       dask-labextension \
       jupyterlab-plotly \
+      jupyterlab-tabular-data-editor \
       plotlywidget
 RUN jupyter serverextension enable --py jupyterlab_code_formatter nbdime --sys-prefix
 
