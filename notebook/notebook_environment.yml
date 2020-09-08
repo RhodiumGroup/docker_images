@@ -13,8 +13,9 @@ dependencies:
   - ipypublish
   - isort
 # need jupyterhub version to match that running on the hub
-  - jupyterhub=1.0.0 # pinkeep: jupyterhub=1.0.0
+  - jupyterhub=1.1.0 # pinkeep: jupyterhub=1.1.0
   - jupyterlab
+  - jupyterlab-git
   - jupyterlab_code_formatter
   - jupyterlab-git
   - mypy
