@@ -16,6 +16,7 @@ dependencies:
   - jupyterhub=1.0.0 # pinkeep: jupyterhub=1.0.0
   - jupyterlab
   - jupyterlab_code_formatter
+  - jupyterlab-git
   - mypy
   - nano
   - nbdime
@@ -33,6 +34,3 @@ dependencies:
   - tox
   - pip:
     - black_nbconvert
-    # need to clone from repo until version > 1.1.0 to fix setup.py bug
-    # (https://github.com/elyra-ai/elyra/commit/2ad2e66ca1ba26c99d39f1d2eea21bd508ce6cdb)
-    - git+https://github.com/elyra-ai/elyra.git@2ad2e66ca1ba26c99d39f1d2eea21bd508ce6cdb#egg=elyra

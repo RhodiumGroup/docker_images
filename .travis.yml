@@ -6,7 +6,7 @@ env:
     - IMAGE_NAME=notebook
     - IMAGE_NAME=worker
   global:
-    - CLAWPACK_COMMIT=fe0722d6668ac4121a89c66dac3cf4435baa9159
+    - CLAWPACK_COMMIT=5f6f94c6087c520e29fbdaf823965c2d8e2ec6b2
 
 install:
 - "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then 
@@ -25,7 +25,7 @@ install:
     $IMAGE_NAME/shared_resources"
 - "if [[ $IMAGE_NAME == worker ]]; then cp -r shared_resources \
     octave-worker/shared_resources && chmod -R +x octave-worker/shared_resources; fi"
-- "cd $IMAGE_NAME"
+- cd $IMAGE_NAME
 
 
 script:
@@ -45,7 +45,7 @@ deploy:
     docker push "rhodium/$IMAGE_NAME:$TRAVIS_BRANCH"
   on:
     all_branches: true
-    condition: $TRAVIS_BRANCH =~ ^dev
+    condition: $TRAVIS_BRANCH != master
 
 - provider: script
   script: >-
@@ -77,7 +77,7 @@ deploy:
     docker push "rhodium/octave-worker:$TRAVIS_BRANCH"
   on:
     all_branches: true
-    condition: ($TRAVIS_BRANCH =~ ^dev) && ($IMAGE_NAME == worker)
+    condition: ($TRAVIS_BRANCH != master) && ($IMAGE_NAME == worker)
 
 - provider: script
   script: >-
