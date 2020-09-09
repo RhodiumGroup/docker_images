@@ -136,7 +136,8 @@ RUN sudo rm -rf /var/lib/apt/lists/* /tempdir
 RUN conda clean -yaf
 
 ## configure correct default image for dask
-ENV DASK_GATEWAY__CLUSTER__OPTIONS__IMAGE ${WORKER_IMAGE}
+ENV DASK_GATEWAY__CLUSTER__OPTIONS__WORKER_IMAGE ${WORKER_IMAGE}
+ENV DASK_GATEWAY__CLUSTER__OPTIONS__SCHEDULER_IMAGE ${SCHEDULER_IMAGE}
 
 ## prepare container
 WORKDIR $HOME

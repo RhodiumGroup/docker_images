@@ -1,3 +1,5 @@
+# Only the packages necessary to build a dask-gateway scheduler. As seen here:
+# https://github.com/dask/dask-gateway/blob/master/dask-gateway/Dockerfile
 channels:
     - conda-forge
 dependencies:
