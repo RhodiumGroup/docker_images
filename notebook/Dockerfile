@@ -1,6 +1,11 @@
 FROM jupyter/base-notebook@sha256:6e276c402aa19799798b84b46e0e08fc03be193de9a81490158ca4d9026b8cae
 ARG DEBIAN_FRONTEND=noninteractive
 
+# pull in build args
+ARG CLAWPACK_COMMIT
+ARG WORKER_IMAGE
+ARG SCHEDULER_IMAGE
+
 ## needed to make sure things with cython compile correctly
 ## (this will eventually become default in numpy)
 ENV NPY_DISTUTILS_APPEND_FLAGS=1
@@ -98,7 +103,6 @@ COPY nbdime_config.json /opt/conda/etc/jupyter
 ## clawpack added for coastal-specific image
 ##################
 
-ARG CLAWPACK_COMMIT
 ENV CLAW=/clawpack
 ENV NETCDF4_DIR=/opt/conda
 ENV FC=gfortran
