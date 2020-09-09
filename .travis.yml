@@ -19,7 +19,7 @@ install:
     export SCHEDULER_IMAGE=rhodium/scheduler:\"$TRAVIS_TAG\";
   fi;"
 - echo $WORKER_IMAGE
-- echo $SCHEULER_IMAGE
+- echo $SCHEDULER_IMAGE
 - "if [[ $IMAGE_NAME == worker ]]; then cp -r shared_resources \
     octave-worker/shared_resources && chmod -R +x octave-worker/shared_resources; fi"
 - cd $IMAGE_NAME

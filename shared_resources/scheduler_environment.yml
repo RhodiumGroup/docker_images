@@ -9,5 +9,6 @@ dependencies:
     - dask-gateway=0.8.0=py38h32f6830_0
     - numpy=1.19.1=py38hbc27379_2
     - pandas=1.1.1=py38h950e882_0
+    - tini=0.18.0=h14c3975_1001
 name: base
   
