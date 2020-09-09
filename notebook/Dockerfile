@@ -3,8 +3,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # pull in build args
 ARG CLAWPACK_COMMIT
-ARG WORKER_IMAGE
-ARG SCHEDULER_IMAGE
 
 ## needed to make sure things with cython compile correctly
 ## (this will eventually become default in numpy)
@@ -135,10 +133,6 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
 ## clean up
 RUN sudo rm -rf /var/lib/apt/lists/* /tempdir
 RUN conda clean -yaf
-
-## configure correct default image for dask
-ENV DASK_GATEWAY__CLUSTER__OPTIONS__WORKER_IMAGE ${WORKER_IMAGE}
-ENV DASK_GATEWAY__CLUSTER__OPTIONS__SCHEDULER_IMAGE ${SCHEDULER_IMAGE}
 
 ## prepare container
 WORKDIR $HOME

@@ -11,15 +11,6 @@ env:
 install:
 - "cp -r shared_resources $IMAGE_NAME/shared_resources && chmod -R +x \
     $IMAGE_NAME/shared_resources"
-- "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then
-    export WORKER_IMAGE=gcr.io/rhg-project-1/pytc-image-gateway:latest;
-    export SCHEDULER_IMAGE=rhodium/scheduler:\"$TRAVIS_COMMIT\";
-  else
-    export WORKER_IMAGE=gcr.io/rhg-project-1/pytc-image-gateway:latest;
-    export SCHEDULER_IMAGE=rhodium/scheduler:\"$TRAVIS_TAG\";
-  fi;"
-- echo $WORKER_IMAGE
-- echo $SCHEDULER_IMAGE
 - "if [[ $IMAGE_NAME == worker ]]; then cp -r shared_resources \
     octave-worker/shared_resources && chmod -R +x octave-worker/shared_resources; fi"
 - cd $IMAGE_NAME
@@ -29,7 +20,7 @@ script:
 - "if [[ $IMAGE_NAME == worker ]]; then docker build -t \
     rhodium/scheduler:local -f Dockerfile_scheduler .; fi"
 - "travis_wait 90 docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT \
-    --build-arg CLAWPACK_COMMIT --build-arg WORKER_IMAGE --build-arg SCHEDULER_IMAGE ."
+    --build-arg CLAWPACK_COMMIT ."
 - "if [[ $IMAGE_NAME == worker ]]; then docker build -t \
     rhodium/octave-worker:$TRAVIS_COMMIT --build-arg TRAVIS_COMMIT=$TRAVIS_COMMIT \
     ../octave-worker; fi"

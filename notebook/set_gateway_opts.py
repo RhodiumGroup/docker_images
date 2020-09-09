@@ -24,7 +24,7 @@ config = {
     "gateway": {
         "cluster": {
             "options": {
-                "gcsfuse_tokens": str(tokens),
+                "gcsfuse_tokens": json.dumps(tokens).replace("{","{{").replace("}","}}"),
                 "scheduler_image": scheduler_image,
                 "worker_image": worker_image
             }
