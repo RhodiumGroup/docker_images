@@ -14,20 +14,10 @@ install:
 - "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then
     export WORKER_IMAGE=gcr.io/rhg-project-1/pytc-image-gateway:latest;
     export SCHEDULER_IMAGE=rhodium/scheduler:\"$TRAVIS_COMMIT\";
-    sed -i.bak \
-      's/image: gcr.io\\/rhg-project-1\\/pytc-image-devbase:.*/\
-      image: gcr.io\\/rhg-project-1\\/pytc-image-devbase:'\"$TRAVIS_COMMIT\"'/' \
-      notebook/worker-template.yml; 
   else
     export WORKER_IMAGE=gcr.io/rhg-project-1/pytc-image-gateway:latest;
     export SCHEDULER_IMAGE=rhodium/scheduler:\"$TRAVIS_TAG\";
-    sed -i.bak \
-      's/image: gcr.io\\/rhg-project-1\\/pytc-image-devbase:.*/\
-      image: gcr.io\\/rhg-project-1\\/pytc-image-devbase:'\"$TRAVIS_TAG\"'/' \
-      notebook/worker-template.yml;
   fi;"
-- rm notebook/worker-template.yml.bak
-- "cat notebook/worker-template.yml | grep image:"
 - echo $WORKER_IMAGE
 - echo $SCHEDULER_IMAGE
 - "if [[ $IMAGE_NAME == worker ]]; then cp -r shared_resources \

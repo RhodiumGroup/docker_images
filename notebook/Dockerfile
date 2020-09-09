@@ -23,10 +23,7 @@ USER $NB_USER
 
 ## filepath curation
 RUN sudo mkdir /pre-home && sudo chown -R $NB_USER /pre-home
-COPY worker-template.yml /pre-home
-COPY add_service_creds.py /pre-home
-COPY run_sql_proxy.py /pre-home
-COPY config.yaml /pre-home
+COPY config.yaml set_gateway_opts.py /pre-home
 
 COPY shared_resources /tempdir
 

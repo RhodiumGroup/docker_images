@@ -5,7 +5,6 @@ import pytz
 
 SEARCH_PATTERNS = [
     ('.travis.yml', r'(?P<pre>.*TAG=)(?P<date>\d{4}-\d{2}-\d{2})\.?(?P<ver>\d{2})?(?P<post>[.\s]*)$'),
-    ('notebook/worker-template.yml', r'(?P<pre>.*image: rhodium/worker:)(?P<date>\d{4}-\d{2}-\d{2})\.?(?P<ver>\d{2})?(?P<post>[.\s]*)$'),
     ('jupyter-config.yml', r'(?P<pre>.*tag: )(?P<date>\d{4}-\d{2}-\d{2})\.?(?P<ver>\d{2})?(?P<post>[.\s]*)$')]
 
 

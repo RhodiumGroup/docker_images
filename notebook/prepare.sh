@@ -2,16 +2,14 @@
 
 set -x
 
-echo "Copy Dask configuration files from pre-load directory into home/.config"
-mkdir -p /home/jovyan/.config/dask
-cp --update -r -v /pre-home/config.yaml /home/jovyan/.config/dask/
+echo "Copy Dask configuration files from pre-load directory into opt/conda/etc/dask/"
+mkdir -p /opt/conda/etc/dask
+cp --update -r -v /pre-home/config.yaml /opt/conda/etc/dask/
 
-# should probably pick one of these!!! The second is new, but is implied by the
-# cp /pre-home below, and we actually only read the version in ~ in rhg_compute_tools.
-cp -r -v /pre-home/worker-template.yml /home/jovyan/.config/dask/
-cp -r -v /pre-home/worker-template.yml /home/jovyan/
+# set credentials for use when starting workers with dask-gateway
+python /pre-home/set_gateway_opts.py
 
-sudo rm /pre-home/config.yaml
+sudo rm /pre-home/config.yaml /pre-home/set_gateway_opts.py
 
 echo "Copy files from pre-load directory into home"
 cp --update -r -v /pre-home/. /home/jovyan
@@ -30,14 +28,12 @@ do
             echo "Mounting $bucket to /gcs/${bucket}";
             mkdir -p "/gcs/$bucket";
             /usr/bin/gcsfuse --key-file="$f" "$bucket" "/gcs/${bucket}";
+            echo "Including $bucket in dask-gateway options";
         fi;
     fi;
 done
 
-if [ -f "/home/jovyan/worker-template.yml" ]; then
-    echo "appending service-account-credentials to worker-template";
-    python /home/jovyan/add_service_creds.py;
-fi
+
 
 # needed for CLAWPACK to not throw segfaults sometimes
 ulimit -s unlimited
