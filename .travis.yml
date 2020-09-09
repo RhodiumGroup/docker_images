@@ -9,18 +9,6 @@ env:
     - CLAWPACK_COMMIT=5f6f94c6087c520e29fbdaf823965c2d8e2ec6b2
 
 install:
-- "if [[ \"$TRAVIS_TAG\" == \"\" ]]; then 
-    sed -i.bak \
-      's/image: gcr.io\\/rhg-project-1\\/pytc-image-devbase:.*/\
-      image: gcr.io\\/rhg-project-1\\/pytc-image-devbase:'\"$TRAVIS_COMMIT\"'/' \
-      notebook/worker-template.yml; 
-  else
-    sed -i.bak \
-      's/image: gcr.io\\/rhg-project-1\\/pytc-image-devbase:.*/\
-      image: gcr.io\\/rhg-project-1\\/pytc-image-devbase:'\"$TRAVIS_TAG\"'/' \
-      notebook/worker-template.yml; fi"
-- "rm notebook/worker-template.yml.bak"
-- "cat notebook/worker-template.yml | grep image:"
 - "cp -r shared_resources $IMAGE_NAME/shared_resources && chmod -R +x \
     $IMAGE_NAME/shared_resources"
 - "if [[ $IMAGE_NAME == worker ]]; then cp -r shared_resources \
@@ -29,7 +17,17 @@ install:
 
 
 script:
-- travis_wait 90 docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT --build-arg CLAWPACK_COMMIT .
+- "if [[ $IMAGE_NAME == notebook ]]; then
+    if [[ \"$TRAVIS_TAG\" == \"\" ]]; then
+      export WORKER_IMAGE=gcr.io\\/rhg-project-1\\/pytc-image-devbase:\"$TRAVIS_COMMIT\";
+    else
+      export WORKER_IMAGE=gcr.io\\/rhg-project-1\\/pytc-image-devbase:\"$TRAVIS_TAG\";
+    fi;
+  fi"
+- echo $WORKER_IMAGE
+- "if [[ $IMAGE_NAME == worker ]]; then docker build -t \
+    rhodium/scheduler:local -f Dockerfile_scheduler .; fi"
+- travis_wait 90 docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT --build-arg CLAWPACK_COMMIT --build-arg WORKER_IMAGE .
 - "if [[ $IMAGE_NAME == worker ]]; then docker build -t \
     rhodium/octave-worker:$TRAVIS_COMMIT --build-arg TRAVIS_COMMIT=$TRAVIS_COMMIT \
     ../octave-worker; fi"
@@ -66,6 +64,37 @@ deploy:
     docker push "rhodium/$IMAGE_NAME:$TRAVIS_TAG"
   on:
     tags: true
+
+# scheduler builds
+- provider: script
+  script: >-
+    docker tag rhodium/scheduler:local rhodium/scheduler:$TRAVIS_COMMIT &&
+    docker tag rhodium/scheduler:local rhodium/scheduler:$TRAVIS_BRANCH &&
+    docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" &&
+    docker push "rhodium/scheduler:$TRAVIS_COMMIT" &&
+    docker push "rhodium/scheduler:$TRAVIS_BRANCH"
+  on:
+    all_branches: true
+    condition: ($TRAVIS_BRANCH != master) && ($IMAGE_NAME == worker)
+
+- provider: script
+  script: >-
+    docker tag rhodium/scheduler:local rhodium/scheduler:latest &&
+    docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" &&
+    docker push "rhodium/scheduler:$TRAVIS_COMMIT" &&
+    docker push "rhodium/scheduler:latest"
+  on:
+    branch: master
+    condition: $IMAGE_NAME = worker
+
+- provider: script
+  script: >-
+    docker tag rhodium/scheduler:local rhodium/scheduler:$TRAVIS_TAG &&
+    docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" &&
+    docker push "rhodium/scheduler:$TRAVIS_TAG"
+  on:
+    tags: true
+    condition: $IMAGE_NAME = worker
 
 # octave-worker builds
 - provider: script

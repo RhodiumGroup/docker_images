@@ -27,8 +27,9 @@ from ruamel.yaml import YAML
 
 SPEC_FILES = [
     ('shared_resources/base_environment.yml', 'base'),
+    ('shared_resources/scheduler_environment.yml', 'base'),
     ('notebook/notebook_environment.yml', 'base'),
-    ('octave-worker/octave_environment.yml', 'base')
+    ('octave-worker/octave_environment.yml', 'base'),
 ]
 
 
@@ -332,16 +333,16 @@ def unpin(file, dry_run):
         unpin_files(SPEC_FILES, dry_run=dry_run)
     elif file == 'base':
         unpin_files([SPEC_FILES[0]], dry_run=dry_run)
-    elif file == 'notebook':
+    elif file == 'scheduler':
         unpin_files([SPEC_FILES[1]], dry_run=dry_run)
-    elif file == 'octave':
+    elif file == 'notebook':
         unpin_files([SPEC_FILES[2]], dry_run=dry_run)
-    elif file == 'r':
+    elif file == 'octave':
         unpin_files([SPEC_FILES[3]], dry_run=dry_run)
     else:
         raise ValueError(
             'env type not recognized: {}'
-            'choose from "base", "notebook", "octave", "r", or "all".'
+            'choose from "base", "scheduler", "notebook", "octave", or "all".'
             .format(file))
 
 

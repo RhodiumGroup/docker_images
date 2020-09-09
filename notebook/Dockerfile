@@ -44,6 +44,7 @@ RUN sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recomme
 # set up conda channels
 RUN mkdir /opt/conda/specs
 COPY shared_resources/base_environment.yml /opt/conda/specs
+COPY shared_resources/scheduler_environment.yml /opt/conda/specs
 COPY notebook_environment.yml /opt/conda/specs
 RUN conda config --add channels conda-forge && \
   conda config --set channel_priority strict
@@ -52,7 +53,8 @@ RUN conda config --add channels conda-forge && \
 RUN conda update -n base conda
 
 #  update environemnt with common packages across worker and nb
-RUN conda env update -f /opt/conda/specs/base_environment.yml
+RUN conda env update -f /opt/conda/specs/scheduler_environment.yml && \
+  conda env update -f /opt/conda/specs/base_environment.yml
 
 # need access to settings/page_config.json for elyra
 USER root
@@ -132,6 +134,9 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
 ## clean up
 RUN sudo rm -rf /var/lib/apt/lists/* /tempdir
 RUN conda clean -yaf
+
+## configure correct default image for dask
+ENV DASK_GATEWAY__CLUSTER__OPTIONS__IMAGE ${WORKER_IMAGE}
 
 ## prepare container
 WORKDIR $HOME
