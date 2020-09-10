@@ -11,7 +11,7 @@ dependencies:
   - cartopy=0.17.0=py37h423102d_1009
   - cftime=1.0.4.2=py37hc1659b7_0
   - click=7.0=py_0
-  - compilers=1.0.4=0
+  - compilers=1.1.1=0
   - dask-glm=0.2.0=py_1
   - dask-ml=1.1.1=py_0
   - datashader=0.8.0=py_0
@@ -23,11 +23,6 @@ dependencies:
   - fastparquet=0.3.2=py37hc1659b7_0
   - fiona=1.8.13=py37h900e953_0
   - fusepy=3.0.1=py_0
-# this gcc pin is necessary b/c of a weird feature in the h553295d_15 build
-# which makes it hard to build numpy-based cython extensions (like pyclaw).
-# we should try removing it whenever we next do an update and see if Clawpack
-# can still be built
-  - gcc_linux-64=7.3.0=h553295d_14 # pinkeep: gcc_linux-64=7.3.0=h553295d_14
   - gcsfs=0.5.3=py_0
   - gdal=3.0.2=py37hbb6b9fb_5
   - geoalchemy2=0.6.3=py_0
@@ -45,8 +40,6 @@ dependencies:
   - intake-esm=2020.6.11
   - iris=2.2.0=py37_1003
   - jedi=0.15.1=py37_0
-# need server proxy on workers if using remote scheduler
-  - jupyter-server-proxy=1.3.2=py_0
   - kubernetes
   - lapack=3.6.1=ha44fe06_2
   - make=4.2.1=h14c3975_2004
