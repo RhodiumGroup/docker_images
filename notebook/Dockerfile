@@ -67,12 +67,6 @@ RUN conda env create -f /opt/conda/specs/r_environment.yml
 
 RUN conda list -n base
 
-# Compile MatI/O
-RUN source /opt/conda/etc/profile.d/conda.sh \
-  && conda activate \
-  && g++ $CFLAGS -L/opt/conda/lib -lmatio /tempdir/matio_73to5.c -o \
-    /opt/conda/bin/matio_73to5
-
 ## Set up jupyter lab extensions
 RUN jupyter labextension update --all && \
     jupyter labextension install \
