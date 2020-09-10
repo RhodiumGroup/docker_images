@@ -67,4 +67,6 @@ ENV OPENBLAS_NUM_THREADS=1
 
 WORKDIR /
 
+RUN chmod +x /usr/bin/prepare.sh
+
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
