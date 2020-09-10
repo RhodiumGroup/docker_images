@@ -1,6 +1,9 @@
 FROM jupyter/base-notebook:notebook-6.0.0
 ARG DEBIAN_FRONTEND=noninteractive
 
+# set shell to bash so that later can use source
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 ## needed to make sure things with cython compile correctly
 ## (this will eventually become default in numpy)
 ENV NPY_DISTUTILS_APPEND_FLAGS=1
