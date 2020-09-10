@@ -13,8 +13,12 @@ COPY shared_resources /tempdir
 COPY add_service_creds.py /usr/bin
 COPY prepare.sh /usr/bin
 
-## perform a bunch of common actions
-RUN bash /tempdir/common.sh
+# install apt-get packages
+apt-get update -y --no-install-recommends
+apt-get install -yq --no-install-recommends \
+  locales \
+  sudo \
+  wget
 
 ###########
 ## install miniconda (following jupyter/base-notebook
