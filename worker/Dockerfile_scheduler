@@ -15,7 +15,8 @@ COPY prepare.sh /usr/bin
 
 # install apt-get packages
 apt-get update -y --no-install-recommends
-apt-get install -yq --no-install-recommends \
+RUN apt-get install -yq --no-install-recommends \
+  ca-certificates \
   locales \
   sudo \
   wget
@@ -65,5 +66,7 @@ ENV MKL_NUM_THREADS=1
 ENV OPENBLAS_NUM_THREADS=1
 
 WORKDIR /
+
+RUN chmod +x /usr/bin/prepare.sh
 
 ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
