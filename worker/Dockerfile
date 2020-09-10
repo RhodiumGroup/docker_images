@@ -2,6 +2,9 @@
 FROM rhodium/scheduler:local
 ARG DEBIAN_FRONTEND=noninteractive
 
+## perform a bunch of common actions
+RUN bash /tempdir/common.sh
+
 RUN conda env update -f /opt/conda/specs/base_environment.yml
 RUN conda list -n base
 
