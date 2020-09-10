@@ -36,7 +36,6 @@ dependencies:
   - intake-esm=2020.8.15=py_0
   - jedi=0.17.2=py38h32f6830_0
   - jellyfish=0.7.2=py38h1e0a361_1 # needed for "us" package
-  - jupyter-server-proxy=1.5.0=py_0 # need server proxy on workers if using remote scheduler
   - kubernetes=1.18.8=0
   - libmatio=1.5.17=hf54d351_0
   - lxml=4.5.2=py38hbb43d70_0
