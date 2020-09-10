@@ -30,6 +30,7 @@ SPEC_FILES = [
     ('shared_resources/scheduler_environment.yml', 'base'),
     ('notebook/notebook_environment.yml', 'base'),
     ('octave-worker/octave_environment.yml', 'base'),
+    ('notebook/r_environment.yml', 'r'),
 ]
 
 
@@ -339,10 +340,12 @@ def unpin(file, dry_run):
         unpin_files([SPEC_FILES[2]], dry_run=dry_run)
     elif file == 'octave':
         unpin_files([SPEC_FILES[3]], dry_run=dry_run)
+    elif file == 'r':
+        unpin_files([SPEC_FILES[4]], dry_run=dry_run)
     else:
         raise ValueError(
             'env type not recognized: {}'
-            'choose from "base", "scheduler", "notebook", "octave", or "all".'
+            'choose from "base", "scheduler", "notebook", "octave", "r", or "all".'
             .format(file))
 
 

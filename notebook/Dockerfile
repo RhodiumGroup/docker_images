@@ -43,6 +43,7 @@ RUN mkdir /opt/conda/specs
 COPY shared_resources/base_environment.yml /opt/conda/specs
 COPY shared_resources/scheduler_environment.yml /opt/conda/specs
 COPY notebook_environment.yml /opt/conda/specs
+COPY r_environment.yml /opt/conda/specs
 RUN conda config --add channels conda-forge && \
   conda config --set channel_priority strict
 
@@ -60,6 +61,9 @@ USER $NB_USER
 
 # update environment with nb-specific packages
 RUN conda env update -f /opt/conda/specs/notebook_environment.yml
+
+# add r env
+RUN conda env create -f /opt/conda/specs/r_environment.yml
 
 RUN conda list -n base
 
