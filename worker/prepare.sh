@@ -42,8 +42,5 @@ if [[ "$GOOGLE_APPLICATION_CREDENTIALS" ]]; then
     gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS;
 fi
 
-# needed for CLAWPACK to not throw segfaults sometimes
-ulimit -s unlimited
-
 # Run extra commands
 $@
