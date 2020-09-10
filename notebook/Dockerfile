@@ -78,6 +78,7 @@ RUN jupyter labextension update --all && \
     jupyter-leaflet \
     jupyter-matplotlib \
     jupyterlab-plotly \
+    jupyterlab-tabular-data-editor \
     plotlywidget
 RUN jupyter serverextension enable --py jupyterlab_code_formatter nbdime --sys-prefix
 
