@@ -16,6 +16,7 @@ COPY prepare.sh /usr/bin
 # install apt-get packages
 RUN apt-get update -y --no-install-recommends
 RUN apt-get install -yq --no-install-recommends \
+  ca-certificates \
   locales \
   sudo \
   wget
