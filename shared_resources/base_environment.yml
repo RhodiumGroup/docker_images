@@ -31,7 +31,7 @@ dependencies:
   - geotiff=1.5.1=hbd99317_7
   - geoviews=1.6.6=py_0
   - git=2.24.0=pl526hce37bd2_1
-  - gitpython=3.0.5=py_0
+  - gitpython=3.1.8=py_0
   - google-cloud-container=0.3.0=py37_0
   - google-cloud-storage=1.23.0=py37_0
   - holoviews=1.12.7=py_0
