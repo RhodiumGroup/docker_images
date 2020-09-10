@@ -1,86 +1,108 @@
+name: base
 channels:
   - conda-forge
 dependencies:
-  - beautifulsoup4=4.9.1=py_1
-  - blas=2.17=openblas
-  - bottleneck=1.3.2=py38h8790de6_1
-  - boto3=1.14.56=pyh9f0ad1d_0
-  - bqplot=0.12.16=pyh9f0ad1d_0
-  - cachecontrol=0.12.6=py_0
-  - cartopy=0.18.0=py38h172510d_0
-  - cftime=1.2.1=py38h8790de6_0
-  - click=7.1.2=pyh9f0ad1d_0
-  - compilers=1.1.1=0
+  - beautifulsoup4=4.8.1=py37_0
+  - bottleneck=1.3.1=py37hc1659b7_0
+  - boto3=1.10.34=py_0
+  - bqplot=0.12.1=py_0
+  - bumpversion=0.5.3=py_1001
+  - cachecontrol=0.12.5=py_0
+  - cartopy=0.17.0=py37h423102d_1009
+  - cftime=1.0.4.2=py37hc1659b7_0
+  - click=7.0=py_0
+  - compilers=1.0.4=0
   - dask-glm=0.2.0=py_1
-  - dask-ml=1.6.0=py_0
-  - datashader=0.11.1=pyh9f0ad1d_0
+  - dask-ml=1.1.1=py_0
+  - datashader=0.8.0=py_0
   - descartes=1.1.0=py_4
-  - dropbox=10.1.1=pyh9f0ad1d_0
-  - esmpy=8.0.1=mpi_mpich_py38h08b7006_100
-  - fastparquet=0.4.1=py38h8790de6_0
-  - fiona=1.8.13=py38h033e0f6_1
+  - dropbox=9.4.0=py_0
+# need to make sure we get esmpy compiled with mpi otherwise xesmf regridding
+# won't work
+  - esmpy=8.0.0=mpi_mpich_py37ha9b28fa_101 # pinkeep: esmpy=8.0.0=mpi_mpich_py37ha9b28fa_101
+  - fastparquet=0.3.2=py37hc1659b7_0
+  - fiona=1.8.13=py37h900e953_0
   - fusepy=3.0.1=py_0
-  - fuzzywuzzy=0.17.0=py_0
-  - gcsfs=0.7.0=py_0
-  - gdal=3.0.4=py38h172510d_10
-  - geopandas=0.8.1=py_0
-  - geotiff=1.6.0=h05acad5_0
-  - geoviews=1.8.1=py_0
-  - git=2.28.0=pl526h5e3e691_1
-  - gitpython=3.1.8=py_0
-  - google-cloud-container=0.3.0=py38_0
-  - google-cloud-storage=1.31.0=pyh9f0ad1d_0
-  - holoviews=1.13.3=pyh9f0ad1d_0
-  - hvplot=0.6.0=pyh9f0ad1d_0
-  - h5netcdf=0.8.1=py_0
-  - intake-esm=2020.8.15=py_0
-  - jedi=0.17.2=py38h32f6830_0
-  - jellyfish=0.7.2=py38h1e0a361_1 # needed for "us" package
-  - jupyter-server-proxy=1.5.0=py_0 # need server proxy on workers if using remote scheduler
-  - kubernetes=1.18.8=0
-  - libmatio=1.5.17=hf54d351_0
-  - lxml=4.5.2=py38hbb43d70_0
-  - make=4.3=h516909a_0
-  - matplotlib=3.3.1=1
-  - nc-time-axis=1.2.0=py_1
-  - netcdf-fortran=4.5.3=mpi_mpich_h3923e1a_0
-  - netcdf4=1.5.4=nompi_py38hec8b9af_102
-  - nose=1.3.7=py38h32f6830_1004
-  - numba=0.51.2=py38hc5bc63f_0
-  - openpyxl=3.0.5=py_0
-  - phantomjs=2.1.1=1 # for geoviews
-  - pillow=7.2.0=py38h9776b28_1
-  - pip=20.2.2=py_0
-  - plotly=4.9.0=pyh9f0ad1d_0
-  - pygeos=0.8=py38hc7361b7_0
-  - pyinterp=0.3.2=mkl_py38hefd7b46_102
+# this gcc pin is necessary b/c of a weird feature in the h553295d_15 build
+# which makes it hard to build numpy-based cython extensions (like pyclaw).
+# we should try removing it whenever we next do an update and see if Clawpack
+# can still be built
+  - gcc_linux-64=7.3.0=h553295d_14 # pinkeep: gcc_linux-64=7.3.0=h553295d_14
+  - gcsfs=0.5.3=py_0
+  - gdal=3.0.2=py37hbb6b9fb_5
+  - geoalchemy2=0.6.3=py_0
+  - geopandas=0.6.2=py_0
+  - geopy=1.20.0=py_0
+  - geotiff=1.5.1=hbd99317_7
+  - geoviews=1.6.6=py_0
+  - git=2.24.0=pl526hce37bd2_1
+  - gitpython=3.0.5=py_0
+  - google-cloud-container=0.3.0=py37_0
+  - google-cloud-storage=1.23.0=py37_0
+  - holoviews=1.12.7=py_0
+  - h5netcdf=0.7.4=py_0
+  - icu=64.2=he1b5a44_1
+  - intake-esm=2020.6.11
+  - iris=2.2.0=py37_1003
+  - jedi=0.15.1=py37_0
+# need server proxy on workers if using remote scheduler
+  - jupyter-server-proxy=1.3.2=py_0
+  - kubernetes
+  - lapack=3.6.1=ha44fe06_2
+  - make=4.2.1=h14c3975_2004
+  - matplotlib=3.1.2=py37_1
+  - nc-time-axis=1.2.0=py_0
+  - ncurses=6.1=hf484d3e_1002
+  - netcdf-fortran=4.5.2=mpi_mpich_ha8580a0_2
+  - netcdf4=1.5.3=mpi_mpich_py37h01ee55b_1
+  - numba=0.46.0=py37hb3f55d8_1
+  - numcodecs=0.6.4=py37he1b5a44_0
+  # for geoviews
+  - phantomjs=2.1.1=1
+  - pip=19.3.1=py37_0
+  - plotly=4.3.0=py_0
+  - polyline=1.4.0=py_0
+  - pydap=3.2.2=py37_1000
+  - pygeos=0.5=py37h5d51c17_1
+  - pyinterp=0.0.7=py37h97f2665_0
   - pyshp=2.1.0=py_0
-  - python=3.8.5=h1103e12_7_cpython
-  - python-snappy=0.5.4=py38h7cfaab3_1
-  - pyyaml=5.3.1=py38h1e0a361_0
-  - rasterio=1.1.5=py38h033e0f6_1
-  - regionmask=0.6.1=py_0
-  - rtree=0.9.4=py38h08f867b_1
-  - scikit-image=0.17.2=py38hc5bc63f_2
-  - scikit-learn=0.23.2=py38hee58b96_0
-  - scipy=1.5.2=py38h8c5af15_0
-  - seaborn=0.10.1=1
-  - selenium=3.141.0=py38h1e0a361_1001 # for geoviews
-  - shapely=1.7.1=py38hc7361b7_0
-  - sparse=0.11.2=py_0
-  - statsmodels=0.12.0=py38h1e0a361_0
+  - python=3.7.3=h357f687_2 # pinkeep: python=3.7
+  - python-blosc=1.8.1=py37hf484d3e_0
+  - python-snappy=0.5.4=py37hee44bf9_1
+  - pyviz_comms=0.7.2=py_0
+  - pyyaml=5.2=py37h516909a_0
+  - rasterio=1.1.1=py37h900e953_0
+  - regionmask=0.4.0=py_0
+  - rtree=0.8.3=py37h7b0cdae_1003
+  - scikit-image=0.16.2=py37hb3f55d8_0
+  - scikit-learn=0.22=py37hcdab131_0
+  - scipy=1.3.2=py37h921218d_0
+  - seaborn=0.9.0=py_2
+  # for geoviews
+  - selenium=3.141.0=py37h516909a_1000
+  - shapely=1.6.4=py37h5d51c17_1007
+  - sparse=0.8.0=py_0
+  - statsmodels=0.10.2=py37hc1659b7_0
+  - unzip=6.0=h516909a_0
+  - uritemplate=3.0.0=py_1
   - xarray=0.16.0=py_0
-  - xarray-extras=0.4.2=py38h516909a_1000
-  - xesmf=0.3.0=py_0
+  - xesmf=0.2.1=py_0
+  - xgcm=0.2.0=py_0
   - xhistogram=0.1.1=py_0
-  - xlrd=1.2.0=pyh9f0ad1d_1
-  - zarr=2.4.0=py_0
-  - zeromq=4.3.2=he1b5a44_3
+  - xlrd=1.2.0=py_0
+  - xrft=0.2.0=py_0
+  - zarr=2.3.2=py37_0
+  - zeromq=4.3.2=he1b5a44_2
+  - zict=1.0.0=py_0
   - pip:
+    - mapbox==0.18.0
+    - py-noaa==1.0
+    - sidecar==0.3.0
     - climate-toolbox==0.1.5
-    - noaa-coops==0.1.8
+    - impactlab-tools==0.4.0
     - parameterize-jobs==0.1.1
-    - git+https://github.com/RhodiumGroup/rhg_compute_tools.git@gateway#egg=rhg_compute_tools # needed for dask-gateway until merged into master
-    - git+https://github.com/maritimeplanning/pytides.git@a8397a0e12645d22c62612385d18e63c4d67d6fa#egg=pytides
-    - us==2.0.2 # installing from pip b/c conda thinks we need py 3.7
-name: base
+    - rhg_compute_tools==0.2.2
+# need to install from master until 0.10.1
+# due to handling of remote scheduler
+# (we also should at some point switch to dask-gateway instead of dask-kubernetes)
+    - dask_kubernetes==0.10.1

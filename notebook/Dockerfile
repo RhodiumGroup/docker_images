@@ -1,9 +1,6 @@
 FROM jupyter/base-notebook@sha256:6e276c402aa19799798b84b46e0e08fc03be193de9a81490158ca4d9026b8cae
 ARG DEBIAN_FRONTEND=noninteractive
 
-# pull in build args
-ARG CLAWPACK_COMMIT
-
 ## needed to make sure things with cython compile correctly
 ## (this will eventually become default in numpy)
 ENV NPY_DISTUTILS_APPEND_FLAGS=1
@@ -73,18 +70,17 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
     /opt/conda/bin/matio_73to5
 
 ## Set up jupyter lab extensions
-RUN jupyter labextension update --all 
-RUN jupyter labextension install \
-      @bokeh/jupyter_bokeh \
-      @jupyterlab/toc \
-      @jupyter-widgets/jupyterlab-manager \
-      @lckr/jupyterlab_variableinspector \
-      @pyviz/jupyterlab_pyviz \
-      @ryantam626/jupyterlab_code_formatter \
-      dask-labextension \
-      jupyterlab-plotly \
-      jupyterlab-tabular-data-editor \
-      plotlywidget
+RUN jupyter labextension update --all && \
+    jupyter labextension install \
+    @bokeh/jupyter_bokeh \
+    @jupyter-widgets/jupyterlab-manager \
+    @jupyter-widgets/jupyterlab-sidecar \
+    @pyviz/jupyterlab_pyviz \
+    dask-labextension \
+    jupyter-leaflet \
+    jupyter-matplotlib \
+    jupyterlab-plotly \
+    plotlywidget
 RUN jupyter serverextension enable --py jupyterlab_code_formatter nbdime --sys-prefix
 
 ## configure nbdime
@@ -94,41 +90,6 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
 # makes sure that the web-tools allow accessible IP
 COPY nbdime_config.json /opt/conda/etc/jupyter
 
-##################
-## clawpack added for coastal-specific image
-##################
-
-ENV CLAW=/clawpack
-ENV NETCDF4_DIR=/opt/conda
-ENV FC=gfortran
-ENV LIB_PATHS=/opt/conda/lib
-ENV CLAW_FFLAGS="-DNETCDF -L/opt/conda/lib -lnetcdf -lnetcdff -I/opt/conda/include \
-  -O3 -march=broadwell -ftree-vectorize -fPIC -fno-plt -ffunction-sections \
-  -fstack-protector-strong"
-
-# need to change shell in order for source command to work
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
-# install clawpack (use root to access /clawpack and then fix permissions)
-USER root
-RUN source /opt/conda/etc/profile.d/conda.sh \
-  && conda activate \
-  && pip install --src=$(dirname $CLAW) -e \
-    git+https://github.com/climateimpactlab/clawpack.git@${CLAWPACK_COMMIT}#egg=clawpack
-RUN /tempdir/fix-permissions.sh /clawpack
-RUN /tempdir/fix-permissions.sh /opt/conda
-USER $NB_USER
-
-RUN source /opt/conda/etc/profile.d/conda.sh \
-  && conda activate \
-  && export EXE=$CLAW/geoclaw/xgeoclaw \
-  && export FFLAGS=$CLAW_FFLAGS \
-  && make -f /tempdir/Makefile.clawpack new \
-  && export EXE=$CLAW/geoclaw/xgeoclaw_omp \
-  && export FFLAGS="$FFLAGS -fopenmp" \
-  && make -f /tempdir/Makefile.clawpack new
-
-##################
 
 ## clean up
 RUN sudo rm -rf /var/lib/apt/lists/* /tempdir

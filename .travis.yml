@@ -5,8 +5,6 @@ env:
   jobs:
     - IMAGE_NAME=notebook
     - IMAGE_NAME=worker
-  global:
-    - CLAWPACK_COMMIT=5f6f94c6087c520e29fbdaf823965c2d8e2ec6b2
 
 install:
 - "cp -r shared_resources $IMAGE_NAME/shared_resources && chmod -R +x \
@@ -19,12 +17,10 @@ install:
 script:
 - "if [[ $IMAGE_NAME == worker ]]; then docker build -t \
     rhodium/scheduler:local -f Dockerfile_scheduler .; fi"
-- "travis_wait 90 docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT \
-    --build-arg CLAWPACK_COMMIT ."
+- travis_wait 90 docker build -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT .
 - "if [[ $IMAGE_NAME == worker ]]; then docker build -t \
     rhodium/octave-worker:$TRAVIS_COMMIT --build-arg TRAVIS_COMMIT=$TRAVIS_COMMIT \
     ../octave-worker; fi"
-- docker run -t rhodium/$IMAGE_NAME:$TRAVIS_COMMIT bash /clawpack/run_tests.sh
 
 deploy:
 - provider: script

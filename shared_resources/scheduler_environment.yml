@@ -4,12 +4,12 @@ channels:
     - conda-forge
 dependencies:
     - aiohttp=3.6.2=py38h516909a_0
-    - dask=2.25.0=py_0
-    - distributed=2.25.0=py38h32f6830_0
+    - dask=2.8.1=py_0
+    - distributed=2.8.1=py_0
     - dask-gateway=0.8.0=py38h32f6830_0
-    - lz4=3.1.0=py38h66f7c9e_0
-    - numpy=1.19.1=py38hbc27379_2
-    - pandas=1.1.1=py38h950e882_0
+    - lz4=2.2.1=py37hd79334b_0
+    - numpy=1.19.1=py37h8960a57_0
+    - pandas=0.25.3=py37hb3f55d8_0
     - tini=0.18.0=h14c3975_1001
 name: base
   
