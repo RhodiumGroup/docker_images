@@ -105,9 +105,6 @@ ENV CLAW_FFLAGS="-DNETCDF -L/opt/conda/lib -lnetcdf -lnetcdff -I/opt/conda/inclu
   -O3 -march=broadwell -ftree-vectorize -fPIC -fno-plt -ffunction-sections \
   -fstack-protector-strong"
 
-# need to change shell in order for source command to work
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
 # install clawpack (use root to access /clawpack and then fix permissions)
 USER root
 RUN source /opt/conda/etc/profile.d/conda.sh \
