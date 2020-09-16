@@ -1,4 +1,4 @@
-FROM jupyter/base-notebook@sha256:6e276c402aa19799798b84b46e0e08fc03be193de9a81490158ca4d9026b8cae
+FROM jupyter/base-notebook@sha256:19ae50d8d07b88d9a95775b27d60198ae1d1d949d4d4540018abc996663d79c0
 ARG DEBIAN_FRONTEND=noninteractive
 
 ## needed to make sure things with cython compile correctly
@@ -49,18 +49,13 @@ RUN conda config --add channels conda-forge && \
   conda config --set channel_priority strict
 
 ## set up conda
-RUN conda update -n base conda
+RUN conda update -n base conda && conda install mamba
 
 #  update environemnt with common packages across worker and nb
-RUN conda env update -f /opt/conda/specs/base_environment.yml
-
-# need access to settings/page_config.json for elyra
-USER root
-RUN /tempdir/fix-permissions.sh /opt/conda/share/jupyter/lab/settings
-USER $NB_USER
+RUN mamba env update -f /opt/conda/specs/base_environment.yml
 
 # update environment with nb-specific packages
-RUN conda env update -f /opt/conda/specs/notebook_environment.yml
+RUN mamba env update -f /opt/conda/specs/notebook_environment.yml
 
 RUN conda list -n base
 
@@ -128,7 +123,7 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
 
 ## clean up
 RUN sudo rm -rf /var/lib/apt/lists/* /tempdir
-RUN conda clean -yaf
+RUN mamba clean -yaf
 
 ## prepare container
 WORKDIR $HOME

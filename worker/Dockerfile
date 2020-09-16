@@ -41,14 +41,15 @@ RUN wget --quiet https://repo.continuum.io/miniconda/Miniconda3-py38_${MINICONDA
     conda config --system --prepend channels conda-forge && \
     conda config --system --set channel_priority strict && \
     conda update -n base --yes conda && \
-    conda update --all --yes
+    conda install mamba && \
+    mamba update --all --yes
 ###########
 
 ## set up python env
 RUN mkdir /opt/conda/specs
 COPY shared_resources/base_environment.yml /opt/conda/specs
-RUN conda env update -f /opt/conda/specs/base_environment.yml
-RUN conda list -n base
+RUN mamba env update -f /opt/conda/specs/base_environment.yml
+RUN mamba list -n base
 
 ##################
 ## clawpack added for coastal-specific image
@@ -85,7 +86,7 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
 
 ## clean up
 RUN rm -rf /var/lib/apt/lists/* /tempdir \
-    && conda clean -yaf \
+    && mamba clean -yaf \
     && sudo apt-get clean
 
 ## prepare container
