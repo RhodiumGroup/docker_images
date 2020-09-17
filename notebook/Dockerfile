@@ -94,6 +94,10 @@ COPY nbdime_config.json /opt/conda/etc/jupyter
 
 ENV CLAW=/clawpack
 ENV NETCDF4_DIR=/opt/conda
+# clawpack needs FC explicitly set to "gfortran" for some logic that applies lapack flags
+# (if we don't set, will be set to a complex filename determined by conda. But gfortran
+# is just a link to that same compiler anyways)
+ENV FC=gfortran
 ENV LIB_PATHS=/opt/conda/lib
 ENV CLAW_FFLAGS="-DNETCDF -L/opt/conda/lib -lnetcdf -lnetcdff -I/opt/conda/include \
   -O3 -march=broadwell -ftree-vectorize -fPIC -fno-plt -ffunction-sections \
