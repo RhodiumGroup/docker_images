@@ -1,4 +1,4 @@
-FROM jupyter/base-notebook@sha256:6e276c402aa19799798b84b46e0e08fc03be193de9a81490158ca4d9026b8cae
+FROM jupyter/base-notebook@sha256:19ae50d8d07b88d9a95775b27d60198ae1d1d949d4d4540018abc996663d79c0
 ARG DEBIAN_FRONTEND=noninteractive
 
 # pull in build args
@@ -50,20 +50,14 @@ RUN conda config --add channels conda-forge && \
   conda config --set channel_priority strict
 
 ## set up conda
-RUN conda update -n base conda
+RUN conda update -n base conda && conda install mamba
 
 #  update environemnt with common packages across worker and nb
-RUN conda env update -f /opt/conda/specs/scheduler_environment.yml && \
-  conda env update -f /opt/conda/specs/base_environment.yml
-
-# need access to settings/page_config.json for elyra
-USER root
-RUN /tempdir/fix-permissions.sh /opt/conda/share/jupyter/lab/settings
-USER $NB_USER
+RUN mamba env update -f /opt/conda/specs/scheduler_environment.yml && \
+  mamba env update -f /opt/conda/specs/base_environment.yml
 
 # update environment with nb-specific packages
-RUN conda env update -f /opt/conda/specs/notebook_environment.yml
-
+RUN mamba env update -f /opt/conda/specs/notebook_environment.yml
 RUN conda list -n base
 
 # Compile MatI/O
@@ -106,9 +100,6 @@ ENV CLAW_FFLAGS="-DNETCDF -L/opt/conda/lib -lnetcdf -lnetcdff -I/opt/conda/inclu
   -O3 -march=broadwell -ftree-vectorize -fPIC -fno-plt -ffunction-sections \
   -fstack-protector-strong"
 
-# need to change shell in order for source command to work
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
 # install clawpack (use root to access /clawpack and then fix permissions)
 USER root
 RUN source /opt/conda/etc/profile.d/conda.sh \
@@ -132,7 +123,7 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
 
 ## clean up
 RUN sudo rm -rf /var/lib/apt/lists/* /tempdir
-RUN conda clean -yaf
+RUN mamba clean -yaf
 
 ## prepare container
 WORKDIR $HOME

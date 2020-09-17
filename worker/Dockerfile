@@ -5,8 +5,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 ## perform a bunch of common actions
 RUN bash /tempdir/common.sh
 
-RUN conda env update -f /opt/conda/specs/base_environment.yml
-RUN conda list -n base
+RUN mamba env update -f /opt/conda/specs/base_environment.yml
+RUN mamba list -n base
 
 ##################
 ## clawpack added for coastal-specific image
@@ -43,5 +43,10 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
 
 ## clean up
 RUN rm -rf /var/lib/apt/lists/* /tempdir \
-    && conda clean -yaf \
+    && mamba clean -yaf \
     && sudo apt-get clean
+
+## prepare container
+ENV OMP_NUM_THREADS=1
+ENV MKL_NUM_THREADS=1
+ENV OPENBLAS_NUM_THREADS=1

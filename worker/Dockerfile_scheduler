@@ -46,24 +46,20 @@ RUN wget --quiet https://repo.continuum.io/miniconda/Miniconda3-py38_${MINICONDA
     conda config --system --prepend channels conda-forge && \
     conda config --system --set channel_priority strict && \
     conda update -n base --yes conda && \
-    conda update --all --yes
+    conda update --all --yes && \
+    conda install mamba
 ###########
 
 ## set up python env
 RUN mkdir /opt/conda/specs
 COPY shared_resources/scheduler_environment.yml /opt/conda/specs
 COPY shared_resources/base_environment.yml /opt/conda/specs
-RUN conda env update -f /opt/conda/specs/scheduler_environment.yml
+RUN mamba env update -f /opt/conda/specs/scheduler_environment.yml
 
 ## clean up
 RUN rm -rf /var/lib/apt/lists/* /tmp/*\
-    && conda clean -yaf \
+    && mamba clean -yaf \
     && sudo apt-get clean
-
-## prepare container
-ENV OMP_NUM_THREADS=1
-ENV MKL_NUM_THREADS=1
-ENV OPENBLAS_NUM_THREADS=1
 
 WORKDIR /
 
