@@ -4,8 +4,8 @@ channels:
     - conda-forge
 dependencies:
     - aiohttp=3.6.2=py38h516909a_0
-    - dask=2.25.0=py_0
-    - distributed=2.25.0=py38h32f6830_0
+    - dask=2.27.0=py_0
+    - distributed=2.27.0=py38h32f6830_0
     - dask-gateway=0.8.0=py38h32f6830_0
     - lz4=3.1.0=py38h66f7c9e_0
     - numpy=1.19.1=py38hbc27379_2
