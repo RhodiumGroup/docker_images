@@ -300,20 +300,7 @@ def pinversions():
 )
 def pin(file, dry_run):
     '''Pin packages in environment files based on environments on the local machine'''
-    
-    if file == 'all':
-        pin_files(SPEC_FILES, dry_run=dry_run)
-    elif file == 'base':
-        pin_files([SPEC_FILES[0]], dry_run=dry_run)
-    elif file == 'notebook':
-        pin_files([SPEC_FILES[1]], dry_run=dry_run)
-    elif file == 'octave':
-        pin_files([SPEC_FILES[2]], dry_run=dry_run)
-    else:
-        raise ValueError(
-            'env type not recognized: {}'
-            'choose from "base", "notebook", "octave", or "all".'
-            .format(file))
+    return _apply_pin_func(pin_files, file, dry_run)
 
         
 @pinversions.command()
@@ -327,21 +314,22 @@ def pin(file, dry_run):
 )
 def unpin(file, dry_run):
     '''Unpin packages in environment files'''
-    
+    return _apply_pin_func(unpin_files, file, dry_run)
+
+
+def _apply_pin_func(func, file, dry_run):
     if file == 'all':
-        unpin_files(SPEC_FILES, dry_run=dry_run)
+        func(SPEC_FILES, dry_run=dry_run)
     elif file == 'base':
-        unpin_files([SPEC_FILES[0]], dry_run=dry_run)
+        func([SPEC_FILES[0]], dry_run=dry_run)
     elif file == 'notebook':
-        unpin_files([SPEC_FILES[1]], dry_run=dry_run)
+        func([SPEC_FILES[1]], dry_run=dry_run)
     elif file == 'octave':
-        unpin_files([SPEC_FILES[2]], dry_run=dry_run)
-    elif file == 'r':
-        unpin_files([SPEC_FILES[3]], dry_run=dry_run)
+        func([SPEC_FILES[2]], dry_run=dry_run)
     else:
         raise ValueError(
             'env type not recognized: {}'
-            'choose from "base", "notebook", "octave", "r", or "all".'
+            'choose from "base", "notebook", "octave", or "all".'
             .format(file))
 
 
