@@ -6,6 +6,7 @@ dependencies:
   - bump2version
   - coverage
   - dask-labextension
+  - elyra
   - flake8
   - gh
   - ipdb

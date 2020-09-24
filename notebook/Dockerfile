@@ -56,6 +56,11 @@ RUN conda update -n base conda && conda install mamba
 RUN mamba env update -f /opt/conda/specs/scheduler_environment.yml && \
   mamba env update -f /opt/conda/specs/base_environment.yml
 
+# need access to settings/page_config.json for elyra	
+USER root	
+RUN /tempdir/fix-permissions.sh /opt/conda/share/jupyter/lab/settings	
+USER $NB_USER
+
 # update environment with nb-specific packages
 RUN mamba env update -f /opt/conda/specs/notebook_environment.yml
 RUN conda list -n base
