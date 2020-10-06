@@ -72,7 +72,6 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
     /opt/conda/bin/matio_73to5
 
 ## Set up jupyter lab extensions
-RUN jupyter labextension update --all 
 RUN jupyter labextension install \
       @bokeh/jupyter_bokeh \
       @jupyterlab/toc \
