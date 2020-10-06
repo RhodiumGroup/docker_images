@@ -1,5 +1,5 @@
 ## using same base image as the "base image for the base image" of the notebook image
-FROM ubuntu:focal-20200703@sha256:d5a6519d9f048100123c568eb83f7ef5bfcad69b01424f420f17c932b00dea76
+FROM ubuntu:focal-20200916@sha256:028d7303257c7f36c721b40099bf5004a41f666a54c0896d5f229f1c0fd99993
 ARG DEBIAN_FRONTEND=noninteractive
 
 # needed to properly install packages that use numpy libraries

@@ -1,4 +1,4 @@
-FROM jupyter/base-notebook@sha256:19ae50d8d07b88d9a95775b27d60198ae1d1d949d4d4540018abc996663d79c0
+FROM jupyter/base-notebook@sha256:8398825484449951c0820493fe7fbb40e646f3249f6f751a7126cfd1a16e8558
 ARG DEBIAN_FRONTEND=noninteractive
 
 # pull in build args
