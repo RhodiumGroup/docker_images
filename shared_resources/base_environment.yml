@@ -81,6 +81,7 @@ dependencies:
     - noaa-coops==0.1.8
     - parameterize-jobs==0.1.1
     - git+https://github.com/RhodiumGroup/rhg_compute_tools.git@gateway#egg=rhg_compute_tools # needed for dask-gateway until merged into master
+    - rechunker==0.3.1
     - git+https://github.com/maritimeplanning/pytides.git@a8397a0e12645d22c62612385d18e63c4d67d6fa#egg=pytides
     - us==2.0.2 # installing from pip b/c conda only has up to 1.0 (won't work with py37)
 name: base
