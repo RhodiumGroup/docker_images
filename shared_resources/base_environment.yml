@@ -1,87 +1,88 @@
 channels:
   - conda-forge
 dependencies:
-  - beautifulsoup4=4.9.2=py_0
+  - beautifulsoup4=4.9.3=pyhb0f4dca_0
   - blas=2.17=openblas
-  - bottleneck=1.3.2=py38h8790de6_1
-  - boto3=1.15.8=pyh9f0ad1d_0
-  - bqplot=0.12.17=pyh9f0ad1d_0
+  - bottleneck=1.3.2=py38hab2c0dc_2
+  - boto3=1.15.16=pyh9f0ad1d_0
+  - bqplot=0.12.18=pyh9f0ad1d_0
   - cachecontrol=0.12.6=py_0
-  - cartopy=0.18.0=py38h4f3c6b6_2
-  - cftime=1.2.1=py38h8790de6_0
+  - cartopy=0.18.0=py38hb21190c_3
+  - cftime=1.2.1=py38hab2c0dc_1
   - click=7.1.2=pyh9f0ad1d_0
   - compilers=1.1.1=0
   - dask-glm=0.2.0=py_1
-  - dask-ml=1.6.0=py_0
+  - dask-ml=1.7.0=py_0
   - datashader=0.11.1=pyh9f0ad1d_0
   - descartes=1.1.0=py_4
   - dropbox=10.4.1=pyh9f0ad1d_0
   # mpi build needed for xesmf
-  - esmpy=8.0.1=mpi_mpich_py38h08b7006_100 # pinkeep: esmpy=*=mpi_*
+  - esmpy=8.0.1=mpi_mpich_py38h6f0bf2d_102 # pinkeep: esmpy=*=mpi_*
   - fastparquet=0.4.1=py38h8790de6_0
-  - fiona=1.8.17=py38h676c6b2_0
+  - fiona=1.8.17=py38h676c6b2_1
   - fusepy=3.0.1=py_0
   - fuzzywuzzy=0.17.0=py_0
   - gcsfs=0.7.1=py_0
-  - gdal=3.1.2=py38hb61cb63_2
+  - gdal=3.1.3=py38h9edfc58_1
   - geopandas=0.8.1=py_0
-  - geotiff=1.6.0=ha04d9d0_1
+  - geotiff=1.6.0=h5d11630_3
   - geoviews=1.8.2=py_0
   - git=2.28.0=pl526h5e3e691_1
-  - gitpython=3.1.8=py_0
+  - gitpython=3.1.9=py_0
   - google-cloud-container=0.3.0=py38_0
   - google-cloud-storage=1.31.2=pyh9f0ad1d_0
   - holoviews=1.13.4=pyh9f0ad1d_0
   - hvplot=0.6.0=pyh9f0ad1d_0
   - h5netcdf=0.8.1=py_0
   - intake-esm=2020.8.15=py_0
-  - jedi=0.17.2=py38h32f6830_0
+  - jedi=0.17.2=py38h32f6830_1
   - kubernetes=1.18.8=0
   - libmatio=1.5.18=hf54d351_0
-  - lxml=4.5.2=py38hbb43d70_0
-  - make=4.3=h516909a_0
-  - matplotlib=3.3.2=0
+  - lxml=4.5.2=py38hbb43d70_1
+  - make=4.3=hd18ef5c_1
+  - matplotlib=3.3.2=py38h32f6830_1
   - nc-time-axis=1.2.0=py_1
   - netcdf-fortran=4.5.3=mpi_mpich_h3923e1a_0
-  - netcdf4=1.5.4=nompi_py38hec8b9af_102
+  - netcdf4=1.5.4=nompi_py38hec8b9af_103
   - nose=1.3.7=py38h32f6830_1004
   - numba=0.51.2=py38hc5bc63f_0
   - openpyxl=3.0.5=py_0
   - phantomjs=2.1.1=1 # for geoviews
-  - pillow=7.2.0=py38h9776b28_1
+  - pillow=8.0.0=py38h9776b28_0
   - pip=20.2.3=py_0
-  - plotly=4.10.0=pyh9f0ad1d_0
-  - pyarrow=1.0.1=py38h9235441_9_cpu
-  - pygeos=0.8=py38hc7361b7_0
-  - pyinterp=0.4.0=openblas_py38h979a579_101
+  - plotly=4.11.0=pyh9f0ad1d_0
+  - pyarrow=1.0.1=py38h9235441_14_cpu
+  - pygeos=0.8=py38hc7361b7_1
+  - pyinterp=0.4.0=openblas_py38h979a579_102
   - pyshp=2.1.2=pyh9f0ad1d_0
-  - python=3.8.5=h1103e12_5_cpython
+  - python=3.8.6=h852b56e_0_cpython
   - python-snappy=0.5.4=py38hee44bf9_1
-  - pyyaml=5.3.1=py38h1e0a361_0
-  - rasterio=1.1.7=py38h676c6b2_0
+  - pyyaml=5.3.1=py38h8df0ef7_1
+  - rasterio=1.1.7=py38h676c6b2_1
   - regionmask=0.6.1=py_0
   - rtree=0.9.4=py38h08f867b_1
-  - scikit-image=0.17.2=py38hc5bc63f_2
+  - scikit-image=0.17.2=py38hc5bc63f_3
   - scikit-learn=0.23.2=py38hee58b96_0
-  - scipy=1.5.2=py38h8c5af15_0
+  - scipy=1.5.2=py38h8c5af15_1
   - seaborn=0.11.0=0
-  - selenium=3.141.0=py38h1e0a361_1001 # for geoviews
-  - shapely=1.7.1=py38hc7361b7_0
+  - selenium=3.141.0=py38h1e0a361_1002 # for geoviews
+  - shapely=1.7.1=py38hc7361b7_1
   - sparse=0.11.2=py_0
-  - statsmodels=0.12.0=py38h1e0a361_0
+  - spatialpandas=0.3.6=py_0
+  - statsmodels=0.12.0=py38hab2c0dc_1
   - xarray=0.16.1=py_0
   - xarray-extras=0.4.2=py38h516909a_1000
   - xesmf=0.3.0=py_0
   - xhistogram=0.1.1=py_0
   - xlrd=1.2.0=pyh9f0ad1d_1
   - zarr=2.4.0=py_0
-  - zeromq=4.3.2=he1b5a44_3
+  - zeromq=4.3.3=he1b5a44_2
   - pip:
     - climate-toolbox==0.1.5
-    - noaa-coops==0.1.8
+    - noaa-coops==0.1.9
     - parameterize-jobs==0.1.1
     - git+https://github.com/RhodiumGroup/rhg_compute_tools.git@gateway#egg=rhg_compute_tools # needed for dask-gateway until merged into master
     - rechunker==0.3.1
-    - git+https://github.com/maritimeplanning/pytides.git@a8397a0e12645d22c62612385d18e63c4d67d6fa#egg=pytides
+    - git+https://github.com/ecomodeller/pytides.git@78aa785d70cea5bf8c47e23d5d3e82ed4e028af6#egg=pytides
     - us==2.0.2 # installing from pip b/c conda only has up to 1.0 (won't work with py37)
 name: base
