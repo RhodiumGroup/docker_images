@@ -92,4 +92,5 @@ dependencies:
     - rhg_compute_tools==0.2.2
     - git+https://github.com/ecomodeller/pytides.git@78aa785d70cea5bf8c47e23d5d3e82ed4e028af6#egg=pytides
     - us==2.0.2 # installing from pip b/c conda only has up to 1.0 (won't work with py37)
+    - wbdata==0.3.0
 name: base
