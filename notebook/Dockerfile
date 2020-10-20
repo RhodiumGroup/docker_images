@@ -54,6 +54,11 @@ RUN conda update -n base conda && conda install mamba
 #  update environemnt with common packages across worker and nb
 RUN mamba env update -f /opt/conda/specs/base_environment.yml
 
+# install climada (needs no-deps flag)
+RUN source /opt/conda/etc/profile.d/conda.sh \
+  && conda activate \
+  && pip install --no-dependencies git+https://github.com/CLIMADA-project/climada_python.git@v1.5.1#egg=climada
+
 # need access to settings/page_config.json for elyra	
 USER root	
 RUN /tempdir/fix-permissions.sh /opt/conda/share/jupyter/lab/settings	
