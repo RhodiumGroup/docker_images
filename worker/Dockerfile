@@ -6,6 +6,12 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN bash /tempdir/common.sh
 
 RUN mamba env update -f /opt/conda/specs/base_environment.yml
+
+# install climada (needs no-deps flag)
+RUN source /opt/conda/etc/profile.d/conda.sh \
+  && conda activate \
+  && pip install --no-dependencies git+https://github.com/CLIMADA-project/climada_python.git@v1.5.1#egg=climada
+  
 RUN mamba list -n base
 
 ##################
