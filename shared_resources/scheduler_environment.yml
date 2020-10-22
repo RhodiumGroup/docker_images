@@ -10,6 +10,6 @@ dependencies:
     - lz4=3.1.0=py38h66f7c9e_1
     - jupyter-server-proxy=1.5.0=py_0
     - numpy=1.19.2=py38hbc27379_1
-    - pandas=1.1.3=py38hc5bc63f_2
+    - pandas=1.1.3=py38hddd6c8b_2
     - tini=0.18.0=h14c3975_1001
 name: base
