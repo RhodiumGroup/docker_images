@@ -11,7 +11,7 @@ dependencies:
   - cfgrib=0.9.8.4=py_0 # for climada
   - cftime=1.2.1=py38hab2c0dc_1
   - click=7.1.2=pyh9f0ad1d_0
-  - compilers=1.1.1=0
+  - compilers=1.1.1=1
   - contextily=1.0.1=py_0 # for climada
   - dask-glm=0.2.0=py_1
   - dask-ml=1.7.0=py_0
@@ -58,20 +58,20 @@ dependencies:
   - pillow=8.0.1=py38h9776b28_0
   - pip=20.2.4=py_0
   - plotly=4.12.0=pyh9f0ad1d_0
-  - pyarrow=2.0.0=py38hb8cc15d_2_cpu
+  - pyarrow=2.0.0=py38hb8cc15d_3_cpu
   - pygeos=0.8=py38hc7361b7_1
-  - pyinterp=0.4.0=openblas_py38h979a579_102
+  - pyinterp=0.4.0=mkl_py38hdf09ab8_2
   - pyshp=2.1.2=pyh9f0ad1d_0
   - pytables=3.6.1=py38hf9f05d5_3 # for climada
   - python=3.8.6=h852b56e_0_cpython
-  - python-snappy=0.5.4=py38hee44bf9_1
+  - python-snappy=0.5.4=py38hd7b2518_3
   - pyyaml=5.3.1=py38h8df0ef7_1
   - rasterio=1.1.7=py38h676c6b2_1
-  - regionmask=0.6.1=py_0
+  - regionmask=0.6.1=py_1
   - rtree=0.9.4=py38h08f867b_1
   - scikit-image=0.17.2=py38hc5bc63f_3
   - scikit-learn=0.23.2=py38h519568a_1
-  - scipy=1.5.2=py38h8c5af15_2
+  - scipy=1.5.2=py38hd648e70_2
   - seaborn=0.11.0=0
   - selenium=3.141.0=py38h1e0a361_1002 # for geoviews
   - shapely=1.7.1=py38hc7361b7_1
