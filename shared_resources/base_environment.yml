@@ -11,7 +11,7 @@ dependencies:
   - cfgrib=0.9.8.4=py_0 # for climada
   - cftime=1.2.1=py38hab2c0dc_1
   - click=7.1.2=pyh9f0ad1d_0
-  - compilers=1.1.1=1
+  - compilers=1.1.1=0
   - contextily=1.0.1=py_0 # for climada
   - dask-glm=0.2.0=py_1
   - dask-ml=1.7.0=py_0
@@ -32,7 +32,7 @@ dependencies:
   - git=2.29.1=pl5262he3b78ea_0
   - gitpython=3.1.11=py_0
   - google-cloud-container=0.3.0=py38_0
-  - google-cloud-storage=1.31.2=pyh9f0ad1d_0
+  - google-cloud-storage=1.32.0=pyh9f0ad1d_0
   - haversine=2.3.0=py_0 # for climada
   - holoviews=1.13.4=pyh9f0ad1d_0
   - hvplot=0.6.0=pyh9f0ad1d_0
@@ -71,7 +71,7 @@ dependencies:
   - rtree=0.9.4=py38h08f867b_1
   - scikit-image=0.17.2=py38hc5bc63f_3
   - scikit-learn=0.23.2=py38h519568a_1
-  - scipy=1.5.2=py38hd648e70_2
+  - scipy=1.5.2=py38h8c5af15_2
   - seaborn=0.11.0=0
   - selenium=3.141.0=py38h1e0a361_1002 # for geoviews
   - shapely=1.7.1=py38hc7361b7_1
