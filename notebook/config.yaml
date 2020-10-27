@@ -1,5 +1,5 @@
 # this config file is adapted from the one used by Pangeo:
-# https://github.com/pangeo-data/pangeo-stacks/blob/master/base-notebook/binder/dask_config.yaml
+# https://github.com/pangeo-data/pangeo-docker-images/blob/master/base-image/dask_config.yml
 
 distributed:
   dashboard:
@@ -9,6 +9,9 @@ distributed:
     tick:
       limit: 5s
 
+  scheduler:
+    idle-timeout: 21600s # matches the 6 hour idle timeout from the helm chart (not sure if these are controlling the same thing)
+
 logging:
   distributed: warning
   bokeh: critical
@@ -17,10 +20,14 @@ logging:
   tornado.application: error
 
 # the below section gives defaults for launching clusters from the dask
-# labextension viewer. We could customize this further
-labextension:
-  factory:
-    module: dask-gateway
-    class: GatewayCluster
-    args: []
-    kwargs: {}
+# labextension viewer. For now, we are leaving it as the default, which starts a 
+# LocalCluster object. This is b/c there are too many possible configs for a potential
+# dask gateway cluster that you might want. It's better to do this programmatically
+# then using the labextension UI
+
+# labextension:
+#   factory:
+#     module: dask_gateway
+#     class: GatewayCluster
+#     args: []
+#     kwargs: {}
