@@ -56,6 +56,7 @@ dependencies:
   - pathos=0.2.6=pyh9f0ad1d_1 # for climada
   - phantomjs=2.1.1=1 # for geoviews
   - pillow=8.0.1=py38h9776b28_0
+  - pint=0.16.1=py_0 # for climada
   - pip=20.2.4=py_0
   - plotly=4.12.0=pyh9f0ad1d_0
   - pyarrow=2.0.0=py38hb8cc15d_3_cpu
