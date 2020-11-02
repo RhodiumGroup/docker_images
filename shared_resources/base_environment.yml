@@ -4,10 +4,10 @@ dependencies:
   - beautifulsoup4=4.9.3=pyhb0f4dca_0
   - blas=2.20=mkl
   - bottleneck=1.3.2=py38hab2c0dc_2 # for xarray
-  - boto3=1.16.4=pyh9f0ad1d_0
+  - boto3=1.16.9=pyhd8ed1ab_0
   - bqplot=0.12.18=pyh9f0ad1d_0
   - cachecontrol=0.12.6=py_0
-  - cartopy=0.18.0=py38h88488af_4
+  - cartopy=0.18.0=py38hc1e57b6_5
   - cfgrib=0.9.8.4=py_0 # for climada
   - cftime=1.2.1=py38hab2c0dc_1
   - click=7.1.2=pyh9f0ad1d_0
@@ -29,7 +29,7 @@ dependencies:
   - geopandas=0.8.1=py_0
   - geotiff=1.6.0=h5d11630_3
   - geoviews=1.8.2=py_0
-  - git=2.29.1=pl5262he3b78ea_0
+  - git=2.29.2=pl5262h78be0e9_0
   - gitpython=3.1.11=py_0
   - google-cloud-container=0.3.0=py38_0
   - google-cloud-storage=1.32.0=pyh9f0ad1d_0
@@ -56,10 +56,9 @@ dependencies:
   - pathos=0.2.6=pyh9f0ad1d_1 # for climada
   - phantomjs=2.1.1=1 # for geoviews
   - pillow=8.0.1=py38h9776b28_0
-  - pint=0.16.1=py_0 # for climada
   - pip=20.2.4=py_0
   - plotly=4.12.0=pyh9f0ad1d_0
-  - pyarrow=2.0.0=py38hb8cc15d_3_cpu
+  - pyarrow=2.0.0=py38h5703e5b_5_cpu
   - pygeos=0.8=py38hc7361b7_1
   - pyinterp=0.4.0=mkl_py38hdf09ab8_2
   - pyshp=2.1.2=pyh9f0ad1d_0
@@ -67,18 +66,18 @@ dependencies:
   - python=3.8.6=h852b56e_0_cpython
   - python-snappy=0.5.4=py38hd7b2518_3
   - pyyaml=5.3.1=py38h8df0ef7_1
-  - rasterio=1.1.7=py38h676c6b2_1
+  - rasterio=1.1.8=py38h37fbd03_0
   - regionmask=0.6.1=py_1
   - rtree=0.9.4=py38h08f867b_1
-  - scikit-image=0.17.2=py38hc5bc63f_3
-  - scikit-learn=0.23.2=py38h519568a_1
-  - scipy=1.5.2=py38h8c5af15_2
-  - seaborn=0.11.0=0
+  - scikit-image=0.17.2=py38h0ef3d22_4
+  - scikit-learn=0.23.2=py38h5d63f67_2
+  - scipy=1.5.3=py38h828c644_0
+  - seaborn=0.11.0=ha770c72_1
   - selenium=3.141.0=py38h1e0a361_1002 # for geoviews
   - shapely=1.7.1=py38hc7361b7_1
   - sparse=0.11.2=py_0
   - spatialpandas=0.3.6=py_0
-  - statsmodels=0.12.0=py38hab2c0dc_1
+  - statsmodels=0.12.1=py38h0b5ebd8_1
   - xarray=0.16.1=py_0
   - xarray-extras=0.4.2=py38h516909a_1000
   - xesmf=0.3.0=py_0
@@ -86,16 +85,17 @@ dependencies:
   - xlrd=1.2.0=pyh9f0ad1d_1
   - xlsxwriter=1.3.7=pyh9f0ad1d_0 # for climada
   - xmlrunner=1.7.7=py_0 # for climada
-  - zarr=2.4.0=py_0
+  - zarr=2.5.0=py_0
   - zeromq=4.3.3=he1b5a44_2
   - pip:
     - pybufrkit==0.2.17 # for climada
     - climate-toolbox==0.1.5
     - noaa-coops==0.1.9
     - parameterize-jobs==0.1.1
-    - git+https://github.com/RhodiumGroup/rhg_compute_tools.git@gateway#egg=rhg_compute_tools # needed for dask-gateway until merged into master
-    - rechunker==0.3.1
+    - pint-xarray==0.1 # should appear in conda-forge soon
     - git+https://github.com/ecomodeller/pytides.git@78aa785d70cea5bf8c47e23d5d3e82ed4e028af6#egg=pytides
+    - rechunker==0.3.1
+    - git+https://github.com/RhodiumGroup/rhg_compute_tools.git@gateway#egg=rhg_compute_tools # needed for dask-gateway until merged into master
     - us==2.0.2 # installing from pip b/c conda only has up to 1.0 (won't work with py37)
     - wbdata==0.3.0
 name: base
