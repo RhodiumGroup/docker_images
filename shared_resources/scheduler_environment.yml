@@ -1,15 +1,15 @@
 # Only the packages necessary to build a dask-gateway scheduler. As seen here:
 # https://github.com/dask/dask-gateway/blob/master/dask-gateway/Dockerfile
 channels:
-    - conda-forge
+  - conda-forge
 dependencies:
-    - aiohttp=3.7.2=py38h1e0a361_0
-    - dask=2.30.0=py_0
-    - distributed=2.30.0=py38h32f6830_1
-    - dask-gateway=0.8.0=py38h32f6830_0
-    - lz4=3.1.0=py38h66f7c9e_1
-    - jupyter-server-proxy=1.5.0=py_0
-    - numpy=1.19.2=py38hf89b668_1
-    - pandas=1.1.4=py38h0ef3d22_0
-    - tini=0.18.0=h14c3975_1001
+  - aiohttp=3.7.2=py38h1e0a361_0
+  - dask=2.30.0=py_0
+  - distributed=2.30.1=py38h578d9bd_0
+  - dask-gateway=0.9.0=py38h578d9bd_0
+  - lz4=3.1.0=py38h66f7c9e_1
+  - jupyter-server-proxy=1.5.0=py_0
+  - numpy=1.19.4=py38hf0fd68c_0
+  - pandas=1.1.4=py38h0ef3d22_0
+  - tini=0.18.0=h14c3975_1001
 name: base
