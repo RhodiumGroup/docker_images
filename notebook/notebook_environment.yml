@@ -36,4 +36,4 @@ dependencies:
   - sphinx_rtd_theme
   - tox
   - pip:
-    - blackbook
+    - black_nbconvert
