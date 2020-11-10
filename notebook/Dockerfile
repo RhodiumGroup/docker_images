@@ -1,4 +1,4 @@
-FROM jupyter/base-notebook@sha256:234dde12af6716e8c5701f6e12d6e2a6652df612b2af6387d495fc58e8e594f6
+FROM jupyter/base-notebook@sha256:387af3915c6b49c99f4823fcdb1ae2d0e7618cdd37e17b4af8c47c62f4c0880b
 ARG DEBIAN_FRONTEND=noninteractive
 
 ## needed to make sure things with cython compile correctly
