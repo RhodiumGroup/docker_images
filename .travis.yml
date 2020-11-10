@@ -6,7 +6,7 @@ env:
     - IMAGE_NAME=notebook
     - IMAGE_NAME=worker
   global:
-    - CLAWPACK_COMMIT=3c820bff52850b4a40e78e8813179182f4145553
+    - CLAWPACK_COMMIT=ed99e8b925260e45149d49c16d8df34bdeb9ac4c
 
 install:
 - "cp -r shared_resources $IMAGE_NAME/shared_resources && chmod -R +x \
