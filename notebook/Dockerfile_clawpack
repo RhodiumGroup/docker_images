@@ -1,0 +1,40 @@
+ARG CLAWPACK_COMMIT
+ARG TRAVIS_COMMIT
+
+FROM rhodium/notebook-tmp:${TRAVIS_COMMIT} 
+
+## needed to make sure things with cython compile correctly
+## (this will eventually become default in numpy)
+ENV NPY_DISTUTILS_APPEND_FLAGS=1
+
+ENV CLAW=/clawpack
+ENV NETCDF4_DIR=/opt/conda
+# clawpack needs FC explicitly set to "gfortran" for some logic that applies lapack flags
+# (if we don't set, will be set to a complex filename determined by conda. But gfortran
+# is just a link to that same compiler anyways)
+ENV FC=gfortran
+ENV LIB_PATHS=/opt/conda/lib
+ENV CLAW_FFLAGS="-DNETCDF -L/opt/conda/lib -lnetcdf -lnetcdff -I/opt/conda/include \
+  -O3 -march=broadwell -ftree-vectorize -fPIC -fno-plt -ffunction-sections \
+  -fstack-protector-strong"
+
+# install clawpack (use root to access /clawpack and then fix permissions)
+USER root
+RUN source /opt/conda/etc/profile.d/conda.sh \
+  && conda activate \
+  && pip install --src=$(dirname $CLAW) -e \
+    git+https://github.com/climateimpactlab/clawpack.git@${CLAWPACK_COMMIT}#egg=clawpack
+RUN /tempdir/fix-permissions.sh /clawpack
+RUN /tempdir/fix-permissions.sh /opt/conda
+USER $NB_USER
+
+RUN source /opt/conda/etc/profile.d/conda.sh \
+  && conda activate \
+  && export EXE=$CLAW/geoclaw/xgeoclaw \
+  && export FFLAGS=$CLAW_FFLAGS \
+  && make -f /tempdir/Makefile.clawpack new \
+  && export EXE=$CLAW/geoclaw/xgeoclaw_omp \
+  && export FFLAGS="$FFLAGS -fopenmp" \
+  && make -f /tempdir/Makefile.clawpack new
+
+##################
