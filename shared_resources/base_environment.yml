@@ -87,6 +87,7 @@ dependencies:
   - tini=0.18.0=h14c3975_1001
   - xarray=0.16.1=py_0
   - xarray-extras=0.4.2=py38h516909a_1000
+  - xarray_leaflet=0.1.13=pyhd8ed1ab_0
   - xesmf=0.3.0=py_0
   - xhistogram=0.1.1=py_0
   - xlrd=1.2.0=pyh9f0ad1d_1
