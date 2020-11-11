@@ -130,7 +130,9 @@ jobs:
         - cd notebook
       script:
         - "travis_wait 90 docker build -t rhodium/notebook:$TRAVIS_COMMIT \
-          -f Dockerfile_clawpack --build-arg TRAVIS_COMMIT ."
+          -f Dockerfile_clawpack \
+          --build-arg TRAVIS_COMMIT \
+          --build-arg CLAWPACK_COMMIT ."
         - docker run -t rhodium/notebook:$TRAVIS_COMMIT bash /clawpack/run_tests.sh
       deploy:
         - provider: script
