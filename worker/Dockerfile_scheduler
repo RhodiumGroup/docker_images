@@ -11,7 +11,6 @@ ENV MPLBACKEND=Agg
 ## filepath curation
 COPY shared_resources /tempdir
 COPY add_service_creds.py /usr/bin
-COPY prepare.sh /usr/bin
 
 # install apt-get packages
 RUN apt-get update -y --no-install-recommends
@@ -26,9 +25,7 @@ RUN apt-get install -yq --no-install-recommends \
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     locale-gen
     
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV CONDA_DIR=/opt/conda \
-    SHELL=/bin/bash \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8
@@ -63,6 +60,5 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/*\
 
 WORKDIR /
 
-RUN chmod +x /usr/bin/prepare.sh
-
-ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
+# set entrypoint to same as default dask-gateway scheduler
+ENTRYPOINT ["tini", "-g", "--"]
