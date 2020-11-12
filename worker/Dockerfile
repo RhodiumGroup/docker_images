@@ -30,7 +30,7 @@ ENV NETCDF4_DIR=/opt/conda
 ENV FC=gfortran
 ENV LIB_PATHS=/opt/conda/lib
 ENV CLAW_FFLAGS="-DNETCDF -L/opt/conda/lib -lnetcdf -lnetcdff -I/opt/conda/include \
-  -O3 -march=broadwell -ftree-vectorize -fPIC -fno-plt -ffunction-sections \
+  -O3 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fno-plt -ffunction-sections \
   -fstack-protector-strong"
 
 # install clawpack
