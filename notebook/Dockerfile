@@ -1,10 +1,6 @@
 FROM jupyter/base-notebook@sha256:387af3915c6b49c99f4823fcdb1ae2d0e7618cdd37e17b4af8c47c62f4c0880b
 ARG DEBIAN_FRONTEND=noninteractive
 
-## needed to make sure things with cython compile correctly
-## (this will eventually become default in numpy)
-ENV NPY_DISTUTILS_APPEND_FLAGS=1
-
 ## get rid of conda pin file that causes update problems
 RUN rm /opt/conda/conda-meta/pinned
 
@@ -95,43 +91,6 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
   && nbdime config-git --enable --system
 # makes sure that the web-tools allow accessible IP
 COPY nbdime_config.json /opt/conda/etc/jupyter
-
-##################
-## clawpack added for coastal-specific image
-##################
-
-ARG CLAWPACK_COMMIT
-ENV CLAW=/clawpack
-ENV NETCDF4_DIR=/opt/conda
-# clawpack needs FC explicitly set to "gfortran" for some logic that applies lapack flags
-# (if we don't set, will be set to a complex filename determined by conda. But gfortran
-# is just a link to that same compiler anyways)
-ENV FC=gfortran
-ENV LIB_PATHS=/opt/conda/lib
-ENV CLAW_FFLAGS="-DNETCDF -L/opt/conda/lib -lnetcdf -lnetcdff -I/opt/conda/include \
-  -O3 -march=broadwell -ftree-vectorize -fPIC -fno-plt -ffunction-sections \
-  -fstack-protector-strong"
-
-# install clawpack (use root to access /clawpack and then fix permissions)
-USER root
-RUN source /opt/conda/etc/profile.d/conda.sh \
-  && conda activate \
-  && pip install --src=$(dirname $CLAW) -e \
-    git+https://github.com/climateimpactlab/clawpack.git@${CLAWPACK_COMMIT}#egg=clawpack
-RUN /tempdir/fix-permissions.sh /clawpack
-RUN /tempdir/fix-permissions.sh /opt/conda
-USER $NB_USER
-
-RUN source /opt/conda/etc/profile.d/conda.sh \
-  && conda activate \
-  && export EXE=$CLAW/geoclaw/xgeoclaw \
-  && export FFLAGS=$CLAW_FFLAGS \
-  && make -f /tempdir/Makefile.clawpack new \
-  && export EXE=$CLAW/geoclaw/xgeoclaw_omp \
-  && export FFLAGS="$FFLAGS -fopenmp" \
-  && make -f /tempdir/Makefile.clawpack new
-
-##################
 
 ## clean up
 RUN sudo rm -rf /var/lib/apt/lists/* /tempdir
