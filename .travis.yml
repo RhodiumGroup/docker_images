@@ -1,14 +1,13 @@
 services:
   - docker
 
-# NOTE: AS OF NOW YOU MUST CHANGE CLAWPACK_COMMIT IN 2 PLACES. Haven't figure out how
-# to set a single environment variable across jobs. env.global did not work.
+env:
+  global:
+    - CLAWPACK_COMMIT=ed99e8b925260e45149d49c16d8df34bdeb9ac4c
 
 jobs:
   include:
     - stage: deploy worker and intermediate notebook
-      env:
-        - CLAWPACK_COMMIT=ed99e8b925260e45149d49c16d8df34bdeb9ac4c
       name: worker builds
       install:
         - "cp -r shared_resources worker/shared_resources && chmod -R +x \
@@ -18,7 +17,7 @@ jobs:
         - cd worker
       script:
         - "travis_wait 90 docker build -t rhodium/worker:$TRAVIS_COMMIT \
-            --build-arg CLAWPACK_COMMIT ."
+            --build-arg CLAWPACK_COMMIT=$CLAWPACK_COMMIT ."
         - "docker build -t rhodium/octave-worker:$TRAVIS_COMMIT \
             --build-arg TRAVIS_COMMIT=$TRAVIS_COMMIT \
             ../octave-worker"
@@ -110,8 +109,6 @@ jobs:
           on:
             all_branches: true
     - stage: test and deploy full notebook
-      env:
-        - CLAWPACK_COMMIT=ed99e8b925260e45149d49c16d8df34bdeb9ac4c
       install:
         - "cp -r shared_resources notebook/shared_resources && chmod -R +x \
             notebook/shared_resources"
@@ -119,8 +116,8 @@ jobs:
       script:
         - "travis_wait 90 docker build -t rhodium/notebook:$TRAVIS_COMMIT \
           -f Dockerfile_clawpack \
-          --build-arg TRAVIS_COMMIT \
-          --build-arg CLAWPACK_COMMIT ."
+          --build-arg TRAVIS_COMMIT=$TRAVIS_COMMIT \
+          --build-arg CLAWPACK_COMMIT=$CLAWPACK_COMMIT ."
         - docker run -t rhodium/notebook:$TRAVIS_COMMIT bash /clawpack/run_tests.sh
       deploy:
         - provider: script
