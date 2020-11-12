@@ -30,6 +30,7 @@ dependencies:
   - pip
   - pytest
   - pytest-cov
+  - pytest-tornasync
   - python-graphviz
   - rsync
   - sidecar
