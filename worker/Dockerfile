@@ -36,7 +36,7 @@ ENV CLAW_FFLAGS="-DNETCDF -L/opt/conda/lib -lnetcdf -lnetcdff -I/opt/conda/inclu
 # install clawpack
 RUN source /opt/conda/etc/profile.d/conda.sh \
     && conda activate \
-    && pip install --src=$(dirname $CLAW) -e \
+    && FFLAGS=$CLAW_FFLAGS pip install --src=$(dirname $CLAW) -e \
         git+https://github.com/climateimpactlab/clawpack.git@${CLAWPACK_COMMIT}#egg=clawpack
 
 RUN source /opt/conda/etc/profile.d/conda.sh \
