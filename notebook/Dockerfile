@@ -93,7 +93,7 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
 COPY nbdime_config.json /opt/conda/etc/jupyter
 
 ## clean up
-RUN sudo rm -rf /var/lib/apt/lists/* /tempdir
+RUN sudo rm -rf /var/lib/apt/lists/*
 RUN mamba clean -yaf
 
 ## prepare container
