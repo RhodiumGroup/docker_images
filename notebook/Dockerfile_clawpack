@@ -1,7 +1,8 @@
-ARG CLAWPACK_COMMIT
 ARG TRAVIS_COMMIT
 
-FROM rhodium/notebook-tmp:${TRAVIS_COMMIT} 
+FROM rhodium/notebook-tmp:${TRAVIS_COMMIT}
+
+ARG CLAWPACK_COMMIT
 
 ## needed to make sure things with cython compile correctly
 ## (this will eventually become default in numpy)
