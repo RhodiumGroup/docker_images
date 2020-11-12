@@ -1,13 +1,14 @@
 services:
   - docker
 
-env:
-  global:
-    - CLAWPACK_COMMIT=ed99e8b925260e45149d49c16d8df34bdeb9ac4c
+# NOTE: AS OF NOW YOU MUST CHANGE CLAWPACK_COMMIT IN 2 PLACES. Haven't figure out how
+# to set a single environment variable across jobs. env.global did not work.
 
 jobs:
   include:
     - stage: deploy worker and intermediate notebook
+      env:
+        - CLAWPACK_COMMIT=ed99e8b925260e45149d49c16d8df34bdeb9ac4c
       name: worker builds
       install:
         - "cp -r shared_resources worker/shared_resources && chmod -R +x \
@@ -124,6 +125,8 @@ jobs:
           on:
             all_branches: true
     - stage: test and deploy full notebook
+      env:
+        - CLAWPACK_COMMIT=ed99e8b925260e45149d49c16d8df34bdeb9ac4c
       install:
         - "cp -r shared_resources notebook/shared_resources && chmod -R +x \
             notebook/shared_resources"
