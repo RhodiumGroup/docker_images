@@ -2,6 +2,8 @@
 FROM rhodium/scheduler:local
 ARG DEBIAN_FRONTEND=noninteractive
 
+COPY prepare.sh /usr/bin
+
 # need to change shell in order for source command to work
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -59,3 +61,5 @@ RUN rm -rf /var/lib/apt/lists/* /tempdir \
 ENV OMP_NUM_THREADS=1
 ENV MKL_NUM_THREADS=1
 ENV OPENBLAS_NUM_THREADS=1
+
+ENTRYPOINT ["tini", "--", "/usr/bin/prepare.sh"]
