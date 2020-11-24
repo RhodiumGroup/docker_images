@@ -38,3 +38,4 @@ dependencies:
   - tox
   - pip:
     - black_nbconvert
+    - pylustrator
