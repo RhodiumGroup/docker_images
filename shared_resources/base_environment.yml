@@ -56,6 +56,7 @@ dependencies:
   - pathos=0.2.7=pyhd3deb0d_0 # for climada
   - phantomjs=2.1.1=1 # for geoviews
   - pillow=8.0.1=py38h9776b28_0
+  - pint-xarray=0.1=pyhd8ed1ab_0
   - pip=20.2.4=py_0
   - plotly=4.12.0=pyh9f0ad1d_0
   - pyarrow=2.0.0=py38h5703e5b_6_cpu
@@ -67,6 +68,7 @@ dependencies:
   - python-snappy=0.5.4=py38hd7b2518_3
   - pyyaml=5.3.1=py38h8df0ef7_1
   - rasterio=1.1.8=py38h37fbd03_0
+  - rechunker=0.3.1=pyhd8ed1ab_1
   - regionmask=0.6.1=py_1
   - rtree=0.9.4=py38h08f867b_1
   - scikit-image=0.17.2=py38h0ef3d22_4
@@ -93,7 +95,6 @@ dependencies:
     - climate-toolbox==0.1.5
     - noaa-coops==0.1.9
     - parameterize-jobs==0.1.1
-    - pint-xarray==0.1 # should appear in conda-forge soon
     - git+https://github.com/ecomodeller/pytides.git@78aa785d70cea5bf8c47e23d5d3e82ed4e028af6#egg=pytides
     - rechunker==0.3.1
     - git+https://github.com/RhodiumGroup/rhg_compute_tools.git@gateway#egg=rhg_compute_tools # needed for dask-gateway until merged into master
