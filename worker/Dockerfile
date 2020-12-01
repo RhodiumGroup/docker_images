@@ -1,6 +1,10 @@
 ## using same base image as the "base image for the base image" of the notebook image
 FROM ubuntu:focal-20201008@sha256:1d7b639619bdca2d008eca2d5293e3c43ff84cbee597ff76de3b7a7de3e84956
 ARG DEBIAN_FRONTEND=noninteractive
+ARG PYTHON_VERSION=default
+
+# Fix DL4006
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # needed to properly install packages that use numpy libraries
 ENV NPY_DISTUTILS_APPEND_FLAGS=1
@@ -16,33 +20,51 @@ COPY prepare.sh /usr/bin
 ## perform a bunch of common actions
 RUN bash /tempdir/common.sh
 
-###########
-## install miniconda (following jupyter/base-notebook
+
+# ---- Miniforge installer ----
+# install miniconda (following jupyter/base-notebook)
+# Default values can be overridden at build time
+# (ARGS are in lower case to distinguish them from ENV)
+# Check https://github.com/conda-forge/miniforge/releases
+# Conda version
+ARG conda_version="4.9.0"
+# Miniforge installer patch version
+ARG miniforge_patch_number="4"
+# Miniforge installer architecture
+ARG miniforge_arch="x86_64"
+# Python implementation to use 
+# can be either Miniforge3 to use Python or Miniforge-pypy3 to use PyPy
+ARG miniforge_python="Miniforge3"
+
+# Miniforge archive to install
+ARG miniforge_version="${conda_version}-${miniforge_patch_number}"
+# Miniforge installer
+ARG miniforge_installer="${miniforge_python}-${miniforge_version}-Linux-${miniforge_arch}.sh"
+# Miniforge checksum
+ARG miniforge_checksum="dae28a05f0fcfed0b47c66468e8434ab42cb1ff90de96540a506949cdecd2b5a"
+
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     locale-gen
-    
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 ENV CONDA_DIR=/opt/conda \
     SHELL=/bin/bash \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8
-ENV PATH=$CONDA_DIR/bin:$PATH
-
-ENV MINICONDA_VERSION=4.8.3 \
-    MINICONDA_MD5=d63adf39f2c220950a063e0529d4ff74 \
-    CONDA_VERSION=4.8.3
+ENV PATH=$CONDA_DIR/bin:$PATH \
+    CONDA_VERSION="${conda_version}"
 
 WORKDIR /tmp
-RUN wget --quiet https://repo.continuum.io/miniconda/Miniconda3-py38_${MINICONDA_VERSION}-Linux-x86_64.sh && \
-    echo "${MINICONDA_MD5} *Miniconda3-py38_${MINICONDA_VERSION}-Linux-x86_64.sh" | md5sum -c - && \
-    /bin/bash Miniconda3-py38_${MINICONDA_VERSION}-Linux-x86_64.sh -f -b -p $CONDA_DIR && \
-    rm Miniconda3-py38_${MINICONDA_VERSION}-Linux-x86_64.sh && \
-    conda config --system --prepend channels conda-forge && \
+RUN wget --quiet "https://github.com/conda-forge/miniforge/releases/download/${miniforge_version}/${miniforge_installer}" && \
+    echo "${miniforge_checksum} *${miniforge_installer}" | sha256sum --check && \
+    /bin/bash "${miniforge_installer}" -f -b -p $CONDA_DIR && \
+    rm "${miniforge_installer}" && \
+    # Conda configuration see https://conda.io/projects/conda/en/latest/configuration.html
+    if [ ! $PYTHON_VERSION = 'default' ]; then conda install --yes python=$PYTHON_VERSION; fi && \
     conda config --system --set channel_priority strict && \
-    conda update -n base --yes conda && \
-    conda install mamba && \
-    mamba update --all --yes
+    conda install mamba --yes && \
+    mamba update conda --yes && \
+    mamba update --all --quiet --yes
 ###########
 
 ## set up python env
