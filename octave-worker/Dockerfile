@@ -12,7 +12,7 @@ RUN apt-get update \
     && apt-get install -yq --no-install-recommends octave octave-optim
 
 # add octave-specific packages
-RUN conda env update -f /opt/conda/specs/octave_environment.yml
+RUN mamba env update -f /opt/conda/specs/octave_environment.yml
 
 # Compile MatI/O
 RUN source /opt/conda/etc/profile.d/conda.sh \
@@ -21,5 +21,5 @@ RUN source /opt/conda/etc/profile.d/conda.sh \
     /opt/conda/bin/matio_73to5
 
 RUN rm -rf /tempdir \
-    && conda clean -yaf \
+    && mamba clean -yaf \
     && sudo apt-get clean
