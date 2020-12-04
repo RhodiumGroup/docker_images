@@ -1,4 +1,4 @@
-FROM jupyter/base-notebook@sha256:1ec56749f62fcaf50e5e8110383cbaa1affefd38b8ef60a868bffba39043e8fa
+FROM jupyter/base-notebook@sha256:f92af96fa090b22cfe6032a2b1004acb8417649ae7faf02fa5ea91525117781b
 ARG DEBIAN_FRONTEND=noninteractive
 
 ## get rid of conda pin file that causes update problems

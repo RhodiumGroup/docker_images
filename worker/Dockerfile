@@ -1,5 +1,5 @@
 ## using same base image as the "base image for the base image" of the notebook image
-FROM ubuntu:focal-20201008@sha256:1d7b639619bdca2d008eca2d5293e3c43ff84cbee597ff76de3b7a7de3e84956
+FROM ubuntu:focal-20201106@sha256:4e4bc990609ed865e07afc8427c30ffdddca5153fd4e82c20d8f0783a291e241
 ARG DEBIAN_FRONTEND=noninteractive
 ARG PYTHON_VERSION=default
 
@@ -27,9 +27,9 @@ RUN bash /tempdir/common.sh
 # (ARGS are in lower case to distinguish them from ENV)
 # Check https://github.com/conda-forge/miniforge/releases
 # Conda version
-ARG conda_version="4.9.0"
+ARG conda_version="4.9.2"
 # Miniforge installer patch version
-ARG miniforge_patch_number="4"
+ARG miniforge_patch_number="0"
 # Miniforge installer architecture
 ARG miniforge_arch="x86_64"
 # Python implementation to use 
