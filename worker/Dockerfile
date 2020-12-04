@@ -41,7 +41,7 @@ ARG miniforge_version="${conda_version}-${miniforge_patch_number}"
 # Miniforge installer
 ARG miniforge_installer="${miniforge_python}-${miniforge_version}-Linux-${miniforge_arch}.sh"
 # Miniforge checksum
-ARG miniforge_checksum="dae28a05f0fcfed0b47c66468e8434ab42cb1ff90de96540a506949cdecd2b5a"
+ARG miniforge_checksum="6321775eb2c02d7f51d3a9004ce0be839099f126f4099c781531428536669560"
 
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     locale-gen
