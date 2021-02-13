@@ -4,17 +4,13 @@ set -x
 
 echo "Copy Dask configuration files from pre-load directory into home/.config"
 mkdir -p /home/jovyan/.config/dask
-cp --update -r -v /pre-home/config.yaml /home/jovyan/.config/dask/
 
-# should probably pick one of these!!! The second is new, but is implied by the
-# cp /pre-home below, and we actually only read the version in ~ in rhg_compute_tools.
-cp -r -v /pre-home/worker-template.yml /home/jovyan/.config/dask/
 cp -r -v /pre-home/worker-template.yml /home/jovyan/
 
-sudo rm /pre-home/config.yaml
 
 echo "Copy files from pre-load directory into home"
 cp --update -r -v /pre-home/. /home/jovyan
+sudo rm -r /pre-home
 
 # mirror directory used on workers
 sudo mkdir -p /opt/gcsfuse_tokens/
@@ -36,7 +32,7 @@ done
 
 if [ -f "/home/jovyan/worker-template.yml" ]; then
     echo "appending service-account-credentials to worker-template";
-    python /home/jovyan/add_service_creds.py;
+    python /home/jovyan/.maintenance/add_service_creds.py;
 fi
 
 # Run extra commands
